@@ -1,10 +1,8 @@
 package hms.model;
 
-abstract class User {
+import hms.attributes.Gender;
 
-	public enum Gender {
-		MALE, FEMALE;
-	}
+abstract class User {
 
 	// To rename to passwordHash if we are using BCrypt to salt
 	private final String id;
