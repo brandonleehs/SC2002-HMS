@@ -1,18 +1,19 @@
 package hms.model;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 import hms.attributes.Gender;
 
 abstract class User {
 
-	// To rename to passwordHash if we are using BCrypt to salt
 	private final String id;
 	private final String name;
-	private String password;
+	private String passwordHash;
 	private final Gender gender;
 
 	protected User(String id, String password, String name, Gender gender) {
 		this.id = id;
-		this.password = password;
+		this.passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
 		this.name = name;
 		this.gender = gender;
 	}
@@ -21,8 +22,8 @@ abstract class User {
 		return this.id;
 	}
 
-	public String getPassword() {
-		return this.password;
+	public String getPasswordHash() {
+		return this.passwordHash;
 	}
 
 	public String getName() {
@@ -34,6 +35,6 @@ abstract class User {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
 	}
 }

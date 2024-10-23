@@ -5,6 +5,9 @@
   <groupId>sc2002</groupId>
   <artifactId>hms</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
   <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
   <dependency>
@@ -13,5 +16,11 @@
     <version>5.10.1</version>
     <scope>test</scope>
   </dependency>
+  <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-core</artifactId>
+    <version>6.3.3</version>
+</dependency>
   </dependencies>
 </project>
