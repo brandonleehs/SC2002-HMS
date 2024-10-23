@@ -10,5 +10,14 @@ public class Patient extends User {
 		this.medicalRecord = medicalRecord;
 	}
 
-	// To implement rest of getters/setters, update functions, etc.
+	public void ViewMedicalRecord() {
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.medicalRecord.setPhoneNumber(phoneNumber);
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.medicalRecord.setEmailAddress(emailAddress);
+	}
 }
