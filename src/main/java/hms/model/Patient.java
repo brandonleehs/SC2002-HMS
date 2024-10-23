@@ -1,5 +1,6 @@
 package hms.model;
 
+import hms.Validation;
 import hms.record.MedicalRecord;
 
 public class Patient extends User {
@@ -17,7 +18,12 @@ public class Patient extends User {
 		this.medicalRecord.setPhoneNumber(phoneNumber);
 	}
 
-	public void setEmailAddress(String emailAddress) {
-		this.medicalRecord.setEmailAddress(emailAddress);
+	public boolean setEmailAddress(String emailAddress) {
+		if (Validation.validateEmailAddress(emailAddress)) {
+			this.medicalRecord.setEmailAddress(emailAddress);
+			return true;
+		}
+		return false;
 	}
+
 }

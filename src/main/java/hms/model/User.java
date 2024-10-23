@@ -2,6 +2,7 @@ package hms.model;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import hms.Validation;
 import hms.attributes.Gender;
 
 abstract class User {
@@ -34,7 +35,11 @@ abstract class User {
 		return this.gender;
 	}
 
-	public void setPassword(String password) {
-		this.passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
+	public boolean setPassword(String password) {
+		if (Validation.validatePassword(password)) {
+			this.passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
+			return true;
+		}
+		return false;
 	}
 }
