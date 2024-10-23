@@ -10,6 +10,24 @@
     <maven.compiler.source>22</maven.compiler.source>
     <maven.compiler.target>22</maven.compiler.target>
   </properties>
+  <build>
+  <plugins>
+    <plugin>
+      <!-- Build an executable JAR -->
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.3.0</version>
+      <configuration>
+        <archive>
+          <manifest>
+            <addClasspath>true</addClasspath>
+            <mainClass>hms.App</mainClass>
+          </manifest>
+        </archive>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
   <dependencies>
   <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
   <dependency>
