@@ -9,6 +9,15 @@ Ensure you have the following installed on your system:
 - **JDK 22** or higher: [Download here](https://www.oracle.com/sg/java/technologies/downloads/)
 - **Apache Maven**: [Download here](https://maven.apache.org/download.cgi)
 
+Make sure your environment is set up correctly by verifying the installation of Java and Maven. You can check this by running the following commands:
+
+```
+java --version
+mvn --version
+```
+
+If both commands return version details, your setup is correct and you're ready to proceed. Otherwise, you may need to configure your PATH environment variables to include the locations of your Java and Maven installations.
+
 ## Getting Started
 
 ### 1. Clone the Repository
@@ -38,7 +47,7 @@ java -jar ./target/hms-0.0.1-SNAPSHOT.jar
 
 ### Alternative: Running from Source
 
-If you prefer to compile and run the application directly from the source code, navigate to the `src/main/java/hms/` directory. Directly compile and run the App.java file.
+If you prefer to compile and run the application directly from the source code, navigate to the `src/main/java/hms/` directory. Directly compile and run the `App.java` file.
 
 ## Project Structure
 
