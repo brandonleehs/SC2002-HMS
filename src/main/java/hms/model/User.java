@@ -1,7 +1,6 @@
 package hms.model;
 
 import hms.attributes.Gender;
-import hms.attributes.Role;
 
 abstract class User {
 
@@ -10,14 +9,12 @@ abstract class User {
 	private final String name;
 	private String password;
 	private final Gender gender;
-	private final Role role;
 
-	protected User(String id, String password, String name, Gender gender, Role role) {
+	protected User(String id, String password, String name, Gender gender) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.gender = gender;
-		this.role = role;
 	}
 
 	public String getId() {
@@ -34,10 +31,6 @@ abstract class User {
 
 	public Gender getGender() {
 		return this.gender;
-	}
-
-	public Role getRole() {
-		return this.role;
 	}
 
 	public void setPassword(String password) {
