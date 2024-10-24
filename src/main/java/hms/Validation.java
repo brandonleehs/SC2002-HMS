@@ -1,14 +1,25 @@
 package hms;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class Validation {
 	private Validation() {
 	}
 
-	// TBD
 	public static boolean validateEmailAddress(String emailAddress) {
-		return true;
+		// A lenient regex pattern for a traditional email address {local}@{domain}
+		// Local part allows only {_, .} special characters.
+		String emailAddressPattern = "^[a-zA-Z0-9_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$";
+		Pattern pattern = Pattern.compile(emailAddressPattern);
+		Matcher matcher = pattern.matcher(emailAddress);
+		if (matcher.matches()) {
+			System.out.println("Email address is valid.");
+			return true;
+		}
+		System.out.println("Email address is invalid.");
+		return false;
+
 	}
 
 	public static boolean validatePassword(String password) {

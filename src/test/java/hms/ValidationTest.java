@@ -8,6 +8,21 @@ import org.junit.jupiter.api.Test;
 class ValidationTest {
 
 	@Test
+	void testInvalidEmailAddressFormat() {
+		assertFalse(Validation.validateEmailAddress("soidjifdnf"));
+	}
+
+	@Test
+	void testValidEmailAddress1() {
+		assertTrue(Validation.validateEmailAddress("alice.brown@example.com"));
+	}
+
+	@Test
+	void testValidEmailAddress2() {
+		assertTrue(Validation.validateEmailAddress("bob.stone@example.com"));
+	}
+
+	@Test
 	void testInvalidPasswordLength() {
 		assertFalse(Validation.validatePassword("asdW$1"));
 	}
