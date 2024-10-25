@@ -57,6 +57,6 @@ The project follows a standard Maven structure:
 - `src/test/java/`: Holds unit/integration/system tests for the project.
 - `target/`: This directory is generated during the build process and houses all output of the build.
 
----
+Our project uses the Model-View-Controller (MVC) design pattern for maintainability and extensibility. Other design patterns our project uses include the Data Access Object (DAO), Repository and Service pattern, also commonly used in Spring applications.
 
 For any additional information or troubleshooting, please consult the project documentation or open an issue in the repository.
