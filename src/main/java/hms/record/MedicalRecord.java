@@ -13,7 +13,7 @@ public class MedicalRecord {
 	private final BloodType bloodType;
 	private String phoneNumber;
 	private String emailAddress;
-	// private AppointmentRecord appointmentRecord;
+	// private AppointmentOutcomeRecord appointmentOutcomeRecord;
 
 	public MedicalRecord(String id, String name, LocalDate dateOfBirth, Gender gender, BloodType bloodType,
 			String phoneNumber, String emailAddress) {
