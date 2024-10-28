@@ -61,4 +61,14 @@ public class MedicalRecord {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
+	public void print(){
+		System.out.println("Patient ID\t: " + this.id);
+		System.out.println("Name\t\t: " + this.name);
+		System.out.println("Gender \t\t: " + this.gender);
+		System.out.println("Blood Type\t: " + this.bloodType);
+		System.out.println("Date of Birth\t: " + this.dateOfBirth);
+		System.out.println("Contact Details: " + this.phoneNumber + "\t\t" + this.emailAddress);
+		//print out each appointment outcome
+	}
 }
