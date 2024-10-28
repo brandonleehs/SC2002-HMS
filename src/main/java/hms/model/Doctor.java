@@ -1,9 +1,14 @@
 package hms.model;
 
+import java.util.Scanner;
+import java.time.LocalDate;
+
 import hms.attributes.Gender;
 import hms.record.MedicalRecord;
+import hms.Medicine;
 import hms.Schedule;
 import hms.appointment.Appointment;
+import hms.record.*;
 
 public class Doctor extends User {
     private int age;
@@ -48,9 +53,26 @@ public class Doctor extends User {
         //prints all appointments scheduled for today
     }
 
-    public void apptOutcome(Appointment appt){
-        //user input for service type
-        //user input for consultation notes
-        //while loop to add medicine list
+    public void apptOutcome(Appointment appt, Scanner sc){
+        System.out.print("Enter service type: ");
+        String type = sc.nextLine();
+
+        System.out.print("Enter consultation notes: ");
+        String notes = sc.nextLine();
+
+        AppointmentOutcomeRecord outcome = new AppointmentOutcomeRecord(LocalDate.now(), type, notes);
+
+        System.out.print("How many medication types prescribed?: ");
+        int numMed = sc.nextInt();
+
+        for(int i=0; i < numMed; i++){
+            System.out.print("Input name of medication number " + (i+1) + ": ");
+            String medName = sc.nextLine();
+
+            System.out.print("Input quantity of " + medName + " prescribed: ");
+            int medQuant = sc.nextInt();
+
+            outcome.addPrescribedMedicine(new Medicine(medName, medQuant));
+        }
     }
 }
