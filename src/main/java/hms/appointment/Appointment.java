@@ -18,6 +18,7 @@ public class Appointment {
 		this.doctorId = doctorId;
 		this.date = date;
 		this.time = time;
+		this.appointmentStatus = AppointmentStatus.PENDING;
 	}
 
 	public String getPatientId() {
