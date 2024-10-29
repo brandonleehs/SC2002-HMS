@@ -1,12 +1,13 @@
 package hms.serializer;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
@@ -24,9 +25,8 @@ public class PatientSerializer {
 	public PatientSerializer() {
 	}
 
-	public static Map<String, Patient> getPatientTable(File file)
-			throws IOException, org.apache.poi.openxml4j.exceptions.InvalidFormatException {
-		OPCPackage pkg = OPCPackage.open(file);
+	public static Map<String, Patient> getPatientTable(InputStream in) throws IOException, InvalidFormatException {
+		OPCPackage pkg = OPCPackage.open(in);
 		Workbook wb = new XSSFWorkbook(pkg);
 		return readWorkbook(wb);
 	}

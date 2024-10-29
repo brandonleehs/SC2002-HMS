@@ -14,7 +14,7 @@ import hms.appointment.AppointmentStatus;
 import hms.attributes.Gender;
 
 class DoctorTest {
-	private static PatientController patientController = new PatientController("/Patient_List.xlsx");
+	private static PatientController patientController = new PatientController("Patient_List.xlsx");
 
 	@Test
 	void testScheduleAppointmentIfRightTime() {
@@ -66,6 +66,40 @@ class DoctorTest {
 		assertFalse(bob.rescheduleAppointment(doctor, doctor, oldAppointment, newAppointment));
 		assertTrue(appointments[26] == oldAppointment);
 		assertTrue(appointments[28] == null);
+	}
+
+	@Test
+	void testRescheduleAppointmentIfDifferentDoctorRightTime() {
+		Patient bob = patientController.getPatientTable().get("P1002");
+		Doctor oldDoctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
+		Doctor newDoctor = new Doctor("D003", "password", "John Doe", Gender.MALE, 35);
+		Appointment oldAppointment = new Appointment(bob.getId(), oldDoctor.getId(), LocalDate.of(2024, 10, 29),
+				LocalTime.of(13, 0));
+		Appointment newAppointment = new Appointment(bob.getId(), newDoctor.getId(), LocalDate.of(2024, 10, 29),
+				LocalTime.of(13, 30));
+		assertTrue(bob.scheduleAppointment(oldDoctor, oldAppointment));
+		assertTrue(bob.rescheduleAppointment(oldDoctor, newDoctor, oldAppointment, newAppointment));
+		Appointment[] appointments1 = oldDoctor.getSchedule().getScheduleMap().get(LocalDate.of(2024, 10, 29));
+		Appointment[] appointments2 = newDoctor.getSchedule().getScheduleMap().get(LocalDate.of(2024, 10, 29));
+		assertTrue(appointments1[26] == null);
+		assertTrue(appointments2[27] == newAppointment);
+	}
+
+	@Test
+	void testRescheduleAppointmentIfDifferentDoctorWrongTime() {
+		Patient bob = patientController.getPatientTable().get("P1002");
+		Doctor oldDoctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
+		Doctor newDoctor = new Doctor("D003", "password", "John Doe", Gender.MALE, 35);
+		Appointment oldAppointment = new Appointment(bob.getId(), oldDoctor.getId(), LocalDate.of(2024, 10, 29),
+				LocalTime.of(13, 0));
+		Appointment newAppointment = new Appointment(bob.getId(), newDoctor.getId(), LocalDate.of(2024, 10, 29),
+				LocalTime.of(12, 30));
+		assertTrue(bob.scheduleAppointment(oldDoctor, oldAppointment));
+		assertFalse(bob.rescheduleAppointment(oldDoctor, newDoctor, oldAppointment, newAppointment));
+		Appointment[] appointments1 = oldDoctor.getSchedule().getScheduleMap().get(LocalDate.of(2024, 10, 29));
+		Appointment[] appointments2 = newDoctor.getSchedule().getScheduleMap().get(LocalDate.of(2024, 10, 29));
+		assertTrue(appointments1[26] == oldAppointment);
+		assertTrue(appointments2 == null);
 	}
 
 	@Test

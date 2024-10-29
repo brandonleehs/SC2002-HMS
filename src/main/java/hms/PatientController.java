@@ -1,8 +1,7 @@
 package hms;
 
-import java.io.File;
-import java.net.URI;
-import java.net.URL;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
 import hms.model.Patient;
@@ -13,11 +12,19 @@ public class PatientController {
 	private Map<String, Patient> patientTable;
 
 	public PatientController(String filepath) {
-		URL url = this.getClass().getResource(filepath);
+		InputStream in = this.getClass().getClassLoader().getResourceAsStream(filepath);
 		try {
-			this.patientTable = PatientSerializer.getPatientTable(new File(URI.create(url.toString())));
+
+			this.patientTable = PatientSerializer.getPatientTable(in);
 		} catch (Exception e) {
 			System.err.println(e);
+		} finally {
+			try {
+				in.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

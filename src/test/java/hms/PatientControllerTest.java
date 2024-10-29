@@ -14,13 +14,13 @@ class PatientControllerTest {
 
 	@Test
 	void testGetPatientTableIfNull() {
-		PatientController patientController = new PatientController("/Patient_List.xlsx");
+		PatientController patientController = new PatientController("Patient_List.xlsx");
 		assertTrue(patientController.getPatientTable() != null);
 	}
 
 	@Test
 	void testGetPatientTableIfAttributesAreSame() {
-		PatientController patientController = new PatientController("/Patient_List.xlsx");
+		PatientController patientController = new PatientController("Patient_List.xlsx");
 		Patient alice = patientController.getPatientTable().get("P1001");
 		assertTrue(alice.getName().equals("Alice Brown"));
 		assertTrue(alice.getDateOfBirth().isEqual(LocalDate.of(1980, 5, 14)));
