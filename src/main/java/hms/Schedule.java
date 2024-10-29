@@ -12,8 +12,16 @@ import java.util.stream.Collectors;
 import hms.appointment.Appointment;
 
 public class Schedule {
+	// Maps an array of (scheduled) appointments to a date
+	// Appointment array has a length of 48, each slot representing a timeslot of 30
+	// minutes in a day
 	private final Map<LocalDate, Appointment[]> scheduleMap;
+	// Represents a range of regular working hours - aka availability that is
+	// repeated
 	private final List<LocalTime[]> workingHours;
+	// Maps custom availability for a day to a date
+	// Each slot represents a timeslot, and the boolean value represents if the
+	// timeslot is available
 	private final Map<LocalDate, boolean[]> availableMap;
 
 	public Schedule(LocalTime startTime, LocalTime endTime) {
@@ -59,6 +67,17 @@ public class Schedule {
 	public void cancelAppointment(Appointment appointment) {
 		Appointment[] timeslots = this.scheduleMap.get(appointment.getDate());
 		timeslots[getTimeslot(appointment.getTime())] = null;
+	}
+
+	public void setAvailability(LocalDate date, LocalTime startTime, LocalTime endTime) {
+
+		int startTimeslot = getTimeslot(startTime);
+		int endTimeslot = getTimeslot(endTime);
+		boolean[] availableArr = new boolean[48];
+		for (int i = startTimeslot; i < endTimeslot; i++) {
+			availableArr[i] = true;
+		}
+		this.availableMap.put(date, availableArr);
 	}
 
 	private boolean isAvailable(Appointment appointment) {
@@ -120,10 +139,6 @@ public class Schedule {
 
 	public Map<LocalDate, boolean[]> getAvailableMap() {
 		return availableMap;
-	}
-
-	public void setAvailability(LocalDate date, boolean[] availableArr) {
-		this.availableMap.put(date, availableArr);
 	}
 
 	// Clears past schedule from record to preserve space
