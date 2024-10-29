@@ -1,6 +1,8 @@
 package hms.record;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import hms.attributes.BloodType;
 import hms.attributes.Gender;
@@ -13,7 +15,7 @@ public class MedicalRecord {
 	private final BloodType bloodType;
 	private String phoneNumber;
 	private String emailAddress;
-	// private AppointmentOutcomeRecord appointmentOutcomeRecord;
+	private final List<AppointmentOutcomeRecord> appointmentOutcomeRecordList;
 
 	public MedicalRecord(String id, String name, LocalDate dateOfBirth, Gender gender, BloodType bloodType,
 			String phoneNumber, String emailAddress) {
@@ -24,6 +26,7 @@ public class MedicalRecord {
 		this.bloodType = bloodType;
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
+		this.appointmentOutcomeRecordList = new ArrayList<AppointmentOutcomeRecord>();
 	}
 
 	public String getId() {
@@ -60,5 +63,13 @@ public class MedicalRecord {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public List<AppointmentOutcomeRecord> getAppointmentOutcomeRecordList() {
+		return this.appointmentOutcomeRecordList;
+	}
+
+	public void addAppointmentOutcomeRecord(AppointmentOutcomeRecord appointmentOutcomeRecord) {
+		this.appointmentOutcomeRecordList.add(appointmentOutcomeRecord);
 	}
 }
