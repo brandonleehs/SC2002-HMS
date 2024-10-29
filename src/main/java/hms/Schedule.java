@@ -70,12 +70,21 @@ public class Schedule {
 	}
 
 	public void setAvailability(LocalDate date, LocalTime startTime, LocalTime endTime) {
-
 		int startTimeslot = getTimeslot(startTime);
 		int endTimeslot = getTimeslot(endTime);
 		boolean[] availableArr = new boolean[48];
 		for (int i = startTimeslot; i < endTimeslot; i++) {
 			availableArr[i] = true;
+		}
+		this.availableMap.put(date, availableArr);
+	}
+
+	public void setUnavailable(LocalDate date, LocalTime startTime, LocalTime endTime) {
+		int startTimeslot = getTimeslot(startTime);
+		int endTimeslot = getTimeslot(endTime);
+		boolean[] availableArr = new boolean[48];
+		for (int i = startTimeslot; i < endTimeslot; i++) {
+			availableArr[i] = false;
 		}
 		this.availableMap.put(date, availableArr);
 	}
