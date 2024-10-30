@@ -1,5 +1,10 @@
 package hms;
 
 public enum MedicineStatus {
-	PENDING, DISPENSED
+	PENDING, DISPENSED;
+
+	// Toggles the status between the two
+	public MedicineStatus toggle() {
+        return this == PENDING ? DISPENSED : PENDING;
+    }
 }
