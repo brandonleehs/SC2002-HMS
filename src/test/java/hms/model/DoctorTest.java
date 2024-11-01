@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import hms.PatientController;
@@ -14,11 +15,16 @@ import hms.appointment.AppointmentStatus;
 import hms.attributes.Gender;
 
 class DoctorTest {
-	private static PatientController patientController = new PatientController("Patient_List.xlsx");
+	private static PatientController patientController = PatientController.getInstance();
+
+	@BeforeAll
+	static void setUp() {
+		patientController.loadPatientMap("Patient_List.xlsx");
+	}
 
 	@Test
 	void testScheduleAppointmentIfRightTime() {
-		Patient alice = patientController.getPatientTable().get("P1001");
+		Patient alice = patientController.getPatientMap().get("P1001");
 		Doctor doctor = new Doctor("D001", "password", "John Smith", Gender.MALE, 45);
 		Appointment appointment = new Appointment(alice.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(13, 0));
@@ -29,7 +35,7 @@ class DoctorTest {
 
 	@Test
 	void testScheduleAppointmentIfWrongTime() {
-		Patient alice = patientController.getPatientTable().get("P1001");
+		Patient alice = patientController.getPatientMap().get("P1001");
 		Doctor doctor = new Doctor("D001", "password", "John Smith", Gender.MALE, 45);
 		Appointment appointment = new Appointment(alice.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(12, 0));
@@ -40,7 +46,7 @@ class DoctorTest {
 
 	@Test
 	void testRescheduleAppointmentIfRightTime() {
-		Patient bob = patientController.getPatientTable().get("P1002");
+		Patient bob = patientController.getPatientMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Appointment oldAppointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(13, 0));
@@ -55,7 +61,7 @@ class DoctorTest {
 
 	@Test
 	void testRescheduleAppointmentIfWrongTime() {
-		Patient bob = patientController.getPatientTable().get("P1002");
+		Patient bob = patientController.getPatientMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Appointment oldAppointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(13, 0));
@@ -70,7 +76,7 @@ class DoctorTest {
 
 	@Test
 	void testRescheduleAppointmentIfDifferentDoctorRightTime() {
-		Patient bob = patientController.getPatientTable().get("P1002");
+		Patient bob = patientController.getPatientMap().get("P1002");
 		Doctor oldDoctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Doctor newDoctor = new Doctor("D003", "password", "John Doe", Gender.MALE, 35);
 		Appointment oldAppointment = new Appointment(bob.getId(), oldDoctor.getId(), LocalDate.of(2024, 10, 29),
@@ -87,7 +93,7 @@ class DoctorTest {
 
 	@Test
 	void testRescheduleAppointmentIfDifferentDoctorWrongTime() {
-		Patient bob = patientController.getPatientTable().get("P1002");
+		Patient bob = patientController.getPatientMap().get("P1002");
 		Doctor oldDoctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Doctor newDoctor = new Doctor("D003", "password", "John Doe", Gender.MALE, 35);
 		Appointment oldAppointment = new Appointment(bob.getId(), oldDoctor.getId(), LocalDate.of(2024, 10, 29),
@@ -104,7 +110,7 @@ class DoctorTest {
 
 	@Test
 	void testCancelSchedule() {
-		Patient bob = patientController.getPatientTable().get("P1002");
+		Patient bob = patientController.getPatientMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Appointment appointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(13, 0));
@@ -116,7 +122,7 @@ class DoctorTest {
 
 	@Test
 	void testAcceptAppointment() {
-		Patient bob = patientController.getPatientTable().get("P1002");
+		Patient bob = patientController.getPatientMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Appointment appointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(13, 0));
@@ -128,7 +134,7 @@ class DoctorTest {
 
 	@Test
 	void testDeclineAppointment() {
-		Patient bob = patientController.getPatientTable().get("P1002");
+		Patient bob = patientController.getPatientMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Appointment appointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(13, 0));
@@ -140,7 +146,7 @@ class DoctorTest {
 
 	@Test
 	void testSetAvailabilityIfWrongTime() {
-		Patient bob = patientController.getPatientTable().get("P1002");
+		Patient bob = patientController.getPatientMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		doctor.setAvailability(LocalDate.of(2024, 10, 29), LocalTime.of(3, 0), LocalTime.of(8, 1, 23));
 		Appointment appointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
@@ -152,7 +158,7 @@ class DoctorTest {
 
 	@Test
 	void testSetAvailabilityIfRightTime() {
-		Patient bob = patientController.getPatientTable().get("P1002");
+		Patient bob = patientController.getPatientMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		doctor.setAvailability(LocalDate.of(2024, 10, 29), LocalTime.of(3, 0), LocalTime.of(8, 1, 23));
 		Appointment appointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),

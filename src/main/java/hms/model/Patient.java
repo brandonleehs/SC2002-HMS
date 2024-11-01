@@ -85,5 +85,4 @@ public class Patient extends User {
 	public void addAppointmentOutcomeRecord(AppointmentOutcomeRecord appointmentOutcomeRecord) {
 		this.medicalRecord.addAppointmentOutcomeRecord(appointmentOutcomeRecord);
 	}
-
 }

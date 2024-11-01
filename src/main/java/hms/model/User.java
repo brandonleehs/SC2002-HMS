@@ -5,7 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import hms.Validation;
 import hms.attributes.Gender;
 
-abstract class User {
+public abstract class User {
 
 	private final String id;
 	private final String name;
