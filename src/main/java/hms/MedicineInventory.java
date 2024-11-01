@@ -40,4 +40,36 @@ public class MedicineInventory {
 		this.medicineStock.put(medicineName, this.medicineStock.get(medicineName) + stock);
 	}
 
+	public void printAvailableMedicines() {
+		System.out.println("Available Medicines:");
+		for (String medicineName : medicineStock.keySet()) {
+			System.out.println(medicineName);
+		}
+	}
+
+	public void viewInventoryStock() {
+		System.out.println("Medicine Inventory:");
+		for (Map.Entry<String, Integer> entry : medicineStock.entrySet()) {
+			String medicineName = entry.getKey();
+			Integer stockLevel = entry.getValue();
+			System.out.println(medicineName + ": " + stockLevel);
+		}
+	}
+
+	public void viewInventoryWarning(){
+		System.out.println("Available Medicines:");
+    	for (String medicineName : medicineStock.keySet()) {
+			int stockLevel = medicineStock.get(medicineName);
+			int lowStockAlertValue = medicineLowStockLevelAlertValue.getOrDefault(medicineName, Integer.MAX_VALUE);
+
+			System.out.print(medicineName + " (Stock: " + stockLevel + ")");
+
+			// Check if stock level is below the alert value
+			if (stockLevel < lowStockAlertValue) {
+				System.out.println(" - Warning: Low stock!");
+			} else {
+				System.out.println();
+			}
+    	}
+	}
 }
