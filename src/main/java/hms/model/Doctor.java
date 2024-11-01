@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import hms.Medicine;
 import hms.Schedule;
 import hms.appointment.Appointment;
 import hms.appointment.AppointmentStatus;
@@ -59,6 +60,10 @@ public class Doctor extends User {
 
 	public void cancelAppointment(Appointment appointment) {
 		this.schedule.cancelAppointment(appointment);
+	}
+
+	public void prescribeMedicine(Medicine medicine, AppointmentOutcomeRecord appointmentOutcomeRecord) {
+		appointmentOutcomeRecord.addPrescribedMedicine(medicine);
 	}
 
 	public int getAge() {

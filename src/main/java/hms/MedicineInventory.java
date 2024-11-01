@@ -12,7 +12,7 @@ public class MedicineInventory {
 	private MedicineInventory() {
 	}
 
-	public static MedicineInventory getMedicineInventory() {
+	public static MedicineInventory getInstance() {
 		return medicineInventory;
 	}
 
@@ -24,7 +24,7 @@ public class MedicineInventory {
 		return this.medicineLowStockLevelAlertValue;
 	}
 
-	public void setStock(String medicineName, int stock) {
+	public void setMedicineStock(String medicineName, int stock) {
 		this.medicineStock.put(medicineName, stock);
 	}
 
@@ -32,44 +32,49 @@ public class MedicineInventory {
 		this.medicineLowStockLevelAlertValue.put(medicineName, LowStockLevelAlertValue);
 	}
 
-	public void decrementMedicineStock(String medicineName) {
+	public boolean dispenseMedicine(String medicineName) {
+		if (this.medicineStock.get(medicineName) <= 0) {
+			return false;
+		}
 		this.medicineStock.put(medicineName, this.medicineStock.get(medicineName) - 1);
+		return true;
 	}
 
 	public void addMedicineStock(String medicineName, int stock) {
 		this.medicineStock.put(medicineName, this.medicineStock.get(medicineName) + stock);
 	}
 
-	public void printAvailableMedicines() {
-		System.out.println("Available Medicines:");
-		for (String medicineName : medicineStock.keySet()) {
-			System.out.println(medicineName);
-		}
-	}
+	// TODO: This should be in boundary/view
+//	public void printAvailableMedicines() {
+//		System.out.println("Available Medicines:");
+//		for (String medicineName : medicineStock.keySet()) {
+//			System.out.println(medicineName);
+//		}
+//	}
 
-	public void viewInventoryStock() {
-		System.out.println("Medicine Inventory:");
-		for (Map.Entry<String, Integer> entry : medicineStock.entrySet()) {
-			String medicineName = entry.getKey();
-			Integer stockLevel = entry.getValue();
-			System.out.println(medicineName + ": " + stockLevel);
-		}
-	}
+//	public void viewInventoryStock() {
+//		System.out.println("Medicine Inventory:");
+//		for (Map.Entry<String, Integer> entry : medicineStock.entrySet()) {
+//			String medicineName = entry.getKey();
+//			Integer stockLevel = entry.getValue();
+//			System.out.println(medicineName + ": " + stockLevel);
+//		}
+//	}
 
-	public void viewInventoryWarning(){
-		System.out.println("Available Medicines:");
-    	for (String medicineName : medicineStock.keySet()) {
-			int stockLevel = medicineStock.get(medicineName);
-			int lowStockAlertValue = medicineLowStockLevelAlertValue.getOrDefault(medicineName, Integer.MAX_VALUE);
-
-			System.out.print(medicineName + " (Stock: " + stockLevel + ")");
-
-			// Check if stock level is below the alert value
-			if (stockLevel < lowStockAlertValue) {
-				System.out.println(" - Warning: Low stock!");
-			} else {
-				System.out.println();
-			}
-    	}
-	}
+//	public void viewInventoryWarning() {
+//		System.out.println("Available Medicines:");
+//		for (String medicineName : medicineStock.keySet()) {
+//			int stockLevel = medicineStock.get(medicineName);
+//			int lowStockAlertValue = medicineLowStockLevelAlertValue.getOrDefault(medicineName, Integer.MAX_VALUE);
+//
+//			System.out.print(medicineName + " (Stock: " + stockLevel + ")");
+//
+//			// Check if stock level is below the alert value
+//			if (stockLevel < lowStockAlertValue) {
+//				System.out.println(" - Warning: Low stock!");
+//			} else {
+//				System.out.println();
+//			}
+//		}
+//	}
 }

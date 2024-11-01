@@ -11,7 +11,6 @@ public class AppointmentOutcomeRecord {
 	private final String serviceType;
 	private final List<Medicine> prescribedMedicineList;
 	private final String consultationNotes;
-	private MedicineStatus medicineStatus;
 
 	public AppointmentOutcomeRecord(LocalDate date, String serviceType, String consultationNotes) {
 		this.date = date;
@@ -39,10 +38,4 @@ public class AppointmentOutcomeRecord {
 	public String getConsultationNotes() {
 		return this.consultationNotes;
 	}
-
-	public void setPrescriptionStatus(){
-		// Toggles the prescription status between
-		medicineStatus = MedicineStatus.toggle();
-	}
-
 }

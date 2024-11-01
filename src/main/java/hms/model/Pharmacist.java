@@ -1,9 +1,16 @@
 package hms.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import hms.Medicine;
+import hms.MedicineInventory;
 import hms.attributes.Gender;
+import hms.record.AppointmentOutcomeRecord;
 
 public class Pharmacist extends User {
 	private final int age;
+	private static final MedicineInventory medicineInventory = MedicineInventory.getInstance();
 
 	public Pharmacist(String id, String password, String name, Gender gender, int age) {
 		super(id, password, name, gender);
@@ -14,9 +21,20 @@ public class Pharmacist extends User {
 		return this.age;
 	}
 
-//	public MedicalRecord viewAppointOutcomeRecord(Patient pname) {
-//		return pname.getAppointmentOutcomeRecordLatest();
-//	}
+	public boolean dispenseMedicine(Patient patient, Medicine medicine) {
+		return medicineInventory.dispenseMedicine(medicine.getName());
+	}
+
+	public List<Medicine> getAllPendingMedicine(Patient patient) {
+		List<Medicine> medicineList = new ArrayList<Medicine>();
+		List<AppointmentOutcomeRecord> appointmentOutcomeRecordList = patient.getAppointmentOutcomeRecordList();
+		for (AppointmentOutcomeRecord appointmentOutcomeRecord : appointmentOutcomeRecordList) {
+			for (Medicine medicine : appointmentOutcomeRecord.getPrescribedMedicineList()) {
+				medicineList.add(medicine);
+			}
+		}
+		return medicineList;
+	}
 //
 //	public void updatePrescriptionStatus(Patient pname) {
 //		// Toggles between pending and dispensed (e.g. if pending, then changes to
