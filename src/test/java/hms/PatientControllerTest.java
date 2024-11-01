@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import hms.attributes.BloodType;
@@ -11,17 +12,21 @@ import hms.attributes.Gender;
 import hms.model.Patient;
 
 class PatientControllerTest {
+	private static PatientController patientController = PatientController.getInstance();
+
+	@BeforeAll
+	static void setUp() {
+		patientController.loadPatientMap("Patient_List.xlsx");
+	}
 
 	@Test
 	void testGetPatientTableIfNull() {
-		PatientController patientController = new PatientController("Patient_List.xlsx");
-		assertTrue(patientController.getPatientTable() != null);
+		assertTrue(patientController.getPatientMap() != null);
 	}
 
 	@Test
 	void testGetPatientTableIfAttributesAreSame() {
-		PatientController patientController = new PatientController("Patient_List.xlsx");
-		Patient alice = patientController.getPatientTable().get("P1001");
+		Patient alice = patientController.getPatientMap().get("P1001");
 		assertTrue(alice.getName().equals("Alice Brown"));
 		assertTrue(alice.getDateOfBirth().isEqual(LocalDate.of(1980, 5, 14)));
 		assertTrue(alice.getGender() == Gender.FEMALE);

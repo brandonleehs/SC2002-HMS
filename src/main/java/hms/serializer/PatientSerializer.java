@@ -25,21 +25,24 @@ public class PatientSerializer {
 	public PatientSerializer() {
 	}
 
-	public static Map<String, Patient> getPatientTable(InputStream in) throws IOException, InvalidFormatException {
+	public static Map<String, Patient> getPatientMap(String filepath) throws IOException, InvalidFormatException {
+		InputStream in = PatientSerializer.class.getClassLoader().getResourceAsStream(filepath);
 		OPCPackage pkg = OPCPackage.open(in);
 		Workbook wb = new XSSFWorkbook(pkg);
+		pkg.close();
+		in.close();
 		return readWorkbook(wb);
 	}
 
 	private static Map<String, Patient> readWorkbook(Workbook wb) {
-		Map<String, Patient> patientTable = new HashMap<String, Patient>();
+		Map<String, Patient> patientMap = new HashMap<String, Patient>();
 		for (Sheet sheet : wb) {
 			for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
 				Patient patient = getPatientFromRow(sheet.getRow(rowNum));
-				patientTable.put(patient.getId(), patient);
+				patientMap.put(patient.getId(), patient);
 			}
 		}
-		return patientTable;
+		return patientMap;
 	}
 
 	private static Patient getPatientFromRow(Row row) {
@@ -58,7 +61,6 @@ public class PatientSerializer {
 		return new Patient(medicalRecord, "password");
 	}
 
-	// O_POS, O_NEG, A_POS, A_NEG, B_POS, B_NEG, AB_POS, AB_NEG;
 	private static BloodType getBloodType(String bloodType) {
 		switch (bloodType) {
 		case "O+":

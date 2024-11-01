@@ -1,35 +1,31 @@
 package hms;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Map;
 
 import hms.model.Patient;
 import hms.serializer.PatientSerializer;
 
-// TODO: change to singleton once serializer is implemented
 public class PatientController {
-	private Map<String, Patient> patientTable;
+	private static final PatientController patientController = new PatientController();
+	private Map<String, Patient> patientMap;
 
-	public PatientController(String filepath) {
-		InputStream in = this.getClass().getClassLoader().getResourceAsStream(filepath);
+	private PatientController() {
+	}
+
+	public static PatientController getInstance() {
+		return patientController;
+	}
+
+	public void loadPatientMap(String filepath) {
 		try {
-
-			this.patientTable = PatientSerializer.getPatientTable(in);
+			this.patientMap = PatientSerializer.getPatientMap(filepath);
 		} catch (Exception e) {
 			System.err.println(e);
-		} finally {
-			try {
-				in.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 	}
 
-	public Map<String, Patient> getPatientTable() {
-		return patientTable;
+	public Map<String, Patient> getPatientMap() {
+		return this.patientMap;
 	}
 
 }
