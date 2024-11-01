@@ -16,7 +16,7 @@ class PatientSerializerTest {
 	@Test
 	void testGetPatientMapIfNull() {
 		PatientSerializer patientSerializer = new PatientSerializer();
-		assertTrue(patientSerializer.getUserMap("Patient_List.xlsx") != null);
+		assertTrue(patientSerializer.getMap("Patient_List.xlsx") != null);
 
 	}
 
@@ -25,7 +25,7 @@ class PatientSerializerTest {
 		PatientSerializer patientSerializer = new PatientSerializer();
 		Map<String, Patient> patientMap;
 
-		patientMap = patientSerializer.getUserMap("Patient_List.xlsx");
+		patientMap = patientSerializer.getMap("Patient_List.xlsx");
 		Patient alice = patientMap.get("P1001");
 		assertTrue(alice.getName().equals("Alice Brown"));
 		assertTrue(alice.getDateOfBirth().isEqual(LocalDate.of(1980, 5, 14)));

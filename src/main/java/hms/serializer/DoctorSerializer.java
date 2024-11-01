@@ -11,7 +11,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import hms.attributes.Gender;
 import hms.model.Doctor;
 
-public class DoctorSerializer extends UserSerializer<Doctor> {
+public class DoctorSerializer extends Serializer<Doctor> {
 
 	@Override
 	protected Map<String, Doctor> readWorkbook(Workbook wb) {

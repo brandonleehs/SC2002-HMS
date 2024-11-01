@@ -15,7 +15,7 @@ import hms.attributes.Gender;
 import hms.model.Patient;
 import hms.record.MedicalRecord;
 
-public class PatientSerializer extends UserSerializer<Patient> {
+public class PatientSerializer extends Serializer<Patient> {
 
 	@Override
 	protected Map<String, Patient> readWorkbook(Workbook wb) {

@@ -9,10 +9,8 @@ import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import hms.model.User;
-
-abstract class UserSerializer<E extends User> {
-	public Map<String, E> getUserMap(String filepath) {
+abstract class Serializer<E> {
+	public Map<String, E> getMap(String filepath) {
 		try (InputStream in = this.getClass().getClassLoader().getResourceAsStream(filepath);
 				OPCPackage pkg = OPCPackage.open(in);) {
 			Workbook wb = new XSSFWorkbook(pkg);

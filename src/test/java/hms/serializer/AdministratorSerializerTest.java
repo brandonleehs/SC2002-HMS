@@ -14,7 +14,7 @@ class AdministratorSerializerTest {
 	@Test
 	void testGetAdministratorMapIfNull() {
 		AdministratorSerializer administratorSerializer = new AdministratorSerializer();
-		assertTrue(administratorSerializer.getUserMap("Staff_List.xlsx") != null);
+		assertTrue(administratorSerializer.getMap("Staff_List.xlsx") != null);
 	}
 
 	@Test
@@ -22,7 +22,7 @@ class AdministratorSerializerTest {
 		AdministratorSerializer administratorSerializer = new AdministratorSerializer();
 		Map<String, Administrator> administratorMap;
 
-		administratorMap = administratorSerializer.getUserMap("Staff_List.xlsx");
+		administratorMap = administratorSerializer.getMap("Staff_List.xlsx");
 		Administrator sarah = administratorMap.get("A001");
 		assertTrue(sarah.getName().equals("Sarah Lee"));
 		assertTrue(sarah.getAge() == 40);

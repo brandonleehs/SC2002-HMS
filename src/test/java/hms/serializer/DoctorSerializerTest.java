@@ -14,7 +14,7 @@ class DoctorSerializerTest {
 	@Test
 	void testGetDoctorMapIfNull() {
 		DoctorSerializer doctorSerializer = new DoctorSerializer();
-		assertTrue(doctorSerializer.getUserMap("Staff_List.xlsx") != null);
+		assertTrue(doctorSerializer.getMap("Staff_List.xlsx") != null);
 	}
 
 	@Test
@@ -22,7 +22,7 @@ class DoctorSerializerTest {
 		DoctorSerializer doctorSerializer = new DoctorSerializer();
 		Map<String, Doctor> doctorMap;
 
-		doctorMap = doctorSerializer.getUserMap("Staff_List.xlsx");
+		doctorMap = doctorSerializer.getMap("Staff_List.xlsx");
 		Doctor john = doctorMap.get("D001");
 		assertTrue(john.getName().equals("John Smith"));
 		assertTrue(john.getAge() == 45);
