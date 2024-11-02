@@ -21,6 +21,7 @@ public class Pharmacist extends User {
 		return this.age;
 	}
 
+	// If successful, returns true
 	public boolean dispenseMedicine(Patient patient, Medicine medicine) {
 		return medicineInventory.dispenseMedicine(medicine.getName());
 	}
@@ -34,6 +35,10 @@ public class Pharmacist extends User {
 			}
 		}
 		return medicineList;
+	}
+
+	public void submitReplenishmentRequest(String medicineName, int stockToAdd) {
+		medicineInventory.addReplenishmentRequest(medicineName, stockToAdd);
 	}
 //
 //	public void updatePrescriptionStatus(Patient pname) {
