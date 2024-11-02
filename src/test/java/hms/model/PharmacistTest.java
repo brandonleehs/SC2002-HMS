@@ -25,8 +25,6 @@ class PharmacistTest {
 				"General", "Fever");
 		doctor.prescribeMedicine(medicine, appointmentOutcomeRecord);
 		patient.addAppointmentOutcomeRecord(appointmentOutcomeRecord);
-		System.out.println(patient.getAppointmentOutcomeRecordList().get(0));
-		System.out.println(pharmacist.getAllPendingMedicine(patient));
 		assertTrue(pharmacist.getAllPendingMedicine(patient).get(0) == medicine);
 	}
 

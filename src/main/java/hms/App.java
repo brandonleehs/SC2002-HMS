@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import hms.appointment.Appointment;
 import hms.attributes.Gender;
+import hms.boundary.PatientMenu;
 import hms.model.Doctor;
 import hms.model.Patient;
 
@@ -17,14 +18,18 @@ public class App {
 		// No doctor controller or view classes implemented yet, this is just a very
 		// barebones test for
 		// functionality
+		PatientMenu patientMenu = new PatientMenu();
+		patientMenu.displayLogo();
+		patientMenu.displayMenu("John Doe");
 		Scanner scanner = new Scanner(System.in);
-		PatientController patientController = new PatientController("Patient_List.xlsx");
+		PatientController patientController = PatientController.getInstance();
+		patientController.loadPatientMap("Patient_List.xlsx");
 		Doctor doctor = new Doctor("D001", "password", "John Smith", Gender.MALE, 45);
 		System.out.println("Enter id:");
 		String id = scanner.nextLine();
 		System.out.println("Enter password:");
 		String password = scanner.nextLine();
-		Patient patient = patientController.getPatientTable().get("P1001");
+		Patient patient = patientController.getPatientMap().get("P1001");
 		Appointment appointment = new Appointment(patient.getId(), doctor.getId(), LocalDate.now(),
 				LocalTime.of(13, 0));
 		patient.scheduleAppointment(doctor, appointment);

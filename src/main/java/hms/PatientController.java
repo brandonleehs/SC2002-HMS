@@ -18,7 +18,8 @@ public class PatientController {
 
 	public void loadPatientMap(String filepath) {
 		try {
-			this.patientMap = PatientSerializer.getPatientMap(filepath);
+			PatientSerializer patientSerializer = new PatientSerializer();
+			this.patientMap = patientSerializer.getMap(filepath);
 		} catch (Exception e) {
 			System.err.println(e);
 		}
