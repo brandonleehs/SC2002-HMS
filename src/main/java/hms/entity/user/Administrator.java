@@ -1,6 +1,6 @@
 package hms.entity.user;
 
-import hms.entity.attributes.Gender;
+import hms.entity.user.attributes.Gender;
 
 public class Administrator extends User {
 	private final int age;

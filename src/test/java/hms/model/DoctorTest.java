@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 import hms.PatientController;
 import hms.entity.appointment.Appointment;
 import hms.entity.appointment.AppointmentStatus;
-import hms.entity.attributes.Gender;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
+import hms.entity.user.attributes.Gender;
 
 class DoctorTest {
 	private static PatientController patientController = PatientController.getInstance();

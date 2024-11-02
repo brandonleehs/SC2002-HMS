@@ -6,8 +6,8 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import hms.entity.attributes.Gender;
 import hms.entity.user.Pharmacist;
+import hms.entity.user.attributes.Gender;
 
 class PharmacistSerializerTest {
 

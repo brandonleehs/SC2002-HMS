@@ -8,9 +8,9 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import hms.boundary.PatientMenu;
 import hms.entity.appointment.Appointment;
-import hms.entity.attributes.Gender;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
+import hms.entity.user.attributes.Gender;
 
 public class App {
 

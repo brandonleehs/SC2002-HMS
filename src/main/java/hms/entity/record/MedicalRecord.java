@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import hms.entity.attributes.BloodType;
-import hms.entity.attributes.Gender;
+import hms.entity.user.attributes.BloodType;
+import hms.entity.user.attributes.Gender;
 
 public class MedicalRecord {
 	private final String id;

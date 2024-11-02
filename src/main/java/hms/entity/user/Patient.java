@@ -5,10 +5,10 @@ import java.util.List;
 
 import hms.Validation;
 import hms.entity.appointment.Appointment;
-import hms.entity.attributes.BloodType;
-import hms.entity.attributes.Gender;
 import hms.entity.record.AppointmentOutcomeRecord;
 import hms.entity.record.MedicalRecord;
+import hms.entity.user.attributes.BloodType;
+import hms.entity.user.attributes.Gender;
 
 public class Patient extends User {
 	private final MedicalRecord medicalRecord;

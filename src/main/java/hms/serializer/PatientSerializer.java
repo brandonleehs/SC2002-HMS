@@ -10,10 +10,10 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import hms.entity.attributes.BloodType;
-import hms.entity.attributes.Gender;
 import hms.entity.record.MedicalRecord;
 import hms.entity.user.Patient;
+import hms.entity.user.attributes.BloodType;
+import hms.entity.user.attributes.Gender;
 
 public class PatientSerializer extends UserSerializer<Patient> {
 

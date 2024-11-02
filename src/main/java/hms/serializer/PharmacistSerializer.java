@@ -8,8 +8,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import hms.entity.attributes.Gender;
 import hms.entity.user.Pharmacist;
+import hms.entity.user.attributes.Gender;
 
 public class PharmacistSerializer extends UserSerializer<Pharmacist> {
 	@Override

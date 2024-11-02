@@ -7,9 +7,9 @@ import java.time.LocalTime;
 import hms.entity.appointment.Appointment;
 import hms.entity.appointment.AppointmentStatus;
 import hms.entity.appointment.Schedule;
-import hms.entity.attributes.Gender;
 import hms.entity.medicine.Medicine;
 import hms.entity.record.AppointmentOutcomeRecord;
+import hms.entity.user.attributes.Gender;
 
 public class Doctor extends User {
 	private final int age;

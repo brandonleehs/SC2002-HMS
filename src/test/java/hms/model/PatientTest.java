@@ -12,11 +12,11 @@ import org.junit.jupiter.api.Test;
 
 import hms.entity.appointment.Appointment;
 import hms.entity.appointment.AppointmentStatus;
-import hms.entity.attributes.BloodType;
-import hms.entity.attributes.Gender;
 import hms.entity.record.MedicalRecord;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
+import hms.entity.user.attributes.BloodType;
+import hms.entity.user.attributes.Gender;
 
 class PatientTest {
 	@Test

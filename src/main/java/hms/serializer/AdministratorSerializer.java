@@ -8,8 +8,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import hms.entity.attributes.Gender;
 import hms.entity.user.Administrator;
+import hms.entity.user.attributes.Gender;
 
 public class AdministratorSerializer extends UserSerializer<Administrator> {
 	@Override

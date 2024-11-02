@@ -7,9 +7,9 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import hms.entity.attributes.BloodType;
-import hms.entity.attributes.Gender;
 import hms.entity.user.Patient;
+import hms.entity.user.attributes.BloodType;
+import hms.entity.user.attributes.Gender;
 
 class PatientControllerTest {
 	private static PatientController patientController = PatientController.getInstance();

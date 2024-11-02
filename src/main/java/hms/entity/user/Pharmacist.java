@@ -3,10 +3,10 @@ package hms.entity.user;
 import java.util.ArrayList;
 import java.util.List;
 
-import hms.entity.attributes.Gender;
 import hms.entity.medicine.Medicine;
 import hms.entity.medicine.MedicineInventory;
 import hms.entity.record.AppointmentOutcomeRecord;
+import hms.entity.user.attributes.Gender;
 
 public class Pharmacist extends User {
 	private final int age;

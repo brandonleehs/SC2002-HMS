@@ -6,8 +6,6 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import hms.entity.attributes.BloodType;
-import hms.entity.attributes.Gender;
 import hms.entity.medicine.Medicine;
 import hms.entity.medicine.MedicineInventory;
 import hms.entity.record.AppointmentOutcomeRecord;
@@ -15,6 +13,8 @@ import hms.entity.record.MedicalRecord;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;
+import hms.entity.user.attributes.BloodType;
+import hms.entity.user.attributes.Gender;
 
 class PharmacistTest {
 	@Test
