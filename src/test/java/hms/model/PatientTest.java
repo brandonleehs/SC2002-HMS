@@ -10,11 +10,13 @@ import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
 
-import hms.appointment.Appointment;
-import hms.appointment.AppointmentStatus;
-import hms.attributes.BloodType;
-import hms.attributes.Gender;
-import hms.record.MedicalRecord;
+import hms.entity.appointment.Appointment;
+import hms.entity.appointment.AppointmentStatus;
+import hms.entity.attributes.BloodType;
+import hms.entity.attributes.Gender;
+import hms.entity.record.MedicalRecord;
+import hms.entity.user.Doctor;
+import hms.entity.user.Patient;
 
 class PatientTest {
 	@Test

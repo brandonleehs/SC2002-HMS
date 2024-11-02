@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import hms.entity.medicine.MedicineInventory;
+
 class MedicineInventoryTest {
 	private static final MedicineInventory medicineInventory = MedicineInventory.getInstance();
 

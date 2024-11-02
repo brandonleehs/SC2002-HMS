@@ -1,11 +1,11 @@
-package hms.record;
+package hms.entity.record;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import hms.attributes.BloodType;
-import hms.attributes.Gender;
+import hms.entity.attributes.BloodType;
+import hms.entity.attributes.Gender;
 
 public class MedicalRecord {
 	private final String id;
@@ -69,10 +69,10 @@ public class MedicalRecord {
 		return this.appointmentOutcomeRecordList;
 	}
 
-	// added for pharmacist to access latest record
-	public AppointmentOutcomeRecord getAppointmentOutcomeRecordLatest() {
-		return this.appointmentOutcomeRecordList[appointmentOutcomeRecordList.length - 1];
-	}
+//	added for pharmacist to access latest record
+//	public AppointmentOutcomeRecord getAppointmentOutcomeRecordLatest() {
+//		return this.appointmentOutcomeRecordList[appointmentOutcomeRecordList.length - 1];
+//	}
 
 	public void addAppointmentOutcomeRecord(AppointmentOutcomeRecord appointmentOutcomeRecord) {
 		this.appointmentOutcomeRecordList.add(appointmentOutcomeRecord);

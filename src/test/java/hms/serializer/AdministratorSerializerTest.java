@@ -6,8 +6,8 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import hms.attributes.Gender;
-import hms.model.Administrator;
+import hms.entity.attributes.Gender;
+import hms.entity.user.Administrator;
 
 class AdministratorSerializerTest {
 

@@ -1,4 +1,4 @@
-package hms;
+package hms.entity.medicine;
 
 import java.util.ArrayList;
 import java.util.HashMap;

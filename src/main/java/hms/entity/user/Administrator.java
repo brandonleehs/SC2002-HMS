@@ -1,6 +1,6 @@
-package hms.model;
+package hms.entity.user;
 
-import hms.attributes.Gender;
+import hms.entity.attributes.Gender;
 
 public class Administrator extends User {
 	private final int age;

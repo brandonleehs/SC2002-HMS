@@ -7,9 +7,9 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import hms.attributes.BloodType;
-import hms.attributes.Gender;
-import hms.model.Patient;
+import hms.entity.attributes.BloodType;
+import hms.entity.attributes.Gender;
+import hms.entity.user.Patient;
 
 class PatientSerializerTest {
 

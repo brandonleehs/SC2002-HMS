@@ -2,7 +2,7 @@ package hms;
 
 import java.util.Map;
 
-import hms.model.Patient;
+import hms.entity.user.Patient;
 import hms.serializer.PatientSerializer;
 
 public class PatientController {

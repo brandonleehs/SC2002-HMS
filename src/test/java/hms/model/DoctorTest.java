@@ -10,9 +10,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import hms.PatientController;
-import hms.appointment.Appointment;
-import hms.appointment.AppointmentStatus;
-import hms.attributes.Gender;
+import hms.entity.appointment.Appointment;
+import hms.entity.appointment.AppointmentStatus;
+import hms.entity.attributes.Gender;
+import hms.entity.user.Doctor;
+import hms.entity.user.Patient;
 
 class DoctorTest {
 	private static PatientController patientController = PatientController.getInstance();

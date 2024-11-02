@@ -1,10 +1,10 @@
-package hms.record;
+package hms.entity.record;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import hms.Medicine;
+import hms.entity.medicine.Medicine;
 
 public class AppointmentOutcomeRecord {
 	private final LocalDate date;

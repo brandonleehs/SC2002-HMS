@@ -1,9 +1,9 @@
-package hms.model;
+package hms.entity.user;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import hms.Validation;
-import hms.attributes.Gender;
+import hms.entity.attributes.Gender;
 
 public abstract class User {
 

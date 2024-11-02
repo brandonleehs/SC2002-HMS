@@ -9,7 +9,8 @@ import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
 
-import hms.appointment.Appointment;
+import hms.entity.appointment.Appointment;
+import hms.entity.appointment.Schedule;
 
 class ScheduleTest {
 

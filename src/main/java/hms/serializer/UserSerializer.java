@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Workbook;
 
-import hms.model.User;
+import hms.entity.user.User;
 
 public abstract class UserSerializer<E extends User> extends Serializer {
 

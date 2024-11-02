@@ -1,15 +1,15 @@
-package hms.model;
+package hms.entity.user;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import hms.Medicine;
-import hms.Schedule;
-import hms.appointment.Appointment;
-import hms.appointment.AppointmentStatus;
-import hms.attributes.Gender;
-import hms.record.AppointmentOutcomeRecord;
+import hms.entity.appointment.Appointment;
+import hms.entity.appointment.AppointmentStatus;
+import hms.entity.appointment.Schedule;
+import hms.entity.attributes.Gender;
+import hms.entity.medicine.Medicine;
+import hms.entity.record.AppointmentOutcomeRecord;
 
 public class Doctor extends User {
 	private final int age;

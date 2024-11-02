@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import hms.MedicineInventory;
+import hms.entity.medicine.MedicineInventory;
 
 class MedicineInventorySerializerTest {
 

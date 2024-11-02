@@ -1,4 +1,4 @@
-package hms;
+package hms.entity.appointment;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import hms.appointment.Appointment;
 
 public class Schedule {
 	// Maps an array of (scheduled) appointments to a date

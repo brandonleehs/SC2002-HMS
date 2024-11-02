@@ -1,4 +1,4 @@
-package hms;
+package hms.entity.medicine;
 
 public enum MedicineStatus {
 	PENDING, DISPENSED;

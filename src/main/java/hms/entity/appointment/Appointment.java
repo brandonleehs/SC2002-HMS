@@ -1,9 +1,9 @@
-package hms.appointment;
+package hms.entity.appointment;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import hms.record.AppointmentOutcomeRecord;
+import hms.entity.record.AppointmentOutcomeRecord;
 
 public class Appointment {
 	private final String patientId;

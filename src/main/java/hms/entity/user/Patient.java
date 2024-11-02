@@ -1,14 +1,14 @@
-package hms.model;
+package hms.entity.user;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import hms.Validation;
-import hms.appointment.Appointment;
-import hms.attributes.BloodType;
-import hms.attributes.Gender;
-import hms.record.AppointmentOutcomeRecord;
-import hms.record.MedicalRecord;
+import hms.entity.appointment.Appointment;
+import hms.entity.attributes.BloodType;
+import hms.entity.attributes.Gender;
+import hms.entity.record.AppointmentOutcomeRecord;
+import hms.entity.record.MedicalRecord;
 
 public class Patient extends User {
 	private final MedicalRecord medicalRecord;

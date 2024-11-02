@@ -5,7 +5,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import hms.MedicineInventory;
+import hms.entity.medicine.MedicineInventory;
 
 public class MedicineInventorySerializer extends Serializer {
 	public void getMedicineInventory(String filepath) {
