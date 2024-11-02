@@ -54,7 +54,9 @@ class PharmacistTest {
 	void testSubmitReplenishmentRequest() {
 		Pharmacist pharmacist = new Pharmacist("P001", "password", "Mark Lee", Gender.MALE, 29);
 		pharmacist.submitReplenishmentRequest("Paracetamol", 100);
-		assertTrue(MedicineInventory.getInstance().getReplenishmentRequestMap().get("Paracetamol").get(0) == 100);
+		assertTrue(MedicineInventory.getInstance().getReplenishmentRequestList().get(0)
+				.getMedicineName() == "Paracetamol");
+		assertTrue(MedicineInventory.getInstance().getReplenishmentRequestList().get(0).getStockToAdd() == 100);
 	}
 
 }

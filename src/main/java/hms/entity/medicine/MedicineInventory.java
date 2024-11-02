@@ -10,7 +10,7 @@ public class MedicineInventory {
 	private static final MedicineInventory medicineInventory = new MedicineInventory();
 	private final Map<String, Integer> medicineStock = new HashMap<String, Integer>();
 	private final Map<String, Integer> medicineLowStockLevelAlertValue = new HashMap<String, Integer>();
-	private final Map<String, List<Integer>> replenishmentRequestMap = new HashMap<String, List<Integer>>();
+	private final List<ReplenishRequest> replenishmentRequestList = new ArrayList<ReplenishRequest>();
 
 	private MedicineInventory() {
 	}
@@ -27,8 +27,8 @@ public class MedicineInventory {
 		return this.medicineLowStockLevelAlertValue;
 	}
 
-	public Map<String, List<Integer>> getReplenishmentRequestMap() {
-		return this.replenishmentRequestMap;
+	public List<ReplenishRequest> getReplenishmentRequestList() {
+		return this.replenishmentRequestList;
 	}
 
 	public void setMedicineStock(String medicineName, int stock) {
@@ -47,20 +47,23 @@ public class MedicineInventory {
 		return true;
 	}
 
-	public void addMedicineStock(String medicineName, int stock) {
-		this.medicineStock.put(medicineName, this.medicineStock.get(medicineName) + stock);
+	public void addMedicineStock(String medicineName, int amountToAdd) {
+		this.medicineStock.put(medicineName, this.medicineStock.get(medicineName) + amountToAdd);
 	}
 
-	public void addReplenishmentRequest(String medicineName, int stockToAdd) {
-		List<Integer> requestList = this.replenishmentRequestMap.get(medicineName);
-		if (requestList == null) {
-			List<Integer> lst = new ArrayList<Integer>();
-			lst.add(stockToAdd);
-			this.replenishmentRequestMap.put(medicineName, lst);
-		} else {
-			requestList.add(stockToAdd);
-		}
+//TODO: Consider checking if amount to remove is too large
+	public void removeMedicineStock(String medicineName, int amountToRemove) {
+		this.medicineStock.put(medicineName, this.medicineStock.get(medicineName) - amountToRemove);
 	}
+
+	public void addReplenishmentRequest(ReplenishRequest replenishRequest) {
+		this.replenishmentRequestList.add(replenishRequest);
+	}
+
+	public boolean removeReplenishmentRequest(ReplenishRequest replenishRequest) {
+		return this.replenishmentRequestList.remove(replenishRequest);
+	}
+
 	// TODO: This should be in boundary/view
 //	public void printAvailableMedicines() {
 //		System.out.println("Available Medicines:");

@@ -5,6 +5,7 @@ import java.util.List;
 
 import hms.entity.medicine.Medicine;
 import hms.entity.medicine.MedicineInventory;
+import hms.entity.medicine.ReplenishRequest;
 import hms.entity.record.AppointmentOutcomeRecord;
 import hms.entity.user.attributes.Gender;
 
@@ -38,7 +39,8 @@ public class Pharmacist extends User {
 	}
 
 	public void submitReplenishmentRequest(String medicineName, int stockToAdd) {
-		medicineInventory.addReplenishmentRequest(medicineName, stockToAdd);
+		ReplenishRequest replenishRequest = new ReplenishRequest(medicineName, stockToAdd);
+		medicineInventory.addReplenishmentRequest(replenishRequest);
 	}
 //
 //	public void updatePrescriptionStatus(Patient pname) {
