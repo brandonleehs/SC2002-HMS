@@ -1,5 +1,6 @@
 package hms.repository;
 
+import java.util.List;
 import java.util.Map;
 
 import hms.entity.user.Administrator;
@@ -16,5 +17,15 @@ public class AdministratorRepository implements IUserRepository<Administrator> {
 	@Override
 	public Administrator getById(String id) {
 		return this.administratorMap.get(id);
+	}
+
+	@Override
+	public void removeById(String id) {
+		this.administratorMap.remove(id);
+	}
+
+	@Override
+	public List<Administrator> getAll() {
+		return this.administratorMap.values().stream().toList();
 	}
 }

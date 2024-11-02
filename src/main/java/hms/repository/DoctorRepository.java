@@ -1,5 +1,6 @@
 package hms.repository;
 
+import java.util.List;
 import java.util.Map;
 
 import hms.entity.user.Doctor;
@@ -16,5 +17,15 @@ public class DoctorRepository implements IUserRepository<Doctor> {
 	@Override
 	public Doctor getById(String id) {
 		return this.doctorMap.get(id);
+	}
+
+	@Override
+	public void removeById(String id) {
+		this.doctorMap.remove(id);
+	}
+
+	@Override
+	public List<Doctor> getAll() {
+		return this.doctorMap.values().stream().toList();
 	}
 }
