@@ -11,7 +11,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import hms.attributes.Gender;
 import hms.model.Administrator;
 
-public class AdministratorSerializer extends Serializer<Administrator> {
+public class AdministratorSerializer extends UserSerializer<Administrator> {
 	@Override
 	protected Map<String, Administrator> readWorkbook(Workbook wb) {
 		Map<String, Administrator> administratorMap = new HashMap<String, Administrator>();
