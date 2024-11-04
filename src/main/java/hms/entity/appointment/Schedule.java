@@ -114,11 +114,11 @@ public class Schedule {
 		return false;
 	}
 
-	private boolean isClashing(Appointment appointment) {
+	public boolean isClashing(Appointment appointment) {
 		return isClashing(LocalDateTime.of(appointment.getDate(), appointment.getTime()));
 	}
 
-	private boolean isClashing(LocalDateTime datetime) {
+	public boolean isClashing(LocalDateTime datetime) {
 		Appointment[] timeslots = this.scheduleMap.get(datetime.toLocalDate());
 		return timeslots != null && timeslots[getTimeslot(datetime.toLocalTime())] != null;
 	}

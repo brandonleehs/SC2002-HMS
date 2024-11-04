@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,8 @@ import hms.entity.appointment.AppointmentStatus;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 import hms.entity.user.attributes.Gender;
+import hms.repository.DoctorRepository;
+import hms.repository.PatientRepository;
 
 class DoctorTest {
 	private static PatientController patientController = PatientController.getInstance();
@@ -168,5 +171,19 @@ class DoctorTest {
 		assertTrue(bob.scheduleAppointment(doctor, appointment));
 		Appointment[] appointments = doctor.getSchedule().getScheduleMap().get(LocalDate.of(2024, 10, 29));
 		assertTrue(appointments[15] == appointment);
+	}
+
+	@Test
+	void testGetAvailability() {
+		DoctorRepository doctorRepository = new DoctorRepository();
+		PatientRepository patientRepository = new PatientRepository();
+		Patient patient = patientRepository.getById("P1001");
+		Doctor doctor = doctorRepository.getById("D001");
+		LocalDate date = LocalDate.of(2024, 11, 5);
+		Appointment appt = new Appointment(patient.getId(), doctor.getId(), date, LocalTime.of(9, 30));
+		patient.scheduleAppointment(doctor, appt);
+		List<LocalTime> availability = doctor.getAvailability(date);
+		assertFalse(availability.contains(LocalTime.of(9, 30)));
+
 	}
 }

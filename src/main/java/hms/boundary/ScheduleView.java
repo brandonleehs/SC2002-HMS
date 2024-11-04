@@ -5,23 +5,12 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import hms.entity.user.Doctor;
-import hms.entity.user.Patient;
 
-public class ScheduleView extends UserMenuView<Patient> {
-
-	public ScheduleView(Patient user) {
-		super(user);
-	}
-
-	@Override
-	public void displayOptions() {
-
-	}
+public class ScheduleView extends View {
 
 	@Override
 	public void show() {
-		String prompt = "Please enter a date (YYYY-MM-DD): ";
-		System.out.print(prompt);
+		System.out.print("Please enter a date (YYYY-MM-DD): ");
 		String input = scanner.nextLine();
 		DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate date = LocalDate.parse(input, dateformatter);

@@ -30,15 +30,16 @@ public class Doctor extends User {
 		for (int hour = 0; hour < 24; hour++) {
 			LocalTime time1 = LocalTime.of(hour, 0);
 			LocalTime time2 = LocalTime.of(hour, 30);
-			if (this.schedule.isAvailable(LocalDateTime.of(date, time1))) {
+			if (!this.schedule.isClashing(LocalDateTime.of(date, time1))
+					&& this.schedule.isAvailable(LocalDateTime.of(date, time1))) {
 				availability.add(time1);
 			}
-			if (this.schedule.isAvailable(LocalDateTime.of(date, time2))) {
+			if (!this.schedule.isClashing(LocalDateTime.of(date, time2))
+					&& this.schedule.isAvailable(LocalDateTime.of(date, time2))) {
 				availability.add(time2);
 			}
 		}
 		return availability;
-
 	}
 
 	// TODO: input validation for date/timings

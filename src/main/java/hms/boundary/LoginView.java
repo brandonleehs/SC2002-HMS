@@ -19,27 +19,29 @@ public class LoginView extends View {
 		displayBorderedText(WIDTH, "Login");
 		boolean login = false;
 		User user = null;
-		do {
-			System.out.print("Enter id: ");
-			String id = scanner.nextLine();
-			System.out.print("Enter password: ");
-			String password = scanner.nextLine();
-			user = getUser(id, password);
-			login = authenticate(user, id, password);
-		} while (!login);
+		while (true) {
+			do {
+				System.out.print("Enter id: ");
+				String id = scanner.nextLine();
+				System.out.print("Enter password: ");
+				String password = scanner.nextLine();
+				user = getUser(id, password);
+				login = authenticate(user, id, password);
+			} while (!login);
 
-		if (user instanceof Patient) {
-			PatientMenuView patientMenu = new PatientMenuView((Patient) user);
-			patientMenu.show();
-		} else if (user instanceof Doctor) {
-			DoctorMenuView doctorMenu = new DoctorMenuView((Doctor) user);
-			doctorMenu.show();
-		} else if (user instanceof Pharmacist) {
-			PharmacistMenuView pharmacistMenu = new PharmacistMenuView((Pharmacist) user);
-			pharmacistMenu.show();
-		} else {
-			AdministratorMenuView administratorMenu = new AdministratorMenuView((Administrator) user);
-			administratorMenu.show();
+			if (user instanceof Patient) {
+				PatientMenuView patientMenu = new PatientMenuView((Patient) user);
+				patientMenu.show();
+			} else if (user instanceof Doctor) {
+				DoctorMenuView doctorMenu = new DoctorMenuView((Doctor) user);
+				doctorMenu.show();
+			} else if (user instanceof Pharmacist) {
+				PharmacistMenuView pharmacistMenu = new PharmacistMenuView((Pharmacist) user);
+				pharmacistMenu.show();
+			} else {
+				AdministratorMenuView administratorMenu = new AdministratorMenuView((Administrator) user);
+				administratorMenu.show();
+			}
 		}
 	}
 

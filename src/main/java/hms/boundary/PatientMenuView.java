@@ -1,6 +1,7 @@
 package hms.boundary;
 
 import hms.boundary.patient.MedicalRecordView;
+import hms.boundary.patient.ScheduleAppointmentView;
 import hms.boundary.patient.UpdatePersonalInfoView;
 import hms.entity.user.Patient;
 
@@ -42,10 +43,12 @@ public class PatientMenuView extends UserMenuView<Patient> {
 				updatePersonalInfoView.show();
 				break;
 			case 3:
-				ScheduleView scheduleView = new ScheduleView(user);
+				ScheduleView scheduleView = new ScheduleView();
 				scheduleView.show();
 				break;
 			case 4:
+				ScheduleAppointmentView scheduleAppointmentView = new ScheduleAppointmentView(user);
+				scheduleAppointmentView.show();
 				break;
 			case 5:
 				break;
@@ -56,6 +59,9 @@ public class PatientMenuView extends UserMenuView<Patient> {
 			case 8:
 				break;
 			case 9:
+				break;
+			case 10:
+				System.out.println("Logging out.");
 				break;
 			}
 		} while (choice < 10);
