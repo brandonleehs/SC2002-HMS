@@ -19,8 +19,34 @@ public enum BloodType {
 			return BloodType.B_NEG;
 		case "AB+":
 			return BloodType.AB_POS;
-		default:
+		case "AB-":
 			return BloodType.AB_NEG;
+		default:
+			return null;
+		}
+	}
+
+	@Override
+	public String toString() {
+		switch (this.ordinal()) {
+		case 0:
+			return "O+";
+		case 1:
+			return "O-";
+		case 2:
+			return "A+";
+		case 3:
+			return "A-";
+		case 4:
+			return "B+";
+		case 5:
+			return "B-";
+		case 6:
+			return "AB+";
+		case 7:
+			return "AB-";
+		default:
+			return null;
 		}
 	}
 }

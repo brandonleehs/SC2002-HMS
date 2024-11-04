@@ -1,5 +1,6 @@
 package hms.boundary;
 
+import hms.boundary.patient.PatientService;
 import hms.entity.user.Patient;
 
 public class PatientMenu extends UserMenu<Patient> {
@@ -25,5 +26,13 @@ public class PatientMenu extends UserMenu<Patient> {
 	public void show() {
 		displayBorderedText(WIDTH, String.format("Welcome, %s.", user.getName()));
 		displayOptions();
+
+		PatientService patientService = new PatientService(user);
+		int choice = 0;
+		do {
+			choice = scanner.nextInt();
+			scanner.nextLine();
+			patientService.renderService(choice);
+		} while (choice < 10);
 	}
 }

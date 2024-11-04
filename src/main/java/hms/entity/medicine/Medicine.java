@@ -6,6 +6,7 @@ public class Medicine {
 
 	public Medicine(String name) {
 		this.name = name;
+		this.medicineStatus = MedicineStatus.PENDING;
 	}
 
 	public String getName() {
