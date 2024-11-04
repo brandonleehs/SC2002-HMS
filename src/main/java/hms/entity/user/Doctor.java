@@ -3,6 +3,8 @@ package hms.entity.user;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import hms.entity.appointment.Appointment;
 import hms.entity.appointment.AppointmentStatus;
@@ -22,7 +24,21 @@ public class Doctor extends User {
 		this.schedule = new Schedule();
 	}
 
-	public void viewSchedule() {
+	// Returns a list of available times
+	public List<LocalTime> getAvailability(LocalDate date) {
+		List<LocalTime> availability = new ArrayList<LocalTime>();
+		for (int hour = 0; hour < 24; hour++) {
+			LocalTime time1 = LocalTime.of(hour, 0);
+			LocalTime time2 = LocalTime.of(hour, 30);
+			if (this.schedule.isAvailable(LocalDateTime.of(date, time1))) {
+				availability.add(time1);
+			}
+			if (this.schedule.isAvailable(LocalDateTime.of(date, time2))) {
+				availability.add(time2);
+			}
+		}
+		return availability;
+
 	}
 
 	// TODO: input validation for date/timings

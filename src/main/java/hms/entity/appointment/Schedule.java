@@ -87,11 +87,11 @@ public class Schedule {
 		this.availableMap.put(date, availableArr);
 	}
 
-	private boolean isAvailable(Appointment appointment) {
+	public boolean isAvailable(Appointment appointment) {
 		return isAvailable(LocalDateTime.of(appointment.getDate(), appointment.getTime()));
 	}
 
-	private boolean isAvailable(LocalDateTime datetime) {
+	public boolean isAvailable(LocalDateTime datetime) {
 		LocalDate date = datetime.toLocalDate();
 		LocalTime time = datetime.toLocalTime();
 		int timeslot = getTimeslot(time);

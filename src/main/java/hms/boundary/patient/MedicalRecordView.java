@@ -41,19 +41,23 @@ public class MedicalRecordView extends View {
 
 	private void displayPrescriptionTable(AppointmentOutcomeRecord appointmentOutcomeRecord) {
 		String title = "Medicine Prescribed";
-		int padding = (WIDTH + 2 - title.length()) / 2;
-		String format = "| %-" + (WIDTH - 25) + "s | %-" + 20 + "s |\n";
+		int leftPadding = (WIDTH - title.length()) / 2;
+		int rightPadding = leftPadding;
+		if ((WIDTH - title.length()) % 2 != 0) {
+			rightPadding++;
+		}
+		String format = "| %-" + (WIDTH - 25) + "s | %-" + 18 + "s |\n";
 
-		System.out.println("-".repeat(WIDTH + 2));
-		System.out.println(" ".repeat(padding) + title);
-		System.out.println("-".repeat(WIDTH + 2));
+		System.out.println("-".repeat(WIDTH));
+		System.out.println(" ".repeat(leftPadding) + title + " ".repeat(rightPadding));
+		System.out.println("-".repeat(WIDTH));
 
 		List<Medicine> prescribedMedicineList = appointmentOutcomeRecord.getPrescribedMedicineList();
 		if (prescribedMedicineList.isEmpty()) {
 			System.out.println("No medicine prescribed.");
 		} else {
 			System.out.printf(format, "Medicine Name", "Status");
-			System.out.println("|" + "-".repeat(WIDTH) + "|");
+			System.out.println("|" + "-".repeat(WIDTH - 2) + "|");
 			for (Medicine medicine : prescribedMedicineList) {
 				System.out.printf(format, medicine.getName(), medicine.getMedicineStatus());
 			}

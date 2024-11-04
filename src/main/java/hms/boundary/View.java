@@ -30,10 +30,14 @@ public abstract class View {
 	}
 
 	protected static void displayBorderedText(int width, String text) {
-		width = (width - text.length()) % 2 == 0 ? width : width + 1;
-		int padding = (width - text.length() - 2) / 2;
+//		width = (width - text.length()) % 2 == 0 ? width : width + 1;
+		int leftPadding = (width - text.length() - 2) / 2;
+		int rightPadding = leftPadding;
+		if ((width - text.length()) % 2 != 0) {
+			rightPadding++;
+		}
 		String border = "+" + "=".repeat(width - 2) + "+";
-		String output = "|" + " ".repeat(padding) + text + " ".repeat(padding) + "|";
+		String output = "|" + " ".repeat(leftPadding) + text + " ".repeat(rightPadding) + "|";
 		System.out.println(border);
 		System.out.println(output);
 		System.out.println(border);
