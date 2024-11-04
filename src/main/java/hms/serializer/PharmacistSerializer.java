@@ -18,7 +18,9 @@ public class PharmacistSerializer extends UserSerializer<Pharmacist> {
 		for (Sheet sheet : wb) {
 			for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
 				Pharmacist pharmacist = getPharmacistFromRow(sheet.getRow(rowNum));
-				pharmacistMap.put(pharmacist.getId(), pharmacist);
+				if (pharmacist != null) {
+					pharmacistMap.put(pharmacist.getId(), pharmacist);
+				}
 			}
 		}
 		return pharmacistMap;
@@ -26,10 +28,14 @@ public class PharmacistSerializer extends UserSerializer<Pharmacist> {
 
 	private Pharmacist getPharmacistFromRow(Row row) {
 		DataFormatter formatter = new DataFormatter();
-		String id = formatter.formatCellValue(row.getCell(0));
-		String name = formatter.formatCellValue(row.getCell(1));
-		Gender gender = formatter.formatCellValue(row.getCell(3)).equals("Male") ? Gender.MALE : Gender.FEMALE;
-		int age = Integer.parseInt(formatter.formatCellValue(row.getCell(4)));
-		return new Pharmacist(id, "password", name, gender, age);
+		String role = formatter.formatCellValue(row.getCell(2));
+		if (role.equals("Pharmacist")) {
+			String id = formatter.formatCellValue(row.getCell(0));
+			String name = formatter.formatCellValue(row.getCell(1));
+			Gender gender = formatter.formatCellValue(row.getCell(3)).equals("Male") ? Gender.MALE : Gender.FEMALE;
+			int age = Integer.parseInt(formatter.formatCellValue(row.getCell(4)));
+			return new Pharmacist(id, "password", name, gender, age);
+		}
+		return null;
 	}
 }

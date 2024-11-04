@@ -18,7 +18,9 @@ public class AdministratorSerializer extends UserSerializer<Administrator> {
 		for (Sheet sheet : wb) {
 			for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
 				Administrator administrator = getAdministratorFromRow(sheet.getRow(rowNum));
-				administratorMap.put(administrator.getId(), administrator);
+				if (administrator != null) {
+					administratorMap.put(administrator.getId(), administrator);
+				}
 			}
 		}
 		return administratorMap;
@@ -26,10 +28,14 @@ public class AdministratorSerializer extends UserSerializer<Administrator> {
 
 	private Administrator getAdministratorFromRow(Row row) {
 		DataFormatter formatter = new DataFormatter();
-		String id = formatter.formatCellValue(row.getCell(0));
-		String name = formatter.formatCellValue(row.getCell(1));
-		Gender gender = formatter.formatCellValue(row.getCell(3)).equals("Male") ? Gender.MALE : Gender.FEMALE;
-		int age = Integer.parseInt(formatter.formatCellValue(row.getCell(4)));
-		return new Administrator(id, "password", name, gender, age);
+		String role = formatter.formatCellValue(row.getCell(2));
+		if (role.equals("Administrator")) {
+			String id = formatter.formatCellValue(row.getCell(0));
+			String name = formatter.formatCellValue(row.getCell(1));
+			Gender gender = formatter.formatCellValue(row.getCell(3)).equals("Male") ? Gender.MALE : Gender.FEMALE;
+			int age = Integer.parseInt(formatter.formatCellValue(row.getCell(4)));
+			return new Administrator(id, "password", name, gender, age);
+		}
+		return null;
 	}
 }

@@ -19,7 +19,9 @@ public class DoctorSerializer extends UserSerializer<Doctor> {
 		for (Sheet sheet : wb) {
 			for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
 				Doctor doctor = getDoctorFromRow(sheet.getRow(rowNum));
-				doctorMap.put(doctor.getId(), doctor);
+				if (doctor != null) {
+					doctorMap.put(doctor.getId(), doctor);
+				}
 			}
 		}
 		return doctorMap;
@@ -27,10 +29,14 @@ public class DoctorSerializer extends UserSerializer<Doctor> {
 
 	private Doctor getDoctorFromRow(Row row) {
 		DataFormatter formatter = new DataFormatter();
-		String id = formatter.formatCellValue(row.getCell(0));
-		String name = formatter.formatCellValue(row.getCell(1));
-		Gender gender = formatter.formatCellValue(row.getCell(3)).equals("Male") ? Gender.MALE : Gender.FEMALE;
-		int age = Integer.parseInt(formatter.formatCellValue(row.getCell(4)));
-		return new Doctor(id, "password", name, gender, age);
+		String role = formatter.formatCellValue(row.getCell(2));
+		if (role.equals("Doctor")) {
+			String id = formatter.formatCellValue(row.getCell(0));
+			String name = formatter.formatCellValue(row.getCell(1));
+			Gender gender = formatter.formatCellValue(row.getCell(3)).equals("Male") ? Gender.MALE : Gender.FEMALE;
+			int age = Integer.parseInt(formatter.formatCellValue(row.getCell(4)));
+			return new Doctor(id, "password", name, gender, age);
+		}
+		return null;
 	}
 }
