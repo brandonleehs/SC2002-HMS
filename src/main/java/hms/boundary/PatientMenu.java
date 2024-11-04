@@ -1,10 +1,10 @@
 package hms.boundary;
 
-import hms.entity.user.User;
+import hms.entity.user.Patient;
 
-public class PatientMenu extends UserMenu {
-	public PatientMenu(User user) {
-		super(user);
+public class PatientMenu extends UserMenu<Patient> {
+	public PatientMenu(Patient patient) {
+		super(patient);
 	}
 
 	@Override

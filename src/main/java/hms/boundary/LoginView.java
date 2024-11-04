@@ -5,7 +5,10 @@ import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import hms.entity.user.Administrator;
+import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
+import hms.entity.user.Pharmacist;
 import hms.entity.user.User;
 
 public class LoginView extends View {
@@ -26,8 +29,17 @@ public class LoginView extends View {
 		} while (!login);
 
 		if (user instanceof Patient) {
-			PatientMenu patientMenu = new PatientMenu(user);
+			PatientMenu patientMenu = new PatientMenu((Patient) user);
 			patientMenu.show();
+		} else if (user instanceof Doctor) {
+			DoctorMenu doctorMenu = new DoctorMenu((Doctor) user);
+			doctorMenu.show();
+		} else if (user instanceof Pharmacist) {
+			PharmacistMenu pharmacistMenu = new PharmacistMenu((Pharmacist) user);
+			pharmacistMenu.show();
+		} else {
+			AdministratorMenu administratorMenu = new AdministratorMenu((Administrator) user);
+			administratorMenu.show();
 		}
 	}
 
