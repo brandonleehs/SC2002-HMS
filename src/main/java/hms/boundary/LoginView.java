@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import hms.entity.user.Patient;
 import hms.entity.user.User;
 
 public class LoginView extends View {
@@ -14,14 +15,20 @@ public class LoginView extends View {
 		displayLogo();
 		displayBorderedText(WIDTH, "Login");
 		boolean login = false;
+		User user = null;
 		do {
 			System.out.print("Enter id: ");
 			String id = scanner.nextLine();
 			System.out.print("Enter password: ");
 			String password = scanner.nextLine();
-			User user = getUser(id, password);
+			user = getUser(id, password);
 			login = authenticate(user, id, password);
 		} while (!login);
+
+		if (user instanceof Patient) {
+			PatientMenu patientMenu = new PatientMenu(user);
+			patientMenu.show();
+		}
 	}
 
 	private User getUser(String id, String password) {
@@ -39,7 +46,6 @@ public class LoginView extends View {
 			System.out.println("Authentication failed. Please try again.");
 			return false;
 		}
-		System.out.println("Success.");
 		return true;
 	}
 }
