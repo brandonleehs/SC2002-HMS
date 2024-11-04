@@ -1,23 +1,35 @@
 package hms.boundary;
 
-// TODO: REFACTOR INTO INTERFACE
-abstract class Menu {
-	// Obtained from figlet's ANSI-Shadow
+import java.util.Scanner;
+
+import hms.repository.AdministratorRepository;
+import hms.repository.DoctorRepository;
+import hms.repository.PatientRepository;
+import hms.repository.PharmacistRepository;
+
+public abstract class View {
+	protected static final PatientRepository patientRepository = new PatientRepository();
+	protected static final DoctorRepository doctorRepository = new DoctorRepository();
+	protected static final PharmacistRepository pharmacistRepository = new PharmacistRepository();
+	protected static final AdministratorRepository administratorRepository = new AdministratorRepository();
+
 	protected static final String LOGO = "\r\n" + "██╗  ██╗███╗   ███╗███████╗\r\n" + "██║  ██║████╗ ████║██╔════╝\r\n"
 			+ "███████║██╔████╔██║███████╗\r\n" + "██╔══██║██║╚██╔╝██║╚════██║\r\n" + "██║  ██║██║ ╚═╝ ██║███████║\r\n"
 			+ "╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝\r\n" + "                           \r\n" + "";
+	protected static final Scanner scanner = new Scanner(System.in);
+	protected static int WIDTH = 50;
 
 	public void displayLogo() {
 		System.out.print(LOGO);
 	}
 
-	abstract public void displayMenu(String name);
+	public abstract void show();
 
-	abstract public void displayHeader(String name);
+	public static void close() {
+		scanner.close();
+	}
 
-	abstract public void displayOptions();
-
-	protected void displayBorderedText(int width, String text) {
+	protected static void displayBorderedText(int width, String text) {
 		width = (width - text.length()) % 2 == 0 ? width : width + 1;
 		int padding = (width - text.length() - 2) / 2;
 		String border = "+" + "=".repeat(width - 2) + "+";

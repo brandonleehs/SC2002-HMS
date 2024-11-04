@@ -28,4 +28,9 @@ public class DoctorRepository implements IUserRepository<Doctor> {
 	public List<Doctor> getAll() {
 		return this.doctorMap.values().stream().toList();
 	}
+
+	@Override
+	public Map<String, Doctor> getMap() {
+		return this.doctorMap;
+	}
 }

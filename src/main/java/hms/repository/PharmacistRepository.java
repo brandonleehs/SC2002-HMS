@@ -11,7 +11,7 @@ public class PharmacistRepository implements IUserRepository<Pharmacist> {
 
 	public PharmacistRepository() {
 		PharmacistSerializer pharmacistSerializer = new PharmacistSerializer();
-		this.pharmacistMap = pharmacistSerializer.getMap("Pharmacist_List.xlsx");
+		this.pharmacistMap = pharmacistSerializer.getMap("Staff_List.xlsx");
 	}
 
 	@Override
@@ -27,5 +27,10 @@ public class PharmacistRepository implements IUserRepository<Pharmacist> {
 	@Override
 	public List<Pharmacist> getAll() {
 		return this.pharmacistMap.values().stream().toList();
+	}
+
+	@Override
+	public Map<String, Pharmacist> getMap() {
+		return pharmacistMap;
 	}
 }

@@ -11,7 +11,7 @@ public class AdministratorRepository implements IUserRepository<Administrator> {
 
 	public AdministratorRepository() {
 		AdministratorSerializer administratorSerializer = new AdministratorSerializer();
-		this.administratorMap = administratorSerializer.getMap("Administrator_List.xlsx");
+		this.administratorMap = administratorSerializer.getMap("Staff_List.xlsx");
 	}
 
 	@Override
@@ -27,5 +27,10 @@ public class AdministratorRepository implements IUserRepository<Administrator> {
 	@Override
 	public List<Administrator> getAll() {
 		return this.administratorMap.values().stream().toList();
+	}
+
+	@Override
+	public Map<String, Administrator> getMap() {
+		return this.administratorMap;
 	}
 }
