@@ -29,16 +29,16 @@ public class LoginView extends View {
 		} while (!login);
 
 		if (user instanceof Patient) {
-			PatientMenu patientMenu = new PatientMenu((Patient) user);
+			PatientMenuView patientMenu = new PatientMenuView((Patient) user);
 			patientMenu.show();
 		} else if (user instanceof Doctor) {
-			DoctorMenu doctorMenu = new DoctorMenu((Doctor) user);
+			DoctorMenuView doctorMenu = new DoctorMenuView((Doctor) user);
 			doctorMenu.show();
 		} else if (user instanceof Pharmacist) {
-			PharmacistMenu pharmacistMenu = new PharmacistMenu((Pharmacist) user);
+			PharmacistMenuView pharmacistMenu = new PharmacistMenuView((Pharmacist) user);
 			pharmacistMenu.show();
 		} else {
-			AdministratorMenu administratorMenu = new AdministratorMenu((Administrator) user);
+			AdministratorMenuView administratorMenu = new AdministratorMenuView((Administrator) user);
 			administratorMenu.show();
 		}
 	}

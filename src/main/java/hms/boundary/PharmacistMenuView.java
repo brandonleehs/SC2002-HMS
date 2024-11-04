@@ -2,9 +2,9 @@ package hms.boundary;
 
 import hms.entity.user.Pharmacist;
 
-public class PharmacistMenu extends UserMenu<Pharmacist> {
+public class PharmacistMenuView extends UserMenuView<Pharmacist> {
 
-	protected PharmacistMenu(Pharmacist pharmacist) {
+	protected PharmacistMenuView(Pharmacist pharmacist) {
 		super(pharmacist);
 	}
 

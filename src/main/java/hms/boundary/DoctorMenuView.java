@@ -2,9 +2,9 @@ package hms.boundary;
 
 import hms.entity.user.Doctor;
 
-public class DoctorMenu extends UserMenu<Doctor> {
+public class DoctorMenuView extends UserMenuView<Doctor> {
 
-	protected DoctorMenu(Doctor doctor) {
+	protected DoctorMenuView(Doctor doctor) {
 		super(doctor);
 	}
 

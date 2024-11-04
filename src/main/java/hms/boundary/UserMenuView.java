@@ -2,10 +2,10 @@ package hms.boundary;
 
 import hms.entity.user.User;
 
-public abstract class UserMenu<E extends User> extends View {
+public abstract class UserMenuView<E extends User> extends View {
 	protected final E user;
 
-	protected UserMenu(E user) {
+	protected UserMenuView(E user) {
 		this.user = user;
 	}
 

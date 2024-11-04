@@ -2,9 +2,9 @@ package hms.boundary;
 
 import hms.entity.user.Administrator;
 
-public class AdministratorMenu extends UserMenu<Administrator> {
+public class AdministratorMenuView extends UserMenuView<Administrator> {
 
-	protected AdministratorMenu(Administrator administrator) {
+	protected AdministratorMenuView(Administrator administrator) {
 		super(administrator);
 	}
 

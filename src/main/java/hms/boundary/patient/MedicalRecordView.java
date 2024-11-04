@@ -27,7 +27,7 @@ public class MedicalRecordView extends View {
 
 		displayBorderedText(WIDTH, "Appointment Records");
 		List<AppointmentOutcomeRecord> records = patient.getAppointmentOutcomeRecordList();
-		if (records == null) {
+		if (records.isEmpty()) {
 			System.out.println("No records found.");
 		}
 		for (AppointmentOutcomeRecord appointmentOutcomeRecord : records) {
