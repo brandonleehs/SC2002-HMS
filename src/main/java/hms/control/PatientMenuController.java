@@ -1,5 +1,6 @@
 package hms.control;
 
+import hms.boundary.ErrorMessage;
 import hms.boundary.InputHandler;
 import hms.boundary.patient.MedicalRecordView;
 import hms.boundary.patient.PatientMenuView;
@@ -16,12 +17,16 @@ public class PatientMenuController extends Controller {
 
 	@Override
 	public void navigate() {
-		int choice = 0;
+		Integer choice = 0;
 		do {
 			this.patientMenuView.displayHeader();
 			this.patientMenuView.displayOptions();
 
 			choice = InputHandler.getChoice();
+			if (choice == null) {
+				choice = -1;
+				continue;
+			}
 			switch (choice) {
 			case 1:
 				MedicalRecordView medicalRecordView = new MedicalRecordView(patient);
@@ -65,6 +70,9 @@ public class PatientMenuController extends Controller {
 			case 10:
 				System.out.println("Logging out.");
 				break;
+			default:
+				ErrorMessage.displayInvalidChoiceError();
+				choice = -1;
 			}
 		} while (choice < 10);
 	}

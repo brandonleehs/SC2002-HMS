@@ -4,15 +4,23 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputHandler {
 	private static final Scanner scanner = new Scanner(System.in);
 
-	public static int getChoice() {
-		int choice = scanner.nextInt();
-		scanner.nextLine();
-		return choice;
+	public static Integer getChoice() {
+
+		try {
+			int choice = scanner.nextInt();
+			scanner.nextLine();
+			return choice;
+		} catch (InputMismatchException e) {
+			ErrorMessage.displayInvalidChoiceFormat();
+			scanner.nextLine(); // Clear buffer!
+		}
+		return null;
 	}
 
 	public static String getString() {
@@ -26,7 +34,7 @@ public class InputHandler {
 			LocalDate date = LocalDate.parse(dateString, dateformatter);
 			return date;
 		} catch (DateTimeParseException e) {
-			System.out.println("Input is not of form YYYY-MM-DD. Please check and try again.");
+			ErrorMessage.displayInvalidDateError();
 			return null;
 		}
 	}
@@ -37,7 +45,7 @@ public class InputHandler {
 			LocalTime time = LocalTime.parse(timeString, DateTimeFormatter.ISO_LOCAL_TIME);
 			return time;
 		} catch (DateTimeParseException e) {
-			System.out.println("Input is not of form HH-MM. Please check and try again.");
+			ErrorMessage.displayInvalidTimeError();
 			return null;
 		}
 	}

@@ -22,12 +22,12 @@ public class LoginController extends Controller {
 
 	@Override
 	public void navigate() {
-		View.displayLogo();
-		this.loginView.displayHeader();
 		boolean login = false;
 		User user = null;
 		while (true) {
 			do {
+				View.displayLogo();
+				this.loginView.displayHeader();
 				this.loginView.displayIdPrompt();
 				String id = InputHandler.getString();
 				this.loginView.displayPasswordPrompt();

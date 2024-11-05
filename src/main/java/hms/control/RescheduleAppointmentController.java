@@ -3,6 +3,7 @@ package hms.control;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import hms.boundary.ErrorMessage;
 import hms.boundary.InputHandler;
 import hms.boundary.Prompt;
 import hms.boundary.patient.RescheduleAppointmentView;
@@ -26,7 +27,16 @@ public class RescheduleAppointmentController extends Controller {
 			this.rescheduleAppointmentView.displayNoAppointments();
 		} else {
 			this.rescheduleAppointmentView.displayAppointments(this.patient, doctorRepository);
-			int choice = InputHandler.getChoice();
+			Integer choice = InputHandler.getChoice();
+
+			if (choice == null) {
+				return;
+			}
+
+			if (!(1 <= choice && choice <= this.patient.getScheduledAppointmentList().size())) {
+				ErrorMessage.displayInvalidChoiceError();
+				return;
+			}
 			Appointment oldAppointment = this.patient.getScheduledAppointmentList().get(choice - 1);
 
 			Prompt.displayDatePrompt();
@@ -47,6 +57,16 @@ public class RescheduleAppointmentController extends Controller {
 			this.rescheduleAppointmentView.displayDoctorsAll(doctorRepository);
 
 			choice = InputHandler.getChoice();
+
+			if (choice == null) {
+				return;
+			}
+
+			if (!(1 <= choice && choice <= doctorRepository.getAll().size())) {
+				ErrorMessage.displayInvalidChoiceError();
+				return;
+			}
+
 			Doctor newDoctor = doctorRepository.getAll().get(choice - 1);
 			Appointment newAppointment = new Appointment(this.patient.getId(), newDoctor.getId(), date, time);
 			Doctor oldDoctor = doctorRepository.getById(oldAppointment.getDoctorId());

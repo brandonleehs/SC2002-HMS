@@ -1,5 +1,6 @@
 package hms.control;
 
+import hms.boundary.ErrorMessage;
 import hms.boundary.InputHandler;
 import hms.boundary.Prompt;
 import hms.boundary.patient.UpdatePersonalInfoView;
@@ -19,7 +20,12 @@ public class UpdatePersonalInfoController extends Controller {
 		this.updatePersonalInfoView.displayHeader();
 		this.updatePersonalInfoView.displayOptions();
 
-		int choice = InputHandler.getChoice();
+		Integer choice = InputHandler.getChoice();
+
+		if (choice == null) {
+			return;
+		}
+
 		switch (choice) {
 		case 1:
 			Prompt.displayPhoneNumberPrompt();
@@ -34,6 +40,7 @@ public class UpdatePersonalInfoController extends Controller {
 			this.updatePersonalInfoView.displayEmailAddressUpdate();
 			break;
 		default:
+			ErrorMessage.displayInvalidChoiceError();
 			this.updatePersonalInfoView.displayReturnMenu();
 		}
 	}
