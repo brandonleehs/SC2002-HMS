@@ -10,13 +10,14 @@ public class RescheduleAppointmentView extends View {
 
 	public void displayAppointments(Patient patient, DoctorRepository doctorRepository) {
 		System.out.println("Please choose an appointment to reschedule: ");
-		String format = "| %-" + 5 + "s | %-" + 10 + "s | %-" + 5 + "s | %-" + 6 + "s | %-" + (WIDTH - 42) + "s |\n";
-		System.out.printf(format, "Index", "Date", "Time", "Id", "Doctor Name");
+		String format = "| %-" + 5 + "s | %-" + 10 + "s | %-" + 5 + "s | %-" + 10 + "s | %-" + (WIDTH - 46) + "s |\n";
+		System.out.printf(format, "Index", "Date", "Time", "Status", "Doctor Name");
 		for (int i = 0; i < patient.getScheduledAppointmentList().size(); i++) {
 			Appointment appointment = patient.getScheduledAppointmentList().get(i);
-			System.out.printf(format, i + 1, appointment.getDate(), appointment.getTime(), appointment.getDoctorId(),
-					doctorRepository.getById(appointment.getDoctorId()).getName());
+			System.out.printf(format, i + 1, appointment.getDate(), appointment.getTime(),
+					appointment.getAppointmentStatus(), doctorRepository.getById(appointment.getDoctorId()).getName());
 		}
+		System.out.println();
 	}
 
 	@Override
