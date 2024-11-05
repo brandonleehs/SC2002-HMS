@@ -27,10 +27,4 @@ public class DoctorMenuView extends View {
 		displayBorderedText(WIDTH, String.format("Welcome, Dr. %s.", doctor.getName()));
 	}
 
-//	@Override
-//	public void show() {
-//		displayBorderedText(WIDTH, String.format("Welcome, Dr. %s.", user.getName()));
-//		displayOptions();
-//	}
-
 }

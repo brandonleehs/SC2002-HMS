@@ -25,11 +25,4 @@ public class AdministratorMenuView extends View {
 	public void displayHeader() {
 		displayBorderedText(WIDTH, String.format("Welcome, %s.", administrator.getName()));
 	}
-
-//	@Override
-//	public void show() {
-//		displayBorderedText(WIDTH, String.format("Welcome, %s.", user.getName()));
-//		displayOptions();
-//	}
-
 }

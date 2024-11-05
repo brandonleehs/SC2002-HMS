@@ -26,10 +26,4 @@ public class PharmacistMenuView extends View {
 		displayBorderedText(WIDTH, String.format("Welcome, %s.", pharmacist.getName()));
 	}
 
-//	@Override
-//	public void show() {
-//		displayBorderedText(WIDTH, String.format("Welcome, %s.", user.getName()));
-//		displayOptions();
-//	}
-
 }
