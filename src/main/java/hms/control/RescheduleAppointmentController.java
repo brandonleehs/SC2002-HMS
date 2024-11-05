@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 import hms.boundary.InputHandler;
 import hms.boundary.Prompt;
-import hms.boundary.patient.RescheduleAppointmentView;
+import hms.boundary.patient.appointment.RescheduleAppointmentView;
 import hms.entity.appointment.Appointment;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;

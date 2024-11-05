@@ -1,7 +1,7 @@
 package hms.control;
 
 import hms.boundary.InputHandler;
-import hms.boundary.patient.CancelAppointmentView;
+import hms.boundary.patient.appointment.CancelAppointmentView;
 import hms.entity.appointment.Appointment;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;

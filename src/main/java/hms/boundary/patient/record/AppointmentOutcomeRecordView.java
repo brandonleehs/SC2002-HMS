@@ -1,4 +1,4 @@
-package hms.boundary.patient;
+package hms.boundary.patient.record;
 
 import java.util.List;
 

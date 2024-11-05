@@ -24,10 +24,6 @@ public class ScheduleView extends View {
 		System.out.println();
 	}
 
-	public void displayBorder() {
-
-	}
-
 	@Override
 	public void displayHeader() {
 		displayBorderedText(WIDTH, "Available Appointment Slots");

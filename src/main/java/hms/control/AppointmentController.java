@@ -1,6 +1,6 @@
 package hms.control;
 
-import hms.boundary.patient.AppointmentView;
+import hms.boundary.patient.appointment.AppointmentView;
 import hms.entity.user.Patient;
 
 public class AppointmentController extends Controller {
