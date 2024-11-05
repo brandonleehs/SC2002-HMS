@@ -51,7 +51,8 @@ public class Doctor extends User {
 		appointment.setAppointmentStatus(AppointmentStatus.CONFIRMED);
 	}
 
-	public void declineAppointment(Appointment appointment) {
+	public void cancelAppointment(Appointment appointment) {
+		this.schedule.cancelAppointment(appointment);
 		appointment.setAppointmentStatus(AppointmentStatus.CANCELLED);
 	}
 
@@ -73,10 +74,6 @@ public class Doctor extends User {
 
 	public boolean changeAppointment(Appointment appointment, LocalDateTime datetime) {
 		return this.schedule.changeAppointment(appointment, datetime);
-	}
-
-	public void cancelAppointment(Appointment appointment) {
-		this.schedule.cancelAppointment(appointment);
 	}
 
 	public void prescribeMedicine(Medicine medicine, AppointmentOutcomeRecord appointmentOutcomeRecord) {

@@ -138,15 +138,16 @@ class DoctorTest {
 	}
 
 	@Test
-	void testDeclineAppointment() {
+	void testCancelAppointment() {
 		Patient bob = patientController.getPatientMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Appointment appointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(13, 0));
 		bob.scheduleAppointment(doctor, appointment);
-		doctor.declineAppointment(appointment);
+		doctor.cancelAppointment(appointment);
 		Appointment[] appointments = doctor.getSchedule().getScheduleMap().get(LocalDate.of(2024, 10, 29));
-		assertTrue(appointments[26].getAppointmentStatus() == AppointmentStatus.CANCELLED);
+		assertTrue(appointment.getAppointmentStatus() == AppointmentStatus.CANCELLED);
+		assertTrue(appointments[26] == null);
 	}
 
 	@Test
