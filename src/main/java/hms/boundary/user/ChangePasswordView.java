@@ -1,4 +1,6 @@
-package hms.boundary;
+package hms.boundary.user;
+
+import hms.boundary.View;
 
 public class ChangePasswordView extends View {
 
