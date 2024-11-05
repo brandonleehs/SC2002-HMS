@@ -1,10 +1,11 @@
 package hms.control;
 
-import hms.boundary.ErrorMessage;
 import hms.boundary.InputHandler;
 import hms.boundary.patient.MedicalRecordView;
 import hms.boundary.patient.PatientMenuView;
 import hms.entity.user.Patient;
+import hms.exceptions.InvalidChoiceFormatException;
+import hms.exceptions.InvalidChoiceValueException;
 
 public class PatientMenuController extends Controller {
 	private final PatientMenuView patientMenuView;
@@ -17,16 +18,19 @@ public class PatientMenuController extends Controller {
 
 	@Override
 	public void navigate() {
-		Integer choice = 0;
+		int choice = 0;
 		do {
 			this.patientMenuView.displayHeader();
 			this.patientMenuView.displayOptions();
 
-			choice = InputHandler.getChoice();
-			if (choice == null) {
+			try {
+				choice = InputHandler.getChoice(1, 10);
+			} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+				// Continue loop if invalid choice
 				choice = -1;
 				continue;
 			}
+
 			switch (choice) {
 			case 1:
 				MedicalRecordView medicalRecordView = new MedicalRecordView(patient);
@@ -71,8 +75,6 @@ public class PatientMenuController extends Controller {
 				System.out.println("Logging out.");
 				break;
 			default:
-				ErrorMessage.displayInvalidChoiceError();
-				choice = -1;
 			}
 		} while (choice < 10);
 	}

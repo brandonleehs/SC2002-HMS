@@ -3,13 +3,16 @@ package hms.control;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import hms.boundary.ErrorMessage;
 import hms.boundary.InputHandler;
 import hms.boundary.Prompt;
 import hms.boundary.patient.ScheduleAppointmentView;
 import hms.entity.appointment.Appointment;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
+import hms.exceptions.InvalidChoiceFormatException;
+import hms.exceptions.InvalidChoiceValueException;
+import hms.exceptions.InvalidDateException;
+import hms.exceptions.InvalidTimeException;
 
 public class ScheduleAppointmentController extends Controller {
 	private ScheduleAppointmentView scheduleAppointmentView;
@@ -22,6 +25,16 @@ public class ScheduleAppointmentController extends Controller {
 
 	@Override
 	public void navigate() {
+		try {
+			scheduleAppointment();
+		} catch (InvalidDateException | InvalidTimeException | InvalidChoiceFormatException
+				| InvalidChoiceValueException e) {
+			return;
+		}
+	}
+
+	private void scheduleAppointment() throws InvalidDateException, InvalidTimeException, InvalidChoiceFormatException,
+			InvalidChoiceValueException {
 		this.scheduleAppointmentView.displayHeader();
 		Prompt.displayDatePrompt();
 		LocalDate date = InputHandler.getDate();
@@ -40,16 +53,7 @@ public class ScheduleAppointmentController extends Controller {
 		Prompt.displayDoctorPrompt();
 		this.scheduleAppointmentView.displayDoctorsAll(doctorRepository);
 
-		Integer choice = InputHandler.getChoice();
-
-		if (choice == null) {
-			return;
-		}
-
-		if (!(1 <= choice && choice <= doctorRepository.getAll().size())) {
-			ErrorMessage.displayInvalidChoiceError();
-			return;
-		}
+		int choice = InputHandler.getChoice(1, doctorRepository.getAll().size());
 
 		Doctor doctor = doctorRepository.getAll().get(choice - 1);
 		Appointment appointment = new Appointment(this.patient.getId(), doctor.getId(), date, time);

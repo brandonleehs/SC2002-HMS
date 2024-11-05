@@ -3,13 +3,16 @@ package hms.control;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import hms.boundary.ErrorMessage;
 import hms.boundary.InputHandler;
 import hms.boundary.Prompt;
 import hms.boundary.patient.RescheduleAppointmentView;
 import hms.entity.appointment.Appointment;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
+import hms.exceptions.InvalidChoiceFormatException;
+import hms.exceptions.InvalidChoiceValueException;
+import hms.exceptions.InvalidDateException;
+import hms.exceptions.InvalidTimeException;
 
 public class RescheduleAppointmentController extends Controller {
 	private RescheduleAppointmentView rescheduleAppointmentView;
@@ -26,56 +29,50 @@ public class RescheduleAppointmentController extends Controller {
 		if (patient.getScheduledAppointmentList().isEmpty()) {
 			this.rescheduleAppointmentView.displayNoAppointments();
 		} else {
-			this.rescheduleAppointmentView.displayAppointments(this.patient, doctorRepository);
-			Integer choice = InputHandler.getChoice();
-
-			if (choice == null) {
+			try {
+				rescheduleAppointment();
+			} catch (InvalidChoiceValueException | InvalidChoiceFormatException | InvalidDateException
+					| InvalidTimeException e) {
 				return;
 			}
+		}
+	}
 
-			if (!(1 <= choice && choice <= this.patient.getScheduledAppointmentList().size())) {
-				ErrorMessage.displayInvalidChoiceError();
-				return;
-			}
-			Appointment oldAppointment = this.patient.getScheduledAppointmentList().get(choice - 1);
+	private void rescheduleAppointment() throws InvalidChoiceValueException, InvalidChoiceFormatException,
+			InvalidDateException, InvalidTimeException {
+		this.rescheduleAppointmentView.displayAppointments(this.patient, doctorRepository);
+		int choice = 0;
+		choice = InputHandler.getChoice(1, this.patient.getScheduledAppointmentList().size());
 
-			Prompt.displayDatePrompt();
-			LocalDate date = InputHandler.getDate();
+		Appointment oldAppointment = this.patient.getScheduledAppointmentList().get(choice - 1);
 
-			if (date == null) {
-				return;
-			}
+		Prompt.displayDatePrompt();
+		LocalDate date = InputHandler.getDate();
 
-			Prompt.displayTimePrompt();
-			LocalTime time = InputHandler.getTime();
+		if (date == null) {
+			return;
+		}
 
-			if (time == null) {
-				return;
-			}
+		Prompt.displayTimePrompt();
+		LocalTime time = InputHandler.getTime();
 
-			Prompt.displayDoctorPrompt();
-			this.rescheduleAppointmentView.displayDoctorsAll(doctorRepository);
+		if (time == null) {
+			return;
+		}
 
-			choice = InputHandler.getChoice();
+		Prompt.displayDoctorPrompt();
+		this.rescheduleAppointmentView.displayDoctorsAll(doctorRepository);
 
-			if (choice == null) {
-				return;
-			}
+		choice = InputHandler.getChoice(1, doctorRepository.getAll().size());
 
-			if (!(1 <= choice && choice <= doctorRepository.getAll().size())) {
-				ErrorMessage.displayInvalidChoiceError();
-				return;
-			}
+		Doctor newDoctor = doctorRepository.getAll().get(choice - 1);
+		Appointment newAppointment = new Appointment(this.patient.getId(), newDoctor.getId(), date, time);
+		Doctor oldDoctor = doctorRepository.getById(oldAppointment.getDoctorId());
 
-			Doctor newDoctor = doctorRepository.getAll().get(choice - 1);
-			Appointment newAppointment = new Appointment(this.patient.getId(), newDoctor.getId(), date, time);
-			Doctor oldDoctor = doctorRepository.getById(oldAppointment.getDoctorId());
-
-			if (patient.rescheduleAppointment(oldDoctor, newDoctor, oldAppointment, newAppointment)) {
-				this.rescheduleAppointmentView.displayRescheduleSuccess();
-			} else {
-				this.rescheduleAppointmentView.displayRescheduleFailure();
-			}
+		if (patient.rescheduleAppointment(oldDoctor, newDoctor, oldAppointment, newAppointment)) {
+			this.rescheduleAppointmentView.displayRescheduleSuccess();
+		} else {
+			this.rescheduleAppointmentView.displayRescheduleFailure();
 		}
 	}
 

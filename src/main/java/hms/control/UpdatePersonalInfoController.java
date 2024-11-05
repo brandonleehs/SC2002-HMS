@@ -1,10 +1,11 @@
 package hms.control;
 
-import hms.boundary.ErrorMessage;
 import hms.boundary.InputHandler;
 import hms.boundary.Prompt;
 import hms.boundary.patient.UpdatePersonalInfoView;
 import hms.entity.user.Patient;
+import hms.exceptions.InvalidChoiceFormatException;
+import hms.exceptions.InvalidChoiceValueException;
 
 public class UpdatePersonalInfoController extends Controller {
 	private final UpdatePersonalInfoView updatePersonalInfoView;
@@ -20,9 +21,10 @@ public class UpdatePersonalInfoController extends Controller {
 		this.updatePersonalInfoView.displayHeader();
 		this.updatePersonalInfoView.displayOptions();
 
-		Integer choice = InputHandler.getChoice();
-
-		if (choice == null) {
+		int choice;
+		try {
+			choice = InputHandler.getChoice(1, 3);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
 			return;
 		}
 
@@ -39,9 +41,9 @@ public class UpdatePersonalInfoController extends Controller {
 			patient.setEmailAddress(emailAddress);
 			this.updatePersonalInfoView.displayEmailAddressUpdate();
 			break;
-		default:
-			ErrorMessage.displayInvalidChoiceError();
+		case 3:
 			this.updatePersonalInfoView.displayReturnMenu();
+		default:
 		}
 	}
 }

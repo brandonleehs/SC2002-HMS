@@ -6,6 +6,7 @@ import hms.boundary.InputHandler;
 import hms.boundary.Prompt;
 import hms.boundary.patient.ScheduleView;
 import hms.entity.user.Doctor;
+import hms.exceptions.InvalidDateException;
 
 public class ScheduleController extends Controller {
 	private final ScheduleView scheduleView;
@@ -17,9 +18,10 @@ public class ScheduleController extends Controller {
 	@Override
 	public void navigate() {
 		Prompt.displayDatePrompt();
-		LocalDate date = InputHandler.getDate();
-
-		if (date == null) {
+		LocalDate date;
+		try {
+			date = InputHandler.getDate();
+		} catch (InvalidDateException e) {
 			return;
 		}
 
