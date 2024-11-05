@@ -1,4 +1,4 @@
-package hms;
+package hms.boundary;
 
 public class Prompt {
 	public static void displayIdPrompt() {

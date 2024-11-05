@@ -2,8 +2,8 @@ package hms.control;
 
 import java.time.LocalDate;
 
-import hms.Prompt;
 import hms.boundary.InputHandler;
+import hms.boundary.Prompt;
 import hms.boundary.patient.ScheduleView;
 import hms.entity.user.Doctor;
 

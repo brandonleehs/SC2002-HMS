@@ -1,7 +1,7 @@
 package hms.control;
 
-import hms.Prompt;
 import hms.boundary.InputHandler;
+import hms.boundary.Prompt;
 import hms.boundary.patient.UpdatePersonalInfoView;
 import hms.entity.user.Patient;
 

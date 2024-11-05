@@ -6,10 +6,9 @@ import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 import hms.repository.DoctorRepository;
 
-public class RescheduleAppointmentView extends View {
-
+public class CancelAppointmentView extends View {
 	public void displayAppointments(Patient patient, DoctorRepository doctorRepository) {
-		System.out.println("Please choose an appointment to reschedule: ");
+		System.out.println("Please choose an appointment to cancel: ");
 		String format = "| %-" + 5 + "s | %-" + 10 + "s | %-" + 5 + "s | %-" + 6 + "s | %-" + (WIDTH - 42) + "s |\n";
 		System.out.printf(format, "Index", "Date", "Time", "Id", "Doctor Name");
 		for (int i = 0; i < patient.getScheduledAppointmentList().size(); i++) {
@@ -21,7 +20,7 @@ public class RescheduleAppointmentView extends View {
 
 	@Override
 	public void displayHeader() {
-		displayBorderedText(WIDTH, "Reschedule Appointment");
+		displayBorderedText(WIDTH, "Cancel Appointment");
 	}
 
 	public void displayDoctorsAll(DoctorRepository doctorRepository) {
@@ -31,12 +30,7 @@ public class RescheduleAppointmentView extends View {
 		}
 	}
 
-	public void displayRescheduleSuccess() {
-		System.out.println("Appointment rescheduled.");
+	public void displayCancelConfirmation() {
+		System.out.println("Appointment has been cancelled.");
 	}
-
-	public void displayRescheduleFailure() {
-		System.out.println("Appointment unavailable. Please check availability again.");
-	}
-
 }

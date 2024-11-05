@@ -46,12 +46,21 @@ public class PatientMenuController extends Controller {
 				rescheduleAppointmentController.navigate();
 				break;
 			case 6:
+				CancelAppointmentController cancelAppointmentController = new CancelAppointmentController(patient);
+				cancelAppointmentController.navigate();
 				break;
 			case 7:
+				AppointmentController appointmentController = new AppointmentController(patient);
+				appointmentController.navigate();
 				break;
 			case 8:
+				AppointmentOutcomeRecordController appointmentOutcomeRecordController = new AppointmentOutcomeRecordController(
+						patient);
+				appointmentOutcomeRecordController.navigate();
 				break;
 			case 9:
+				ChangePasswordController changePasswordController = new ChangePasswordController(patient);
+				changePasswordController.navigate();
 				break;
 			case 10:
 				System.out.println("Logging out.");
