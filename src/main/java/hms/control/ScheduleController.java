@@ -19,6 +19,10 @@ public class ScheduleController extends Controller {
 		Prompt.displayDatePrompt();
 		LocalDate date = InputHandler.getDate();
 
+		if (date == null) {
+			return;
+		}
+
 		this.scheduleView.displayHeader();
 		this.scheduleView.displayDate(date);
 

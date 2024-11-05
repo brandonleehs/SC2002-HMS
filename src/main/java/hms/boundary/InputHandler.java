@@ -3,6 +3,7 @@ package hms.boundary;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class InputHandler {
@@ -21,13 +22,23 @@ public class InputHandler {
 	public static LocalDate getDate() {
 		String dateString = scanner.nextLine();
 		DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate date = LocalDate.parse(dateString, dateformatter);
-		return date;
+		try {
+			LocalDate date = LocalDate.parse(dateString, dateformatter);
+			return date;
+		} catch (DateTimeParseException e) {
+			System.out.println("Input is not of form YYYY-MM-DD. Please check and try again.");
+			return null;
+		}
 	}
 
 	public static LocalTime getTime() {
 		String timeString = scanner.nextLine();
-		LocalTime time = LocalTime.parse(timeString, DateTimeFormatter.ISO_LOCAL_TIME);
-		return time;
+		try {
+			LocalTime time = LocalTime.parse(timeString, DateTimeFormatter.ISO_LOCAL_TIME);
+			return time;
+		} catch (DateTimeParseException e) {
+			System.out.println("Input is not of form HH-MM. Please check and try again.");
+			return null;
+		}
 	}
 }
