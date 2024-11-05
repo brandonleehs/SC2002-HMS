@@ -1,13 +1,6 @@
 package hms.boundary;
 
 public class Prompt {
-	public static void displayIdPrompt() {
-		System.out.print("Enter id: ");
-	}
-
-	public static void displayPasswordPrompt() {
-		System.out.print("Enter password: ");
-	}
 
 	public static void displayDatePrompt() {
 		System.out.print("Please enter a date (YYYY-MM-DD): ");

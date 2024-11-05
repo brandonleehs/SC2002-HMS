@@ -5,4 +5,12 @@ public class LoginView extends View {
 	public void displayHeader() {
 		displayBorderedText(WIDTH, "Login");
 	}
+
+	public void displayIdPrompt() {
+		System.out.print("Enter id: ");
+	}
+
+	public void displayPasswordPrompt() {
+		System.out.print("Enter password: ");
+	}
 }

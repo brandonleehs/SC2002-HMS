@@ -7,7 +7,6 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import hms.boundary.InputHandler;
 import hms.boundary.LoginView;
-import hms.boundary.Prompt;
 import hms.boundary.View;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
@@ -29,9 +28,9 @@ public class LoginController extends Controller {
 		User user = null;
 		while (true) {
 			do {
-				Prompt.displayIdPrompt();
+				this.loginView.displayIdPrompt();
 				String id = InputHandler.getString();
-				Prompt.displayPasswordPrompt();
+				this.loginView.displayPasswordPrompt();
 				String password = InputHandler.getString();
 				user = getUser(id, password);
 				login = authenticate(user, id, password);
