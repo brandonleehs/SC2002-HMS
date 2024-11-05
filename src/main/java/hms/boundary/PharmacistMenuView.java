@@ -2,13 +2,13 @@ package hms.boundary;
 
 import hms.entity.user.Pharmacist;
 
-public class PharmacistMenuView extends UserMenuView<Pharmacist> {
+public class PharmacistMenuView extends View {
+	private Pharmacist pharmacist;
 
 	protected PharmacistMenuView(Pharmacist pharmacist) {
-		super(pharmacist);
+		this.pharmacist = pharmacist;
 	}
 
-	@Override
 	public void displayOptions() {
 		String options = "Please select an option:\r\n" + "1. View Appointment Outcome Record\r\n"
 				+ "2. Update Prescription Status\r\n" + "3. View Medication Inventory\r\n"
@@ -22,9 +22,14 @@ public class PharmacistMenuView extends UserMenuView<Pharmacist> {
 	}
 
 	@Override
-	public void show() {
-		displayBorderedText(WIDTH, String.format("Welcome, %s.", user.getName()));
-		displayOptions();
+	public void displayHeader() {
+		displayBorderedText(WIDTH, String.format("Welcome, %s.", pharmacist.getName()));
 	}
+
+//	@Override
+//	public void show() {
+//		displayBorderedText(WIDTH, String.format("Welcome, %s.", user.getName()));
+//		displayOptions();
+//	}
 
 }

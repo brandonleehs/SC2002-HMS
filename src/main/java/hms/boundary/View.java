@@ -1,33 +1,28 @@
 package hms.boundary;
 
-import java.util.Scanner;
-
-import hms.repository.AdministratorRepository;
-import hms.repository.DoctorRepository;
-import hms.repository.PatientRepository;
-import hms.repository.PharmacistRepository;
-
 public abstract class View {
-	protected static final PatientRepository patientRepository = new PatientRepository();
-	protected static final DoctorRepository doctorRepository = new DoctorRepository();
-	protected static final PharmacistRepository pharmacistRepository = new PharmacistRepository();
-	protected static final AdministratorRepository administratorRepository = new AdministratorRepository();
+//	protected static final PatientRepository patientRepository = new PatientRepository();
+//	protected static final DoctorRepository doctorRepository = new DoctorRepository();
+//	protected static final PharmacistRepository pharmacistRepository = new PharmacistRepository();
+//	protected static final AdministratorRepository administratorRepository = new AdministratorRepository();
 
-	protected static final String LOGO = "\r\n" + "██╗  ██╗███╗   ███╗███████╗\r\n" + "██║  ██║████╗ ████║██╔════╝\r\n"
+	private static final String LOGO = "\r\n" + "██╗  ██╗███╗   ███╗███████╗\r\n" + "██║  ██║████╗ ████║██╔════╝\r\n"
 			+ "███████║██╔████╔██║███████╗\r\n" + "██╔══██║██║╚██╔╝██║╚════██║\r\n" + "██║  ██║██║ ╚═╝ ██║███████║\r\n"
 			+ "╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝\r\n" + "                           \r\n" + "";
-	protected static final Scanner scanner = new Scanner(System.in);
-	protected static int WIDTH = 50;
+//	protected static final Scanner scanner = new Scanner(System.in);
+	protected static int WIDTH = 60;
 
-	public void displayLogo() {
+	public static void displayLogo() {
 		System.out.print(LOGO);
 	}
 
-	public abstract void show();
+//	public abstract void show();
 
-	public static void close() {
-		scanner.close();
-	}
+//	public static void close() {
+//		scanner.close();
+//	}
+
+	public abstract void displayHeader();
 
 	protected static void displayBorderedText(int width, String text) {
 		int leftPadding = (width - text.length() - 2) / 2;

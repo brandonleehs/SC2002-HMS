@@ -2,13 +2,13 @@ package hms.boundary;
 
 import hms.entity.user.Administrator;
 
-public class AdministratorMenuView extends UserMenuView<Administrator> {
+public class AdministratorMenuView extends View {
+	private Administrator administrator;
 
 	protected AdministratorMenuView(Administrator administrator) {
-		super(administrator);
+		this.administrator = administrator;
 	}
 
-	@Override
 	public void displayOptions() {
 		String options = "Please select an option:\r\n" + "1. View and Manage Hospital Staff\r\n"
 				+ "2. View Appointments Details\r\n" + "3. View and Manage Medication Inventory\r\n"
@@ -22,9 +22,14 @@ public class AdministratorMenuView extends UserMenuView<Administrator> {
 	}
 
 	@Override
-	public void show() {
-		displayBorderedText(WIDTH, String.format("Welcome, %s.", user.getName()));
-		displayOptions();
+	public void displayHeader() {
+		displayBorderedText(WIDTH, String.format("Welcome, %s.", administrator.getName()));
 	}
+
+//	@Override
+//	public void show() {
+//		displayBorderedText(WIDTH, String.format("Welcome, %s.", user.getName()));
+//		displayOptions();
+//	}
 
 }

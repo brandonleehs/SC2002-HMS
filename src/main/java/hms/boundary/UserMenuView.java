@@ -10,4 +10,5 @@ public abstract class UserMenuView<E extends User> extends View {
 	}
 
 	abstract public void displayOptions();
+
 }
