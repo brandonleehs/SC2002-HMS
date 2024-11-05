@@ -18,13 +18,17 @@ public class CancelAppointmentController extends Controller {
 	@Override
 	public void navigate() {
 		this.cancelAppointmentView.displayHeader();
-		this.cancelAppointmentView.displayAppointments(this.patient, doctorRepository);
-		int choice = InputHandler.getChoice();
-		Appointment appointment = this.patient.getScheduledAppointmentList().get(choice - 1);
+		if (patient.getScheduledAppointmentList().isEmpty()) {
+			this.cancelAppointmentView.displayNoAppointments();
+		} else {
+			this.cancelAppointmentView.displayAppointments(patient, doctorRepository);
+			int choice = InputHandler.getChoice();
+			Appointment appointment = this.patient.getScheduledAppointmentList().get(choice - 1);
 
-		Doctor doctor = doctorRepository.getById(appointment.getDoctorId());
-		patient.cancelAppointment(doctor, appointment);
-		this.cancelAppointmentView.displayCancelConfirmation();
+			Doctor doctor = doctorRepository.getById(appointment.getDoctorId());
+			patient.cancelAppointment(doctor, appointment);
+			this.cancelAppointmentView.displayCancelConfirmation();
+		}
 	}
 
 }

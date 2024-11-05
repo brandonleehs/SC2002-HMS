@@ -4,7 +4,7 @@ public abstract class View {
 	private static final String LOGO = "\r\n" + "██╗  ██╗███╗   ███╗███████╗\r\n" + "██║  ██║████╗ ████║██╔════╝\r\n"
 			+ "███████║██╔████╔██║███████╗\r\n" + "██╔══██║██║╚██╔╝██║╚════██║\r\n" + "██║  ██║██║ ╚═╝ ██║███████║\r\n"
 			+ "╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝\r\n" + "                           \r\n" + "";
-	protected static int WIDTH = 60;
+	protected static int WIDTH = 70;
 
 	public static void displayLogo() {
 		System.out.print(LOGO);
@@ -24,4 +24,5 @@ public abstract class View {
 		System.out.println(output);
 		System.out.println(border);
 	}
+
 }

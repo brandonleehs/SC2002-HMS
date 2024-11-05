@@ -7,13 +7,13 @@ public enum AppointmentStatus {
 	public String toString() {
 		switch (this.ordinal()) {
 		case 0:
-			return "\u29D6 Pending";
+			return "[?] Pending";
 		case 1:
-			return "\u2B24 Confirmed";
+			return "[+] Confirmed";
 		case 2:
-			return "\u2717 Cancelled";
+			return "[!] Cancelled";
 		case 3:
-			return "\u2713 Completed";
+			return "[X] Completed";
 		default:
 			return null;
 		}

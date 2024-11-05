@@ -15,7 +15,11 @@ public class AppointmentController extends Controller {
 	@Override
 	public void navigate() {
 		this.appointmentView.displayHeader();
-		this.appointmentView.displayAppointments(patient, doctorRepository);
+		if (patient.getScheduledAppointmentList().isEmpty()) {
+			this.appointmentView.displayNoAppointments();
+		} else {
+			this.appointmentView.displayAppointments(patient, doctorRepository);
+		}
 	}
 
 }

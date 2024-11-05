@@ -12,9 +12,9 @@ public enum MedicineStatus {
 	public String toString() {
 		switch (this.ordinal()) {
 		case 0:
-			return "\u2717 Pending";
+			return "[?] Pending";
 		case 1:
-			return "\u2713 Dispensed";
+			return "[X] Dispensed";
 		default:
 			return null;
 		}

@@ -22,28 +22,32 @@ public class RescheduleAppointmentController extends Controller {
 	@Override
 	public void navigate() {
 		this.rescheduleAppointmentView.displayHeader();
-		this.rescheduleAppointmentView.displayAppointments(this.patient, doctorRepository);
-		int choice = InputHandler.getChoice();
-		Appointment oldAppointment = this.patient.getScheduledAppointmentList().get(choice - 1);
-
-		Prompt.displayDatePrompt();
-		LocalDate date = InputHandler.getDate();
-
-		Prompt.displayTimePrompt();
-		LocalTime time = InputHandler.getTime();
-
-		Prompt.displayDoctorPrompt();
-		this.rescheduleAppointmentView.displayDoctorsAll(doctorRepository);
-
-		choice = InputHandler.getChoice();
-		Doctor newDoctor = doctorRepository.getAll().get(choice - 1);
-		Appointment newAppointment = new Appointment(this.patient.getId(), newDoctor.getId(), date, time);
-		Doctor oldDoctor = doctorRepository.getById(oldAppointment.getDoctorId());
-
-		if (patient.rescheduleAppointment(oldDoctor, newDoctor, oldAppointment, newAppointment)) {
-			this.rescheduleAppointmentView.displayRescheduleSuccess();
+		if (patient.getScheduledAppointmentList().isEmpty()) {
+			this.rescheduleAppointmentView.displayNoAppointments();
 		} else {
-			this.rescheduleAppointmentView.displayRescheduleFailure();
+			this.rescheduleAppointmentView.displayAppointments(this.patient, doctorRepository);
+			int choice = InputHandler.getChoice();
+			Appointment oldAppointment = this.patient.getScheduledAppointmentList().get(choice - 1);
+
+			Prompt.displayDatePrompt();
+			LocalDate date = InputHandler.getDate();
+
+			Prompt.displayTimePrompt();
+			LocalTime time = InputHandler.getTime();
+
+			Prompt.displayDoctorPrompt();
+			this.rescheduleAppointmentView.displayDoctorsAll(doctorRepository);
+
+			choice = InputHandler.getChoice();
+			Doctor newDoctor = doctorRepository.getAll().get(choice - 1);
+			Appointment newAppointment = new Appointment(this.patient.getId(), newDoctor.getId(), date, time);
+			Doctor oldDoctor = doctorRepository.getById(oldAppointment.getDoctorId());
+
+			if (patient.rescheduleAppointment(oldDoctor, newDoctor, oldAppointment, newAppointment)) {
+				this.rescheduleAppointmentView.displayRescheduleSuccess();
+			} else {
+				this.rescheduleAppointmentView.displayRescheduleFailure();
+			}
 		}
 	}
 

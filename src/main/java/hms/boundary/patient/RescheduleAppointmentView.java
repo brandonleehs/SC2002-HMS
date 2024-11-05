@@ -9,15 +9,14 @@ import hms.repository.DoctorRepository;
 public class RescheduleAppointmentView extends View {
 
 	public void displayAppointments(Patient patient, DoctorRepository doctorRepository) {
-		System.out.println("Please choose an appointment to reschedule: ");
-		String format = "| %-" + 5 + "s | %-" + 10 + "s | %-" + 5 + "s | %-" + 10 + "s | %-" + (WIDTH - 46) + "s |\n";
+		String format = "| %-" + 5 + "s | %-" + 10 + "s | %-" + 5 + "s | %-" + 13 + "s | %-" + (WIDTH - 49) + "s |\n";
 		System.out.printf(format, "Index", "Date", "Time", "Status", "Doctor Name");
 		for (int i = 0; i < patient.getScheduledAppointmentList().size(); i++) {
 			Appointment appointment = patient.getScheduledAppointmentList().get(i);
 			System.out.printf(format, i + 1, appointment.getDate(), appointment.getTime(),
 					appointment.getAppointmentStatus(), doctorRepository.getById(appointment.getDoctorId()).getName());
 		}
-		System.out.println();
+		System.out.println("Please choose an appointment to reschedule: ");
 	}
 
 	@Override
@@ -38,6 +37,10 @@ public class RescheduleAppointmentView extends View {
 
 	public void displayRescheduleFailure() {
 		System.out.println("Appointment unavailable. Please check availability again.");
+	}
+
+	public void displayNoAppointments() {
+		System.out.println("No appointments to reschedule.");
 	}
 
 }
