@@ -39,16 +39,8 @@ public class ScheduleAppointmentController extends Controller {
 		Prompt.displayDatePrompt();
 		LocalDate date = InputHandler.getDate();
 
-		if (date == null) {
-			return;
-		}
-
 		Prompt.displayTimePrompt();
 		LocalTime time = InputHandler.getTime();
-
-		if (time == null) {
-			return;
-		}
 
 		Prompt.displayDoctorPrompt();
 		this.scheduleAppointmentView.displayDoctorsAll(doctorRepository);
