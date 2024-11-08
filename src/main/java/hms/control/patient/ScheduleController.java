@@ -1,10 +1,11 @@
-package hms.control;
+package hms.control.patient;
 
 import java.time.LocalDate;
 
 import hms.boundary.InputHandler;
 import hms.boundary.Prompt;
 import hms.boundary.patient.ScheduleView;
+import hms.control.Controller;
 import hms.entity.user.Doctor;
 import hms.exceptions.InvalidDateException;
 

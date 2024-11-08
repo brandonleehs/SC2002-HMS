@@ -1,7 +1,8 @@
-package hms.control;
+package hms.control.user;
 
 import hms.boundary.InputHandler;
 import hms.boundary.user.ChangePasswordView;
+import hms.control.Controller;
 import hms.entity.user.User;
 
 public class ChangePasswordController extends Controller {

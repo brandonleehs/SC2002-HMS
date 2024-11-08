@@ -1,4 +1,4 @@
-package hms.control;
+package hms.control.user;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import hms.boundary.InputHandler;
 import hms.boundary.View;
 import hms.boundary.user.LoginView;
+import hms.control.Controller;
+import hms.control.patient.PatientMenuController;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;

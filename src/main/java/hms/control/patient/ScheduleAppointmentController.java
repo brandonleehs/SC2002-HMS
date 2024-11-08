@@ -1,4 +1,4 @@
-package hms.control;
+package hms.control.patient;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import hms.boundary.InputHandler;
 import hms.boundary.Prompt;
 import hms.boundary.patient.appointment.ScheduleAppointmentView;
+import hms.control.Controller;
 import hms.entity.appointment.Appointment;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;

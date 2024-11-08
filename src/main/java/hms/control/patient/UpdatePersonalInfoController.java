@@ -1,8 +1,9 @@
-package hms.control;
+package hms.control.patient;
 
 import hms.boundary.InputHandler;
 import hms.boundary.Prompt;
 import hms.boundary.patient.UpdatePersonalInfoView;
+import hms.control.Controller;
 import hms.entity.user.Patient;
 import hms.exceptions.InvalidChoiceFormatException;
 import hms.exceptions.InvalidChoiceValueException;

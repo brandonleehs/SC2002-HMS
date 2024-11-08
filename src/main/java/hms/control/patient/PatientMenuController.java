@@ -1,8 +1,10 @@
-package hms.control;
+package hms.control.patient;
 
 import hms.boundary.InputHandler;
 import hms.boundary.patient.PatientMenuView;
 import hms.boundary.patient.record.MedicalRecordView;
+import hms.control.Controller;
+import hms.control.user.ChangePasswordController;
 import hms.entity.user.Patient;
 import hms.exceptions.InvalidChoiceFormatException;
 import hms.exceptions.InvalidChoiceValueException;

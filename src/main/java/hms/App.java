@@ -1,6 +1,6 @@
 package hms;
 
-import hms.control.LoginController;
+import hms.control.user.LoginController;
 
 public class App {
 
