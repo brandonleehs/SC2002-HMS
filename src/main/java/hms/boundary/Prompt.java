@@ -22,4 +22,14 @@ public class Prompt {
 	public static void displayEmailAddressPrompt() {
 		System.out.print("Enter email address: ");
 	}
+
+	public static void displayStartTimePrompt() {
+		System.out.print("Choose a start time. ");
+		displayTimePrompt();
+	}
+
+	public static void displayEndTimePrompt() {
+		System.out.print("Choose a end time. ");
+		displayTimePrompt();
+	}
 }

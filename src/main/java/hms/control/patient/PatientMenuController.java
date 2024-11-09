@@ -80,5 +80,4 @@ public class PatientMenuController extends Controller {
 			}
 		} while (choice < 10);
 	}
-
 }

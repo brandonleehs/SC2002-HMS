@@ -19,13 +19,37 @@ public class AppointmentOutcomeRecordView extends View {
 		if (records.isEmpty()) {
 			System.out.println("No records found.");
 		}
-		for (AppointmentOutcomeRecord appointmentOutcomeRecord : records) {
+		for (int i = 0; i < records.size(); i++) {
+			AppointmentOutcomeRecord appointmentOutcomeRecord = records.get(i);
+			displayAppointmentHeader(i);
+			System.out.println(String.format("UUID: %s", appointmentOutcomeRecord.getUUID().toString()));
 			System.out.println(String.format("Date: %s", appointmentOutcomeRecord.getDate()));
 			System.out.println(String.format("Service Type: %s", appointmentOutcomeRecord.getServiceType()));
 			System.out.println(String.format("Diagnosis: %s", appointmentOutcomeRecord.getConsultationNotes()));
 
 			displayPrescriptionTable(appointmentOutcomeRecord);
 		}
+//		for (AppointmentOutcomeRecord appointmentOutcomeRecord : records) {
+//			System.out.println(String.format("UUID: %s", appointmentOutcomeRecord.getUUID().toString()));
+//			System.out.println(String.format("Date: %s", appointmentOutcomeRecord.getDate()));
+//			System.out.println(String.format("Service Type: %s", appointmentOutcomeRecord.getServiceType()));
+//			System.out.println(String.format("Diagnosis: %s", appointmentOutcomeRecord.getConsultationNotes()));
+//
+//			displayPrescriptionTable(appointmentOutcomeRecord);
+//		}
+	}
+
+	private void displayAppointmentHeader(int i) {
+		String text = String.format("Appointment %d", i + 1);
+		int leftPadding = (WIDTH - text.length() - 2) / 2;
+		int rightPadding = leftPadding;
+		if ((WIDTH - text.length()) % 2 != 0) {
+			rightPadding++;
+		}
+
+		System.out.println("-".repeat(WIDTH));
+		System.out.println("|" + " ".repeat(leftPadding) + text + " ".repeat(rightPadding) + "|");
+		System.out.println("-".repeat(WIDTH));
 	}
 
 	private void displayPrescriptionTable(AppointmentOutcomeRecord appointmentOutcomeRecord) {

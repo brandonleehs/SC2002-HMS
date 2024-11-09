@@ -3,6 +3,7 @@ package hms.model;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,7 @@ class PharmacistTest {
 		Doctor doctor = new Doctor("D001", "password", "John Smith", Gender.MALE, 45);
 		Medicine medicine = new Medicine("Paracetamol");
 		AppointmentOutcomeRecord appointmentOutcomeRecord = new AppointmentOutcomeRecord(LocalDate.of(2024, 11, 2),
-				"General", "Fever");
+				"General", "Fever", UUID.randomUUID());
 		doctor.prescribeMedicine(medicine, appointmentOutcomeRecord);
 		patient.addAppointmentOutcomeRecord(appointmentOutcomeRecord);
 		assertTrue(pharmacist.getAllPendingMedicine(patient).get(0) == medicine);
@@ -42,7 +43,7 @@ class PharmacistTest {
 		Medicine medicine1 = new Medicine("Paracetamol");
 		Medicine medicine2 = new Medicine("Ibuprofen");
 		AppointmentOutcomeRecord appointmentOutcomeRecord = new AppointmentOutcomeRecord(LocalDate.of(2024, 11, 2),
-				"General", "Fever");
+				"General", "Fever", UUID.randomUUID());
 		doctor.prescribeMedicine(medicine1, appointmentOutcomeRecord);
 		doctor.prescribeMedicine(medicine2, appointmentOutcomeRecord);
 		patient.addAppointmentOutcomeRecord(appointmentOutcomeRecord);

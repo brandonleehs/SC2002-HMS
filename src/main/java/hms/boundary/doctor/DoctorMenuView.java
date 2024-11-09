@@ -1,11 +1,12 @@
-package hms.boundary;
+package hms.boundary.doctor;
 
+import hms.boundary.View;
 import hms.entity.user.Doctor;
 
 public class DoctorMenuView extends View {
 	private Doctor doctor;
 
-	protected DoctorMenuView(Doctor doctor) {
+	public DoctorMenuView(Doctor doctor) {
 		this.doctor = doctor;
 	}
 
@@ -13,7 +14,8 @@ public class DoctorMenuView extends View {
 		String options = "Please select an option:\r\n" + "1. View Patient Medical Records\r\n"
 				+ "2. Update Patient Medical Records\r\n" + "3. View Personal Schedule\r\n"
 				+ "4. Set Availability for Appointments\r\n" + "5. Accept or Decline Appointment Requests\r\n"
-				+ "6. View Upcoming Appointments\r\n" + "7. Record Appointment Outcome\r\n" + "8. Logout";
+				+ "6. View Upcoming Appointments\r\n" + "7. Record Appointment Outcome\r\n" + "8. Change Password\r\n"
+				+ "9. Logout";
 		String border = "=".repeat(WIDTH);
 		String prompt = "Enter choice (1-8):";
 
@@ -25,6 +27,10 @@ public class DoctorMenuView extends View {
 	@Override
 	public void displayHeader() {
 		displayBorderedText(WIDTH, String.format("Welcome, Dr. %s.", doctor.getName()));
+	}
+
+	public void displayPatientIdPrompt() {
+		System.out.print("Enter patient ID: ");
 	}
 
 }

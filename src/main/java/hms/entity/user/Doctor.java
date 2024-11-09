@@ -16,12 +16,16 @@ import hms.entity.user.attributes.Gender;
 public class Doctor extends User {
 	private final int age;
 	private final Schedule schedule;
+	private final List<Appointment> pendingAppointmentList;
+	private final List<Appointment> confirmedAppointmentList;
 
 	// TODO: add custom working hours after testing
 	public Doctor(String id, String password, String name, Gender gender, int age) {
 		super(id, password, name, gender);
 		this.age = age;
 		this.schedule = new Schedule();
+		this.pendingAppointmentList = new ArrayList<Appointment>();
+		this.confirmedAppointmentList = new ArrayList<Appointment>();
 	}
 
 	// Returns a list of available times
@@ -49,36 +53,59 @@ public class Doctor extends User {
 
 	public void acceptAppointment(Appointment appointment) {
 		appointment.setAppointmentStatus(AppointmentStatus.CONFIRMED);
+
+		this.confirmedAppointmentList.add(appointment);
+		removeAppointmentFromPendingList(appointment);
 	}
 
 	public void cancelAppointment(Appointment appointment) {
 		this.schedule.cancelAppointment(appointment);
 		appointment.setAppointmentStatus(AppointmentStatus.CANCELLED);
+
+		removeAppointmentFromPendingList(appointment);
+		removeAppointmentFromConfirmedList(appointment);
 	}
 
 	public void completeAppointment(Patient patient, Appointment appointment, String serviceType,
 			String consultationNotes) {
-		appointment.setAppointmentStatus(AppointmentStatus.COMPLETED);
+
 		AppointmentOutcomeRecord appointmentOutcomeRecord = new AppointmentOutcomeRecord(appointment.getDate(),
-				serviceType, consultationNotes);
+				serviceType, consultationNotes, appointment.getUUID());
+
 		appointment.setAppointmentOutcomeRecord(appointmentOutcomeRecord);
 		// Remove appointment from schedule
 		cancelAppointment(appointment);
+		// Remember to set status back to completed!
+		appointment.setAppointmentStatus(AppointmentStatus.COMPLETED);
 		// Add to patient's outcome record
 		patient.addAppointmentOutcomeRecord(appointmentOutcomeRecord);
+		patient.getScheduledAppointmentList().remove(appointment);
+
+		removeAppointmentFromConfirmedList(appointment);
+		removeAppointmentFromPendingList(appointment);
+
 	}
 
 	public boolean scheduleAppointment(Appointment appointment) {
-		return this.schedule.addAppointment(appointment);
+		if (this.schedule.addAppointment(appointment)) {
+			this.pendingAppointmentList.add(appointment);
+			return true;
+		}
+		return false;
+//		return this.schedule.addAppointment(appointment);
 	}
 
-	public boolean changeAppointment(Appointment appointment, LocalDateTime datetime) {
-		return this.schedule.changeAppointment(appointment, datetime);
-	}
+//	public boolean changeAppointment(Appointment appointment, LocalDateTime datetime) {
+//		return this.schedule.changeAppointment(appointment, datetime);
+//	}
 
 	public void prescribeMedicine(Medicine medicine, AppointmentOutcomeRecord appointmentOutcomeRecord) {
 		appointmentOutcomeRecord.addPrescribedMedicine(medicine);
 	}
+
+//	public void removeMedicine(Medicine medicine, AppointmentOutcomeRecord appointmentOutcomeRecord) {
+//		appointmentOutcomeRecord.removePrescribedMedicine(medicine);
+//	}
 
 	public int getAge() {
 		return this.age;
@@ -86,5 +113,25 @@ public class Doctor extends User {
 
 	public Schedule getSchedule() {
 		return this.schedule;
+	}
+
+	public List<Appointment> getPendingAppointmentList() {
+		return this.pendingAppointmentList;
+	}
+
+	public List<Appointment> getConfirmedAppointmentList() {
+		return this.confirmedAppointmentList;
+	}
+
+	private void removeAppointmentFromPendingList(Appointment appointment) {
+		if (this.pendingAppointmentList.contains(appointment)) {
+			this.pendingAppointmentList.remove(appointment);
+		}
+	}
+
+	private void removeAppointmentFromConfirmedList(Appointment appointment) {
+		if (this.confirmedAppointmentList.contains(appointment)) {
+			this.confirmedAppointmentList.remove(appointment);
+		}
 	}
 }

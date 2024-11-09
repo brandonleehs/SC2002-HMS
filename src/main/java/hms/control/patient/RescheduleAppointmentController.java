@@ -42,6 +42,7 @@ public class RescheduleAppointmentController extends Controller {
 	private void rescheduleAppointment() throws InvalidChoiceValueException, InvalidChoiceFormatException,
 			InvalidDateException, InvalidTimeException {
 		this.rescheduleAppointmentView.displayAppointments(this.patient, doctorRepository);
+		this.rescheduleAppointmentView.displayAppointmentPrompt();
 		int choice = 0;
 		choice = InputHandler.getChoice(1, this.patient.getScheduledAppointmentList().size());
 

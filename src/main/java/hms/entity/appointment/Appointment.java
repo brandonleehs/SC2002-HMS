@@ -2,10 +2,12 @@ package hms.entity.appointment;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.UUID;
 
 import hms.entity.record.AppointmentOutcomeRecord;
 
 public class Appointment {
+	private final UUID uuid;
 	private final String patientId;
 	private String doctorId;
 	private AppointmentStatus appointmentStatus;
@@ -14,6 +16,7 @@ public class Appointment {
 	private AppointmentOutcomeRecord appointmentOutcomeRecord;
 
 	public Appointment(String patientId, String doctorId, LocalDate date, LocalTime time) {
+		this.uuid = UUID.randomUUID();
 		this.patientId = patientId;
 		this.doctorId = doctorId;
 		this.date = date;
@@ -65,4 +68,7 @@ public class Appointment {
 		this.appointmentOutcomeRecord = appointmentOutcomeRecord;
 	}
 
+	public UUID getUUID() {
+		return this.uuid;
+	}
 }

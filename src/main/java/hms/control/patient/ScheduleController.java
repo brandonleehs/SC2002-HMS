@@ -4,16 +4,16 @@ import java.time.LocalDate;
 
 import hms.boundary.InputHandler;
 import hms.boundary.Prompt;
-import hms.boundary.patient.ScheduleView;
+import hms.boundary.patient.AvailabilityView;
 import hms.control.Controller;
 import hms.entity.user.Doctor;
 import hms.exceptions.InvalidDateException;
 
 public class ScheduleController extends Controller {
-	private final ScheduleView scheduleView;
+	private final AvailabilityView scheduleView;
 
 	public ScheduleController() {
-		this.scheduleView = new ScheduleView();
+		this.scheduleView = new AvailabilityView();
 	}
 
 	@Override

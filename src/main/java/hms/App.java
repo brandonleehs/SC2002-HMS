@@ -26,7 +26,6 @@ public class App {
 //		doctor.completeAppointment(user, appt, "Consultation", "Hypertension. Lifestyle change recommended.");
 //		doctor.prescribeMedicine(new Medicine("Paracetamol"), appt.getAppointmentOutcomeRecord());
 //		Medicine medicine = new Medicine("Ibuprofen");
-//		medicine.setMedicineStatus(MedicineStatus.DISPENSED);
 //		doctor.prescribeMedicine(medicine, appt.getAppointmentOutcomeRecord());
 //		MedicalRecordView medicalRecordView = new MedicalRecordView(user);
 //		medicalRecordView.show();

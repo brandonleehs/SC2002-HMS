@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import hms.boundary.View;
 import hms.entity.user.Doctor;
 
-public class ScheduleView extends View {
+public class AvailabilityView extends View {
 
 	public void displayDate(LocalDate date) {
 		System.out.println("Date: " + date);

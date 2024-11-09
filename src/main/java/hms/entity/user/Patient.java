@@ -82,6 +82,7 @@ public class Patient extends User {
 		if (newDoctor.scheduleAppointment(newAppointment)) {
 			cancelAppointment(oldDoctor, oldAppointment);
 			this.scheduledAppointmentList.add(newAppointment);
+			this.scheduledAppointmentList.remove(oldAppointment);
 			this.allAppointmentList.add(newAppointment);
 			return true;
 		}
