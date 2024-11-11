@@ -16,9 +16,16 @@ public class ScheduleView extends View {
 
 	public void displayAppointments(Doctor doctor, LocalDate date, PatientRepository patientRepository) {
 		displayBorderedText(WIDTH, "Schedule");
+		System.out.println();
+
 		String format = "| %-" + 5 + "s | %-" + 10 + "s | %-" + 5 + "s | %-" + 13 + "s | %-" + (WIDTH - 49) + "s |\n";
 		System.out.printf(format, "Index", "Date", "Time", "Status", "Patient Name");
 		Appointment[] appointmentArr = doctor.getSchedule().getScheduleMap().get(date);
+
+		if (IfNoAppointments(appointmentArr)) {
+			displayNoAppointments();
+			return;
+		}
 
 		int index = 0;
 		for (int i = 0; i < appointmentArr.length; i++) {
@@ -31,6 +38,24 @@ public class ScheduleView extends View {
 			}
 		}
 		System.out.println();
+	}
+
+	private boolean IfNoAppointments(Appointment[] appointmentArr) {
+		if (appointmentArr == null) {
+			return true;
+		}
+
+		int count = 0;
+		for (int i = 0; i < appointmentArr.length; i++) {
+			if (appointmentArr[i] == null) {
+				count++;
+			}
+		}
+		return count == appointmentArr.length;
+	}
+
+	private void displayNoAppointments() {
+		System.out.println("No appointments scheduled on this date.");
 	}
 
 	public void displayUpcomingAppointments(Doctor doctor, PatientRepository patientRepository) {
