@@ -1,11 +1,12 @@
-package hms.boundary;
+package hms.boundary.pharmacist;
 
+import hms.boundary.View;
 import hms.entity.user.Pharmacist;
 
 public class PharmacistMenuView extends View {
 	private Pharmacist pharmacist;
 
-	protected PharmacistMenuView(Pharmacist pharmacist) {
+	public PharmacistMenuView(Pharmacist pharmacist) {
 		this.pharmacist = pharmacist;
 	}
 
