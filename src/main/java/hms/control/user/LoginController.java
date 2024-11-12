@@ -13,7 +13,9 @@ import hms.boundary.user.LoginView;
 import hms.control.Controller;
 import hms.control.doctor.DoctorMenuController;
 import hms.control.patient.PatientMenuController;
+import hms.control.pharmacist.PharmacistMenuController;
 import hms.entity.appointment.Appointment;
+import hms.entity.user.Administrator;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;
@@ -81,7 +83,13 @@ public class LoginController extends Controller {
 				doctorMenuController.navigate();
 
 			} else if (user instanceof Pharmacist) {
+				PharmacistMenuController pharmacistMenuController = new PharmacistMenuController((Pharmacist) user);
+				pharmacistMenuController.navigate();
 
+			} else if (user instanceof Administrator) {
+				// Not yet done
+				// PharmacistMenuController pharmacistMenuController = new PharmacistMenuController((Pharmacist) user);
+				// pharmacistMenuController.navigate();			
 			} else {
 
 			}

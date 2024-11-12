@@ -27,4 +27,7 @@ public class PharmacistMenuView extends View {
 		displayBorderedText(WIDTH, String.format("Welcome, %s.", pharmacist.getName()));
 	}
 
+	public void displayPatientIdPrompt() {
+		System.out.print("Enter patient ID: ");
+	}
 }
