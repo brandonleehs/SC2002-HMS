@@ -1,22 +1,20 @@
 package hms.entity.medicine;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import hms.serializer.MedicineInventorySerializer;
+
+import java.util.*;
 
 // Define a singleton class with early instantiation
 public class MedicineInventory {
-	private static final MedicineInventory medicineInventory = new MedicineInventory();
-	private final Map<String, Integer> medicineStock = new HashMap<String, Integer>();
-	private final Map<String, Integer> medicineLowStockLevelAlertValue = new HashMap<String, Integer>();
+	private Map<String, Integer> medicineStock = new HashMap<String, Integer>();
+	private Map<String, Integer> medicineLowStockLevelAlertValue = new HashMap<String, Integer>();
 	private final List<ReplenishRequest> replenishmentRequestList = new ArrayList<ReplenishRequest>();
 
-	private MedicineInventory() {
-	}
-
-	public static MedicineInventory getInstance() {
-		return medicineInventory;
+	public MedicineInventory() {
+		MedicineInventorySerializer medicineInventorySerializer = new MedicineInventorySerializer();
+		List<HashMap<String, Integer>> maps = medicineInventorySerializer.getMedicineInventory("Medicine_List.xlsx");
+		medicineStock = maps.get(0);
+		medicineLowStockLevelAlertValue = maps.get(1);
 	}
 
 	public Map<String, Integer> getMedicineStock() {
@@ -31,14 +29,6 @@ public class MedicineInventory {
 		return this.replenishmentRequestList;
 	}
 
-	public void setMedicineStock(String medicineName, int stock) {
-		this.medicineStock.put(medicineName, stock);
-	}
-
-	public void setLowStockLevelAlertValue(String medicineName, int LowStockLevelAlertValue) {
-		this.medicineLowStockLevelAlertValue.put(medicineName, LowStockLevelAlertValue);
-	}
-
 	public boolean dispenseMedicine(String medicineName) {
 		if (this.medicineStock.get(medicineName) <= 0) {
 			return false;
@@ -49,6 +39,10 @@ public class MedicineInventory {
 
 	public void addMedicineStock(String medicineName, int amountToAdd) {
 		this.medicineStock.put(medicineName, this.medicineStock.get(medicineName) + amountToAdd);
+	}
+
+	public Set<String> getMedicineNames() {
+		return this.medicineStock.keySet();
 	}
 
 //TODO: Consider checking if amount to remove is too large

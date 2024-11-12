@@ -48,7 +48,7 @@ public class LoginController extends Controller {
 		Appointment appt2 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 12, 5),
 				LocalTime.of(11, 30));
 		patient.scheduleAppointment(doctor, appt2);
-		doctor.completeAppointment(patient, appt2, "Consultation", "Fever. Rest recommended. ");
+//		doctor.completeAppointment(patient, appt2, "Consultation", "Fever. Rest recommended. ");
 
 		Appointment appt3 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 6),
 				LocalTime.of(11, 30));

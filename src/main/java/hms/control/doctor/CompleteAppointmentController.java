@@ -3,10 +3,10 @@ package hms.control.doctor;
 import hms.boundary.InputHandler;
 import hms.boundary.doctor.CompleteAppointmentView;
 import hms.boundary.doctor.ScheduleView;
+import hms.boundary.pharmacist.ShowMedicationInventoryView;
 import hms.control.Controller;
 import hms.entity.appointment.Appointment;
 import hms.entity.medicine.Medicine;
-import hms.entity.record.AppointmentOutcomeRecord;
 import hms.entity.user.Doctor;
 import hms.exceptions.InvalidChoiceFormatException;
 import hms.exceptions.InvalidChoiceValueException;
@@ -15,6 +15,7 @@ public class CompleteAppointmentController extends Controller {
 	private ScheduleView scheduleView;
 	private CompleteAppointmentView completeAppointmentView;
 	private Doctor doctor;
+	private ShowMedicationInventoryView medicineInventoryView = new ShowMedicationInventoryView();
 
 	public CompleteAppointmentController(Doctor doctor) {
 		this.scheduleView = new ScheduleView();
@@ -56,6 +57,7 @@ public class CompleteAppointmentController extends Controller {
 		Medicine[] medicines = new Medicine[numPre];
 
 		for (int i = 0; i < numPre; i++) {
+			medicineInventoryView.printAvailableMedicines();
 			completeAppointmentView.displayAddPrescriptionNamePrompt();
 			String medName = InputHandler.getString();
 			medicines[i] = new Medicine(medName);

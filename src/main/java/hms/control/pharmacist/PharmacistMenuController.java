@@ -4,6 +4,7 @@ import hms.boundary.InputHandler;
 import hms.boundary.pharmacist.PharmacistMenuView;
 import hms.control.Controller;
 import hms.control.user.ChangePasswordController;
+import hms.control.pharmacist.UpdatePrescriptionStatusController;
 import hms.boundary.patient.record.MedicalRecordView;
 import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;
@@ -35,14 +36,14 @@ public class PharmacistMenuController extends Controller{
 			}
 
             switch (choice) {
-            case 1: //view appointment outcome record
+            case 1: //View Appointment Outcome Record
                 MedicalRecordView medicalRecordView = new MedicalRecordView(choosePatient());
                 medicalRecordView.displayAppointmentOutcomeRecord();
                 break;
-            // case 2: //update patient medical records
-            //     UpdatePatientMedicalRecordController updatePatientMedicalRecordController = new UpdatePatientMedicalRecordController(choosePatient());
-            //     updatePatientMedicalRecordController.navigate();
-            //     break;
+            case 2: //Update Prescription Status
+                UpdatePrescriptionStatusController updatePatientMedicalRecordController = new UpdatePrescriptionStatusController(choosePatient());
+                updatePatientMedicalRecordController.navigate();
+                break;
             // case 3: //view personal schedule (all appointments in DB)
             //     scheduleView.displayAllAppointments(doctor.getSchedule(), patientRepository);
             //     break;
