@@ -1,116 +1,64 @@
 package hms.repository;
 
 import hms.entity.medicine.ReplenishRequest;
-import hms.serializer.MedicineInventorySerializer;
-
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-// Define a singleton class with early instantiation
 public class MedicineInventory {
-	private Map<String, List<Integer>> medicineStock = new HashMap<String, List<Integer>>();
-	private final List<ReplenishRequest> replenishmentRequestList = new ArrayList<ReplenishRequest>();
+	private final Map<String, Integer> medicineStock = new HashMap<>(); // Current stock of medicines
+	private final Map<String, Integer> lowStockAlert = new HashMap<>(); // Low stock alert level for medicines
+	private final List<ReplenishRequest> replenishmentRequestList = new ArrayList<>(); // List of pending replenishment requests
 
-	public MedicineInventory() {
-		MedicineInventorySerializer medicineInventorySerializer = new MedicineInventorySerializer();
-		medicineStock = medicineInventorySerializer.getMedicineInventory("Medicine_List.xlsx");
+	// Method to add a new medicine with stock and low stock alert value
+	public void addNewMedicine(String medicineName, int initialStock, int alertLevel) {
+		medicineStock.put(medicineName, initialStock);
+		lowStockAlert.put(medicineName, alertLevel);
 	}
 
+	// Method to update stock for an existing medicine
+	public boolean updateMedicineStock(String medicineName, int additionalStock) {
+		if (medicineStock.containsKey(medicineName)) {
+			int currentStock = medicineStock.get(medicineName);
+			medicineStock.put(medicineName, currentStock + additionalStock);
+			return true;
+		}
+		return false;
+	}
+
+	// Method to remove a medicine from inventory
+	public boolean removeMedicine(String medicineName) {
+		if (medicineStock.containsKey(medicineName)) {
+			medicineStock.remove(medicineName);
+			lowStockAlert.remove(medicineName);
+			return true;
+		}
+		return false;
+	}
+
+	// Method to get current stock levels of all medicines
 	public Map<String, Integer> getMedicineStock() {
-		Map<String, Integer> temp = new HashMap<String, Integer>();
-		for (Map.Entry<String, List<Integer>> entry : medicineStock.entrySet()) {
-            String key = entry.getKey();
-            List<Integer> values = entry.getValue();
-
-            // Check if the list has at least one element
-            if (values != null && !values.isEmpty()) {
-                temp.put(key, values.get(0)); // Put the first element in the new map
-            }
-        }
-		return temp;
+		return new HashMap<>(medicineStock); // Return a copy to prevent modification from outside
 	}
 
+	// Method to get low stock alert levels of all medicines
 	public Map<String, Integer> getMedicineLowStockLevelAlertValue() {
-		Map<String, Integer> temp = new HashMap<String, Integer>();
-		for (Map.Entry<String, List<Integer>> entry : medicineStock.entrySet()) {
-            String key = entry.getKey();
-            List<Integer> values = entry.getValue();
-
-            // Check if the list has at least one element
-            if (values != null && !values.isEmpty()) {
-                temp.put(key, values.get(1)); // Put the first element in the new map
-            }
-        }
-		return temp;
+		return new HashMap<>(lowStockAlert); // Return a copy to prevent modification from outside
 	}
 
-// 	public List<ReplenishRequest> getReplenishmentRequestList() {
-// 		return this.replenishmentRequestList;
-// 	}
-
-// 	public boolean dispenseMedicine(String medicineName) {
-// 		if (this.medicineStock.get(medicineName) <= 0) {
-// 			return false;
-// 		}
-// 		this.medicineStock.put(medicineName, this.medicineStock.get(medicineName) - 1);
-// 		return true;
-// 	}
-
-// 	public void addMedicineStock(String medicineName, int amountToAdd) {
-// 		this.medicineStock.put(medicineName, this.medicineStock.get(medicineName) + amountToAdd);
-// 	}
-
-	public Set<String> getMedicineNames() {
-		return this.medicineStock.keySet();
+	// Method to retrieve the list of pending replenishment requests
+	public List<ReplenishRequest> getReplenishmentRequestList() {
+		return new ArrayList<>(replenishmentRequestList); // Return a copy to prevent external modifications
 	}
 
-// //TODO: Consider checking if amount to remove is too large
-// 	public void removeMedicineStock(String medicineName, int amountToRemove) {
-// 		this.medicineStock.put(medicineName, this.medicineStock.get(medicineName) - amountToRemove);
-// 	}
-
-	public void addReplenishmentRequest(ReplenishRequest replenishRequest) {
-		this.replenishmentRequestList.add(replenishRequest);
+	// Method to add stock based on a replenishment request
+	public void addMedicineStock(String medicineName, int stockToAdd) {
+		medicineStock.put(medicineName, medicineStock.getOrDefault(medicineName, 0) + stockToAdd);
 	}
 
-	public boolean removeReplenishmentRequest(ReplenishRequest replenishRequest) {
-		return this.replenishmentRequestList.remove(replenishRequest);
+	// Method to remove a replenishment request from the list
+	public boolean removeReplenishmentRequest(ReplenishRequest request) {
+		return replenishmentRequestList.remove(request);
 	}
-
-	// TODO: This should be in boundary/view
-//	public void printAvailableMedicines() {
-//		System.out.println("Available Medicines:");
-//		for (String medicineName : medicineStock.keySet()) {
-//			System.out.println(medicineName);
-//		}
-//	}
-
-//	public void viewInventoryStock() {
-//		System.out.println("Medicine Inventory:");
-//		for (Map.Entry<String, Integer> entry : medicineStock.entrySet()) {
-//			String medicineName = entry.getKey();
-//			Integer stockLevel = entry.getValue();
-//			System.out.println(medicineName + ": " + stockLevel);
-//		}
-//	}
-
-//	public void viewInventoryWarning() {
-//		System.out.println("Available Medicines:");
-//		for (String medicineName : medicineStock.keySet()) {
-//			int stockLevel = medicineStock.get(medicineName);
-//			int lowStockAlertValue = medicineLowStockLevelAlertValue.getOrDefault(medicineName, Integer.MAX_VALUE);
-//
-//			System.out.print(medicineName + " (Stock: " + stockLevel + ")");
-//
-//			// Check if stock level is below the alert value
-//			if (stockLevel < lowStockAlertValue) {
-//				System.out.println(" - Warning: Low stock!");
-//			} else {
-//				System.out.println();
-//			}
-//		}
-//	}
 }
