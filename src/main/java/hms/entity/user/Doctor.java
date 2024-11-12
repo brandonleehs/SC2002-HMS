@@ -67,10 +67,14 @@ public class Doctor extends User {
 	}
 
 	public void completeAppointment(Patient patient, Appointment appointment, String serviceType,
-			String consultationNotes) {
+			String consultationNotes, Medicine[] medicines) {
 
 		AppointmentOutcomeRecord appointmentOutcomeRecord = new AppointmentOutcomeRecord(appointment.getDate(),
 				serviceType, consultationNotes, appointment.getUUID());
+		
+		for (Medicine medicine : medicines) {
+			appointmentOutcomeRecord.addPrescribedMedicine(medicine);
+		}
 
 		appointment.setAppointmentOutcomeRecord(appointmentOutcomeRecord);
 		// Remove appointment from schedule
@@ -83,7 +87,6 @@ public class Doctor extends User {
 
 		removeAppointmentFromConfirmedList(appointment);
 		removeAppointmentFromPendingList(appointment);
-
 	}
 
 	public boolean scheduleAppointment(Appointment appointment) {

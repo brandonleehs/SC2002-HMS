@@ -5,6 +5,8 @@ import hms.boundary.doctor.CompleteAppointmentView;
 import hms.boundary.doctor.ScheduleView;
 import hms.control.Controller;
 import hms.entity.appointment.Appointment;
+import hms.entity.medicine.Medicine;
+import hms.entity.record.AppointmentOutcomeRecord;
 import hms.entity.user.Doctor;
 import hms.exceptions.InvalidChoiceFormatException;
 import hms.exceptions.InvalidChoiceValueException;
@@ -44,8 +46,26 @@ public class CompleteAppointmentController extends Controller {
 		completeAppointmentView.displaySetConsultationNotesPrompt();
 		String consultationNotes = InputHandler.getString();
 
+		completeAppointmentView.displayPrescriptionChoicePrompt();
+		int numPre;
+		try {
+			numPre = InputHandler.getChoice(0, 10);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+			return;
+		}
+		Medicine[] medicines = new Medicine[numPre];
+
+		for (int i = 0; i < numPre; i++) {
+			completeAppointmentView.displayAddPrescriptionNamePrompt();
+			String medName = InputHandler.getString();
+			medicines[i] = new Medicine(medName);
+		}
+
 		doctor.completeAppointment(patientRepository.getById(appointment.getPatientId()), appointment, serviceType,
-				consultationNotes);
+				consultationNotes, medicines);
+
+
+		
 //		Prompt.displayDatePrompt();
 //		LocalDate date;
 //		try {

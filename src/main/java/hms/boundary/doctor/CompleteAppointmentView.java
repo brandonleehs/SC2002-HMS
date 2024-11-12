@@ -21,4 +21,12 @@ public class CompleteAppointmentView extends UpdatePatientMedicalRecordView {
 	public void displayServiceTypePrompt() {
 		System.out.println("Enter service type:");
 	}
+
+	public void displayPrescriptionChoicePrompt() {
+        System.out.print("Enter numer of prescriptions to give (1-10): ");
+    }
+
+	public void displayAddPrescriptionNamePrompt() {
+        System.out.print("Enter Medicine to be added: ");
+    }
 }
