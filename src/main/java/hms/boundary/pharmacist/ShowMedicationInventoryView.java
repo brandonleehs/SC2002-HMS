@@ -1,10 +1,11 @@
 package hms.boundary.pharmacist;
 
+import java.util.Set;
+
 import hms.boundary.View;
-import hms.entity.medicine.MedicineInventory;
 
 public class ShowMedicationInventoryView extends View{
-    public void printAvailableMedicines(medicineList){
+    public void printAvailableMedicines(Set<String> medicineList){
 		System.out.println("Available Medicines:");
 		for (String medicineName : medicineList) {
 			System.out.println(medicineName);

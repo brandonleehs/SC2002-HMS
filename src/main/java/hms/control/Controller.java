@@ -2,9 +2,9 @@ package hms.control;
 
 import hms.repository.AdministratorRepository;
 import hms.repository.DoctorRepository;
+import hms.repository.MedicineInventory;
 import hms.repository.PatientRepository;
 import hms.repository.PharmacistRepository;
-import hms.entity.medicine.MedicineInventory;
 
 public abstract class Controller {
 	protected static final PatientRepository patientRepository = new PatientRepository();
