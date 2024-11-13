@@ -1,11 +1,10 @@
 package hms.control.pharmacist;
 
 import hms.boundary.InputHandler;
+import hms.boundary.patient.record.MedicalRecordView;
 import hms.boundary.pharmacist.PharmacistMenuView;
 import hms.control.Controller;
 import hms.control.user.ChangePasswordController;
-import hms.control.pharmacist.UpdatePrescriptionStatusController;
-import hms.boundary.patient.record.MedicalRecordView;
 import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;
 import hms.exceptions.InvalidChoiceFormatException;
@@ -44,34 +43,24 @@ public class PharmacistMenuController extends Controller{
                 UpdatePrescriptionStatusController updatePatientMedicalRecordController = new UpdatePrescriptionStatusController(choosePatient());
                 updatePatientMedicalRecordController.navigate();
                 break;
-            // case 3: //view personal schedule (all appointments in DB)
-            //     scheduleView.displayAllAppointments(doctor.getSchedule(), patientRepository);
-            //     break;
-            // case 4: //set availability for appointments
-            //     SetDoctorAvailabilityController setDoctorAvailabilityController = new SetDoctorAvailabilityController(doctor);
-            //     setDoctorAvailabilityController.navigate();
-            //     break;
-            // case 5: // accept or decline appt requests
-            //     PendingRequestController pendingRequestController = new PendingRequestController(doctor);
-            //     pendingRequestController.navigate();
-            //     break;
-            // case 6: //view all appts today & tmr
-            //     scheduleView.displayUpcomingAppointments(doctor.getSchedule(), patientRepository);
-            //     break;
-            // case 7: //record appt outcome
-            //     CompleteAppointmentController completeAppointmentController = new CompleteAppointmentController(doctor);
-            //     completeAppointmentController.navigate();
-            //     break;
-            case 8: //change password
+            case 3: //View Medication Inventory
+                ShowMedicationInventoryController showMedicationInventoryController = new ShowMedicationInventoryController();
+                showMedicationInventoryController.navigate();
+                break;
+            case 4: //Submit Replenishment Request
+                // SetDoctorAvailabilityController setDoctorAvailabilityController = new SetDoctorAvailabilityController(doctor);
+                // setDoctorAvailabilityController.navigate();
+                // break;
+            case 5: //change password
                 ChangePasswordController changePasswordController = new ChangePasswordController(pharmacist);
                 changePasswordController.navigate();
                 break;
-            case 9: //logout
+            case 6: //logout
                 System.out.println("Logging out.");
                 break;
             default:
             }
-        } while (choice < 9);
+        } while (choice < 6);
     }
     
     private Patient choosePatient() {

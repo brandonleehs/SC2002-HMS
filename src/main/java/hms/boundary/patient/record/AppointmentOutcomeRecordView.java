@@ -1,6 +1,8 @@
 package hms.boundary.patient.record;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import hms.boundary.View;
 import hms.entity.medicine.Medicine;
@@ -65,14 +67,14 @@ public class AppointmentOutcomeRecordView extends View {
 		System.out.println(" ".repeat(leftPadding) + title + " ".repeat(rightPadding));
 		System.out.println("-".repeat(WIDTH));
 
-		List<Medicine> prescribedMedicineList = appointmentOutcomeRecord.getPrescribedMedicineList();
+		HashMap<Medicine, Integer> prescribedMedicineList = appointmentOutcomeRecord.getPrescribedMedicineList();
 		if (prescribedMedicineList.isEmpty()) {
 			System.out.println("No medicine prescribed.");
 		} else {
 			System.out.printf(format, "Medicine Name", "Status");
 			System.out.println("|" + "-".repeat(WIDTH - 2) + "|");
-			for (Medicine medicine : prescribedMedicineList) {
-				System.out.printf(format, medicine.getName(), medicine.getMedicineStatus());
+			for (Map.Entry<Medicine, Integer> entry : prescribedMedicineList.entrySet()) {
+				System.out.printf(format, entry.getKey().getName(), entry.getKey().getMedicineStatus());
 			}
 		}
 	}

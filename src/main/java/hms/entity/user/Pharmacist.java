@@ -1,13 +1,6 @@
 package hms.entity.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import hms.entity.medicine.Medicine;
-import hms.entity.medicine.ReplenishRequest;
-import hms.entity.record.AppointmentOutcomeRecord;
 import hms.entity.user.attributes.Gender;
-import hms.repository.MedicineInventory;
 
 public class Pharmacist extends User {
 	private final int age;
@@ -26,16 +19,16 @@ public class Pharmacist extends User {
 	// 	return medicineInventory.dispenseMedicine(medicine.getName());
 	// }
 
-	public List<Medicine> getAllPendingMedicine(Patient patient) {
-		List<Medicine> medicineList = new ArrayList<Medicine>();
-		List<AppointmentOutcomeRecord> appointmentOutcomeRecordList = patient.getAppointmentOutcomeRecordList();
-		for (AppointmentOutcomeRecord appointmentOutcomeRecord : appointmentOutcomeRecordList) {
-			for (Medicine medicine : appointmentOutcomeRecord.getPrescribedMedicineList()) {
-				medicineList.add(medicine);
-			}
-		}
-		return medicineList;
-	}
+	// public List<Medicine> getAllPendingMedicine(Patient patient) {
+	// 	List<Medicine> medicineList = new ArrayList<Medicine>();
+	// 	List<AppointmentOutcomeRecord> appointmentOutcomeRecordList = patient.getAppointmentOutcomeRecordList();
+	// 	for (AppointmentOutcomeRecord appointmentOutcomeRecord : appointmentOutcomeRecordList) {
+	// 		for (Medicine medicine : appointmentOutcomeRecord.getPrescribedMedicineList()) {
+	// 			medicineList.add(medicine);
+	// 		}
+	// 	}
+	// 	return medicineList;
+	// }
 
 	// public void submitReplenishmentRequest(String medicineName, int stockToAdd) {
 	// 	ReplenishRequest replenishRequest = new ReplenishRequest(medicineName, stockToAdd);

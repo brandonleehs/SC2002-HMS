@@ -1,5 +1,10 @@
 package hms.control.doctor;
 
+import java.util.Set;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import hms.boundary.InputHandler;
 import hms.boundary.doctor.CompleteAppointmentView;
 import hms.boundary.doctor.ScheduleView;
@@ -7,6 +12,7 @@ import hms.control.Controller;
 import hms.control.pharmacist.ShowMedicationInventoryController;
 import hms.entity.appointment.Appointment;
 import hms.entity.medicine.Medicine;
+import hms.entity.medicine.MedicineStatus;
 import hms.entity.user.Doctor;
 import hms.exceptions.InvalidChoiceFormatException;
 import hms.exceptions.InvalidChoiceValueException;
@@ -16,6 +22,7 @@ public class CompleteAppointmentController extends Controller {
 	private CompleteAppointmentView completeAppointmentView;
 	private ShowMedicationInventoryController showMedicationInventoryController = new ShowMedicationInventoryController();
 	private Doctor doctor;
+	private Map<String, List<Integer>> medicines = new HashMap<String, List<Integer>>();
 
 	public CompleteAppointmentController(Doctor doctor) {
 		this.scheduleView = new ScheduleView();
@@ -54,17 +61,35 @@ public class CompleteAppointmentController extends Controller {
 		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
 			return;
 		}
-		Medicine[] medicines = new Medicine[numPre];
-
+		
+		//Add list for medicine set
+		medicines = medicineInventory.getFullMedicine();
+		List<String> medicineNames = medicineInventory.getMedicineNames();
+		HashMap<Medicine, Integer> prescribed_medicines = new HashMap<>();
+		//Get choice with amount from doctor
 		for (int i = 0; i < numPre; i++) {
+			int medicineChoice, medicineAmount = 0;
 			showMedicationInventoryController.navigate();
 			completeAppointmentView.displayAddPrescriptionNamePrompt();
-			String medName = InputHandler.getString();
-			medicines[i] = new Medicine(medName);
+			try {
+				medicineChoice = InputHandler.getChoice(1, medicines.keySet().size());
+			} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+				return;
+			}
+			
+			completeAppointmentView.displayAddPrescriptionAmountPrompt();
+			try {
+				medicineAmount = InputHandler.getChoice(1, 999);
+			} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+				return;
+			}
+			Medicine prescribed_medicine = new Medicine(medicineNames.get(medicineChoice-1));
+			prescribed_medicine.setMedicineStatus(MedicineStatus.PENDING);
+			prescribed_medicines.put(prescribed_medicine, medicineAmount);
 		}
 
 		doctor.completeAppointment(patientRepository.getById(appointment.getPatientId()), appointment, serviceType,
-				consultationNotes, medicines);
+				consultationNotes, prescribed_medicines);
 
 
 		

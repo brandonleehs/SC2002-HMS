@@ -4,7 +4,6 @@ import hms.boundary.InputHandler;
 import hms.boundary.doctor.UpdatePatientMedicalRecordView;
 import hms.boundary.patient.record.MedicalRecordView;
 import hms.control.Controller;
-import hms.entity.medicine.Medicine;
 import hms.entity.record.AppointmentOutcomeRecord;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
@@ -54,10 +53,10 @@ public class UpdatePatientMedicalRecordController extends Controller {
 		String notes = null;
 		switch (choice) {
 		case 1:
-			this.updatePatientMedicalRecordView.displayAddPrescriptionNamePrompt();
-			String medName = InputHandler.getString();
-			this.doctor.prescribeMedicine(new Medicine(medName), appointmentOutcomeRecord);
-			break;
+			// this.updatePatientMedicalRecordView.displayAddPrescriptionNamePrompt();
+			// String medName = InputHandler.getString();
+			// this.doctor.prescribeMedicine(new Medicine(medName), appointmentOutcomeRecord);
+			// break;
 		case 2:
 			this.updatePatientMedicalRecordView.displaySetConsultationNotesPrompt();
 			notes = InputHandler.getString();

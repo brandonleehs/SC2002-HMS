@@ -1,8 +1,7 @@
 package hms.entity.record;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.UUID;
 
 import hms.entity.medicine.Medicine;
@@ -11,14 +10,13 @@ public class AppointmentOutcomeRecord {
 	private final UUID uuid;
 	private final LocalDate date;
 	private String serviceType;
-	private final List<Medicine> prescribedMedicineList;
+	private HashMap<Medicine, Integer> prescribedMedicineList;
 	private String consultationNotes;
 
 	public AppointmentOutcomeRecord(LocalDate date, String serviceType, String consultationNotes, UUID uuid) {
 		this.uuid = uuid;
 		this.date = date;
 		this.serviceType = serviceType;
-		this.prescribedMedicineList = new ArrayList<Medicine>();
 		this.consultationNotes = consultationNotes;
 	}
 
@@ -46,16 +44,16 @@ public class AppointmentOutcomeRecord {
 		this.consultationNotes = stringBuilder.toString();
 	}
 
-	public List<Medicine> getPrescribedMedicineList() {
+	public HashMap<Medicine, Integer> getPrescribedMedicineList() {
 		return this.prescribedMedicineList;
 	}
 
-	public void addPrescribedMedicine(Medicine medicine) {
-		this.prescribedMedicineList.add(medicine);
+	public void addPrescribedMedicine(HashMap<Medicine, Integer> medicineList) {
+		this.prescribedMedicineList = medicineList;
 	}
 
 	public void removePrescribedMedicine(Medicine medicine) {
-		this.prescribedMedicineList.remove(medicine);
+		this.prescribedMedicineList.remove(medicine.getName());
 	}
 
 	public String getConsultationNotes() {

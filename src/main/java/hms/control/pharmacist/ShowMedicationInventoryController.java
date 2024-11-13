@@ -1,12 +1,13 @@
 package hms.control.pharmacist;
 
-import java.util.Set;
+import java.util.List;
+import java.util.Map;
 
 import hms.boundary.pharmacist.ShowMedicationInventoryView;
 import hms.control.Controller;
 
 public class ShowMedicationInventoryController extends Controller {
-    private Set<String> medicineList = medicineInventory.getMedicineNames();
+    private Map<String, List<Integer>> medicineList = medicineInventory.getFullMedicine();
     private ShowMedicationInventoryView showMedicationInventoryView = new ShowMedicationInventoryView();
     
     public void navigate(){

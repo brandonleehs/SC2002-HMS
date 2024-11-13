@@ -19,6 +19,10 @@ public class MedicineInventory {
 		medicineStock = medicineInventorySerializer.getMedicineInventory("Medicine_List.xlsx");
 	}
 
+	public Map<String, List<Integer>> getFullMedicine(){
+		return medicineStock;
+	}
+
 	public Map<String, Integer> getMedicineStock() {
 		Map<String, Integer> temp = new HashMap<String, Integer>();
 		for (Map.Entry<String, List<Integer>> entry : medicineStock.entrySet()) {
@@ -63,8 +67,9 @@ public class MedicineInventory {
 // 		this.medicineStock.put(medicineName, this.medicineStock.get(medicineName) + amountToAdd);
 // 	}
 
-	public Set<String> getMedicineNames() {
-		return this.medicineStock.keySet();
+	public List<String> getMedicineNames() {
+		List<String> temp_r = new ArrayList<>(medicineStock.keySet());
+		return temp_r;
 	}
 
 // //TODO: Consider checking if amount to remove is too large
