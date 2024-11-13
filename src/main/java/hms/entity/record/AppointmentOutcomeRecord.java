@@ -2,9 +2,11 @@ package hms.entity.record;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import hms.entity.medicine.Medicine;
+import hms.entity.medicine.MedicineStatus;
 
 public class AppointmentOutcomeRecord {
 	private final UUID uuid;
@@ -54,7 +56,7 @@ public class AppointmentOutcomeRecord {
 	}
 
 	public void removePrescribedMedicine(Medicine medicine) {
-		this.prescribedMedicineList.remove(medicine.getName());
+		this.prescribedMedicineList.remove(medicine);
 	}
 
 	public String getConsultationNotes() {
@@ -63,5 +65,18 @@ public class AppointmentOutcomeRecord {
 
 	public UUID getUUID() {
 		return this.uuid;
+	}
+
+	public Boolean CheckIfUnprescribedMedicineExists(){
+		// Sees if all medicine in this record has been dispensed
+		if (prescribedMedicineList.isEmpty()) {
+			return false;
+		}
+		else{
+			for (Map.Entry<Medicine, Integer> entry : prescribedMedicineList.entrySet()) {
+				if(entry.getKey().getMedicineStatus()==MedicineStatus.PENDING) return true;
+			}
+			return false;
+		}
 	}
 }

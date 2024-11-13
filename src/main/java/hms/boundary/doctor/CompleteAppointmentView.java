@@ -33,4 +33,8 @@ public class CompleteAppointmentView extends UpdatePatientMedicalRecordView {
 	public void displayAddPrescriptionAmountPrompt() {
         System.out.print("Enter amount of Medicine to be prescribed: ");
     }
+
+	public void SuccessfulPrescribtion(){
+		System.out.print("Medicine prescribed successfully");
+	}
 }

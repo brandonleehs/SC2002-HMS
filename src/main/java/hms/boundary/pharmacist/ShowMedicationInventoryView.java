@@ -7,7 +7,6 @@ import hms.boundary.View;
 import hms.entity.medicine.InventoryWarning;
 
 public class ShowMedicationInventoryView extends View{
-    //TODO: Print Medicine Names with Amount
     public void printAvailableMedicines(Map<String, List<Integer>> medicineList){
         this.displayHeader();
         String format = "| %-" + (WIDTH - 42) + "s | %-" + 10 + "s | %-" + 10 + "s | %-" + 10 + "s |\n";
@@ -27,6 +26,10 @@ public class ShowMedicationInventoryView extends View{
 				u++;
 			}
 		}
+	}
+
+	public void noRecords(){
+		System.out.println("There are no records");
 	}
 
     @Override

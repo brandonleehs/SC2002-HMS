@@ -1,7 +1,7 @@
 package hms.control.pharmacist;
 
 import hms.boundary.InputHandler;
-import hms.boundary.patient.record.MedicalRecordView;
+import hms.boundary.patient.record.AppointmentOutcomeRecordView;
 import hms.boundary.pharmacist.PharmacistMenuView;
 import hms.control.Controller;
 import hms.control.user.ChangePasswordController;
@@ -13,6 +13,7 @@ import hms.exceptions.InvalidChoiceValueException;
 public class PharmacistMenuController extends Controller{
     private final PharmacistMenuView pharmacistMenuView;
     private Pharmacist pharmacist;
+    private AppointmentOutcomeRecordView appointmentOutcomeRecordView = new AppointmentOutcomeRecordView();
 
     public PharmacistMenuController(Pharmacist pharmacist){
         this.pharmacist=pharmacist;
@@ -36,8 +37,7 @@ public class PharmacistMenuController extends Controller{
 
             switch (choice) {
             case 1: //View Appointment Outcome Record
-                MedicalRecordView medicalRecordView = new MedicalRecordView(choosePatient());
-                medicalRecordView.displayAppointmentOutcomeRecord();
+                appointmentOutcomeRecordView.displayAppointmentOutcomeRecord(choosePatient());
                 break;
             case 2: //Update Prescription Status
                 UpdatePrescriptionStatusController updatePatientMedicalRecordController = new UpdatePrescriptionStatusController(choosePatient());
@@ -48,19 +48,23 @@ public class PharmacistMenuController extends Controller{
                 showMedicationInventoryController.navigate();
                 break;
             case 4: //Submit Replenishment Request
-                // SetDoctorAvailabilityController setDoctorAvailabilityController = new SetDoctorAvailabilityController(doctor);
-                // setDoctorAvailabilityController.navigate();
-                // break;
-            case 5: //change password
+                SubmitReplenishmentRequestController submitReplenishmentRequest = new SubmitReplenishmentRequestController();
+                submitReplenishmentRequest.navigate();
+                break;
+            case 5: //View active amounts of Replenishment Requests waiting for approval
+                ViewReplenishmentRequestController viewReplenishmentRequestController = new ViewReplenishmentRequestController();
+                viewReplenishmentRequestController.navigate();
+                break;
+            case 6: //change password
                 ChangePasswordController changePasswordController = new ChangePasswordController(pharmacist);
                 changePasswordController.navigate();
                 break;
-            case 6: //logout
+            case 7: //logout
                 System.out.println("Logging out.");
                 break;
             default:
             }
-        } while (choice < 6);
+        } while (choice < 7);
     }
     
     private Patient choosePatient() {

@@ -11,6 +11,12 @@ public class ShowMedicationInventoryController extends Controller {
     private ShowMedicationInventoryView showMedicationInventoryView = new ShowMedicationInventoryView();
     
     public void navigate(){
-        showMedicationInventoryView.printAvailableMedicines(medicineList);
+        showMedicationInventoryView.displayHeader();
+        if(!medicineList.isEmpty()){
+            showMedicationInventoryView.printAvailableMedicines(medicineList);
+        } 
+        else{
+            showMedicationInventoryView.noRecords();
+        }
     }
 }

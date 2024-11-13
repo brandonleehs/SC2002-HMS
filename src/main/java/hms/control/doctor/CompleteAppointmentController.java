@@ -21,7 +21,7 @@ public class CompleteAppointmentController extends Controller {
 	private CompleteAppointmentView completeAppointmentView;
 	private ShowMedicationInventoryController showMedicationInventoryController = new ShowMedicationInventoryController();
 	private Doctor doctor;
-	private Map<String, List<Integer>> medicines = new HashMap<String, List<Integer>>();
+	private Map<String, List<Integer>> medicines = new HashMap<>();
 
 	public CompleteAppointmentController(Doctor doctor) {
 		this.scheduleView = new ScheduleView();
@@ -89,6 +89,7 @@ public class CompleteAppointmentController extends Controller {
 
 		doctor.completeAppointment(patientRepository.getById(appointment.getPatientId()), appointment, serviceType,
 				consultationNotes, prescribed_medicines);
+		completeAppointmentView.SuccessfulPrescribtion();
 
 
 		
