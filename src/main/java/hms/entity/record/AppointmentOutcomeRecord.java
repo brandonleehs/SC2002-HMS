@@ -18,6 +18,7 @@ public class AppointmentOutcomeRecord {
 		this.date = date;
 		this.serviceType = serviceType;
 		this.consultationNotes = consultationNotes;
+		this.prescribedMedicineList = new HashMap<>();
 	}
 
 	public LocalDate getDate() {
@@ -49,7 +50,7 @@ public class AppointmentOutcomeRecord {
 	}
 
 	public void addPrescribedMedicine(HashMap<Medicine, Integer> medicineList) {
-		this.prescribedMedicineList = medicineList;
+		this.prescribedMedicineList.putAll(medicineList);;
 	}
 
 	public void removePrescribedMedicine(Medicine medicine) {
