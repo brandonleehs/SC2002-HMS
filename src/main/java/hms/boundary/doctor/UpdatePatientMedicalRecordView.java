@@ -18,9 +18,9 @@ public class UpdatePatientMedicalRecordView extends View {
 		System.out.println(prompt);
 	}
 
-//	public void displayAddPrescriptionQtyPrompt() {
-//		System.out.print("Enter quantity of Medicine to be added:");
-//	}
+	public void displayAddPrescriptionQtyPrompt() {
+		System.out.print("Enter quantity of Medicine to be added:");
+	}
 
 	public void displayApptOptionPrompt() {
 		System.out.print("Please enter the appointment number: ");
