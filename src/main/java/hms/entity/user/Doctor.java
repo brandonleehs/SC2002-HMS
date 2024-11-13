@@ -101,13 +101,13 @@ public class Doctor extends User {
 //		return this.schedule.changeAppointment(appointment, datetime);
 //	}
 
-	// public void prescribeMedicine(Medicine medicine, AppointmentOutcomeRecord appointmentOutcomeRecord) {
-	// 	appointmentOutcomeRecord.addPrescribedMedicine(medicine);
-	// }
+	public void prescribeMedicine(HashMap<Medicine, Integer> medicineList, AppointmentOutcomeRecord appointmentOutcomeRecord) {
+		appointmentOutcomeRecord.addPrescribedMedicine(medicineList);
+	}
 
-//	public void removeMedicine(Medicine medicine, AppointmentOutcomeRecord appointmentOutcomeRecord) {
-//		appointmentOutcomeRecord.removePrescribedMedicine(medicine);
-//	}
+	public void removeMedicine(Medicine medicine, AppointmentOutcomeRecord appointmentOutcomeRecord) {
+		appointmentOutcomeRecord.removePrescribedMedicine(medicine);
+	}
 
 	public int getAge() {
 		return this.age;
