@@ -3,6 +3,7 @@ package hms;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// TODO: Refactor email validation, move print out of validation
 public final class Validation {
 	private Validation() {
 	}
@@ -27,33 +28,45 @@ public final class Validation {
 
 		if (password.length() < 8) {
 			valid = false;
-			System.out.println("Password must be at least 8 characters long.");
+			System.out.println("[!] Password must be at least 8 characters long.");
+		} else {
+			System.out.println("[X] Password contains at least 8 characters long.");
 		}
 		if (!Pattern.compile(".*[A-Z].*").matcher(password).matches()) {
 			valid = false;
-			System.out.println("Password must contain at least one uppercase letter.");
+			System.out.println("[!] Password must contain at least one uppercase letter.");
+		} else {
+			System.out.println("[X] Password contains at least one uppercase letter.");
 		}
 		if (!Pattern.compile(".*[a-z].*").matcher(password).matches()) {
 			valid = false;
-			System.out.println("Password must contain at least one lowercase letter.");
+			System.out.println("[!] Password must contain at least one lowercase letter.");
+		} else {
+			System.out.println("[X] Password contains at least one lowercase letter.");
 		}
 		if (!Pattern.compile(".*\\d.*").matcher(password).matches()) {
 			valid = false;
-			System.out.println("Password must contain at least one digit.");
+			System.out.println("[!] Password must contain at least one digit.");
+		} else {
+			System.out.println("[X] Password contains at least one digit.");
 		}
 		if (!Pattern.compile(".*[!@#$%^&*].*").matcher(password).matches()) {
 			valid = false;
-			System.out.println("Password must contain at least one special character (!, @, #, $, %, ^, &, *).");
+			System.out.println("[!] Password must contain at least one special character (!, @, #, $, %, ^, &, *).");
+		} else {
+			System.out.println("[X] Password contains at least one special character (!, @, #, $, %, ^, &, *).");
 		}
 		if (Pattern.compile("\\s").matcher(password).find()) {
 			valid = false;
-			System.out.println("Password must not contain any spaces or tabs.");
+			System.out.println("[!] Password must not contain any spaces or tabs.");
+		} else {
+			System.out.println("[X] Password does not contain any spaces or tabs.");
 		}
 
 		if (valid) {
-			System.out.println("Password is valid.");
+			System.out.println("[X] Password is valid.");
 		} else {
-			System.out.println("Password is invalid.");
+			System.out.println("[!] Password is invalid.");
 		}
 		return valid;
 	}

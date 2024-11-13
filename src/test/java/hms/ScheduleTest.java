@@ -9,7 +9,8 @@ import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
 
-import hms.appointment.Appointment;
+import hms.entity.appointment.Appointment;
+import hms.entity.appointment.Schedule;
 
 class ScheduleTest {
 
@@ -215,9 +216,7 @@ class ScheduleTest {
 	@Test
 	void testSetAvailability1() {
 		Schedule schedule = new Schedule(LocalTime.of(5, 23, 1), LocalTime.of(12, 43, 56));
-		boolean[] availableArr = new boolean[48];
-		availableArr[4] = true;
-		schedule.setAvailability(LocalDate.of(2024, 10, 25), availableArr);
+		schedule.setAvailability(LocalDate.of(2024, 10, 25), LocalTime.of(2, 0), LocalTime.of(2, 30));
 		Appointment appointment = new Appointment("1234", "5678", LocalDate.of(2024, 10, 25), LocalTime.of(2, 0, 1));
 		assertTrue(schedule.addAppointment(appointment));
 	}
@@ -225,9 +224,7 @@ class ScheduleTest {
 	@Test
 	void testSetAvailability2() {
 		Schedule schedule = new Schedule(LocalTime.of(5, 23, 1), LocalTime.of(12, 43, 56));
-		boolean[] availableArr = new boolean[48];
-		availableArr[4] = true;
-		schedule.setAvailability(LocalDate.of(2024, 10, 25), availableArr);
+		schedule.setAvailability(LocalDate.of(2024, 10, 25), LocalTime.of(2, 0), LocalTime.of(2, 30));
 		Appointment appointment = new Appointment("1234", "5678", LocalDate.of(2024, 10, 25), LocalTime.of(10, 0, 1));
 		assertFalse(schedule.addAppointment(appointment));
 	}
@@ -235,9 +232,16 @@ class ScheduleTest {
 	@Test
 	void testSetAvailability3() {
 		Schedule schedule = new Schedule(LocalTime.of(5, 23, 1), LocalTime.of(12, 43, 56));
-		boolean[] availableArr = new boolean[48];
-		schedule.setAvailability(LocalDate.of(2024, 10, 25), availableArr);
+		schedule.setUnavailable(LocalDate.of(2024, 10, 25), LocalTime.of(0, 0), LocalTime.of(23, 59));
 		Appointment appointment = new Appointment("1234", "5678", LocalDate.of(2024, 10, 25), LocalTime.of(10, 0, 1));
+		assertFalse(schedule.addAppointment(appointment));
+	}
+
+	@Test
+	void testSetAvailability4() {
+		Schedule schedule = new Schedule(LocalTime.of(5, 23, 1), LocalTime.of(12, 43, 56));
+		schedule.setUnavailable(LocalDate.of(2024, 10, 25), LocalTime.of(0, 0), LocalTime.of(23, 59));
+		Appointment appointment = new Appointment("1234", "5678", LocalDate.of(2024, 10, 25), LocalTime.of(23, 30, 0));
 		assertFalse(schedule.addAppointment(appointment));
 	}
 
