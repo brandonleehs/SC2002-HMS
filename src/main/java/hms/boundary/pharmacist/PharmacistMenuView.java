@@ -13,7 +13,8 @@ public class PharmacistMenuView extends View {
 	public void displayOptions() {
 		String options = "Please select an option:\r\n" + "1. View Appointment Outcome Record\r\n"
 				+ "2. Update Prescription Status\r\n" + "3. View Medication Inventory\r\n"
-				+ "4. Submit Replenishment Request\r\n" + "5. Logout";
+				+ "4. Submit Replenishment Request\r\n" + "5. View Replenishment Requests\r\n" 
+				+ "6. Change Password\r\n" + "7. Logout";
 		String border = "=".repeat(WIDTH);
 		String prompt = "Enter choice (1-5):";
 
