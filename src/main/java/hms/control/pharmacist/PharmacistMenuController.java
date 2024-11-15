@@ -3,6 +3,7 @@ package hms.control.pharmacist;
 import hms.boundary.InputHandler;
 import hms.boundary.patient.record.AppointmentOutcomeRecordView;
 import hms.boundary.pharmacist.PharmacistMenuView;
+import hms.boundary.pharmacist.ViewReplenishmentRequestView;
 import hms.control.Controller;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Patient;
@@ -52,8 +53,9 @@ public class PharmacistMenuController extends Controller{
                 submitReplenishmentRequest.navigate();
                 break;
             case 5: //View active amounts of Replenishment Requests waiting for approval
-                ViewReplenishmentRequestController viewReplenishmentRequestController = new ViewReplenishmentRequestController();
-                viewReplenishmentRequestController.navigate();
+                ViewReplenishmentRequestView viewReplenishmentRequestView = new ViewReplenishmentRequestView();
+                viewReplenishmentRequestView.displayHeader();
+                viewReplenishmentRequestView.displayRequests(medicineInventory.getReplenishmentRequestList());
                 break;
             case 6: //change password
                 ChangePasswordController changePasswordController = new ChangePasswordController(pharmacist);
