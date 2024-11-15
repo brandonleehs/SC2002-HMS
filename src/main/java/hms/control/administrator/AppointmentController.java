@@ -1,70 +1,58 @@
 package hms.control.administrator;
 
-import hms.boundary.administrator.ViewAppointmentsView;
-import hms.entity.appointment.Appointment;
-import hms.entity.appointment.AppointmentStatus;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class AppointmentController {
+import hms.boundary.administrator.ViewAppointmentsView;
+import hms.control.Controller;
+import hms.entity.appointment.Appointment;
+import hms.entity.appointment.AppointmentStatus;
+import hms.entity.user.Patient;
+
+public class AppointmentController extends Controller {
     private final ViewAppointmentsView appointmentsView;
-    private final List<Appointment> appointmentList;
+    private Patient patient;
 
-    public AppointmentController() {
+    public AppointmentController(Patient patient) {
         this.appointmentsView = new ViewAppointmentsView();
-        this.appointmentList = new ArrayList<>();
+        this.patient = patient;
     }
 
-    public void viewAppointments() {
+    public void navigate() {
         appointmentsView.displayHeader();
-        appointmentsView.displayOptions();
-        int choice = appointmentsView.getUserInput();
-
-        switch (choice) {
-            case 1:
-                displayAllAppointments();
-                break;
-            case 2:
-                filterAppointmentsByStatus();
-                break;
-            case 3:
-                searchAppointmentsByPatientId();
-                break;
-            default:
-                System.out.println("Invalid choice. Returning to main menu.");
-        }
-    }
-
-    private void displayAllAppointments() {
-        appointmentsView.displayAppointments(appointmentList);
-    }
-
-    private void filterAppointmentsByStatus() {
-        AppointmentStatus status = appointmentsView.getStatusChoice();
-        if (status == null) {
-            System.out.println("Invalid status choice.");
+        List<Appointment> allAppointments = patient.getAllAppointmentList();
+        if (allAppointments == null) {
+            appointmentsView.displayNoAppointments();
             return;
         }
 
-        List<Appointment> filteredAppointments = appointmentList.stream()
-                .filter(appointment -> appointment.getAppointmentStatus() == status)
-                .collect(Collectors.toList());
-
-        appointmentsView.displayAppointments(filteredAppointments);
-    }
-
-    private void searchAppointmentsByPatientId() {
-        String patientId = appointmentsView.getPatientId();
-        List<Appointment> patientAppointments = appointmentList.stream()
-                .filter(appointment -> appointment.getPatientId().equals(patientId))
-                .collect(Collectors.toList());
-
-        if (patientAppointments.isEmpty()) {
-            System.out.println("No appointments found for Patient ID: " + patientId);
-        } else {
-            appointmentsView.displayAppointments(patientAppointments);
+        List<Appointment> pendingAppointments = new ArrayList<Appointment>();
+        List<Appointment> confirmedAppointments = new ArrayList<Appointment>();
+        List<Appointment> cancelledAppointments = new ArrayList<Appointment>();
+        List<Appointment> completedAppointments = new ArrayList<Appointment>();
+        for (Appointment appointment : allAppointments) {
+            AppointmentStatus status = appointment.getAppointmentStatus();
+            switch (status) {
+                case AppointmentStatus.PENDING:
+                    pendingAppointments.add(appointment);
+                    break;
+                case AppointmentStatus.CONFIRMED:
+                    confirmedAppointments.add(appointment);
+                    break;
+                case AppointmentStatus.CANCELLED:
+                    cancelledAppointments.add(appointment);
+                    break;
+                case AppointmentStatus.COMPLETED:
+                    completedAppointments.add(appointment);
+                default:
+                    break;
+            }
         }
+
+        appointmentsView.displayAppointmentsType(pendingAppointments, doctorRepository, AppointmentStatus.PENDING);
+        appointmentsView.displayAppointmentsType(confirmedAppointments, doctorRepository, AppointmentStatus.CONFIRMED);
+        appointmentsView.displayAppointmentsType(cancelledAppointments, doctorRepository, AppointmentStatus.CANCELLED);
+        appointmentsView.displayAppointmentsType(completedAppointments, doctorRepository, AppointmentStatus.COMPLETED);
+
     }
 }

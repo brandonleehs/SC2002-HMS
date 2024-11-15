@@ -1,64 +1,57 @@
 package hms.boundary.administrator;
 
 import java.util.List;
-import java.util.Scanner;
 
-import hms.boundary.View;
+import hms.boundary.patient.appointment.AppointmentView;
+import hms.boundary.patient.record.AppointmentOutcomeRecordView;
 import hms.entity.appointment.Appointment;
 import hms.entity.appointment.AppointmentStatus;
+import hms.entity.record.AppointmentOutcomeRecord;
+import hms.repository.DoctorRepository;
 
-public class ViewAppointmentsView extends View {
-    public void displayOptions() {
-        System.out.println("Please select an option:");
-        System.out.println("1. View All Appointments");
-        System.out.println("2. Filter by Status");
-        System.out.println("3. Search by Patient ID");
-    }
+public class ViewAppointmentsView extends AppointmentView {
 
     @Override
-    public void displayHeader() {
-        displayBorderedText(WIDTH, "Appointment Management");
+	public void displayHeader() {
+		displayBorderedText(WIDTH, "All Appointments");
+	}
+
+    public void displayNoAppointmentsType(AppointmentStatus status) {
+        System.out.println("No " + status + " appointments scheduled.");
     }
 
-    public AppointmentStatus getStatusChoice() {
-        System.out.println("Enter status to filter (1. Pending, 2. Confirmed, 3. Cancelled, 4. Completed): ");
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        switch (choice) {
-            case 1: return AppointmentStatus.PENDING;
-            case 2: return AppointmentStatus.CONFIRMED;
-            case 3: return AppointmentStatus.CANCELLED;
-            case 4: return AppointmentStatus.COMPLETED;
-            default: return null;
+    public void displayAppointmentsType(List<Appointment> appointments, DoctorRepository doctorRepository, AppointmentStatus status) {
+        System.out.println(status + " appointments:");
+        if (appointments == null) {
+            displayNoAppointmentsType(status);
+            return;
         }
-    }
 
-    public String getPatientId() {
-        System.out.print("Enter Patient ID: ");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
+        String format = "| %-" + 5 + "s | %-" + 10 + "s | %-" + 5 + "s | %-" + 13 + "s | %-" + (WIDTH - 49) + "s |\n";
 
-    public int getUserInput() {
-        System.out.print("Enter choice: ");
-        Scanner scanner = new Scanner(System.in);
-        try {
-            return Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a number.");
-            return -1; // Return an invalid option to handle gracefully
+        if (status == AppointmentStatus.COMPLETED) {
+            AppointmentOutcomeRecordView appointmentOutcomeRecordView = new AppointmentOutcomeRecordView();
+            System.out.printf(format, "Index", "Date", "Time", "Doctor ID", "Doctor Name");
+            for (int i = 0; i < appointments.size(); i++) {
+                Appointment appointment = appointments.get(i);
+                System.out.printf(format, i + 1, appointment.getDate(), appointment.getTime(),
+                        appointment.getDoctorId(), doctorRepository.getById(appointment.getDoctorId()).getName());
+                AppointmentOutcomeRecord appointmentOutcomeRecord = appointment.getAppointmentOutcomeRecord();
+                System.out.println(String.format("Service Type: %s", appointmentOutcomeRecord.getServiceType()));
+                System.out.println(String.format("Diagnosis: %s", appointmentOutcomeRecord.getConsultationNotes()));
+                appointmentOutcomeRecordView.displayPrescriptionTable(appointmentOutcomeRecord);
+            }
+            return;
         }
+
+        
+		System.out.printf(format, "Index", "Date", "Time", "Doctor ID", "Doctor Name");
+		for (int i = 0; i < appointments.size(); i++) {
+			Appointment appointment = appointments.get(i);
+			System.out.printf(format, i + 1, appointment.getDate(), appointment.getTime(),
+					appointment.getDoctorId(), doctorRepository.getById(appointment.getDoctorId()).getName());
+		}
+		System.out.println();
     }
 
-    public void displayAppointments(List<Appointment> appointments) {
-        for (Appointment appointment : appointments) {
-            System.out.println("ID: " + appointment.getUUID());
-            System.out.println("Patient ID: " + appointment.getPatientId());
-            System.out.println("Doctor ID: " + appointment.getDoctorId());
-            System.out.println("Date: " + appointment.getDate());
-            System.out.println("Time: " + appointment.getTime());
-            System.out.println("Status: " + appointment.getAppointmentStatus());
-            System.out.println("-----");
-        }
-    }
 }
