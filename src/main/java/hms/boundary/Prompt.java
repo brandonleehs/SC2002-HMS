@@ -32,4 +32,8 @@ public class Prompt {
 		System.out.print("Choose a end time. ");
 		displayTimePrompt();
 	}
+
+	public static void displayPatientIdPrompt() {
+		System.out.print("Enter patient ID: ");
+	}
 }

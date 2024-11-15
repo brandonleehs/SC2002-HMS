@@ -100,7 +100,7 @@ public class DoctorMenuController extends Controller {
 	}
 
 	private Patient choosePatient() {
-		this.doctorMenuView.displayPatientIdPrompt();
+		Prompt.displayPatientIdPrompt();
 		String patientID = InputHandler.getString();
 		return patientRepository.getById(patientID);
 	}

@@ -28,9 +28,4 @@ public class DoctorMenuView extends View {
 	public void displayHeader() {
 		displayBorderedText(WIDTH, String.format("Welcome, Dr. %s.", doctor.getName()));
 	}
-
-	public void displayPatientIdPrompt() {
-		System.out.print("Enter patient ID: ");
-	}
-
 }
