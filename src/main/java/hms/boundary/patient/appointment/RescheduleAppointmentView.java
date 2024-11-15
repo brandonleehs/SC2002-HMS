@@ -1,13 +1,16 @@
 package hms.boundary.patient.appointment;
 
+import hms.boundary.InputHandler;
 import hms.entity.appointment.Appointment;
 import hms.entity.user.Patient;
+import hms.exceptions.InvalidChoiceFormatException;
+import hms.exceptions.InvalidChoiceValueException;
 import hms.repository.DoctorRepository;
 
 public class RescheduleAppointmentView extends AppointmentView {
 
 	@Override
-	public void displayAppointments(Patient patient, DoctorRepository doctorRepository) {
+	public int displayAppointments(Patient patient, DoctorRepository doctorRepository) {
 		String format = "| %-" + 5 + "s | %-" + 10 + "s | %-" + 5 + "s | %-" + 13 + "s | %-" + (WIDTH - 49) + "s |\n";
 		System.out.printf(format, "Index", "Date", "Time", "Status", "Doctor Name");
 		for (int i = 0; i < patient.getScheduledAppointmentList().size(); i++) {
@@ -16,10 +19,18 @@ public class RescheduleAppointmentView extends AppointmentView {
 					appointment.getAppointmentStatus(), doctorRepository.getById(appointment.getDoctorId()).getName());
 		}
 		System.out.println();
+		return 0;
 	}
 
-	public void displayAppointmentPrompt() {
+	public int displayAppointmentPrompt(int size) {
 		System.out.println("Please select an appointment index:");
+		int i;
+        try{
+            i = InputHandler.getChoice(1, size);
+        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+				return -1;
+		}
+        return i-1;
 	}
 
 	public void displayHeader() {
