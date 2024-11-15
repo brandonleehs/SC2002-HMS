@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import hms.boundary.InputHandler;
 import hms.boundary.doctor.UpdatePatientMedicalRecordView;
 import hms.boundary.patient.record.MedicalRecordView;
 import hms.control.Controller;
@@ -14,8 +13,6 @@ import hms.entity.medicine.MedicineStatus;
 import hms.entity.record.AppointmentOutcomeRecord;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
-import hms.exceptions.InvalidChoiceFormatException;
-import hms.exceptions.InvalidChoiceValueException;
 
 public class UpdatePatientMedicalRecordController extends Controller {
 	private Patient patient;
@@ -42,24 +39,16 @@ public class UpdatePatientMedicalRecordController extends Controller {
 		MedicalRecordView medicalRecordView = new MedicalRecordView(this.patient);
 		medicalRecordView.displayMedicalRecord();
 
-		this.updatePatientMedicalRecordView.displayApptOptionPrompt();
+		
 
-		int choice = 0;
-		try {
-			choice = InputHandler.getChoice(1, patient.getAppointmentOutcomeRecordList().size());
-		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-			return;
-		}
+		int choice = this.updatePatientMedicalRecordView.displayApptOptionPrompt(patient.getAppointmentOutcomeRecordList().size());
+		if (choice == -1) return;
 
-		AppointmentOutcomeRecord appointmentOutcomeRecord = patient.getAppointmentOutcomeRecordList().get(choice - 1);
+		AppointmentOutcomeRecord appointmentOutcomeRecord = patient.getAppointmentOutcomeRecordList().get(choice);
 
-		this.updatePatientMedicalRecordView.displayOptions();
-		try {
-			choice = InputHandler.getChoice(1, 5);
-		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-			choice = -1;
-			return;
-		}
+		choice = this.updatePatientMedicalRecordView.displayOptions();
+		if (choice == -1) return;
+		
 		String notes = null;
 		switch (choice) {
 		case 1:
@@ -67,36 +56,24 @@ public class UpdatePatientMedicalRecordController extends Controller {
 			List<String> medicineNames = medicineInventory.getMedicineNames();
 			HashMap<Medicine, Integer> prescribed_medicines = new HashMap<>();
 
-			int medicineChoice, medicineAmount = 0;
 			showMedicationInventoryController.navigate();
 
-			updatePatientMedicalRecordView.displayAddPrescriptionNamePrompt();
-			try {
-				medicineChoice = InputHandler.getChoice(1, medicines.keySet().size());
-			} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				return;
-			}
-			
-			updatePatientMedicalRecordView.displayAddPrescriptionQtyPrompt();
-			try {
-				medicineAmount = InputHandler.getChoice(1, 999);
-			} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				return;
-			}
+			int medicineChoice = updatePatientMedicalRecordView.displayAddPrescriptionNamePrompt(medicines.keySet().size());
+			if (medicineChoice == -1) return;
 
-			Medicine prescribed_medicine = new Medicine(medicineNames.get(medicineChoice-1));
+			int medicineAmount = updatePatientMedicalRecordView.displayAddPrescriptionQtyPrompt();
+			
+			Medicine prescribed_medicine = new Medicine(medicineNames.get(medicineChoice));
 			prescribed_medicine.setMedicineStatus(MedicineStatus.PENDING);
 			prescribed_medicines.put(prescribed_medicine, medicineAmount);
 			doctor.prescribeMedicine(prescribed_medicines, appointmentOutcomeRecord);
 			break;
 		case 2:
-			this.updatePatientMedicalRecordView.displaySetConsultationNotesPrompt();
-			notes = InputHandler.getString();
+			notes = this.updatePatientMedicalRecordView.displaySetConsultationNotesPrompt();
 			appointmentOutcomeRecord.addConsultationNotes(notes);
 			break;
 		case 3:
-			this.updatePatientMedicalRecordView.displaySetConsultationNotesPrompt();
-			notes = InputHandler.getString();
+			notes = this.updatePatientMedicalRecordView.displaySetConsultationNotesPrompt();
 			appointmentOutcomeRecord.setConsultationNotes(notes);
 			break;
 		case 4:
