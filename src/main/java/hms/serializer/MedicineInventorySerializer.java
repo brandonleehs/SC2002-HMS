@@ -5,8 +5,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import hms.repository.MedicineInventory;
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
@@ -22,7 +20,6 @@ public class MedicineInventorySerializer extends Serializer {
 				setMedicineStock(sheet.getRow(rowNum));
 			}
 		}
-		List<Map<String, Integer>> maps = new ArrayList<>();
 		return medicineStock;
 	}
 
