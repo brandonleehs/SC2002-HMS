@@ -6,11 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import hms.entity.appointment.Appointment;
-import hms.entity.medicine.ReplenishRequest;
 import hms.entity.user.attributes.Gender;
 import hms.repository.DoctorRepository;
 import hms.repository.IUserRepository;
-import hms.repository.MedicineInventory;
 
 public class Administrator extends User {
 	private final int age;
