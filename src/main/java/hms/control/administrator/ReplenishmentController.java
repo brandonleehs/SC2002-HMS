@@ -1,54 +1,42 @@
 package hms.control.administrator;
 
-import hms.boundary.administrator.ApproveReplenishmentRequestsView;
-import hms.entity.medicine.ReplenishRequest;
-import hms.repository.MedicineInventory;
 import java.util.List;
 
-public class ReplenishmentController {
-    private final ApproveReplenishmentRequestsView replenishmentView;
-    private final MedicineInventory medicineInventory;
+import hms.boundary.administrator.ReplenishRequest.ReplenishRequestView;
+import hms.control.Controller;
+import hms.entity.medicine.ReplenishRequest;
 
-    public ReplenishmentController() {
-        this.replenishmentView = new ApproveReplenishmentRequestsView();
-        this.medicineInventory = new MedicineInventory();
-    }
+public class ReplenishmentController extends Controller {
+    private final ReplenishRequestView replenishRequestView = new ReplenishRequestView();
 
-    public void approveReplenishmentRequests() {
+    public ReplenishmentController() {}
+
+    @Override
+    public void navigate() {
         List<ReplenishRequest> pendingRequests = medicineInventory.getReplenishmentRequestList();
-
         if (pendingRequests.isEmpty()) {
-            System.out.println("No pending replenishment requests.");
+            replenishRequestView.emptyRequests();
             return;
         }
-
-        for (ReplenishRequest request : pendingRequests) {
-            replenishmentView.displayHeader();
-            replenishmentView.displayRequestDetails(request);
-            replenishmentView.displayOptions();
-
-            int choice = replenishmentView.getUserInput();
-            if (choice == 1) {
-                approveRequest(request);
-                System.out.println("Request approved.");
-            } else if (choice == 2) {
-                declineRequest(request);
-                System.out.println("Request declined.");
-            } else {
-                System.out.println("Invalid choice. Skipping request.");
-            }
+        replenishRequestView.displayRequests(pendingRequests);
+        int choice = replenishRequestView.getRequestChoice(pendingRequests.size());
+        if (choice==-1){
+            return;
         }
-    }
+        else{
+            // Print chosen Request
+            ReplenishRequest chosenRequest = pendingRequests.get(choice-1);
+            choice = replenishRequestView.getConfirmation();
+            if (choice==3) {
+                return;
+            }
+            else if (choice==1){
+                medicineInventory.approveReplenishmentRequest(chosenRequest);
+            }
+            else{
+                medicineInventory.removeReplenishmentRequest(chosenRequest);
+            }
 
-    private void approveRequest(ReplenishRequest request) {
-        // Add stock to the inventory
-        medicineInventory.addMedicineStock(request.getMedicineName(), request.getStockToAdd());
-        // Remove the request from the list
-        medicineInventory.removeReplenishmentRequest(request);
-    }
-
-    private void declineRequest(ReplenishRequest request) {
-        // Simply remove the request from the pending list without adding stock
-        medicineInventory.removeReplenishmentRequest(request);
+        }
     }
 }

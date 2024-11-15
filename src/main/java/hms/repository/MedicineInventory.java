@@ -89,7 +89,15 @@ public class MedicineInventory {
 		this.replenishmentRequestList.add(replenishRequest);
 	}
 
-	public boolean removeReplenishmentRequest(ReplenishRequest replenishRequest) {
-		return this.replenishmentRequestList.remove(replenishRequest);
+	public void approveReplenishmentRequest(ReplenishRequest replenishRequest){
+		String medicineName = replenishRequest.getMedicineName();
+		List<Integer> tempList = medicineStock.get(medicineName);
+		tempList.set(0, replenishRequest.getStockToAdd()+tempList.get(0));
+		medicineStock.put(medicineName, tempList);
+		removeReplenishmentRequest(replenishRequest);
+	}
+
+	public void removeReplenishmentRequest(ReplenishRequest replenishRequest) {
+		this.replenishmentRequestList.remove(replenishRequest);
 	}
 }

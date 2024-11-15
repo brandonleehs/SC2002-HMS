@@ -17,7 +17,8 @@ public class AdministratorMenuView extends View {
                 2. View Appointment Details
                 3. Manage Medication Inventory
                 4. Approve Replenishment Requests
-                5. Logout
+                5. Change Password
+				6. Logout
                 """;
 
 		String border = "=".repeat(WIDTH);
@@ -31,5 +32,9 @@ public class AdministratorMenuView extends View {
 	@Override
 	public void displayHeader() {
 		displayBorderedText(WIDTH, String.format("Welcome, Administrator %s.", administrator.getName()));
+	}
+
+	public void displayPatientIdPrompt() {
+		System.out.print("Enter patient ID: ");
 	}
 }

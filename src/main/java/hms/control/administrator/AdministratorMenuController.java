@@ -1,11 +1,11 @@
 package hms.control.administrator;
 
 import hms.boundary.InputHandler;
-import hms.boundary.Prompt;
 import hms.boundary.administrator.AdministratorMenuView;
 import hms.control.Controller;
 import hms.control.administrator.InventoryManagement.InventoryManagementController;
 import hms.control.administrator.ManageStaff.ManageStaffController;
+import hms.control.user.ChangePasswordController;
 import hms.entity.user.Administrator;
 import hms.entity.user.Patient;
 import hms.exceptions.InvalidChoiceFormatException;
@@ -14,16 +14,14 @@ import hms.exceptions.InvalidChoiceValueException;
 public class AdministratorMenuController extends Controller{
     private final Administrator administrator;
     private final AdministratorMenuView adminMenuView;
-    private final ManageStaffController staffController;
-    private final InventoryManagementController inventoryManagementController;
-    private final ReplenishmentController replenishmentController;
+    private final ManageStaffController staffController = new ManageStaffController();
+    private final InventoryManagementController inventoryManagementController = new InventoryManagementController();
+    private final ReplenishmentController replenishmentController = new ReplenishmentController();
+    private AppointmentController appointmentController;
 
-    public AdministratorMenuController(Administrator administrator) {
+    public AdministratorMenuController(Administrator administrator){
         this.administrator = administrator;
         this.adminMenuView = new AdministratorMenuView(administrator);
-        this.staffController = new ManageStaffController();
-        this.inventoryManagementController = new InventoryManagementController();
-        this.replenishmentController = new ReplenishmentController();
     }
 
     @Override
@@ -45,23 +43,30 @@ public class AdministratorMenuController extends Controller{
                     staffController.navigate();
                     break;
                 case 2:
-                    Prompt.displayPatientIdPrompt();
-                    String patientID = InputHandler.getString();
-                    Patient patient = patientRepository.getById(patientID);
-                    AppointmentController appointmentController = new AppointmentController(patient);
+                    appointmentController = new AppointmentController(choosePatient());
                     appointmentController.navigate();
                     break;
                 case 3:
                     inventoryManagementController.navigate();
                     break;
-                // case 4:
-                //     replenishmentController.approveReplenishmentRequests();
-                //     break;
+                case 4:
+                    replenishmentController.navigate();
+                    break;
                 case 5:
+                    ChangePasswordController changePasswordController = new ChangePasswordController(administrator);
+                    changePasswordController.navigate();
+                    break;
+                case 6:
                     System.out.println("Logging out...");
                     break;
                 default:
             }
-        } while (choice < 5);
+        } while (choice < 6);    
+    }
+
+    private Patient choosePatient() {
+        adminMenuView.displayPatientIdPrompt();
+        String patientID = InputHandler.getString();
+        return patientRepository.getById(patientID);
     }
 }
