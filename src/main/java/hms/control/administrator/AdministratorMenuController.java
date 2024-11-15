@@ -12,18 +12,15 @@ import hms.exceptions.InvalidChoiceValueException;
 public class AdministratorMenuController extends Controller{
     private final Administrator administrator;
     private final AdministratorMenuView adminMenuView;
-    private final ManageStaffController staffController;
+    private final ManageStaffController staffController = new ManageStaffController();
     private final AppointmentController appointmentController;
-    private final InventoryManagementController inventoryManagementController;
-    private final ReplenishmentController replenishmentController;
+    private final InventoryManagementController inventoryManagementController = new InventoryManagementController();
+    private final ReplenishmentController replenishmentController = new ReplenishmentController();
 
     public AdministratorMenuController(Administrator administrator) {
         this.administrator = administrator;
         this.adminMenuView = new AdministratorMenuView(administrator);
-        this.staffController = new ManageStaffController();
         this.appointmentController = new AppointmentController();
-        this.inventoryManagementController = new InventoryManagementController();
-        this.replenishmentController = new ReplenishmentController();
     }
 
     @Override

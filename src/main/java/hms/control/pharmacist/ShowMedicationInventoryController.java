@@ -8,13 +8,12 @@ import hms.control.Controller;
 
 public class ShowMedicationInventoryController extends Controller {
     private Map<String, List<Integer>> medicineList;
-    private ShowMedicationInventoryView showMedicationInventoryView;
+    private final ShowMedicationInventoryView showMedicationInventoryView = new ShowMedicationInventoryView();
     
     public ShowMedicationInventoryController(){
-        this.medicineList = medicineInventory.getFullMedicine();
-        this.showMedicationInventoryView = new ShowMedicationInventoryView();
     }
 
+    @Override
     public void navigate(){
         showMedicationInventoryView.displayHeader();
         this.medicineList = medicineInventory.getFullMedicine();

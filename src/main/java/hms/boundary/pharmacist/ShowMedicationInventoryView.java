@@ -9,7 +9,6 @@ import hms.entity.medicine.InventoryWarning;
 public class ShowMedicationInventoryView extends View{
     public void printAvailableMedicines(Map<String, List<Integer>> medicineList){
         String format = "| %-" + (WIDTH - 42) + "s | %-" + 10 + "s | %-" + 10 + "s | %-" + 10 + "s |\n";
-
 		System.out.println("Available Medicines:");
         if (medicineList.isEmpty()) {
 			System.out.println("No medicine prescribed.");
