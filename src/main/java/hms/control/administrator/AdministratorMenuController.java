@@ -14,9 +14,6 @@ import hms.exceptions.InvalidChoiceValueException;
 public class AdministratorMenuController extends Controller{
     private final Administrator administrator;
     private final AdministratorMenuView adminMenuView;
-    private final ManageStaffController staffController = new ManageStaffController();
-    private final InventoryManagementController inventoryManagementController = new InventoryManagementController();
-    private final ReplenishmentController replenishmentController = new ReplenishmentController();
     private AppointmentController appointmentController;
 
     public AdministratorMenuController(Administrator administrator){
@@ -40,6 +37,7 @@ public class AdministratorMenuController extends Controller{
 
             switch (choice) {
                 case 1:
+                    ManageStaffController staffController = new ManageStaffController();
                     staffController.navigate();
                     break;
                 case 2:
@@ -47,9 +45,11 @@ public class AdministratorMenuController extends Controller{
                     appointmentController.navigate();
                     break;
                 case 3:
+                    InventoryManagementController inventoryManagementController = new InventoryManagementController();
                     inventoryManagementController.navigate();
                     break;
                 case 4:
+                    ReplenishmentController replenishmentController = new ReplenishmentController();
                     replenishmentController.navigate();
                     break;
                 case 5:

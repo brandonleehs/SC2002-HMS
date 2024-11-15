@@ -13,10 +13,6 @@ import hms.exceptions.InvalidChoiceValueException;
 public class PharmacistMenuController extends Controller{
     private final PharmacistMenuView pharmacistMenuView;
     private final Pharmacist pharmacist;
-    private final AppointmentOutcomeRecordView appointmentOutcomeRecordView = new AppointmentOutcomeRecordView();
-    private final ShowMedicationInventoryController showMedicationInventoryController = new ShowMedicationInventoryController();
-    private final SubmitReplenishmentRequestController submitReplenishmentRequest = new SubmitReplenishmentRequestController();
-    private final ViewReplenishmentRequestController viewReplenishmentRequestController = new ViewReplenishmentRequestController();
 
     public PharmacistMenuController(Pharmacist pharmacist){
         this.pharmacist=pharmacist;
@@ -40,20 +36,24 @@ public class PharmacistMenuController extends Controller{
 
             switch (choice) {
             case 1: //View Appointment Outcome Record
-                this.appointmentOutcomeRecordView.displayAppointmentOutcomeRecord(choosePatient());
+                AppointmentOutcomeRecordView appointmentOutcomeRecordView = new AppointmentOutcomeRecordView();
+                appointmentOutcomeRecordView.displayAppointmentOutcomeRecord(choosePatient());
                 break;
             case 2: //Update Prescription Status
                 UpdatePrescriptionStatusController updatePatientMedicalRecordController = new UpdatePrescriptionStatusController(choosePatient());
                 updatePatientMedicalRecordController.navigate();
                 break;
             case 3: //View Medication Inventory
-                this.showMedicationInventoryController.navigate();
+                ShowMedicationInventoryController showMedicationInventoryController = new ShowMedicationInventoryController();
+                showMedicationInventoryController.navigate();
                 break;
             case 4: //Submit Replenishment Request
-                this.submitReplenishmentRequest.navigate();
+                SubmitReplenishmentRequestController submitReplenishmentRequest = new SubmitReplenishmentRequestController();
+                submitReplenishmentRequest.navigate();
                 break;
             case 5: //View active amounts of Replenishment Requests waiting for approval
-                this.viewReplenishmentRequestController.navigate();
+                ViewReplenishmentRequestController viewReplenishmentRequestController = new ViewReplenishmentRequestController();
+                viewReplenishmentRequestController.navigate();
                 break;
             case 6: //change password
                 ChangePasswordController changePasswordController = new ChangePasswordController(pharmacist);
