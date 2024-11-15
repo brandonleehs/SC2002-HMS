@@ -10,7 +10,7 @@ import java.util.Map;
 
 // Define a singleton class with early instantiation
 public class MedicineInventory {
-	private Map<String, List<Integer>> medicineStock = new HashMap<String, List<Integer>>();
+	private Map<String, List<Integer>> medicineStock = new HashMap<>();
 	private final List<ReplenishRequest> replenishmentRequestList = new ArrayList<ReplenishRequest>();
 
 	public MedicineInventory() {
@@ -27,18 +27,25 @@ public class MedicineInventory {
 		return temp_r;
 	}
 
-	public Map<String, Integer> getMedicineStock() {
-		Map<String, Integer> temp = new HashMap<String, Integer>();
-		for (Map.Entry<String, List<Integer>> entry : medicineStock.entrySet()) {
-            String key = entry.getKey();
-            List<Integer> values = entry.getValue();
+	public Integer getMedicineStock(String medicineName) {
+		return medicineStock.get(medicineName).get(0);
+	}
 
-            // Check if the list has at least one element
-            if (values != null && !values.isEmpty()) {
-                temp.put(key, values.get(0)); // Put the first element in the new map
-            }
-        }
-		return temp;
+	public void addMedicineStock(String name, int amount){
+		List<Integer> tempList = medicineStock.get(name);
+		int oldStock = tempList.get(0);
+		tempList.set(0, oldStock+amount);
+	}
+
+	public void removeMedicineStock(String name, int amount){
+		List<Integer> tempList = medicineStock.get(name);
+		int oldStock = tempList.get(0);
+		tempList.set(0, oldStock-amount);
+	}
+
+	public void setMedicineStock(String name, int amount){
+		List<Integer> tempList = medicineStock.get(name);
+		tempList.set(0, amount);
 	}
 
 	public Map<String, Integer> getMedicineLowStockLevelAlertValue() {
@@ -53,6 +60,11 @@ public class MedicineInventory {
             }
         }
 		return temp;
+	}
+
+	public void setStockWarningLevel(String medicineName, int amount){
+		List<Integer> tempList = medicineStock.get(medicineName);
+		tempList.set(1, amount);
 	}
 
 	public boolean dispenseMedicine(String medicineName, Integer quantityToDispense) {

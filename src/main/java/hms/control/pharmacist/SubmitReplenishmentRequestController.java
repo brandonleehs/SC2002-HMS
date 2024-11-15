@@ -20,6 +20,7 @@ public class SubmitReplenishmentRequestController extends Controller{
     }
 
     public void navigate(){
+        submitReplenishmentRequestView.displayHeader();
         int medicineChoice=0, amount = 0;
         List<String> medicineNames = medicineInventory.getMedicineNames();
         this.submitReplenishmentRequestView.displayHeader();
@@ -33,7 +34,7 @@ public class SubmitReplenishmentRequestController extends Controller{
         // Prompt for amount to be replenished
         this.submitReplenishmentRequestView.MedicineAmountPrompt();
         try{
-            amount = InputHandler.getChoice(1, 700);
+            amount = InputHandler.getChoice(1, 9999);
             } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
         }
         ReplenishRequest replenishRequest = new ReplenishRequest(medicineNames.get(medicineChoice-1), amount);

@@ -14,6 +14,7 @@ import hms.control.Controller;
 import hms.control.doctor.DoctorMenuController;
 import hms.control.patient.PatientMenuController;
 import hms.control.pharmacist.PharmacistMenuController;
+import hms.control.administrator.AdministratorMenuController;
 import hms.entity.appointment.Appointment;
 import hms.entity.user.Administrator;
 import hms.entity.user.Doctor;
@@ -87,9 +88,8 @@ public class LoginController extends Controller {
 				pharmacistMenuController.navigate();
 
 			} else if (user instanceof Administrator) {
-				// Not yet done
-				// PharmacistMenuController pharmacistMenuController = new PharmacistMenuController((Pharmacist) user);
-				// pharmacistMenuController.navigate();			
+				AdministratorMenuController administratorMenuController = new AdministratorMenuController((Administrator) user);
+				administratorMenuController.navigate();	
 			} else {
 
 			}
