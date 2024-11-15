@@ -1,5 +1,6 @@
 package hms.boundary.user;
 
+import hms.boundary.InputHandler;
 import hms.boundary.View;
 
 public class LoginView extends View {
@@ -8,11 +9,13 @@ public class LoginView extends View {
 		displayBorderedText(WIDTH, "Login");
 	}
 
-	public void displayIdPrompt() {
+	public String displayIdPrompt() {
 		System.out.print("Enter id: ");
+		return InputHandler.getString();
 	}
 
-	public void displayPasswordPrompt() {
+	public String displayPasswordPrompt() {
 		System.out.print("Enter password: ");
+		return InputHandler.getString();
 	}
 }

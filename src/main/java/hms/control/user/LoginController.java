@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import hms.boundary.InputHandler;
 import hms.boundary.View;
 import hms.boundary.user.LoginView;
 import hms.control.Controller;
@@ -67,10 +66,8 @@ public class LoginController extends Controller {
 			do {
 				View.displayLogo();
 				this.loginView.displayHeader();
-				this.loginView.displayIdPrompt();
-				String id = InputHandler.getString();
-				this.loginView.displayPasswordPrompt();
-				String password = InputHandler.getString();
+				String id = this.loginView.displayIdPrompt();
+				String password = this.loginView.displayPasswordPrompt();
 				user = getUser(id, password);
 				login = authenticate(user, id, password);
 			} while (!login);
