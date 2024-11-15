@@ -2,7 +2,6 @@ package hms.control.doctor;
 
 import java.time.LocalDate;
 
-import hms.boundary.InputHandler;
 import hms.boundary.Prompt;
 import hms.boundary.doctor.DoctorMenuView;
 import hms.boundary.doctor.ScheduleView;
@@ -11,9 +10,6 @@ import hms.control.Controller;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
-import hms.exceptions.InvalidChoiceFormatException;
-import hms.exceptions.InvalidChoiceValueException;
-import hms.exceptions.InvalidDateException;
 
 public class DoctorMenuController extends Controller {
 	private final DoctorMenuView doctorMenuView;
@@ -29,47 +25,30 @@ public class DoctorMenuController extends Controller {
 		int choice = 0;
 		do {
 			this.doctorMenuView.displayHeader();
-			this.doctorMenuView.displayOptions();
+			choice = this.doctorMenuView.displayOptions();
 
-			try {
-				choice = InputHandler.getChoice(1, 9);
-			} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				// Continue loop if invalid choice
-				choice = -1;
-				continue;
-			}
-			ScheduleView scheduleView = new ScheduleView();
+			Patient patient;
+			ScheduleView scheduleView;
 
-			Patient patient = null;
 			switch (choice) {
 			case 1: // view patient medical records
-				patient = choosePatient();
-				if (patient == null) {
-					choice = -1;
-				} else {
-					MedicalRecordView medicalRecordView = new MedicalRecordView(patient);
-					medicalRecordView.displayMedicalRecord();
-				}
+				patient = DoctorMenuView.choosePatient(patientRepository);
+                if (patient == null) continue;
+				MedicalRecordView medicalRecordView = new MedicalRecordView(patient);
+				medicalRecordView.displayMedicalRecord();
 				break;
 			case 2: // update patient medical records
-				patient = choosePatient();
-				if (patient == null) {
-					choice = -1;
-				} else {
-					UpdatePatientMedicalRecordController updatePatientMedicalRecordController = new UpdatePatientMedicalRecordController(
-							doctor, patient);
-					updatePatientMedicalRecordController.navigate();
-				}
+
+				patient = DoctorMenuView.choosePatient(patientRepository);
+                if (patient == null) continue;
+				UpdatePatientMedicalRecordController updatePatientMedicalRecordController = new UpdatePatientMedicalRecordController(
+						doctor, patient);
+				updatePatientMedicalRecordController.navigate();
 				break;
 			case 3: // view personal schedule (all appointments in DB)
-				try {
-					Prompt.displayDatePrompt();
-					LocalDate date = InputHandler.getDate();
-					scheduleView.displayAppointments(doctor, date, patientRepository);
-
-				} catch (InvalidDateException e) {
-					choice = -1;
-				}
+				LocalDate date = Prompt.displayDatePrompt();
+				scheduleView = new ScheduleView();
+				scheduleView.displayAppointments(doctor, date, patientRepository);
 				break;
 			case 4: // set availability for appointments
 				SetDoctorAvailabilityController setDoctorAvailabilityController = new SetDoctorAvailabilityController(
@@ -81,6 +60,7 @@ public class DoctorMenuController extends Controller {
 				pendingRequestController.navigate();
 				break;
 			case 6: // view all appts today & tmr
+				scheduleView = new ScheduleView();
 				scheduleView.displayUpcomingAppointments(doctor, patientRepository);
 				break;
 			case 7: // record appt outcome
@@ -98,11 +78,4 @@ public class DoctorMenuController extends Controller {
 			}
 		} while (choice < 9);
 	}
-
-	private Patient choosePatient() {
-		Prompt.displayPatientIdPrompt();
-		String patientID = InputHandler.getString();
-		return patientRepository.getById(patientID);
-	}
-
 }

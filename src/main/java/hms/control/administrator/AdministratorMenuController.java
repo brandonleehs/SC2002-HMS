@@ -1,6 +1,5 @@
 package hms.control.administrator;
 
-import hms.boundary.InputHandler;
 import hms.boundary.administrator.AdministratorMenuView;
 import hms.control.Controller;
 import hms.control.administrator.InventoryManagement.InventoryManagementController;
@@ -8,13 +7,10 @@ import hms.control.administrator.ManageStaff.ManageStaffController;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Administrator;
 import hms.entity.user.Patient;
-import hms.exceptions.InvalidChoiceFormatException;
-import hms.exceptions.InvalidChoiceValueException;
 
 public class AdministratorMenuController extends Controller{
     private final Administrator administrator;
     private final AdministratorMenuView adminMenuView;
-    private AppointmentController appointmentController;
 
     public AdministratorMenuController(Administrator administrator){
         this.administrator = administrator;
@@ -26,14 +22,7 @@ public class AdministratorMenuController extends Controller{
         int choice;
         do {
             adminMenuView.displayHeader();
-            adminMenuView.displayOptions();
-            try{
-                choice = InputHandler.getChoice(1, 9);
-            } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				// Continue loop if invalid choice
-				choice = -1;
-				continue;
-			}
+            choice = adminMenuView.displayOptions();
 
             switch (choice) {
                 case 1:
@@ -41,7 +30,9 @@ public class AdministratorMenuController extends Controller{
                     staffController.navigate();
                     break;
                 case 2:
-                    appointmentController = new AppointmentController(choosePatient());
+                    Patient patient = this.adminMenuView.choosePatient(patientRepository);
+                    if (patient == null) continue;
+                    AppointmentController appointmentController = new AppointmentController(patient);
                     appointmentController.navigate();
                     break;
                 case 3:
@@ -64,9 +55,5 @@ public class AdministratorMenuController extends Controller{
         } while (choice < 6);    
     }
 
-    private Patient choosePatient() {
-        adminMenuView.displayPatientIdPrompt();
-        String patientID = InputHandler.getString();
-        return patientRepository.getById(patientID);
-    }
+
 }

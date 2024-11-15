@@ -1,6 +1,5 @@
 package hms.control.pharmacist;
 
-import hms.boundary.InputHandler;
 import hms.boundary.patient.record.AppointmentOutcomeRecordView;
 import hms.boundary.pharmacist.PharmacistMenuView;
 import hms.boundary.pharmacist.ViewReplenishmentRequestView;
@@ -8,8 +7,6 @@ import hms.control.Controller;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;
-import hms.exceptions.InvalidChoiceFormatException;
-import hms.exceptions.InvalidChoiceValueException;
 
 public class PharmacistMenuController extends Controller{
     private final PharmacistMenuView pharmacistMenuView;
@@ -25,23 +22,20 @@ public class PharmacistMenuController extends Controller{
         int choice = 0;
         do{
             this.pharmacistMenuView.displayHeader();
-            this.pharmacistMenuView.displayOptions();
+            choice = this.pharmacistMenuView.displayOptions();
 
-            try{
-                choice = InputHandler.getChoice(1, 9);
-            } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				// Continue loop if invalid choice
-				choice = -1;
-				continue;
-			}
-
+            Patient patient;
             switch (choice) {
             case 1: //View Appointment Outcome Record
                 AppointmentOutcomeRecordView appointmentOutcomeRecordView = new AppointmentOutcomeRecordView();
-                appointmentOutcomeRecordView.displayAppointmentOutcomeRecord(choosePatient());
+                patient = PharmacistMenuView.choosePatient(patientRepository);
+                if (patient == null) continue;
+                appointmentOutcomeRecordView.displayAppointmentOutcomeRecord(patient);
                 break;
             case 2: //Update Prescription Status
-                UpdatePrescriptionStatusController updatePatientMedicalRecordController = new UpdatePrescriptionStatusController(choosePatient());
+                patient = PharmacistMenuView.choosePatient(patientRepository);
+                if (patient == null) continue;
+                UpdatePrescriptionStatusController updatePatientMedicalRecordController = new UpdatePrescriptionStatusController(patient);
                 updatePatientMedicalRecordController.navigate();
                 break;
             case 3: //View Medication Inventory
@@ -68,11 +62,4 @@ public class PharmacistMenuController extends Controller{
             }
         } while (choice < 7);
     }
-    
-    private Patient choosePatient() {
-        pharmacistMenuView.displayPatientIdPrompt();
-        String patientID = InputHandler.getString();
-        return patientRepository.getById(patientID);
-    }
-
 }

@@ -4,7 +4,7 @@ import hms.entity.user.Patient;
 import hms.repository.PatientRepository;
 
 public abstract class StaffView extends View {
-    public Patient choosePatient(PatientRepository patientRepository) {
+    public static Patient choosePatient(PatientRepository patientRepository) {
         Prompt.displayPatientIdPrompt();
         Patient patient = patientRepository.getById(InputHandler.getString());
         if (patient == null) {
