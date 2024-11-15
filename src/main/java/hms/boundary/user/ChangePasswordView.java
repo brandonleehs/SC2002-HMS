@@ -1,5 +1,6 @@
 package hms.boundary.user;
 
+import hms.boundary.InputHandler;
 import hms.boundary.View;
 
 public class ChangePasswordView extends View {
@@ -9,8 +10,9 @@ public class ChangePasswordView extends View {
 		displayBorderedText(WIDTH, "Change Password");
 	}
 
-	public void displayPasswordPrompt() {
+	public String displayPasswordPrompt() {
 		System.out.print("Enter new password: ");
+		return InputHandler.getString();
 	}
 
 	public void displayPasswordChangeSuccess() {
