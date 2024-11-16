@@ -1,5 +1,8 @@
 package hms.repository;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -8,10 +11,11 @@ import hms.serializer.DoctorSerializer;
 
 public class DoctorRepository implements IUserRepository<Doctor> {
 	private final Map<String, Doctor> doctorMap;
+	private static final String FILEPATH = "./src/main/resources/Staff_List.csv";
 
 	public DoctorRepository() {
-		DoctorSerializer doctorSerializer = new DoctorSerializer();
-		this.doctorMap = doctorSerializer.getMap("Staff_List.xlsx");
+		DoctorSerializer doctorSerializer = new DoctorSerializer(FILEPATH);
+		this.doctorMap = doctorSerializer.getMap();
 	}
 
 	@Override
@@ -34,7 +38,24 @@ public class DoctorRepository implements IUserRepository<Doctor> {
 		return this.doctorMap;
 	}
 
-	public void addDoctor(String id, Doctor doctor){
+	public void addDoctor(String id, Doctor doctor) {
 		doctorMap.put(id, doctor);
+	}
+
+	@Override
+	public void deserialize() {
+		File file = new File(FILEPATH);
+		try {
+			PrintWriter printWriter = new PrintWriter(file);
+			for (Doctor doctor : getAll()) {
+				String data = String.join(",", doctor.getId(), doctor.getName(), "Doctor",
+						doctor.getGender().toString(), String.valueOf(doctor.getAge()));
+				printWriter.println(data);
+			}
+			printWriter.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

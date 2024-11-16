@@ -25,8 +25,11 @@ public class UpdatePersonalInfoController extends Controller {
 			this.updatePersonalInfoView.displayPhoneNumberUpdate();
 			break;
 		case 2:
-			patient.setEmailAddress(Prompt.displayEmailAddressPrompt());
-			this.updatePersonalInfoView.displayEmailAddressUpdate();
+			if (patient.setEmailAddress(Prompt.displayEmailAddressPrompt())) {
+				this.updatePersonalInfoView.displayEmailAddressUpdate();
+			} else {
+				this.updatePersonalInfoView.displayNoEmailAddressUpdate();
+			}
 			break;
 		case 3:
 			this.updatePersonalInfoView.displayReturnMenu();

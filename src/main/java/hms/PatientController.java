@@ -18,8 +18,8 @@ public class PatientController {
 
 	public void loadPatientMap(String filepath) {
 		try {
-			PatientSerializer patientSerializer = new PatientSerializer();
-			this.patientMap = patientSerializer.getMap(filepath);
+			PatientSerializer patientSerializer = new PatientSerializer("Patient_List.csv");
+			this.patientMap = patientSerializer.getMap();
 		} catch (Exception e) {
 			System.err.println(e);
 		}

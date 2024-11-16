@@ -15,17 +15,17 @@ class PatientSerializerTest {
 
 	@Test
 	void testGetPatientMapIfNull() {
-		PatientSerializer patientSerializer = new PatientSerializer();
-		assertTrue(patientSerializer.getMap("Patient_List.xlsx") != null);
+		PatientSerializer patientSerializer = new PatientSerializer("Patient_List.csv");
+		assertTrue(patientSerializer.getMap() != null);
 
 	}
 
 	@Test
 	void testGetPatientMapIfAttributesAreSame() {
-		PatientSerializer patientSerializer = new PatientSerializer();
+		PatientSerializer patientSerializer = new PatientSerializer("Patient_List.csv");
 		Map<String, Patient> patientMap;
 
-		patientMap = patientSerializer.getMap("Patient_List.xlsx");
+		patientMap = patientSerializer.getMap();
 		Patient alice = patientMap.get("P1001");
 		assertTrue(alice.getName().equals("Alice Brown"));
 		assertTrue(alice.getDateOfBirth().isEqual(LocalDate.of(1980, 5, 14)));

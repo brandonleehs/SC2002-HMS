@@ -7,8 +7,10 @@ import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import hms.boundary.InputHandler;
 import hms.boundary.View;
 import hms.boundary.user.LoginView;
+import hms.boundary.user.StartView;
 import hms.control.Controller;
 import hms.control.administrator.AdministratorMenuController;
 import hms.control.doctor.DoctorMenuController;
@@ -21,16 +23,24 @@ import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;
 import hms.entity.user.User;
+import hms.exceptions.InvalidChoiceFormatException;
+import hms.exceptions.InvalidChoiceValueException;
 
 public class LoginController extends Controller {
 	private final LoginView loginView;
+	private final StartView startView;
 
 	public LoginController() {
 		this.loginView = new LoginView();
+		this.startView = new StartView();
 	}
 
 	@Override
 	public void navigate() {
+//		String filepath = "./src/main/resources/Patient_List.csv";
+//		PatientSerializer patientSerializer = new PatientSerializer(filepath);
+//		patientSerializer.deserialize(filepath, patientRepository);
+
 		Patient patient = patientRepository.getById("P1001");
 		Doctor doctor = doctorRepository.getById("D001");
 		Appointment appt = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 5),
@@ -66,34 +76,53 @@ public class LoginController extends Controller {
 		boolean login = false;
 		User user = null;
 		while (true) {
-			do {
-				View.displayLogo();
-				this.loginView.displayHeader();
-				String id = this.loginView.displayIdPrompt();
-				String password = this.loginView.displayPasswordPrompt();
-				user = getUser(id, password);
-				login = authenticate(user, id, password);
-			} while (!login);
-
-			if (user instanceof Patient) {
-				PatientMenuController patientMenuController = new PatientMenuController((Patient) user);
-				patientMenuController.navigate();
-
-			} else if (user instanceof Doctor) {
-				DoctorMenuController doctorMenuController = new DoctorMenuController((Doctor) user);
-				doctorMenuController.navigate();
-
-			} else if (user instanceof Pharmacist) {
-				PharmacistMenuController pharmacistMenuController = new PharmacistMenuController((Pharmacist) user);
-				pharmacistMenuController.navigate();
-
-			} else if (user instanceof Administrator) {
-				AdministratorMenuController administratorMenuController = new AdministratorMenuController(
-						(Administrator) user);
-				administratorMenuController.navigate();
-			} else {
-
+			startView.displayHeader();
+			startView.displayOptions();
+			int choice = 0;
+			try {
+				choice = InputHandler.getChoice(1, 2);
+			} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+				choice = 2;
 			}
+
+			if (choice == 1) {
+				do {
+					View.displayLogo();
+					this.loginView.displayHeader();
+					String id = this.loginView.displayIdPrompt();
+					String password = this.loginView.displayPasswordPrompt();
+					user = getUser(id, password);
+					login = authenticate(user, id, password);
+				} while (!login);
+
+				if (user instanceof Patient) {
+					PatientMenuController patientMenuController = new PatientMenuController((Patient) user);
+					patientMenuController.navigate();
+
+				} else if (user instanceof Doctor) {
+					DoctorMenuController doctorMenuController = new DoctorMenuController((Doctor) user);
+					doctorMenuController.navigate();
+
+				} else if (user instanceof Pharmacist) {
+					PharmacistMenuController pharmacistMenuController = new PharmacistMenuController((Pharmacist) user);
+					pharmacistMenuController.navigate();
+
+				} else if (user instanceof Administrator) {
+					AdministratorMenuController administratorMenuController = new AdministratorMenuController(
+							(Administrator) user);
+					administratorMenuController.navigate();
+				}
+
+			} else {
+				// save and close
+				patientRepository.deserialize();
+				doctorRepository.deserialize();
+				pharmacistRepository.deserialize();
+				administratorRepository.deserialize();
+				medicineInventory.deserialize();
+				break;
+			}
+
 		}
 	}
 

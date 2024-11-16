@@ -59,4 +59,8 @@ public class InputHandler {
 			throw new InvalidTimeException(InvalidTimeException.INVALID_TIME_MESSAGE, e);
 		}
 	}
+
+	public Scanner getScanner() {
+		return scanner;
+	}
 }

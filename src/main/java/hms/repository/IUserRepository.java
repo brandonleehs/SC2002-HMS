@@ -13,4 +13,6 @@ public interface IUserRepository<E extends User> {
 	public List<E> getAll();
 
 	public Map<String, E> getMap();
+
+	public void deserialize();
 }

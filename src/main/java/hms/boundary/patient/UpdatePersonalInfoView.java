@@ -15,6 +15,10 @@ public class UpdatePersonalInfoView extends View {
 		System.out.println("Email address updated.");
 	}
 
+	public void displayNoEmailAddressUpdate() {
+		System.out.println("Email address not updated.");
+	}
+
 	public void displayReturnMenu() {
 		System.out.println("Returning to Menu.");
 	}

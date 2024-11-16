@@ -13,16 +13,16 @@ class DoctorSerializerTest {
 
 	@Test
 	void testGetDoctorMapIfNull() {
-		DoctorSerializer doctorSerializer = new DoctorSerializer();
-		assertTrue(doctorSerializer.getMap("Staff_List.xlsx") != null);
+		DoctorSerializer doctorSerializer = new DoctorSerializer("Staff_List.csv");
+		assertTrue(doctorSerializer.getMap() != null);
 	}
 
 	@Test
 	void testGetDoctorMapIfAttributesAreSame() {
-		DoctorSerializer doctorSerializer = new DoctorSerializer();
+		DoctorSerializer doctorSerializer = new DoctorSerializer("Staff_List.csv");
 		Map<String, Doctor> doctorMap;
 
-		doctorMap = doctorSerializer.getMap("Staff_List.xlsx");
+		doctorMap = doctorSerializer.getMap();
 		Doctor john = doctorMap.get("D001");
 		assertTrue(john.getName().equals("John Smith"));
 		assertTrue(john.getAge() == 45);
