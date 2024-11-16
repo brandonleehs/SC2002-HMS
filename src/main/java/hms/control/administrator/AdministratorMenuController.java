@@ -47,15 +47,19 @@ public class AdministratorMenuController extends MenuController {
 				replenishmentController.navigate();
 				break;
 			case 5:
+				ResetPasswordController resetPasswordController = new ResetPasswordController();
+				resetPasswordController.navigate();
+				break;
+			case 6:
 				ChangePasswordController changePasswordController = new ChangePasswordController(administrator);
 				changePasswordController.navigate();
 				break;
-			case 6:
+			case 7:
 				System.out.println("Logging out...");
 				break;
 			default:
 			}
-		} while (choice < 6);
+		} while (choice < 7);
 	}
 
 }
