@@ -16,12 +16,14 @@ import hms.control.administrator.AdministratorMenuController;
 import hms.control.doctor.DoctorMenuController;
 import hms.control.patient.PatientMenuController;
 import hms.control.pharmacist.PharmacistMenuController;
+import hms.control.receptionist.ReceptionistMenuController;
 import hms.entity.appointment.Appointment;
 import hms.entity.medicine.Medicine;
 import hms.entity.user.Administrator;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;
+import hms.entity.user.Receptionist;
 import hms.entity.user.User;
 import hms.exceptions.InvalidChoiceFormatException;
 import hms.exceptions.InvalidChoiceValueException;
@@ -111,7 +113,12 @@ public class LoginController extends Controller {
 					AdministratorMenuController administratorMenuController = new AdministratorMenuController(
 							(Administrator) user);
 					administratorMenuController.navigate();
-				}
+
+				} else if (user instanceof Receptionist) {
+					System.out.println(1);
+					ReceptionistMenuController receptionistMenuController = new ReceptionistMenuController((Receptionist) user);
+					receptionistMenuController.navigate();
+				} 
 
 			} else {
 				// save and close
@@ -131,6 +138,7 @@ public class LoginController extends Controller {
 		userMap.putAll(doctorRepository.getMap());
 		userMap.putAll(patientRepository.getMap());
 		userMap.putAll(pharmacistRepository.getMap());
+		userMap.putAll(receptionistRepository.getMap());
 		User user = userMap.get(id);
 		return user;
 	}
