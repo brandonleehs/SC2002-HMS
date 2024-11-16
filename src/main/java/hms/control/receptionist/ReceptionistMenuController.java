@@ -19,11 +19,12 @@ public class ReceptionistMenuController extends Controller{
         int choice = 0;
         do{
             this.receptionistMenuView.displayHeader();
-            choice = this. receptionistMenuView.displayOptions();
+            choice = this.receptionistMenuView.displayOptions();
 
             switch (choice) {
                 case 1:
-                    
+                    AddPatientController addPatientController = new AddPatientController();
+                    addPatientController.navigate();
                     break;
                 case 2:
                     ChangePasswordController changePasswordController = new ChangePasswordController(receptionist);
