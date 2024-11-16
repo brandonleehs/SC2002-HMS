@@ -6,38 +6,39 @@ import hms.exceptions.InvalidChoiceFormatException;
 import hms.exceptions.InvalidChoiceValueException;
 
 public class ManageStaffView extends View {
-    
-    @Override
-    public void displayHeader() {
-        displayBorderedText(WIDTH, "Manage Hospital Staff");
-    }
 
-    public void displayOptions() {
-        System.out.println("1. Add Doctor/Pharmacist");
-        System.out.println("2. Update Doctor/Pharmacist");
-        System.out.println("3. Remove Doctor/Pharmacist");
-        System.out.println("4. Display All Doctors and Pharmacists");
-    }
+	@Override
+	public void displayHeader() {
+		displayBorderedText(WIDTH, "Manage Hospital Staff");
+	}
 
-    public void displayRemoveSuccess() {
-        System.out.println("User successfully removed.");
-    }
+	public void displayOptions() {
+		System.out.println("1. Add Doctor/Pharmacist");
+		System.out.println("2. Update Doctor/Pharmacist");
+		System.out.println("3. Remove Doctor/Pharmacist");
+		System.out.println("4. Display All Doctors and Pharmacists");
+		System.out.println("5. Return to main menu");
+	}
 
-    public void displayUserNotFound() {
-        System.out.println("User not found.");
-    }
+	public void displayRemoveSuccess() {
+		System.out.println("User successfully removed.");
+	}
 
-    public int getChoice() {
-        int choice;
-        try {
-                choice = InputHandler.getChoice(1, 5);
-            } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-                return -1;
-            }
-        return choice;
-    }
+	public void displayUserNotFound() {
+		System.out.println("User not found.");
+	}
 
-    public void printExit(){
-        System.out.println("Returning to main menu...");
-    }
+	public int getChoice() {
+		int choice;
+		try {
+			choice = InputHandler.getChoice(1, 5);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+			return -1;
+		}
+		return choice;
+	}
+
+	public void printExit() {
+		System.out.println("Returning to main menu...");
+	}
 }

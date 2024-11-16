@@ -15,7 +15,6 @@ public class AppointmentOutcomeRecordController extends Controller {
 
 	@Override
 	public void navigate() {
-		this.appointmentOutcomeRecordView.displayHeader();
 		this.appointmentOutcomeRecordView.displayRecords(patient);
 	}
 

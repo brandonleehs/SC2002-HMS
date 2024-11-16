@@ -8,15 +8,16 @@ import hms.entity.user.Doctor;
 import hms.entity.user.Pharmacist;
 
 public class DisplayStaffController extends Controller {
-    private final DisplayStaffView displayStaffView = new DisplayStaffView();
-    private Map<String, Doctor> doctors;
-    private Map<String, Pharmacist> pharmacists;
-    
-    @Override
-    public void navigate(){
-        doctors = doctorRepository.getMap();
-        pharmacists = pharmacistRepository.getMap();
-        displayStaffView.displayDoctorList(doctors); // Display all doctors
-        displayStaffView.displayPharmacistList(pharmacists); // Display all pharmacists
-    }
+	private final DisplayStaffView displayStaffView = new DisplayStaffView();
+	private Map<String, Doctor> doctors;
+	private Map<String, Pharmacist> pharmacists;
+
+	@Override
+	public void navigate() {
+		doctors = doctorRepository.getMap();
+		pharmacists = pharmacistRepository.getMap();
+		displayStaffView.displayHeader();
+		displayStaffView.displayDoctorList(doctors); // Display all doctors
+		displayStaffView.displayPharmacistList(pharmacists); // Display all pharmacists
+	}
 }
