@@ -18,7 +18,6 @@ public class SubmitReplenishmentRequestController extends Controller {
 	public void navigate() {
 		submitReplenishmentRequestView.displayHeader();
 		List<String> medicineNames = medicineInventory.getMedicineNames();
-		this.submitReplenishmentRequestView.displayHeader();
 		showMedicationInventoryController.navigate();
 		// Prompt for choosing which medicine
 		int medicineChoice = this.submitReplenishmentRequestView.MedicineIndexPrompt(medicineNames.size());

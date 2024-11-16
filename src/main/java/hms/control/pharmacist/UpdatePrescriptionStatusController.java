@@ -34,25 +34,35 @@ public class UpdatePrescriptionStatusController extends Controller {
 
 		// Display index table for user to see which medicine
 		appointmentOutcomeRecordView.displayPrescriptionTable(editingRecord);
-		int medicineIndex = updatePrescriptionStatusView
-				.MedicinePrompt(editingRecord.getPrescribedMedicineMap().size());
+		int medicineIndex = updatePrescriptionStatusView.MedicinePrompt(editingRecord.getPrescribedMedicineMap().size())
+				- 1;
 		Medicine medicineChosen = medicines.get(medicineIndex);
 		int quantityToDispense = editingRecord.getPrescribedMedicineMap().get(medicineChosen);
 
+		// Sucessfully deduct medicine from stock
+		if (medicineInventory.dispenseMedicine(medicineChosen.getName(), quantityToDispense)) {
+			medicineChosen.setMedicineStatus(MedicineStatus.DISPENSED);
+			updatePrescriptionStatusView.SuccessfulDispense();
+		}
+		// Unsuccessful deduction
+		else {
+			updatePrescriptionStatusView.UnsuccessfulDispense();
+		}
+
 		// Display action choice for medicine dispensing (dispense or change back to
 		// pending)
-		int dispenseOrUndispense = updatePrescriptionStatusView.DecisionPrompt();
-		if (dispenseOrUndispense == 1) {
-			// Sucessfully deduct medicine from stock
-			if (medicineInventory.dispenseMedicine(medicineChosen.getName(), quantityToDispense)) {
-				medicineChosen.setMedicineStatus(MedicineStatus.DISPENSED);
-				updatePrescriptionStatusView.SuccessfulDispense();
-			}
-			// Unsuccessful deduction
-			else {
-				updatePrescriptionStatusView.UnsuccessfulDispense();
-			}
-		}
+//		int dispenseOrUndispense = updatePrescriptionStatusView.DecisionPrompt();
+//		if (dispenseOrUndispense == 1) {
+//			// Sucessfully deduct medicine from stock
+//			if (medicineInventory.dispenseMedicine(medicineChosen.getName(), quantityToDispense)) {
+//				medicineChosen.setMedicineStatus(MedicineStatus.DISPENSED);
+//				updatePrescriptionStatusView.SuccessfulDispense();
+//			}
+//			// Unsuccessful deduction
+//			else {
+//				updatePrescriptionStatusView.UnsuccessfulDispense();
+//			}
+//		}
 
 		// TODO: Consider adding reversal of medicine
 		// else if (dispenseOrUndispense==2){
