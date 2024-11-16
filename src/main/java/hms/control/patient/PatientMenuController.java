@@ -2,11 +2,11 @@ package hms.control.patient;
 
 import hms.boundary.patient.PatientMenuView;
 import hms.boundary.patient.record.MedicalRecordView;
-import hms.control.Controller;
+import hms.control.MenuController;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Patient;
 
-public class PatientMenuController extends Controller {
+public class PatientMenuController extends MenuController {
 	private final PatientMenuView patientMenuView;
 	private Patient patient;
 
@@ -17,6 +17,7 @@ public class PatientMenuController extends Controller {
 
 	@Override
 	public void navigate() {
+		checkNewUser(patient);
 		int choice = 0;
 		do {
 			this.patientMenuView.displayHeader();

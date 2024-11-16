@@ -4,11 +4,12 @@ import hms.boundary.patient.record.AppointmentOutcomeRecordView;
 import hms.boundary.pharmacist.PharmacistMenuView;
 import hms.boundary.pharmacist.ViewReplenishmentRequestView;
 import hms.control.Controller;
+import hms.control.MenuController;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;
 
-public class PharmacistMenuController extends Controller {
+public class PharmacistMenuController extends MenuController {
 	private final PharmacistMenuView pharmacistMenuView;
 	private final Pharmacist pharmacist;
 
@@ -19,6 +20,7 @@ public class PharmacistMenuController extends Controller {
 
 	@Override
 	public void navigate() {
+		checkNewUser(pharmacist);
 		int choice = 0;
 		do {
 			this.pharmacistMenuView.displayHeader();

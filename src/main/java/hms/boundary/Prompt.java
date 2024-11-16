@@ -58,4 +58,9 @@ public class Prompt {
 	public static void displayPatientIdPrompt() {
 		System.out.print("Enter patient ID: ");
 	}
+
+	public static String displayNewPasswordPrompt() {
+		System.out.print("Welcome to HMS.\r\nPlease enter your new password: ");
+		return InputHandler.getString();
+	}
 }

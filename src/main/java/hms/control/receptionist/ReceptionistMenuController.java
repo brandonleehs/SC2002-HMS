@@ -1,11 +1,11 @@
 package hms.control.receptionist;
 
 import hms.boundary.receptionist.ReceptionistMenuView;
-import hms.control.Controller;
+import hms.control.MenuController;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Receptionist;
 
-public class ReceptionistMenuController extends Controller{
+public class ReceptionistMenuController extends MenuController {
     private final Receptionist receptionist;
     private final ReceptionistMenuView receptionistMenuView;
 
@@ -16,6 +16,7 @@ public class ReceptionistMenuController extends Controller{
 
     @Override
     public void navigate() {
+        checkNewUser(receptionist);
         int choice = 0;
         do{
             this.receptionistMenuView.displayHeader();

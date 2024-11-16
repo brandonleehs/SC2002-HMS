@@ -6,12 +6,12 @@ import hms.boundary.Prompt;
 import hms.boundary.doctor.DoctorMenuView;
 import hms.boundary.doctor.ScheduleView;
 import hms.boundary.patient.record.MedicalRecordView;
-import hms.control.Controller;
+import hms.control.MenuController;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 
-public class DoctorMenuController extends Controller {
+public class DoctorMenuController extends MenuController {
 	private final DoctorMenuView doctorMenuView;
 	private Doctor doctor;
 
@@ -22,6 +22,7 @@ public class DoctorMenuController extends Controller {
 
 	@Override
 	public void navigate() {
+		checkNewUser(doctor);
 		int choice = 0;
 		do {
 			this.doctorMenuView.displayHeader();
