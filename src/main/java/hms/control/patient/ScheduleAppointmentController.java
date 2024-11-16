@@ -22,17 +22,28 @@ public class ScheduleAppointmentController extends Controller {
 	@Override
 	public void navigate() {
 		this.scheduleAppointmentView.displayHeader();
-		
+
 		LocalDate date = Prompt.displayDatePrompt();
 
-		
+		if (date == null) {
+			return;
+		}
+
 		LocalTime time = Prompt.displayTimePrompt();
 
+		if (time == null) {
+			return;
+		}
+
 		Prompt.displayDoctorPrompt();
-		
+
 		int choice = this.scheduleAppointmentView.displayDoctorsAll(doctorRepository);
 
-		Doctor doctor = doctorRepository.getAll().get(choice - 1);
+		if (choice == -1) {
+			return;
+		}
+
+		Doctor doctor = doctorRepository.getAll().get(choice);
 		Appointment appointment = new Appointment(this.patient.getId(), doctor.getId(), date, time);
 
 		if (patient.scheduleAppointment(doctor, appointment)) {

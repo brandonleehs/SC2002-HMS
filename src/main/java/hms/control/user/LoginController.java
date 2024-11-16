@@ -1,7 +1,5 @@
 package hms.control.user;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +15,6 @@ import hms.control.doctor.DoctorMenuController;
 import hms.control.patient.PatientMenuController;
 import hms.control.pharmacist.PharmacistMenuController;
 import hms.control.receptionist.ReceptionistMenuController;
-import hms.entity.appointment.Appointment;
-import hms.entity.medicine.Medicine;
 import hms.entity.user.Administrator;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
@@ -39,31 +35,38 @@ public class LoginController extends Controller {
 
 	@Override
 	public void navigate() {
-		Patient patient = patientRepository.getById("P1001");
-		Doctor doctor = doctorRepository.getById("D001");
-		Appointment appt = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 5),
-				LocalTime.of(9, 30));
-		patient.scheduleAppointment(doctor, appt);
-		doctor.acceptAppointment(appt);
-		Appointment appt1 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 5),
-				LocalTime.of(10, 30));
-		patient.scheduleAppointment(doctor, appt1);
-
-		Appointment appt2 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 12, 5),
-				LocalTime.of(11, 30));
-		patient.scheduleAppointment(doctor, appt2);
-
-		Appointment appt3 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 6),
-				LocalTime.of(11, 30));
-		patient.scheduleAppointment(doctor, appt3);
-
-		doctor.acceptAppointment(appt1);
-
-		Map<Medicine, Integer> medicineMap = new HashMap<Medicine, Integer>();
-		medicineMap.put(new Medicine("Paracetamol"), 101);
-		medicineMap.put(new Medicine("Ibuprofen"), 50);
-
-		doctor.completeAppointment(patient, appt1, "Consultation", "Fever. Rest recommended. ", medicineMap);
+//		Patient patient = patientRepository.getById("P1001");
+//		Doctor doctor = doctorRepository.getById("D001");
+//		Appointment appt = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 5),
+//				LocalTime.of(9, 30));
+//		patient.scheduleAppointment(doctor, appt);
+//		doctor.acceptAppointment(appt);
+//		Appointment appt1 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 5),
+//				LocalTime.of(10, 30));
+//		patient.scheduleAppointment(doctor, appt1);
+//
+//		Appointment appt2 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 5),
+//				LocalTime.of(11, 30));
+//		patient.scheduleAppointment(doctor, appt2);
+//
+//		Appointment appt3 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 6),
+//				LocalTime.of(11, 30));
+//		patient.scheduleAppointment(doctor, appt3);
+//
+//		doctor.acceptAppointment(appt1);
+//
+//		Map<Medicine, Integer> medicineMap = new HashMap<Medicine, Integer>();
+//		medicineMap.put(new Medicine("Paracetamol"), 101);
+//		medicineMap.put(new Medicine("Ibuprofen"), 50);
+//
+//		doctor.completeAppointment(patient, appt1, "Consultation", "Fever. Rest recommended. ", medicineMap);
+//
+//		Appointment[] slot = doctor.getSchedule().getScheduleMap().get(LocalDate.of(2024, 11, 5));
+//		for (int i = 0; i < 48; i++) {
+//			if (slot[i] != null) {
+//				System.out.println(slot[i].getTime());
+//			}
+//		}
 
 		boolean login = false;
 		User user = null;
@@ -106,9 +109,10 @@ public class LoginController extends Controller {
 
 				} else if (user instanceof Receptionist) {
 					System.out.println(1);
-					ReceptionistMenuController receptionistMenuController = new ReceptionistMenuController((Receptionist) user);
+					ReceptionistMenuController receptionistMenuController = new ReceptionistMenuController(
+							(Receptionist) user);
 					receptionistMenuController.navigate();
-				} 
+				}
 
 			} else {
 				// save and close

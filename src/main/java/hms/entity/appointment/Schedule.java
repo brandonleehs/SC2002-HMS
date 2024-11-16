@@ -120,6 +120,7 @@ public class Schedule {
 
 	public boolean isClashing(LocalDateTime datetime) {
 		Appointment[] timeslots = this.scheduleMap.get(datetime.toLocalDate());
+
 		return timeslots != null && timeslots[getTimeslot(datetime.toLocalTime())] != null;
 	}
 
