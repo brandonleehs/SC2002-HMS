@@ -16,7 +16,7 @@ public class AppointmentController extends Controller {
 	@Override
 	public void navigate() {
 		this.appointmentView.displayHeader();
-		if (patient.getAllAppointmentList().isEmpty()) {
+		if (patient.getScheduledAppointmentList().isEmpty()) {
 			this.appointmentView.displayNoAppointments();
 		} else {
 			this.appointmentView.displayAppointments(patient, doctorRepository);

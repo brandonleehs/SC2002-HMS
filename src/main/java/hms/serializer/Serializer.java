@@ -30,7 +30,9 @@ abstract class Serializer {
 //				this.scanner = new Scanner(new File(filepath));
 //			scanner.useDelimiter(",");
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			if (!(filepath.contains("Appointment_List") || filepath.contains("AppointmentOutcomeRecord_List"))) {
+				e.printStackTrace();
+			}
 		}
 	}
 

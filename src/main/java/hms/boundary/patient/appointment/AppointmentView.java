@@ -19,8 +19,8 @@ public class AppointmentView extends View {
 	public int displayAppointments(Patient patient, DoctorRepository doctorRepository) {
 		String format = "| %-" + 5 + "s | %-" + 10 + "s | %-" + 5 + "s | %-" + 13 + "s | %-" + (WIDTH - 49) + "s |\n";
 		System.out.printf(format, "Index", "Date", "Time", "Status", "Doctor Name");
-		for (int i = 0; i < patient.getAllAppointmentList().size(); i++) {
-			Appointment appointment = patient.getAllAppointmentList().get(i);
+		for (int i = 0; i < patient.getScheduledAppointmentList().size(); i++) {
+			Appointment appointment = patient.getScheduledAppointmentList().get(i);
 			System.out.printf(format, i + 1, appointment.getDate(), appointment.getTime(),
 					appointment.getAppointmentStatus(), doctorRepository.getById(appointment.getDoctorId()).getName());
 		}
@@ -39,7 +39,7 @@ public class AppointmentView extends View {
 		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
 			return -1;
 		}
-		return choice-1;
+		return choice - 1;
 	}
 
 	public void displayNoAppointments() {

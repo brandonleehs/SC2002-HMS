@@ -59,6 +59,10 @@ public class ScheduleView extends View {
 	}
 
 	public void displayUpcomingAppointments(Doctor doctor, PatientRepository patientRepository) {
+		if (doctor.getConfirmedAppointmentList().isEmpty()) {
+			System.out.println("No upcoming appointments.");
+			return;
+		}
 		String format = "| %-" + 5 + "s | %-" + 10 + "s | %-" + 5 + "s | %-" + 13 + "s | %-" + (WIDTH - 49) + "s |\n";
 		System.out.printf(format, "Index", "Date", "Time", "Status", "Patient Name");
 
@@ -68,7 +72,6 @@ public class ScheduleView extends View {
 					appointment.getAppointmentStatus(),
 					patientRepository.getById(appointment.getPatientId()).getName());
 		}
-
 		System.out.println();
 	}
 

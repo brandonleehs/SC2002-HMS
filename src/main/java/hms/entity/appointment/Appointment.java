@@ -7,7 +7,7 @@ import java.util.UUID;
 import hms.entity.record.AppointmentOutcomeRecord;
 
 public class Appointment {
-	private final UUID uuid;
+	private UUID uuid;
 	private final String patientId;
 	private String doctorId;
 	private AppointmentStatus appointmentStatus;
@@ -22,6 +22,16 @@ public class Appointment {
 		this.date = date;
 		this.time = time;
 		this.appointmentStatus = AppointmentStatus.PENDING;
+	}
+
+	public Appointment(UUID uuid, String patientId, String doctorId, AppointmentStatus appointmentStatus,
+			LocalDate date, LocalTime time) {
+		this.uuid = uuid;
+		this.patientId = patientId;
+		this.doctorId = doctorId;
+		this.date = date;
+		this.time = time;
+		this.appointmentStatus = appointmentStatus;
 	}
 
 	public String getPatientId() {
