@@ -34,7 +34,7 @@ public class AddPatientView extends View {
 		}
         patientDetails.add(birthdate);
 
-        System.out.println("Enter Gender:\n1: Male\n 2: Female");
+        System.out.println("Enter Gender:\r\n1: Male\r\n2: Female");
         int choice;
         try {
             choice = InputHandler.getChoice(1, 2);
