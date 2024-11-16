@@ -1,7 +1,7 @@
 package hms.repository;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
@@ -47,13 +47,15 @@ public class DoctorRepository implements IUserRepository<Doctor> {
 		File file = new File(FILEPATH);
 		try {
 			PrintWriter printWriter = new PrintWriter(file);
+			String header = String.join(",", "Staff ID", "Name", "Role", "Gender", "Age");
+			printWriter.println(header);
 			for (Doctor doctor : getAll()) {
 				String data = String.join(",", doctor.getId(), doctor.getName(), "Doctor",
 						doctor.getGender().toString(), String.valueOf(doctor.getAge()));
 				printWriter.println(data);
 			}
 			printWriter.close();
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -1,7 +1,8 @@
 package hms.repository;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
@@ -40,16 +41,18 @@ public class AdministratorRepository implements IUserRepository<Administrator> {
 
 	@Override
 	public void deserialize() {
-		File file = new File(FILEPATH);
+//		File file = new File(FILEPATH);
 		try {
-			PrintWriter printWriter = new PrintWriter(file);
+			FileWriter fw = new FileWriter(FILEPATH, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter printWriter = new PrintWriter(bw);
 			for (Administrator administrator : getAll()) {
 				String data = String.join(",", administrator.getId(), administrator.getName(), "Administrator",
 						administrator.getGender().toString(), String.valueOf(administrator.getAge()));
 				printWriter.println(data);
 			}
 			printWriter.close();
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

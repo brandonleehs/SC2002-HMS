@@ -108,6 +108,8 @@ public class MedicineInventory {
 		File file = new File(FILEPATH);
 		try {
 			PrintWriter printWriter = new PrintWriter(file);
+			String header = String.join(",", "Medicine Name", "Initial Stock", "Low Stock Level Alert");
+			printWriter.println(header);
 			for (Map.Entry<String, List<Integer>> entry : medicineStock.entrySet()) {
 				String data = String.join(",", entry.getKey(), String.valueOf(entry.getValue().get(0)),
 						String.valueOf(entry.getValue().get(1)));

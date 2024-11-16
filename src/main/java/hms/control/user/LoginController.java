@@ -116,13 +116,12 @@ public class LoginController extends Controller {
 			} else {
 				// save and close
 				patientRepository.deserialize();
-				doctorRepository.deserialize();
+				doctorRepository.deserialize(); // must deserialize doctor first since it writes header!
 				pharmacistRepository.deserialize();
 				administratorRepository.deserialize();
 				medicineInventory.deserialize();
 				break;
 			}
-
 		}
 	}
 

@@ -43,6 +43,9 @@ public class PatientRepository implements IUserRepository<Patient> {
 		File file = new File(FILEPATH);
 		try {
 			PrintWriter printWriter = new PrintWriter(file);
+			String header = String.join(",", "Patient ID", "Name", "Date of Birth", "Gender", "Blood Type",
+					"Contact Information");
+			printWriter.println(header);
 			for (Patient patient : getAll()) {
 				String data = String.join(",", patient.getId(), patient.getName(), patient.getDateOfBirth().toString(),
 						patient.getGender().toString(), patient.getBloodType().toString(), patient.getEmailAddress());
