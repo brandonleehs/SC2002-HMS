@@ -31,7 +31,12 @@ public class RescheduleAppointmentController extends Controller {
 
 	private void rescheduleAppointment() {
 		this.rescheduleAppointmentView.displayAppointments(this.patient, doctorRepository);
-		int choice = 		this.rescheduleAppointmentView.displayAppointmentPrompt(this.patient.getScheduledAppointmentList().size());
+		int choice = this.rescheduleAppointmentView
+				.displayAppointmentPrompt(this.patient.getScheduledAppointmentList().size());
+
+		if (choice == -1) {
+			return;
+		}
 
 		Appointment oldAppointment = this.patient.getScheduledAppointmentList().get(choice);
 
@@ -40,10 +45,14 @@ public class RescheduleAppointmentController extends Controller {
 		LocalTime time = Prompt.displayTimePrompt();
 
 		Prompt.displayDoctorPrompt();
-	
+
 		choice = this.rescheduleAppointmentView.displayDoctorsAll(doctorRepository);
 
-		Doctor newDoctor = doctorRepository.getAll().get(choice - 1);
+		if (choice == -1) {
+			return;
+		}
+
+		Doctor newDoctor = doctorRepository.getAll().get(choice);
 		Appointment newAppointment = new Appointment(this.patient.getId(), newDoctor.getId(), date, time);
 		Doctor oldDoctor = doctorRepository.getById(oldAppointment.getDoctorId());
 
