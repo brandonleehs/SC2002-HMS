@@ -5,36 +5,36 @@ import hms.boundary.View;
 import hms.exceptions.InvalidChoiceFormatException;
 import hms.exceptions.InvalidChoiceValueException;
 
-public class SubmitReplenishmentRequestView extends View{
-    
-    public int MedicineIndexPrompt(int size){
-        System.out.println("Enter Index of Medicine to be replenished:");
-        int i;
-        try{
-            i = InputHandler.getChoice(1, size);
-        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				return -1;
-		}
-        return i-1;
-    }
+public class SubmitReplenishmentRequestView extends View {
 
-    public int MedicineAmountPrompt(){
-        System.out.println("Enter Amount of Medicine to be replenished:");
-        int amt;
-        try{
-            amt = InputHandler.getChoice(1, 999);
-        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				return -1;
+	public int MedicineIndexPrompt(int size) {
+		System.out.println("Enter Index of Medicine to be replenished:");
+		int i;
+		try {
+			i = InputHandler.getChoice(1, size);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+			return -1;
 		}
-        return amt;
-    }
+		return i;
+	}
 
-    public void SuccessfulRequestPrompt(){
-        System.out.println("Request successfully made");
-    }
-        
-    @Override
-    public void displayHeader() {
-        displayBorderedText(WIDTH, "Submit Replenishment Request");
-    }
+	public int MedicineAmountPrompt() {
+		System.out.println("Enter Amount of Medicine to be replenished (1-999):");
+		int amt;
+		try {
+			amt = InputHandler.getChoice(1, 999);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+			return -1;
+		}
+		return amt;
+	}
+
+	public void SuccessfulRequestPrompt() {
+		System.out.println("Request successfully made");
+	}
+
+	@Override
+	public void displayHeader() {
+		displayBorderedText(WIDTH, "Submit Replenishment Request");
+	}
 }

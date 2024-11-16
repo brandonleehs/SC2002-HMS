@@ -10,11 +10,12 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import hms.boundary.View;
 import hms.boundary.user.LoginView;
 import hms.control.Controller;
+import hms.control.administrator.AdministratorMenuController;
 import hms.control.doctor.DoctorMenuController;
 import hms.control.patient.PatientMenuController;
 import hms.control.pharmacist.PharmacistMenuController;
-import hms.control.administrator.AdministratorMenuController;
 import hms.entity.appointment.Appointment;
+import hms.entity.medicine.Medicine;
 import hms.entity.user.Administrator;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
@@ -54,11 +55,13 @@ public class LoginController extends Controller {
 				LocalTime.of(11, 30));
 		patient.scheduleAppointment(doctor, appt3);
 
-//		doctor.acceptAppointment(appt1);
+		doctor.acceptAppointment(appt1);
 
-//		doctor.completeAppointment(patient, appt1, "Consultation", "Fever. Rest recommended. ");
-//		doctor.prescribeMedicine(new Medicine("Paracetamol"), appt1.getAppointmentOutcomeRecord());
-//		doctor.prescribeMedicine(new Medicine("Ibuprofen"), appt1.getAppointmentOutcomeRecord());
+		Map<Medicine, Integer> medicineMap = new HashMap<Medicine, Integer>();
+		medicineMap.put(new Medicine("Paracetamol"), 101);
+		medicineMap.put(new Medicine("Ibuprofen"), 50);
+
+		doctor.completeAppointment(patient, appt1, "Consultation", "Fever. Rest recommended. ", medicineMap);
 
 		boolean login = false;
 		User user = null;
@@ -85,8 +88,9 @@ public class LoginController extends Controller {
 				pharmacistMenuController.navigate();
 
 			} else if (user instanceof Administrator) {
-				AdministratorMenuController administratorMenuController = new AdministratorMenuController((Administrator) user);
-				administratorMenuController.navigate();	
+				AdministratorMenuController administratorMenuController = new AdministratorMenuController(
+						(Administrator) user);
+				administratorMenuController.navigate();
 			} else {
 
 			}

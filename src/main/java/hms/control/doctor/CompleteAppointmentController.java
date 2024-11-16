@@ -35,7 +35,8 @@ public class CompleteAppointmentController extends Controller {
 		}
 		scheduleView.displayUpcomingAppointments(doctor, patientRepository);
 		int choice = completeAppointmentView.displayApptOptionPrompt(doctor.getConfirmedAppointmentList().size());
-		if (choice == -1) return;
+		if (choice == -1)
+			return;
 
 		Appointment appointment = doctor.getConfirmedAppointmentList().get(choice);
 
@@ -43,21 +44,24 @@ public class CompleteAppointmentController extends Controller {
 		String consultationNotes = completeAppointmentView.displaySetConsultationNotesPrompt();
 
 		int numPre = completeAppointmentView.displayPrescriptionChoicePrompt();
-		if (numPre == -1) return;
-		
-		//Add list for medicine set
+		if (numPre == -1)
+			return;
+
+		// Add list for medicine set
 		medicines = medicineInventory.getFullMedicine();
 		List<String> medicineNames = medicineInventory.getMedicineNames();
 		HashMap<Medicine, Integer> prescribed_medicines = new HashMap<>();
-		//Get choice with amount from doctor
+		// Get choice with amount from doctor
 		for (int i = 0; i < numPre; i++) {
 			int medicineChoice, medicineAmount = 0;
 			showMedicationInventoryController.navigate();
 			medicineChoice = completeAppointmentView.displayAddPrescriptionNamePrompt(medicines.keySet().size());
-			if (medicineChoice == -1) return;
-			
+			if (medicineChoice == -1)
+				return;
+
 			medicineAmount = completeAppointmentView.displayAddPrescriptionAmountPrompt();
-			if (medicineAmount == -1) return;
+			if (medicineAmount == -1)
+				return;
 
 			Medicine prescribed_medicine = new Medicine(medicineNames.get(medicineChoice));
 			prescribed_medicine.setMedicineStatus(MedicineStatus.PENDING);
@@ -66,10 +70,8 @@ public class CompleteAppointmentController extends Controller {
 
 		doctor.completeAppointment(patientRepository.getById(appointment.getPatientId()), appointment, serviceType,
 				consultationNotes, prescribed_medicines);
-		completeAppointmentView.SuccessfulPrescribtion();
+		completeAppointmentView.SuccessfulPrescription();
 
-
-		
 //		Prompt.displayDatePrompt();
 //		LocalDate date;
 //		try {

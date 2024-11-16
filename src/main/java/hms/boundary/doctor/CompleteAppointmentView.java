@@ -17,12 +17,12 @@ public class CompleteAppointmentView extends UpdatePatientMedicalRecordView {
 	public int displayApptOptionPrompt(int size) {
 		System.out.println("Please enter the appointment index:");
 		int i;
-        try{
-            i = InputHandler.getChoice(1, size);
-        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				return -1;
+		try {
+			i = InputHandler.getChoice(1, size);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+			return -1;
 		}
-        return i-1;
+		return i - 1;
 	}
 
 	public String displaySetConsultationNotesPrompt() {
@@ -36,39 +36,39 @@ public class CompleteAppointmentView extends UpdatePatientMedicalRecordView {
 	}
 
 	public int displayPrescriptionChoicePrompt() {
-        System.out.print("Enter numer of prescriptions to give (1-999): ");
+		System.out.print("Enter numer of prescriptions to give (1-999): ");
 		int amt;
-        try{
-            amt = InputHandler.getChoice(1, 999);
-        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				return -1;
+		try {
+			amt = InputHandler.getChoice(1, 999);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+			return -1;
 		}
-        return amt;
-    }
+		return amt;
+	}
 
 	public int displayAddPrescriptionNamePrompt(int size) {
-        System.out.print("Enter index of Medicine to be added: ");
+		System.out.print("Enter index of Medicine to be added: ");
 		int i;
-        try{
-            i = InputHandler.getChoice(1, size);
-        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				return -1;
+		try {
+			i = InputHandler.getChoice(1, size);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+			return -1;
 		}
-        return i-1;
-    }
+		return i - 1;
+	}
 
 	public int displayAddPrescriptionAmountPrompt() {
-        System.out.print("Enter amount of Medicine to be prescribed: ");
+		System.out.print("Enter amount of Medicine to be prescribed (1-999): ");
 		int amt;
-        try{
-            amt = InputHandler.getChoice(1, 999);
-        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				return -1;
+		try {
+			amt = InputHandler.getChoice(1, 999);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+			return -1;
 		}
-        return amt;
-    }
+		return amt;
+	}
 
-	public void SuccessfulPrescribtion(){
-		System.out.print("Medicine prescribed successfully");
+	public void SuccessfulPrescription() {
+		System.out.println("Medicine prescribed successfully");
 	}
 }

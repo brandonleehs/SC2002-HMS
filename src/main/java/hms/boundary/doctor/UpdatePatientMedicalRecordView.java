@@ -20,35 +20,35 @@ public class UpdatePatientMedicalRecordView extends View {
 		System.out.println(options);
 		System.out.println(prompt);
 		int choice;
-        try{
-            choice = InputHandler.getChoice(1, 4);
-        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				return -1;
+		try {
+			choice = InputHandler.getChoice(1, 4);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+			return -1;
 		}
-        return choice;
+		return choice;
 	}
 
 	public int displayAddPrescriptionQtyPrompt() {
-		System.out.print("Enter quantity of Medicine to be added:");
+		System.out.print("Enter quantity of Medicine to be added: ");
 		int amt;
-        try{
-            amt = InputHandler.getChoice(1, 999);
-        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				return -1;
+		try {
+			amt = InputHandler.getChoice(1, 999);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+			return -1;
 		}
-        return amt;
+		return amt;
 	}
 
 	public int displayApptOptionPrompt(int size) {
 		System.out.print("Please enter the appointment number: ");
 		int i;
-        try{
-            i = InputHandler.getChoice(1, size);
-        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				return -1;
+		try {
+			i = InputHandler.getChoice(1, size);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+			return -1;
 		}
-        return i-1;
-    }
+		return i - 1;
+	}
 
 	public String displaySetConsultationNotesPrompt() {
 		System.out.println("Enter consultation notes to add:");
@@ -56,14 +56,14 @@ public class UpdatePatientMedicalRecordView extends View {
 	}
 
 	public int displayAddPrescriptionNamePrompt(int size) {
-		System.out.print("Enter medicine name to be added:");
+		System.out.print("Enter medicine index to be added: ");
 		int i;
-        try{
-            i = InputHandler.getChoice(1, size);
-        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				return -1;
+		try {
+			i = InputHandler.getChoice(1, size);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+			return -1;
 		}
-        return i-1;
+		return i - 1;
 	}
 
 	public void displayRemovePrescriptionNamePrompt() {

@@ -12,7 +12,7 @@ public class AppointmentOutcomeRecord {
 	private final UUID uuid;
 	private final LocalDate date;
 	private String serviceType;
-	private HashMap<Medicine, Integer> prescribedMedicineList;
+	private Map<Medicine, Integer> prescribedMedicineMap;
 	private String consultationNotes;
 
 	public AppointmentOutcomeRecord(LocalDate date, String serviceType, String consultationNotes, UUID uuid) {
@@ -20,7 +20,7 @@ public class AppointmentOutcomeRecord {
 		this.date = date;
 		this.serviceType = serviceType;
 		this.consultationNotes = consultationNotes;
-		this.prescribedMedicineList = new HashMap<>();
+		this.prescribedMedicineMap = new HashMap<>();
 	}
 
 	public LocalDate getDate() {
@@ -47,16 +47,16 @@ public class AppointmentOutcomeRecord {
 		this.consultationNotes = stringBuilder.toString();
 	}
 
-	public HashMap<Medicine, Integer> getPrescribedMedicineList() {
-		return this.prescribedMedicineList;
+	public Map<Medicine, Integer> getPrescribedMedicineMap() {
+		return this.prescribedMedicineMap;
 	}
 
-	public void addPrescribedMedicine(HashMap<Medicine, Integer> medicineList) {
-		this.prescribedMedicineList.putAll(medicineList);;
+	public void addPrescribedMedicine(Map<Medicine, Integer> medicineMap) {
+		this.prescribedMedicineMap.putAll(medicineMap);
 	}
 
 	public void removePrescribedMedicine(Medicine medicine) {
-		this.prescribedMedicineList.remove(medicine);
+		this.prescribedMedicineMap.remove(medicine);
 	}
 
 	public String getConsultationNotes() {
@@ -67,14 +67,14 @@ public class AppointmentOutcomeRecord {
 		return this.uuid;
 	}
 
-	public Boolean CheckIfUnprescribedMedicineExists(){
+	public Boolean CheckIfUnprescribedMedicineExists() {
 		// Sees if all medicine in this record has been dispensed
-		if (prescribedMedicineList.isEmpty()) {
+		if (prescribedMedicineMap.isEmpty()) {
 			return false;
-		}
-		else{
-			for (Map.Entry<Medicine, Integer> entry : prescribedMedicineList.entrySet()) {
-				if(entry.getKey().getMedicineStatus()==MedicineStatus.PENDING) return true;
+		} else {
+			for (Map.Entry<Medicine, Integer> entry : prescribedMedicineMap.entrySet()) {
+				if (entry.getKey().getMedicineStatus() == MedicineStatus.PENDING)
+					return true;
 			}
 			return false;
 		}

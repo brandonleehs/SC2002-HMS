@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import hms.entity.appointment.Appointment;
 import hms.entity.appointment.AppointmentStatus;
@@ -68,11 +69,11 @@ public class Doctor extends User {
 	}
 
 	public void completeAppointment(Patient patient, Appointment appointment, String serviceType,
-			String consultationNotes, HashMap<Medicine, Integer> medicineList) {
+			String consultationNotes, Map<Medicine, Integer> medicineList) {
 
 		AppointmentOutcomeRecord appointmentOutcomeRecord = new AppointmentOutcomeRecord(appointment.getDate(),
 				serviceType, consultationNotes, appointment.getUUID());
-		
+
 		appointmentOutcomeRecord.addPrescribedMedicine(medicineList);
 
 		appointment.setAppointmentOutcomeRecord(appointmentOutcomeRecord);
@@ -101,7 +102,8 @@ public class Doctor extends User {
 //		return this.schedule.changeAppointment(appointment, datetime);
 //	}
 
-	public void prescribeMedicine(HashMap<Medicine, Integer> medicineList, AppointmentOutcomeRecord appointmentOutcomeRecord) {
+	public void prescribeMedicine(HashMap<Medicine, Integer> medicineList,
+			AppointmentOutcomeRecord appointmentOutcomeRecord) {
 		appointmentOutcomeRecord.addPrescribedMedicine(medicineList);
 	}
 

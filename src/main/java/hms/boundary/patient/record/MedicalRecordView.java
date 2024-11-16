@@ -22,9 +22,7 @@ public class MedicalRecordView extends View {
 		System.out.println(String.format("Email Address: %s", this.patient.getEmailAddress()));
 		System.out.println(String.format("Blood Type: %s", this.patient.getBloodType()));
 
-		displayBorderedText(WIDTH, "Appointment Records");
 		this.appointmentOutcomeRecordView.displayRecords(this.patient);
-	
 	}
 
 	@Override
