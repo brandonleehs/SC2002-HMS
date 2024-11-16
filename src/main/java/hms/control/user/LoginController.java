@@ -7,13 +7,15 @@ import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import hms.boundary.InputHandler;
 import hms.boundary.View;
 import hms.boundary.user.LoginView;
 import hms.control.Controller;
 import hms.control.doctor.DoctorMenuController;
 import hms.control.patient.PatientMenuController;
+import hms.control.pharmacist.PharmacistMenuController;
+import hms.control.administrator.AdministratorMenuController;
 import hms.entity.appointment.Appointment;
+import hms.entity.user.Administrator;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;
@@ -46,7 +48,7 @@ public class LoginController extends Controller {
 		Appointment appt2 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 12, 5),
 				LocalTime.of(11, 30));
 		patient.scheduleAppointment(doctor, appt2);
-		doctor.completeAppointment(patient, appt2, "Consultation", "Fever. Rest recommended. ");
+//		doctor.completeAppointment(patient, appt2, "Consultation", "Fever. Rest recommended. ");
 
 		Appointment appt3 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 6),
 				LocalTime.of(11, 30));
@@ -64,10 +66,8 @@ public class LoginController extends Controller {
 			do {
 				View.displayLogo();
 				this.loginView.displayHeader();
-				this.loginView.displayIdPrompt();
-				String id = InputHandler.getString();
-				this.loginView.displayPasswordPrompt();
-				String password = InputHandler.getString();
+				String id = this.loginView.displayIdPrompt();
+				String password = this.loginView.displayPasswordPrompt();
 				user = getUser(id, password);
 				login = authenticate(user, id, password);
 			} while (!login);
@@ -81,7 +81,12 @@ public class LoginController extends Controller {
 				doctorMenuController.navigate();
 
 			} else if (user instanceof Pharmacist) {
+				PharmacistMenuController pharmacistMenuController = new PharmacistMenuController((Pharmacist) user);
+				pharmacistMenuController.navigate();
 
+			} else if (user instanceof Administrator) {
+				AdministratorMenuController administratorMenuController = new AdministratorMenuController((Administrator) user);
+				administratorMenuController.navigate();	
 			} else {
 
 			}

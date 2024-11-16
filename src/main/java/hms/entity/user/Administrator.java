@@ -6,15 +6,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import hms.entity.appointment.Appointment;
-import hms.entity.medicine.MedicineInventory;
-import hms.entity.medicine.ReplenishRequest;
 import hms.entity.user.attributes.Gender;
 import hms.repository.DoctorRepository;
 import hms.repository.IUserRepository;
 
 public class Administrator extends User {
 	private final int age;
-	private static final MedicineInventory medicineInventory = MedicineInventory.getInstance();
 
 	public Administrator(String id, String password, String name, Gender gender, int age) {
 		super(id, password, name, gender);
@@ -40,24 +37,24 @@ public class Administrator extends User {
 		return res;
 	}
 
-	public void addMedicineStock(String medicineName, int stockToAdd) {
-		medicineInventory.addMedicineStock(medicineName, stockToAdd);
-	}
+// 	public void addMedicineStock(String medicineName, int stockToAdd) {
+// 		medicineInventory.addMedicineStock(medicineName, stockToAdd);
+// 	}
 
-	public void removeMedicineStock(String medicineName, int stockToRemove) {
-		medicineInventory.addMedicineStock(medicineName, stockToRemove);
-	}
+// 	public void removeMedicineStock(String medicineName, int stockToRemove) {
+// 		medicineInventory.addMedicineStock(medicineName, stockToRemove);
+// 	}
 
-	public void setMedicineStock(String medicineName, int stock) {
-		medicineInventory.setMedicineStock(medicineName, stock);
-	}
+// 	public void setMedicineStock(String medicineName, int stock) {
+// 		medicineInventory.setMedicineStock(medicineName, stock);
+// 	}
 
-	public void setLowStockLevelAlertValue(String medicineName, int LowStockLevelAlertValue) {
-		medicineInventory.setLowStockLevelAlertValue(medicineName, LowStockLevelAlertValue);
-	}
+// 	public void setLowStockLevelAlertValue(String medicineName, int LowStockLevelAlertValue) {
+// 		medicineInventory.setLowStockLevelAlertValue(medicineName, LowStockLevelAlertValue);
+// 	}
 
-	public void approveRequest(ReplenishRequest replenishRequest) {
-		medicineInventory.addMedicineStock(replenishRequest.getMedicineName(), replenishRequest.getStockToAdd());
-		medicineInventory.removeReplenishmentRequest(replenishRequest);
-	}
+// 	public void approveRequest(ReplenishRequest replenishRequest) {
+// 		medicineInventory.addMedicineStock(replenishRequest.getMedicineName(), replenishRequest.getStockToAdd());
+// 		medicineInventory.removeReplenishmentRequest(replenishRequest);
+// 	}
 }

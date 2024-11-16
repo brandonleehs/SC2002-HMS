@@ -2,9 +2,12 @@ package hms.boundary.doctor;
 
 import java.util.List;
 
+import hms.boundary.InputHandler;
 import hms.boundary.View;
 import hms.entity.appointment.Appointment;
 import hms.entity.user.Doctor;
+import hms.exceptions.InvalidChoiceFormatException;
+import hms.exceptions.InvalidChoiceValueException;
 import hms.repository.PatientRepository;
 
 public class PendingRequestView extends View {
@@ -41,14 +44,28 @@ public class PendingRequestView extends View {
 		}
 	}
 
-	public void displayOptions() {
+	public int displayOptions() {
 		System.out.println("Please select an option:");
 		System.out.println("1. Confirm");
 		System.out.println("2. Cancel");
+		int choice;
+        try{
+            choice = InputHandler.getChoice(1, 2);
+        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+				return -1;
+		}
+        return choice;
 	}
 
-	public void displayAppointmentPrompt() {
+	public int displayAppointmentPrompt(int size) {
 		System.out.println("Please select an appointment index:");
+		int i;
+        try{
+            i = InputHandler.getChoice(1, size);
+        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+				return -1;
+		}
+        return i-1;
 	}
 
 	public void displayNoPending() {

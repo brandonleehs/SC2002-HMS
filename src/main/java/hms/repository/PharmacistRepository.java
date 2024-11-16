@@ -33,4 +33,8 @@ public class PharmacistRepository implements IUserRepository<Pharmacist> {
 	public Map<String, Pharmacist> getMap() {
 		return pharmacistMap;
 	}
+
+	public void addPharmacist(String id, Pharmacist pharmacist){
+		pharmacistMap.put(id, pharmacist);
+	}
 }

@@ -1,25 +1,31 @@
 package hms.control.doctor;
 
-import hms.boundary.InputHandler;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import hms.boundary.doctor.UpdatePatientMedicalRecordView;
 import hms.boundary.patient.record.MedicalRecordView;
 import hms.control.Controller;
+import hms.control.pharmacist.ShowMedicationInventoryController;
 import hms.entity.medicine.Medicine;
+import hms.entity.medicine.MedicineStatus;
 import hms.entity.record.AppointmentOutcomeRecord;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
-import hms.exceptions.InvalidChoiceFormatException;
-import hms.exceptions.InvalidChoiceValueException;
 
 public class UpdatePatientMedicalRecordController extends Controller {
 	private Patient patient;
 	private Doctor doctor;
 	private UpdatePatientMedicalRecordView updatePatientMedicalRecordView;
+	private ShowMedicationInventoryController showMedicationInventoryController;
+	private Map<String, List<Integer>> medicines = new HashMap<String, List<Integer>>();
 
 	public UpdatePatientMedicalRecordController(Doctor doctor, Patient patient) {
 		this.patient = patient;
 		this.doctor = doctor;
 		this.updatePatientMedicalRecordView = new UpdatePatientMedicalRecordView();
+		this.showMedicationInventoryController = new ShowMedicationInventoryController();
 	}
 
 	@Override
@@ -33,39 +39,41 @@ public class UpdatePatientMedicalRecordController extends Controller {
 		MedicalRecordView medicalRecordView = new MedicalRecordView(this.patient);
 		medicalRecordView.displayMedicalRecord();
 
-		this.updatePatientMedicalRecordView.displayApptOptionPrompt();
+		
 
-		int choice = 0;
-		try {
-			choice = InputHandler.getChoice(1, patient.getAppointmentOutcomeRecordList().size());
-		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-			return;
-		}
+		int choice = this.updatePatientMedicalRecordView.displayApptOptionPrompt(patient.getAppointmentOutcomeRecordList().size());
+		if (choice == -1) return;
 
-		AppointmentOutcomeRecord appointmentOutcomeRecord = patient.getAppointmentOutcomeRecordList().get(choice - 1);
+		AppointmentOutcomeRecord appointmentOutcomeRecord = patient.getAppointmentOutcomeRecordList().get(choice);
 
-		this.updatePatientMedicalRecordView.displayOptions();
-		try {
-			choice = InputHandler.getChoice(1, 5);
-		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-			choice = -1;
-			return;
-		}
+		choice = this.updatePatientMedicalRecordView.displayOptions();
+		if (choice == -1) return;
+		
 		String notes = null;
 		switch (choice) {
 		case 1:
-			this.updatePatientMedicalRecordView.displayAddPrescriptionNamePrompt();
-			String medName = InputHandler.getString();
-			this.doctor.prescribeMedicine(new Medicine(medName), appointmentOutcomeRecord);
+			medicines = medicineInventory.getFullMedicine();
+			List<String> medicineNames = medicineInventory.getMedicineNames();
+			HashMap<Medicine, Integer> prescribed_medicines = new HashMap<>();
+
+			showMedicationInventoryController.navigate();
+
+			int medicineChoice = updatePatientMedicalRecordView.displayAddPrescriptionNamePrompt(medicines.keySet().size());
+			if (medicineChoice == -1) return;
+
+			int medicineAmount = updatePatientMedicalRecordView.displayAddPrescriptionQtyPrompt();
+			
+			Medicine prescribed_medicine = new Medicine(medicineNames.get(medicineChoice));
+			prescribed_medicine.setMedicineStatus(MedicineStatus.PENDING);
+			prescribed_medicines.put(prescribed_medicine, medicineAmount);
+			doctor.prescribeMedicine(prescribed_medicines, appointmentOutcomeRecord);
 			break;
 		case 2:
-			this.updatePatientMedicalRecordView.displaySetConsultationNotesPrompt();
-			notes = InputHandler.getString();
+			notes = this.updatePatientMedicalRecordView.displaySetConsultationNotesPrompt();
 			appointmentOutcomeRecord.addConsultationNotes(notes);
 			break;
 		case 3:
-			this.updatePatientMedicalRecordView.displaySetConsultationNotesPrompt();
-			notes = InputHandler.getString();
+			notes = this.updatePatientMedicalRecordView.displaySetConsultationNotesPrompt();
 			appointmentOutcomeRecord.setConsultationNotes(notes);
 			break;
 		case 4:

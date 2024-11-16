@@ -1,12 +1,9 @@
 package hms.control.doctor;
 
-import hms.boundary.InputHandler;
 import hms.boundary.doctor.PendingRequestView;
 import hms.control.Controller;
 import hms.entity.appointment.Appointment;
 import hms.entity.user.Doctor;
-import hms.exceptions.InvalidChoiceFormatException;
-import hms.exceptions.InvalidChoiceValueException;
 
 public class PendingRequestController extends Controller {
 	PendingRequestView pendingRequestView;
@@ -24,23 +21,11 @@ public class PendingRequestController extends Controller {
 			return;
 		}
 		pendingRequestView.displayPendingAppointments(this.doctor, patientRepository);
-		pendingRequestView.displayAppointmentPrompt();
+		int choice = pendingRequestView.displayAppointmentPrompt(this.doctor.getPendingAppointmentList().size());
+		if (choice == -1) return;
 
-		int choice = 0;
-		try {
-			choice = InputHandler.getChoice(1, this.doctor.getPendingAppointmentList().size());
-		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-			return;
-		}
-
-		Appointment appointment = this.doctor.getPendingAppointmentList().get(choice - 1);
-		pendingRequestView.displayOptions();
-
-		try {
-			choice = InputHandler.getChoice(1, 2);
-		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-			return;
-		}
+		Appointment appointment = this.doctor.getPendingAppointmentList().get(choice);
+		choice = pendingRequestView.displayOptions();
 
 		switch (choice) {
 		case 1:

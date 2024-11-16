@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import hms.entity.appointment.Appointment;
@@ -67,10 +68,12 @@ public class Doctor extends User {
 	}
 
 	public void completeAppointment(Patient patient, Appointment appointment, String serviceType,
-			String consultationNotes) {
+			String consultationNotes, HashMap<Medicine, Integer> medicineList) {
 
 		AppointmentOutcomeRecord appointmentOutcomeRecord = new AppointmentOutcomeRecord(appointment.getDate(),
 				serviceType, consultationNotes, appointment.getUUID());
+		
+		appointmentOutcomeRecord.addPrescribedMedicine(medicineList);
 
 		appointment.setAppointmentOutcomeRecord(appointmentOutcomeRecord);
 		// Remove appointment from schedule
@@ -83,7 +86,6 @@ public class Doctor extends User {
 
 		removeAppointmentFromConfirmedList(appointment);
 		removeAppointmentFromPendingList(appointment);
-
 	}
 
 	public boolean scheduleAppointment(Appointment appointment) {
@@ -99,13 +101,13 @@ public class Doctor extends User {
 //		return this.schedule.changeAppointment(appointment, datetime);
 //	}
 
-	public void prescribeMedicine(Medicine medicine, AppointmentOutcomeRecord appointmentOutcomeRecord) {
-		appointmentOutcomeRecord.addPrescribedMedicine(medicine);
+	public void prescribeMedicine(HashMap<Medicine, Integer> medicineList, AppointmentOutcomeRecord appointmentOutcomeRecord) {
+		appointmentOutcomeRecord.addPrescribedMedicine(medicineList);
 	}
 
-//	public void removeMedicine(Medicine medicine, AppointmentOutcomeRecord appointmentOutcomeRecord) {
-//		appointmentOutcomeRecord.removePrescribedMedicine(medicine);
-//	}
+	public void removeMedicine(Medicine medicine, AppointmentOutcomeRecord appointmentOutcomeRecord) {
+		appointmentOutcomeRecord.removePrescribedMedicine(medicine);
+	}
 
 	public int getAge() {
 		return this.age;
