@@ -2,14 +2,14 @@ package hms.control.administrator;
 
 import hms.boundary.StaffView;
 import hms.boundary.administrator.AdministratorMenuView;
-import hms.control.Controller;
+import hms.control.MenuController;
 import hms.control.administrator.InventoryManagement.InventoryManagementController;
 import hms.control.administrator.ManageStaff.ManageStaffController;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Administrator;
 import hms.entity.user.Patient;
 
-public class AdministratorMenuController extends Controller {
+public class AdministratorMenuController extends MenuController {
 	private final Administrator administrator;
 	private final AdministratorMenuView adminMenuView;
 
@@ -20,6 +20,7 @@ public class AdministratorMenuController extends Controller {
 
 	@Override
 	public void navigate() {
+		checkNewUser(administrator);
 		int choice;
 		do {
 			adminMenuView.displayHeader();
@@ -46,15 +47,19 @@ public class AdministratorMenuController extends Controller {
 				replenishmentController.navigate();
 				break;
 			case 5:
+				ResetPasswordController resetPasswordController = new ResetPasswordController();
+				resetPasswordController.navigate();
+				break;
+			case 6:
 				ChangePasswordController changePasswordController = new ChangePasswordController(administrator);
 				changePasswordController.navigate();
 				break;
-			case 6:
+			case 7:
 				System.out.println("Logging out...");
 				break;
 			default:
 			}
-		} while (choice < 6);
+		} while (choice < 7);
 	}
 
 }

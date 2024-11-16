@@ -38,6 +38,10 @@ public class PatientRepository implements IUserRepository<Patient> {
 		return patientMap;
 	}
 
+	public void addPatient(String id, Patient patient){
+		patientMap.put(id, patient);
+	}
+	
 	@Override
 	public void deserialize() {
 		File file = new File(FILEPATH);

@@ -33,16 +33,16 @@ public class AppointmentController extends Controller {
         for (Appointment appointment : allAppointments) {
             AppointmentStatus status = appointment.getAppointmentStatus();
             switch (status) {
-                case AppointmentStatus.PENDING:
+                case PENDING:
                     pendingAppointments.add(appointment);
                     break;
-                case AppointmentStatus.CONFIRMED:
+                case CONFIRMED:
                     confirmedAppointments.add(appointment);
                     break;
-                case AppointmentStatus.CANCELLED:
+                case CANCELLED:
                     cancelledAppointments.add(appointment);
                     break;
-                case AppointmentStatus.COMPLETED:
+                case COMPLETED:
                     completedAppointments.add(appointment);
                 default:
                     break;

@@ -54,4 +54,8 @@ public abstract class User {
 		}
 		return false;
 	}
+
+	public void resetPassword() {
+		this.passwordHash = BCrypt.hashpw("password", BCrypt.gensalt());
+	}
 }
