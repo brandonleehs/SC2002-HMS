@@ -1,4 +1,4 @@
-Patient ID,Name,Date of Birth,Gender,Blood Type,Contact Information,Password Hash
-P1003,Charlie White,1990-07-08,Male,O-,charlie.white@example.com,$2a$10$WB4A1m1uGaJ4RLMDnDCoNO/lg5FRbEdmIMtr216cUOJKZHLbrbaPq
-P1001,Alice Brown,1980-05-14,Female,A+,alice.brown@example.com,$2a$10$ZX37P6ph95zRewPxvIqR6.KHFQVnmkfc1urxyEZMF3/28OuTvr1Ee
-P1002,Bob Stone,1975-11-22,Male,B+,bob.stone@example.com,$2a$10$3gpyQB3hJtLveIJtz3Cemu90qUZq0m/jK6NJraB16eYhzbBZbyjuu
+Patient ID,Name,Date of Birth,Gender,Blood Type,Contact Information,Phone Number,Password Hash
+P1003,Charlie White,1990-07-08,Male,O-,charlie.white@example.com,12345678,$2a$10$9vvulwLuHrc4B11kp5axeeqAXl1V3AcNaYMtzdBlx.y9yhihgFK0O
+P1001,Alice Brown,1980-05-14,Female,A+,alice.brown@example.com,987654321,$2a$10$R6EKgytk5IFI8E36E2fT7OENnKoC7/ZwywnJtT7F0mlGK8TQrtwxG
+P1002,Bob Stone,1975-11-22,Male,B+,bob.stone@example.com,12345678,$2a$10$hi6q.bGlXD/fN5wzz6JVRu4hln4o6ibt8xJXAgCzKxDelFRHUeCGq

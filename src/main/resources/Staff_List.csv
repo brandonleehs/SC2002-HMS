@@ -1,12 +1,6 @@
 Staff ID,Name,Role,Gender,Age,Password Hash,Availability
 D002,Emily Clarke,Doctor,Female,38,$2a$10$DT16AKv/8U/ropcZOKWPEOuwFBVYYGENKAX5gW0EEUEUK.EuM2YzC
-<<<<<<< HEAD
-D001,John Smith,Doctor,Male,45,$2a$10$SbqzkRaEn65jQZcepT3gduWCO/FvpedU12DMkxIpNB9NnhPwQ1TDS,2024-11-05,-268435456
-P001,Mark Lee,Pharmacist,Male,29,$2a$10$U2TmtFMyvla.N2lPggb7EOwyD9zk9oZriFYKSrtq7aoxely9P/Uaa
-A001,Sarah Lee,Administrator,Female,40,$2a$10$oaexp4oaL35HAJpKdcYZneCbbwqrDCLBtowzBAcH4FEXJ8i3Y9Apq
-=======
 D001,John Smith,Doctor,Male,45,$2a$10$rN6kOv3vHynN1ynePZGa/ei8Tdu1dgzLHlz2tA2ccLws6LL2fYDJ6
 P001,Mark Lee,Pharmacist,Male,29,$2a$10$Gf2H9cTBUPirAgWVR7.ZxuGzzNC0ulXlOiiGluZk1t4ylHBsepbtC
 A001,Sarah Lee,Administrator,Female,40,$2a$10$VZ48Led9e7HMcNL0H2yKE.CILtXSbJUdq2fyGDKpH3LnH.Q.86qwm
 R001,Jack Frost,Receptionist,Male,62,$2a$10$awZtyJEBTHZdOI/brtOz1uFJL.bF2gwi5caCS/lnzHN/seCsY5j0W
->>>>>>> 39bb6914a77a39d97f18141d36140a6113fa82b3

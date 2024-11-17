@@ -48,12 +48,12 @@ public class PatientRepository implements IUserRepository<Patient> {
 		try {
 			PrintWriter printWriter = new PrintWriter(file);
 			String header = String.join(",", "Patient ID", "Name", "Date of Birth", "Gender", "Blood Type",
-					"Contact Information", "Password Hash");
+					"Contact Information", "Phone Number", "Password Hash");
 			printWriter.println(header);
 			for (Patient patient : getAll()) {
 				String data = String.join(",", patient.getId(), patient.getName(), patient.getDateOfBirth().toString(),
 						patient.getGender().toString(), patient.getBloodType().toString(), patient.getEmailAddress(),
-						patient.getPasswordHash());
+						patient.getPhoneNumber(), patient.getPasswordHash());
 				printWriter.println(data);
 			}
 			printWriter.close();

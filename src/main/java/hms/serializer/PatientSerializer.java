@@ -48,10 +48,11 @@ public class PatientSerializer extends UserSerializer<Patient> {
 		String emailAddress = row[5];
 		MedicalRecord medicalRecord = new MedicalRecord(id, name, dateOfBirth, gender, bloodType, "12345678",
 				emailAddress);
-		if (row.length < 7) {
+		if (row.length <= 6) {
 			return new Patient(medicalRecord, "password");
 		}
-		String passwordHash = row[6];
+		medicalRecord.setPhoneNumber(row[6]);
+		String passwordHash = row[7];
 		Patient patient = new Patient(medicalRecord, "password");
 		patient.setPasswordHash(passwordHash);
 		return patient;
