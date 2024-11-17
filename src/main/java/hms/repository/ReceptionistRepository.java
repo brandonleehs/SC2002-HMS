@@ -52,7 +52,8 @@ public class ReceptionistRepository implements IUserRepository<Receptionist> {
 			PrintWriter printWriter = new PrintWriter(bw);
 			for (Receptionist receptionist : getAll()) {
 				String data = String.join(",", receptionist.getId(), receptionist.getName(), "Pharmacist",
-						receptionist.getGender().toString(), String.valueOf(receptionist.getAge()));
+						receptionist.getGender().toString(), String.valueOf(receptionist.getAge()),
+						receptionist.getPasswordHash());
 				printWriter.println(data);
 			}
 			printWriter.close();

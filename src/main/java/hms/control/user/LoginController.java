@@ -113,6 +113,7 @@ public class LoginController extends Controller {
 				doctorRepository.deserialize(); // must deserialize doctor first since it writes header!
 				pharmacistRepository.deserialize();
 				administratorRepository.deserialize();
+				receptionistRepository.deserialize();
 				medicineInventory.deserialize();
 				appointmentRepository.deserialize();
 				appointmentOutcomeRecordRepository.deserialize();
