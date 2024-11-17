@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Schedule {
 	// Maps an array of (scheduled) appointments to a date
@@ -150,12 +149,5 @@ public class Schedule {
 
 	public Map<LocalDate, boolean[]> getAvailableMap() {
 		return availableMap;
-	}
-
-	// Clears past schedule from record to preserve space
-	private void clearScheduleHistory() {
-		List<LocalDate> history = this.scheduleMap.keySet().stream().filter(el -> el.isBefore(LocalDate.now()))
-				.collect(Collectors.toList());
-		this.scheduleMap.keySet().removeAll(history);
 	}
 }

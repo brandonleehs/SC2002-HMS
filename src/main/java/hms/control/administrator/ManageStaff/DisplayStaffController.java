@@ -20,8 +20,8 @@ public class DisplayStaffController extends Controller {
 		pharmacists = pharmacistRepository.getMap();
 		receptionists = receptionistRepository.getMap();
 		displayStaffView.displayHeader();
-		displayStaffView.displayDoctorList(doctors); // Display all doctors
-		displayStaffView.displayPharmacistList(pharmacists); // Display all pharmacists
+		displayStaffView.displayDoctorList(doctors);
+		displayStaffView.displayPharmacistList(pharmacists);
 		displayStaffView.displayReceptionistList(receptionists);
 	}
 }

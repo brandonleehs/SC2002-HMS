@@ -38,13 +38,6 @@ public class RescheduleAppointmentView extends AppointmentView {
 		displayBorderedText(WIDTH, "Reschedule Appointment");
 	}
 
-//	public void displayDoctorsAll(DoctorRepository doctorRepository) {
-//		for (int i = 0; i < doctorRepository.getAll().size(); i++) {
-//			Doctor doctor = doctorRepository.getAll().get(i);
-//			System.out.println(String.format("%d. Dr. %s (%s)", i + 1, doctor.getName(), doctor.getId()));
-//		}
-//	}
-
 	public void displayRescheduleSuccess() {
 		System.out.println("Appointment rescheduled.");
 	}

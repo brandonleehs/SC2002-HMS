@@ -1,9 +1,8 @@
-package hms;
+package hms.auth;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// TODO: Refactor email validation, move print out of validation
 public final class Validation {
 	private Validation() {
 	}

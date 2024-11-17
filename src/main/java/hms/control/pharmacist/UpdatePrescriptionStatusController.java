@@ -48,27 +48,6 @@ public class UpdatePrescriptionStatusController extends Controller {
 		else {
 			updatePrescriptionStatusView.UnsuccessfulDispense();
 		}
-
-		// Display action choice for medicine dispensing (dispense or change back to
-		// pending)
-//		int dispenseOrUndispense = updatePrescriptionStatusView.DecisionPrompt();
-//		if (dispenseOrUndispense == 1) {
-//			// Sucessfully deduct medicine from stock
-//			if (medicineInventory.dispenseMedicine(medicineChosen.getName(), quantityToDispense)) {
-//				medicineChosen.setMedicineStatus(MedicineStatus.DISPENSED);
-//				updatePrescriptionStatusView.SuccessfulDispense();
-//			}
-//			// Unsuccessful deduction
-//			else {
-//				updatePrescriptionStatusView.UnsuccessfulDispense();
-//			}
-//		}
-
-		// TODO: Consider adding reversal of medicine
-		// else if (dispenseOrUndispense==2){
-
-		// }
-
 	}
 
 }

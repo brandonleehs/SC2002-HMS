@@ -32,14 +32,6 @@ public class AppointmentOutcomeRecordView extends View {
 
 			displayPrescriptionTable(appointmentOutcomeRecord);
 		}
-//		for (AppointmentOutcomeRecord appointmentOutcomeRecord : records) {
-//			System.out.println(String.format("UUID: %s", appointmentOutcomeRecord.getUUID().toString()));
-//			System.out.println(String.format("Date: %s", appointmentOutcomeRecord.getDate()));
-//			System.out.println(String.format("Service Type: %s", appointmentOutcomeRecord.getServiceType()));
-//			System.out.println(String.format("Diagnosis: %s", appointmentOutcomeRecord.getConsultationNotes()));
-//
-//			displayPrescriptionTable(appointmentOutcomeRecord);
-//		}
 	}
 
 	private void displayAppointmentHeader(int i) {
@@ -64,10 +56,6 @@ public class AppointmentOutcomeRecordView extends View {
 		}
 		String format = "| %-" + 5 + "s | %-" + (WIDTH - 37) + "s | %-" + 6 + "s | %-" + 13 + "s |\n";
 
-		// String format = "| %-" + (WIDTH - 31) + "s | %-" + 10 + "s | %-" + 10 + "s
-		// |\n";
-//		String format = "| %-" + 5 + "s | %-" + 10 + "s | %-" + 5 + "s | %-" + 13 + "s |\n";
-
 		System.out.println("-".repeat(WIDTH));
 		System.out.println(" ".repeat(leftPadding) + title + " ".repeat(rightPadding));
 		System.out.println("-".repeat(WIDTH));
@@ -87,23 +75,6 @@ public class AppointmentOutcomeRecordView extends View {
 		}
 
 	}
-
-//	public void displayAppointmentOutcomeRecord(Patient patient) {
-//		List<AppointmentOutcomeRecord> records = patient.getAppointmentOutcomeRecordList();
-//		if (records.isEmpty()) {
-//			System.out.println("No records found.");
-//		} else {
-//			int index = 1;
-//			for (AppointmentOutcomeRecord appointmentOutcomeRecord : records) {
-//				System.out.println(String.format("Date: %s", appointmentOutcomeRecord.getDate()));
-//				System.out.println(String.format("Service Type: %s", appointmentOutcomeRecord.getServiceType()));
-//				System.out.println(String.format("Diagnosis: %s", appointmentOutcomeRecord.getConsultationNotes()));
-//				System.out.println("+" + "=".repeat(WIDTH - 2) + "+");
-//				System.out.println("Appointment Record: " + index++);
-//				displayPrescriptionTable(appointmentOutcomeRecord);
-//			}
-//		}
-//	}
 
 	public List<AppointmentOutcomeRecord> displayUnprescribedAppointmentOutcomeRecord(Patient patient) {
 		List<AppointmentOutcomeRecord> records = patient.getAppointmentOutcomeRecordList();

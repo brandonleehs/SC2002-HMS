@@ -48,7 +48,6 @@ public class Doctor extends User {
 		return availability;
 	}
 
-	// TODO: input validation for date/timings
 	public void setAvailability(LocalDate date, LocalTime startTime, LocalTime endTime) {
 		this.schedule.setAvailability(date, startTime, endTime);
 	}
@@ -95,12 +94,7 @@ public class Doctor extends User {
 			return true;
 		}
 		return false;
-//		return this.schedule.addAppointment(appointment);
 	}
-
-//	public boolean changeAppointment(Appointment appointment, LocalDateTime datetime) {
-//		return this.schedule.changeAppointment(appointment, datetime);
-//	}
 
 	public void prescribeMedicine(HashMap<Medicine, Integer> medicineList,
 			AppointmentOutcomeRecord appointmentOutcomeRecord) {

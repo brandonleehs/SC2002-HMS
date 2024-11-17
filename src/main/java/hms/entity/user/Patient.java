@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import hms.Validation;
+import hms.auth.Validation;
 import hms.entity.appointment.Appointment;
 import hms.entity.appointment.AppointmentStatus;
 import hms.entity.record.AppointmentOutcomeRecord;

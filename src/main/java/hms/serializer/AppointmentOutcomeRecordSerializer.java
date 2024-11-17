@@ -1,8 +1,6 @@
 package hms.serializer;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -42,15 +40,12 @@ public class AppointmentOutcomeRecordSerializer extends Serializer {
 				initAppointmentOutcomeRecordFromRow(row);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	private void initAppointmentOutcomeRecordFromRow(String[] row) {
 		UUID uuid = UUID.fromString(row[0]);
-		// Parse as LocalDate
-		LocalDate date = LocalDate.from(DateTimeFormatter.ISO_LOCAL_DATE.parse(row[1]));
 		String serviceType = row[2];
 		String consultationNotes = row[3];
 		Map<Medicine, Integer> prescribedMedicineMap = new HashMap<Medicine, Integer>();

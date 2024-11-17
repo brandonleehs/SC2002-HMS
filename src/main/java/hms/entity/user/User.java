@@ -2,7 +2,7 @@ package hms.entity.user;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import hms.Validation;
+import hms.auth.Validation;
 import hms.entity.user.attributes.Gender;
 
 public abstract class User {

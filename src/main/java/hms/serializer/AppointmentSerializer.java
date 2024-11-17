@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import hms.entity.appointment.Appointment;
@@ -31,8 +29,6 @@ public class AppointmentSerializer extends Serializer {
 			return;
 		}
 
-		List<Appointment> appointmentList = new ArrayList<Appointment>();
-
 		try {
 			this.br.readLine();
 			String line;
@@ -52,7 +48,6 @@ public class AppointmentSerializer extends Serializer {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

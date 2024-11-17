@@ -29,7 +29,6 @@ public class PharmacistSerializer extends UserSerializer<Pharmacist> {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return pharmacistMap;
@@ -48,44 +47,4 @@ public class PharmacistSerializer extends UserSerializer<Pharmacist> {
 		pharmacist.setPasswordHash(passwordHash);
 		return pharmacist;
 	}
-
-//	private Pharmacist getPharmacistFromRow() {
-//		String id = this.scanner.next();
-//		String name = this.scanner.next();
-//		String role = this.scanner.next();
-//		Gender gender = this.scanner.next().equals("Male") ? Gender.MALE : Gender.FEMALE;
-//		scanner.skip(",");
-//		int age = Integer.parseInt(this.scanner.nextLine());
-//		if (role.equals("Pharmacist")) {
-//			return new Pharmacist(id, "password", name, gender, age);
-//		}
-//		return null;
-//	}
-//	@Override
-//	protected Map<String, Pharmacist> readWorkbook(Workbook wb) {
-//		Map<String, Pharmacist> pharmacistMap = new HashMap<String, Pharmacist>();
-//		for (Sheet sheet : wb) {
-//			for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
-//				Pharmacist pharmacist = getPharmacistFromRow(sheet.getRow(rowNum));
-//				if (pharmacist != null) {
-//					pharmacistMap.put(pharmacist.getId(), pharmacist);
-//				}
-//			}
-//		}
-//		return pharmacistMap;
-//	}
-//
-//	private Pharmacist getPharmacistFromRow(Row row) {
-//		DataFormatter formatter = new DataFormatter();
-//		String role = formatter.formatCellValue(row.getCell(2));
-//		if (role.equals("Pharmacist")) {
-//			String id = formatter.formatCellValue(row.getCell(0));
-//			String name = formatter.formatCellValue(row.getCell(1));
-//			Gender gender = formatter.formatCellValue(row.getCell(3)).equals("Male") ? Gender.MALE : Gender.FEMALE;
-//			int age = Integer.parseInt(formatter.formatCellValue(row.getCell(4)));
-//			return new Pharmacist(id, "password", name, gender, age);
-//		}
-//		return null;
-//	}
-
 }

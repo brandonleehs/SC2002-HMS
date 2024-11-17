@@ -10,7 +10,7 @@ import hms.entity.user.Receptionist;
 import hms.entity.user.attributes.Gender;
 
 public class UpdateStaffController extends Controller {
-	private final UpdateStaffView updateStaffView;	
+	private final UpdateStaffView updateStaffView;
 
 	public UpdateStaffController() {
 		this.updateStaffView = new UpdateStaffView();
@@ -26,49 +26,48 @@ public class UpdateStaffController extends Controller {
 		List<String> details;
 		int age;
 		switch (choice) {
-			case 1: //if Doctor chosen
-				Doctor editingDoctor = doctorRepository.getById(tempID);
-				if (editingDoctor == null) {
-					updateStaffView.staffDoesNotExist();
-					return;
-				}
-				details = updateStaffView.getDetails();
-				age = this.updateStaffView.getAge();
-				if (age == -1) {
-					return;
-				}
-				doctorEditor(details, editingDoctor, age);
-				break;
-			
-			case 2: //if Pharmacist chosen
-				Pharmacist editingPharmacist = pharmacistRepository.getById(tempID);
-				if (editingPharmacist == null) {
-					updateStaffView.staffDoesNotExist();
-					return;
-				}
-				details = updateStaffView.getDetails();
-				age = this.updateStaffView.getAge();
-				if (age == -1) {
-					return;
-				}
-				pharmacistEditor(details, editingPharmacist, age);
-				break;
+		case 1: // if Doctor chosen
+			Doctor editingDoctor = doctorRepository.getById(tempID);
+			if (editingDoctor == null) {
+				updateStaffView.staffDoesNotExist();
+				return;
+			}
+			details = updateStaffView.getDetails();
+			age = this.updateStaffView.getAge();
+			if (age == -1) {
+				return;
+			}
+			doctorEditor(details, editingDoctor, age);
+			break;
 
-			case 3:
-				Receptionist editingReceptionist = receptionistRepository.getById(tempID);
-				if (editingReceptionist == null) {
-					updateStaffView.staffDoesNotExist();
-					return;
-				}
-				details = updateStaffView.getDetails();
-				age = this.updateStaffView.getAge();
-				if (age == -1) {
-					return;
-				}
-				receptionistEditor(details, editingReceptionist, age);
-				break;
+		case 2: // if Pharmacist chosen
+			Pharmacist editingPharmacist = pharmacistRepository.getById(tempID);
+			if (editingPharmacist == null) {
+				updateStaffView.staffDoesNotExist();
+				return;
+			}
+			details = updateStaffView.getDetails();
+			age = this.updateStaffView.getAge();
+			if (age == -1) {
+				return;
+			}
+			pharmacistEditor(details, editingPharmacist, age);
+			break;
+
+		case 3:
+			Receptionist editingReceptionist = receptionistRepository.getById(tempID);
+			if (editingReceptionist == null) {
+				updateStaffView.staffDoesNotExist();
+				return;
+			}
+			details = updateStaffView.getDetails();
+			age = this.updateStaffView.getAge();
+			if (age == -1) {
+				return;
+			}
+			receptionistEditor(details, editingReceptionist, age);
+			break;
 		}
-		// DoctorPharmacistEditor(details, choice);
 	}
 
 	private void doctorEditor(List<String> details, Doctor editingDoctor, int age) {

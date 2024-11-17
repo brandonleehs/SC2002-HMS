@@ -35,32 +35,6 @@ public class LoginController extends Controller {
 
 	@Override
 	public void navigate() {
-//		Patient patient = patientRepository.getById("P1001");
-//		Doctor doctor = doctorRepository.getById("D001");
-//		Appointment appt = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 5),
-//				LocalTime.of(9, 30));
-//		patient.scheduleAppointment(doctor, appt);
-//		doctor.acceptAppointment(appt);
-//		Appointment appt1 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 5),
-//				LocalTime.of(10, 30));
-//		patient.scheduleAppointment(doctor, appt1);
-//
-//		Appointment appt2 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 5),
-//				LocalTime.of(11, 30));
-//		patient.scheduleAppointment(doctor, appt2);
-//
-//		Appointment appt3 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 6),
-//				LocalTime.of(11, 30));
-//		patient.scheduleAppointment(doctor, appt3);
-//
-//		doctor.acceptAppointment(appt1);
-//
-//		Map<Medicine, Integer> medicineMap = new HashMap<Medicine, Integer>();
-//		medicineMap.put(new Medicine("Paracetamol"), 101);
-//		medicineMap.put(new Medicine("Ibuprofen"), 50);
-//
-//		doctor.completeAppointment(patient, appt1, "Consultation", "Fever. Rest recommended. ", medicineMap);
-
 		boolean login = false;
 		User user = null;
 		while (true) {

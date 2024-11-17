@@ -28,17 +28,6 @@ public class UpdatePrescriptionStatusView extends View {
 		return i;
 	}
 
-//	public int DecisionPrompt() {
-//		System.out.println("Enter 1 to Dispense, 2 to Undispense: ");
-//		int choice;
-//		try {
-//			choice = InputHandler.getChoice(1, 2);
-//		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-//			return -1;
-//		}
-//		return choice;
-//	}
-
 	public void SuccessfulDispense() {
 		System.out.println("Successfully dispensed medicine!");
 	}

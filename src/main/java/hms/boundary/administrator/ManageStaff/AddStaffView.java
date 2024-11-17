@@ -44,32 +44,6 @@ public class AddStaffView extends View {
 			returnDetails.add("F");
 		}
 		return returnDetails;
-
-//		List<String> returnDetails = new ArrayList<>();
-//		List<String> dupe = new ArrayList<>();
-//		int loop;
-//		do {
-//			try {
-//				choice = -1;
-//				System.out.println("Enter ID: ");
-//				returnDetails.add(InputHandler.getString());
-//				System.out.println("Enter Name: ");
-//				returnDetails.add(InputHandler.getString());
-//				System.out.println("Enter Gender: ");
-//				System.out.println("1: Male");
-//				System.out.println("2: Female");
-//				choice = InputHandler.getChoice(1, 2);
-//				if (choice == 1) {
-//					returnDetails.add("M");
-//				} else {
-//					returnDetails.add("F");
-//				}
-//				loop = 1;
-//			} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-//				return dupe;
-//			}
-//		} while (loop != 1);
-//		return returnDetails;
 	}
 
 	public int getAge() {

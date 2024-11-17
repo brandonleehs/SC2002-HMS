@@ -25,7 +25,6 @@ public class MedicineInventorySerializer extends Serializer {
 				setData(row);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -51,36 +50,4 @@ public class MedicineInventorySerializer extends Serializer {
 	public List<ReplenishRequest> getReplenishmentRequestList() {
 		return this.replenishmentRequestList;
 	}
-
-//	private void setMedicineStock() {
-//		List<Integer> temp = new ArrayList<Integer>(2);
-//		String name = this.scanner.next();
-//		int stock = Integer.parseInt(this.scanner.next());
-//		scanner.skip(",");
-//		int lowStockLeveLAlertValue = Integer.parseInt(this.scanner.nextLine());
-//		temp.add(stock);
-//		temp.add(lowStockLeveLAlertValue);
-//		this.medicineStock.put(name, temp);
-//	}
-
-//	public Map<String, List<Integer>> getMedicineInventory(String filepath) {
-//		Workbook wb = getWorkbook(filepath);
-//		for (Sheet sheet : wb) {
-//			for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
-//				setMedicineStock(sheet.getRow(rowNum));
-//			}
-//		}
-//		return medicineStock;
-//	}
-//
-//	private void setMedicineStock(Row row) {
-//		List<Integer> temp = new ArrayList<Integer>(2);
-//		DataFormatter formatter = new DataFormatter();
-//		String name = formatter.formatCellValue(row.getCell(0));
-//		int stock = Integer.parseInt(formatter.formatCellValue(row.getCell(1)));
-//		int lowStockLeveLAlertValue = Integer.parseInt(formatter.formatCellValue(row.getCell(2)));
-//		temp.add(stock);
-//		temp.add(lowStockLeveLAlertValue);
-//		medicineStock.put(name, temp);
-//	}
 }

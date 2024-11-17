@@ -22,7 +22,8 @@ public class PendingRequestController extends Controller {
 		}
 		pendingRequestView.displayPendingAppointments(this.doctor, patientRepository);
 		int choice = pendingRequestView.displayAppointmentPrompt(this.doctor.getPendingAppointmentList().size());
-		if (choice == -1) return;
+		if (choice == -1)
+			return;
 
 		Appointment appointment = this.doctor.getPendingAppointmentList().get(choice);
 		choice = pendingRequestView.displayOptions();
@@ -37,27 +38,5 @@ public class PendingRequestController extends Controller {
 		default:
 
 		}
-
-//		while (appointment.getPatientId() != null) {
-//			try {
-//				choice = InputHandler.getChoice(0, 1);
-//			} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-//				// Continue loop if invalid choice
-//				choice = -1;
-//				break;
-//			}
-//			switch (choice) {
-//			case 0:
-//				appointment.setAppointmentStatus(AppointmentStatus.CANCELLED);
-//				break;
-//			case 1:
-//				appointment.setAppointmentStatus(AppointmentStatus.CONFIRMED);
-//			default:
-//
-//				schedule = doctor.getSchedule();
-//				appointment = pendingRequestView.displayFirstPendingAppointments(schedule, patientRepository);
-//			}
-//		}
-//		System.out.println("No more pending Appointments.");
 	}
 }

@@ -32,7 +32,6 @@ public class InputHandler {
 		}
 	}
 
-	// TODO: Validate!
 	public static String getString() {
 		return scanner.nextLine();
 	}

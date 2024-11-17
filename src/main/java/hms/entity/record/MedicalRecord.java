@@ -69,11 +69,6 @@ public class MedicalRecord {
 		return this.appointmentOutcomeRecordList;
 	}
 
-//	added for pharmacist to access latest record
-//	public AppointmentOutcomeRecord getAppointmentOutcomeRecordLatest() {
-//		return this.appointmentOutcomeRecordList[appointmentOutcomeRecordList.length - 1];
-//	}
-
 	public void addAppointmentOutcomeRecord(AppointmentOutcomeRecord appointmentOutcomeRecord) {
 		this.appointmentOutcomeRecordList.add(appointmentOutcomeRecord);
 	}

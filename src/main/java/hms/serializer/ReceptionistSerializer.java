@@ -8,12 +8,12 @@ import hms.entity.user.Receptionist;
 import hms.entity.user.attributes.Gender;
 
 public class ReceptionistSerializer extends UserSerializer<Receptionist> {
-    
-    public ReceptionistSerializer(String filepath) {
-        super(filepath);
-    }
 
-    @Override
+	public ReceptionistSerializer(String filepath) {
+		super(filepath);
+	}
+
+	@Override
 	public Map<String, Receptionist> getMap() {
 		Map<String, Receptionist> receptionistMap = new HashMap<String, Receptionist>();
 
@@ -29,7 +29,6 @@ public class ReceptionistSerializer extends UserSerializer<Receptionist> {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return receptionistMap;

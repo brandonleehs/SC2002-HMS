@@ -39,16 +39,17 @@ public class UpdatePatientMedicalRecordController extends Controller {
 		MedicalRecordView medicalRecordView = new MedicalRecordView(this.patient);
 		medicalRecordView.displayMedicalRecord();
 
-		
-
-		int choice = this.updatePatientMedicalRecordView.displayApptOptionPrompt(patient.getAppointmentOutcomeRecordList().size());
-		if (choice == -1) return;
+		int choice = this.updatePatientMedicalRecordView
+				.displayApptOptionPrompt(patient.getAppointmentOutcomeRecordList().size());
+		if (choice == -1)
+			return;
 
 		AppointmentOutcomeRecord appointmentOutcomeRecord = patient.getAppointmentOutcomeRecordList().get(choice);
 
 		choice = this.updatePatientMedicalRecordView.displayOptions();
-		if (choice == -1) return;
-		
+		if (choice == -1)
+			return;
+
 		String notes = null;
 		switch (choice) {
 		case 1:
@@ -58,11 +59,13 @@ public class UpdatePatientMedicalRecordController extends Controller {
 
 			showMedicationInventoryController.navigate();
 
-			int medicineChoice = updatePatientMedicalRecordView.displayAddPrescriptionNamePrompt(medicines.keySet().size());
-			if (medicineChoice == -1) return;
+			int medicineChoice = updatePatientMedicalRecordView
+					.displayAddPrescriptionNamePrompt(medicines.keySet().size());
+			if (medicineChoice == -1)
+				return;
 
 			int medicineAmount = updatePatientMedicalRecordView.displayAddPrescriptionQtyPrompt();
-			
+
 			Medicine prescribed_medicine = new Medicine(medicineNames.get(medicineChoice));
 			prescribed_medicine.setMedicineStatus(MedicineStatus.PENDING);
 			prescribed_medicines.put(prescribed_medicine, medicineAmount);
@@ -82,18 +85,4 @@ public class UpdatePatientMedicalRecordController extends Controller {
 		default:
 		}
 	}
-//
-//	public AppointmentOutcomeRecord chooseAppointmentOutcomeRecord() {
-//		updatePatientMedicalRecordView.displayApptOptionPrompt();
-//		int i = -1;
-//		while (i == -1) {
-//			try {
-//				i = InputHandler.getChoice(1, patient.getAppointmentOutcomeRecordList().size());
-//			} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-//				continue;
-//			}
-//		}
-//
-//		return (patient.getAppointmentOutcomeRecordList()).get(i - 1);
-//	}
 }
