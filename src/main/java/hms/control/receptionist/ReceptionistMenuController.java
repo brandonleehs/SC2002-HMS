@@ -4,6 +4,7 @@ import hms.boundary.receptionist.ReceptionistMenuView;
 import hms.control.MenuController;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Receptionist;
+import hms.entity.user.User;
 
 public class ReceptionistMenuController extends MenuController {
     private final Receptionist receptionist;
@@ -16,7 +17,7 @@ public class ReceptionistMenuController extends MenuController {
 
     @Override
     public void navigate() {
-        checkNewUser(receptionist);
+        checkNewUser((User)receptionist);
         int choice = 0;
         do{
             this.receptionistMenuView.displayHeader();
@@ -28,8 +29,9 @@ public class ReceptionistMenuController extends MenuController {
                     addPatientController.navigate();
                     break;
                 case 2:
-                    ChangePasswordController changePasswordController = new ChangePasswordController(receptionist);
+                    ChangePasswordController changePasswordController = new ChangePasswordController((User)receptionist);
                     changePasswordController.navigate();
+                    break;
                 case 3:
                     System.out.println("Logging out...");
                     break;
