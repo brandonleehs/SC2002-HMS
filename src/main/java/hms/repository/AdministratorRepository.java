@@ -48,7 +48,8 @@ public class AdministratorRepository implements IUserRepository<Administrator> {
 			PrintWriter printWriter = new PrintWriter(bw);
 			for (Administrator administrator : getAll()) {
 				String data = String.join(",", administrator.getId(), administrator.getName(), "Administrator",
-						administrator.getGender().toString(), String.valueOf(administrator.getAge()));
+						administrator.getGender().toString(), String.valueOf(administrator.getAge()),
+						administrator.getPasswordHash());
 				printWriter.println(data);
 			}
 			printWriter.close();

@@ -23,7 +23,7 @@ public abstract class User {
 		return this.id;
 	}
 
-	public void setId(String newID){
+	public void setId(String newID) {
 		this.id = newID;
 	}
 
@@ -35,7 +35,7 @@ public abstract class User {
 		return this.name;
 	}
 
-	public void setName(String newName){
+	public void setName(String newName) {
 		this.name = newName;
 	}
 
@@ -43,7 +43,7 @@ public abstract class User {
 		return this.gender;
 	}
 
-	public void setGender(Gender newGender){
+	public void setGender(Gender newGender) {
 		this.gender = newGender;
 	}
 
@@ -53,6 +53,10 @@ public abstract class User {
 			return true;
 		}
 		return false;
+	}
+
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
 	}
 
 	public void resetPassword() {

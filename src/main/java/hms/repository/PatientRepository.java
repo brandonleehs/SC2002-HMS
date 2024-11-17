@@ -38,21 +38,22 @@ public class PatientRepository implements IUserRepository<Patient> {
 		return patientMap;
 	}
 
-	public void addPatient(String id, Patient patient){
+	public void addPatient(String id, Patient patient) {
 		patientMap.put(id, patient);
 	}
-	
+
 	@Override
 	public void deserialize() {
 		File file = new File(FILEPATH);
 		try {
 			PrintWriter printWriter = new PrintWriter(file);
 			String header = String.join(",", "Patient ID", "Name", "Date of Birth", "Gender", "Blood Type",
-					"Contact Information");
+					"Contact Information", "Password Hash");
 			printWriter.println(header);
 			for (Patient patient : getAll()) {
 				String data = String.join(",", patient.getId(), patient.getName(), patient.getDateOfBirth().toString(),
-						patient.getGender().toString(), patient.getBloodType().toString(), patient.getEmailAddress());
+						patient.getGender().toString(), patient.getBloodType().toString(), patient.getEmailAddress(),
+						patient.getPasswordHash());
 				printWriter.println(data);
 			}
 			printWriter.close();

@@ -39,7 +39,13 @@ public class AdministratorSerializer extends UserSerializer<Administrator> {
 		String name = row[1];
 		Gender gender = row[3].equals("Male") ? Gender.MALE : Gender.FEMALE;
 		int age = Integer.parseInt(row[4]);
-		return new Administrator(id, "password", name, gender, age);
+		if (row.length < 6) {
+			return new Administrator(id, "password", name, gender, age);
+		}
+		String passwordHash = row[5];
+		Administrator administrator = new Administrator(id, "password", name, gender, age);
+		administrator.setPasswordHash(passwordHash);
+		return administrator;
 	}
 
 //	private Administrator getAdministratorFromRow() {

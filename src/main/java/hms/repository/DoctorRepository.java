@@ -47,11 +47,11 @@ public class DoctorRepository implements IUserRepository<Doctor> {
 		File file = new File(FILEPATH);
 		try {
 			PrintWriter printWriter = new PrintWriter(file);
-			String header = String.join(",", "Staff ID", "Name", "Role", "Gender", "Age");
+			String header = String.join(",", "Staff ID", "Name", "Role", "Gender", "Age", "Password Hash");
 			printWriter.println(header);
 			for (Doctor doctor : getAll()) {
 				String data = String.join(",", doctor.getId(), doctor.getName(), "Doctor",
-						doctor.getGender().toString(), String.valueOf(doctor.getAge()));
+						doctor.getGender().toString(), String.valueOf(doctor.getAge()), doctor.getPasswordHash());
 				printWriter.println(data);
 			}
 			printWriter.close();

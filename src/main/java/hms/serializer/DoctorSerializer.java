@@ -40,7 +40,13 @@ public class DoctorSerializer extends UserSerializer<Doctor> {
 		String name = row[1];
 		Gender gender = row[3].equals("Male") ? Gender.MALE : Gender.FEMALE;
 		int age = Integer.parseInt(row[4]);
-		return new Doctor(id, "password", name, gender, age);
+		if (row.length < 6) {
+			return new Doctor(id, "password", name, gender, age);
+		}
+		String passwordHash = row[5];
+		Doctor doctor = new Doctor(id, "password", name, gender, age);
+		doctor.setPasswordHash(passwordHash);
+		return doctor;
 	}
 
 //	private Doctor getDoctorFromRow() {

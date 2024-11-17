@@ -40,7 +40,13 @@ public class PharmacistSerializer extends UserSerializer<Pharmacist> {
 		String name = row[1];
 		Gender gender = row[3].equals("Male") ? Gender.MALE : Gender.FEMALE;
 		int age = Integer.parseInt(row[4]);
-		return new Pharmacist(id, "password", name, gender, age);
+		if (row.length < 6) {
+			return new Pharmacist(id, "password", name, gender, age);
+		}
+		String passwordHash = row[5];
+		Pharmacist pharmacist = new Pharmacist(id, "password", name, gender, age);
+		pharmacist.setPasswordHash(passwordHash);
+		return pharmacist;
 	}
 
 //	private Pharmacist getPharmacistFromRow() {

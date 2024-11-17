@@ -52,7 +52,8 @@ public class PharmacistRepository implements IUserRepository<Pharmacist> {
 			PrintWriter printWriter = new PrintWriter(bw);
 			for (Pharmacist pharmacist : getAll()) {
 				String data = String.join(",", pharmacist.getId(), pharmacist.getName(), "Pharmacist",
-						pharmacist.getGender().toString(), String.valueOf(pharmacist.getAge()));
+						pharmacist.getGender().toString(), String.valueOf(pharmacist.getAge()),
+						pharmacist.getPasswordHash());
 				printWriter.println(data);
 			}
 			printWriter.close();
