@@ -101,7 +101,6 @@ public class LoginController extends Controller {
 					administratorMenuController.navigate();
 
 				} else if (user instanceof Receptionist) {
-					System.out.println(1);
 					ReceptionistMenuController receptionistMenuController = new ReceptionistMenuController(
 							(Receptionist) user);
 					receptionistMenuController.navigate();
