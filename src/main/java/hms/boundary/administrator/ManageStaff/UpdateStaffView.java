@@ -21,15 +21,13 @@ public class UpdateStaffView extends View{
     }
 
     public int getRoleChoice() {
-        System.out.println("Choose role (Doctor/Pharmacist): ");
-        System.out.println("1: Doctor");
-        System.out.println("2: Pharmacist");
-        System.out.println("3: Cancel");
+        System.out.println("Choose role (Doctor/Pharmacist/Receptionist): ");
+		System.out.println("1: Doctor\r\n2: Pharmacist\r\n3: Receptionist\r\n4: Cancel");
         choice=0;
         try {
-                choice = InputHandler.getChoice(1, 3);
+                choice = InputHandler.getChoice(1, 4);
             } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-                return 3;
+                return 4;
             }
         return choice;
     }
@@ -106,5 +104,9 @@ public class UpdateStaffView extends View{
 
     public void updatePharmacistSuccessful(){
         System.out.println("Pharmacist updated successfully.");
+    }
+
+    public void updateReceptionistSuccessful(){
+        System.out.println("Receptionist updated successfully.");
     }
 }

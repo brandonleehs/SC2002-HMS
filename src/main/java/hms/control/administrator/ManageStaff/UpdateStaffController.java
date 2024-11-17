@@ -6,12 +6,11 @@ import hms.boundary.administrator.ManageStaff.UpdateStaffView;
 import hms.control.Controller;
 import hms.entity.user.Doctor;
 import hms.entity.user.Pharmacist;
+import hms.entity.user.Receptionist;
 import hms.entity.user.attributes.Gender;
 
 public class UpdateStaffController extends Controller {
-	private final UpdateStaffView updateStaffView;
-	private Doctor editingDoctor;
-	private Pharmacist editingPharmacist;
+	private final UpdateStaffView updateStaffView;	
 
 	public UpdateStaffController() {
 		this.updateStaffView = new UpdateStaffView();
@@ -21,42 +20,58 @@ public class UpdateStaffController extends Controller {
 	public void navigate() {
 		updateStaffView.displayHeader();
 		int choice = updateStaffView.getRoleChoice();
-		if (choice == 3)
+		if (choice == 4)
 			return;
 		String tempID = updateStaffView.getID();
-		// If doctor chosen
-		if (choice == 1) {
-			this.editingDoctor = doctorRepository.getById(tempID);
-			if (this.editingDoctor == null) {
-				updateStaffView.staffDoesNotExist();
-				return;
-			}
-			List<String> details = updateStaffView.getDetails();
-			int age = this.updateStaffView.getAge();
-			if (age == -1) {
-				return;
-			}
-			DoctorEditor(details, editingDoctor, age);
-		}
-		// If pharmacist chosen
-		else {
-			this.editingPharmacist = pharmacistRepository.getById(tempID);
-			if (this.editingPharmacist == null) {
-				updateStaffView.staffDoesNotExist();
-				return;
-			}
-			List<String> details = updateStaffView.getDetails();
-			int age = this.updateStaffView.getAge();
-			if (age == -1) {
-				return;
-			}
-			PharmacistEditor(details, editingPharmacist, age);
-		}
+		List<String> details;
+		int age;
+		switch (choice) {
+			case 1: //if Doctor chosen
+				Doctor editingDoctor = doctorRepository.getById(tempID);
+				if (editingDoctor == null) {
+					updateStaffView.staffDoesNotExist();
+					return;
+				}
+				details = updateStaffView.getDetails();
+				age = this.updateStaffView.getAge();
+				if (age == -1) {
+					return;
+				}
+				doctorEditor(details, editingDoctor, age);
+				break;
+			
+			case 2: //if Pharmacist chosen
+				Pharmacist editingPharmacist = pharmacistRepository.getById(tempID);
+				if (editingPharmacist == null) {
+					updateStaffView.staffDoesNotExist();
+					return;
+				}
+				details = updateStaffView.getDetails();
+				age = this.updateStaffView.getAge();
+				if (age == -1) {
+					return;
+				}
+				pharmacistEditor(details, editingPharmacist, age);
+				break;
 
+			case 3:
+				Receptionist editingReceptionist = receptionistRepository.getById(tempID);
+				if (editingReceptionist == null) {
+					updateStaffView.staffDoesNotExist();
+					return;
+				}
+				details = updateStaffView.getDetails();
+				age = this.updateStaffView.getAge();
+				if (age == -1) {
+					return;
+				}
+				receptionistEditor(details, editingReceptionist, age);
+				break;
+		}
 		// DoctorPharmacistEditor(details, choice);
 	}
 
-	private void DoctorEditor(List<String> details, Doctor editingDoctor, int age) {
+	private void doctorEditor(List<String> details, Doctor editingDoctor, int age) {
 		// TODO: Verify that id is valid format (D001/P001 for example)
 		int choice = updateStaffView.printDetails(details, age);
 		if (choice == 2) {
@@ -72,7 +87,7 @@ public class UpdateStaffController extends Controller {
 		updateStaffView.updateDoctorSuccessful();
 	}
 
-	private void PharmacistEditor(List<String> details, Pharmacist editingPharmacist, int age) {
+	private void pharmacistEditor(List<String> details, Pharmacist editingPharmacist, int age) {
 		int choice = updateStaffView.printDetails(details, age);
 		if (choice == 2) {
 			return;
@@ -85,5 +100,20 @@ public class UpdateStaffController extends Controller {
 			editingPharmacist.setGender(Gender.FEMALE);
 		}
 		updateStaffView.updatePharmacistSuccessful();
+	}
+
+	private void receptionistEditor(List<String> details, Receptionist editingReceptionist, int age) {
+		int choice = updateStaffView.printDetails(details, age);
+		if (choice == 2) {
+			return;
+		}
+		editingReceptionist.setId(details.get(0));
+		editingReceptionist.setName(details.get(1));
+		if (details.get(2).equals("M")) {
+			editingReceptionist.setGender(Gender.MALE);
+		} else {
+			editingReceptionist.setGender(Gender.FEMALE);
+		}
+		updateStaffView.updateReceptionistSuccessful();
 	}
 }

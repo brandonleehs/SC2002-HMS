@@ -13,10 +13,10 @@ public class ManageStaffView extends View {
 	}
 
 	public void displayOptions() {
-		System.out.println("1. Add Doctor/Pharmacist");
-		System.out.println("2. Update Doctor/Pharmacist");
-		System.out.println("3. Remove Doctor/Pharmacist");
-		System.out.println("4. Display All Doctors and Pharmacists");
+		System.out.println("1. Add Staff");
+		System.out.println("2. Update Staff");
+		System.out.println("3. Remove Staff");
+		System.out.println("4. Display All Staff");
 		System.out.println("5. Return to main menu");
 	}
 

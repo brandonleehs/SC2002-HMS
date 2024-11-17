@@ -6,14 +6,13 @@ import hms.boundary.administrator.ManageStaff.AddStaffView;
 import hms.control.Controller;
 import hms.entity.user.Doctor;
 import hms.entity.user.Pharmacist;
+import hms.entity.user.Receptionist;
 import hms.entity.user.attributes.Gender;
 import hms.exceptions.InvalidChoiceFormatException;
 import hms.exceptions.InvalidChoiceValueException;
 
 public class AddStaffController extends Controller {
 	private final AddStaffView addStaffView;
-	private Doctor newDoctor;
-	private Pharmacist newPharmacist;
 
 	public AddStaffController() {
 		this.addStaffView = new AddStaffView();
@@ -23,7 +22,7 @@ public class AddStaffController extends Controller {
 	public void navigate() {
 		addStaffView.displayHeader();
 		int choice = addStaffView.getRoleChoice();
-		if (choice == 3)
+		if (choice == 4)
 			return;
 		List<String> details;
 		try {
@@ -48,15 +47,24 @@ public class AddStaffController extends Controller {
 			}
 			password = "password";
 			int age = this.addStaffView.getAge();
-			if (choice == 1) {
-				this.newDoctor = new Doctor(id, password, name, gender, age);
-				doctorRepository.addDoctor(id, this.newDoctor);
-				addStaffView.addDoctorSuccessful();
-
-			} else {
-				this.newPharmacist = new Pharmacist(id, password, name, gender, age);
-				pharmacistRepository.addPharmacist(id, this.newPharmacist);
-				addStaffView.addPharmacistSuccessful();
+			switch (choice) {
+				case 1:
+					Doctor newDoctor = new Doctor(id, password, name, gender, age);
+					doctorRepository.addDoctor(id, newDoctor);
+					addStaffView.addDoctorSuccessful();
+					break;
+				
+				case 2:
+					Pharmacist newPharmacist = new Pharmacist(id, password, name, gender, age);
+					pharmacistRepository.addPharmacist(id, newPharmacist);
+					addStaffView.addPharmacistSuccessful();
+					break;
+			
+				case 3:
+					Receptionist newReceptionist = new Receptionist(id, password, name, gender, age);
+					receptionistRepository.addReceptionist(id, newReceptionist);
+					addStaffView.addReceptionistSuccessful();
+					break;
 			}
 		} else {
 			addStaffView.userExists();
