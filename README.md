@@ -70,9 +70,12 @@ git clone https://github.com/brandonleehs/SC2002-HMS.git
 cd SC2002-HMS/
 ```
 
-TODO!
+**2. Create a list of all java files in the project, then run the application.**
 
-navigate to the `src/main/java/hms/` directory. Directly compile and run the `App.java` file.
+```
+dir /s /B *.java > sources.txt
+java -cp "./lib/*" @sources.txt
+```
 
 ## Project Structure
 
