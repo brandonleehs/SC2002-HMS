@@ -61,7 +61,18 @@ java -jar ./target/hms-1.0.jar
 
 ### 3. Running from Source
 
-If you prefer to compile and run the application directly from the source code, navigate to the `src/main/java/hms/` directory. Directly compile and run the `App.java` file.
+**1. Clone the Repository**
+
+If you prefer to compile and run the application directly from the source code, clone the repository and navigate to the project directory.
+
+```
+git clone https://github.com/brandonleehs/SC2002-HMS.git
+cd SC2002-HMS/
+```
+
+TODO!
+
+navigate to the `src/main/java/hms/` directory. Directly compile and run the `App.java` file.
 
 ## Project Structure
 
