@@ -10,6 +10,7 @@ import hms.control.MenuController;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
+import hms.entity.user.User;
 
 public class DoctorMenuController extends MenuController {
 	private final DoctorMenuView doctorMenuView;
@@ -22,7 +23,7 @@ public class DoctorMenuController extends MenuController {
 
 	@Override
 	public void navigate() {
-		checkNewUser(doctor);
+		checkNewUser((User)doctor);
 		int choice = 0;
 		do {
 			this.doctorMenuView.displayHeader();
@@ -69,7 +70,7 @@ public class DoctorMenuController extends MenuController {
 				completeAppointmentController.navigate();
 				break;
 			case 8: // change password
-				ChangePasswordController changePasswordController = new ChangePasswordController(doctor);
+				ChangePasswordController changePasswordController = new ChangePasswordController((User)doctor);
 				changePasswordController.navigate();
 				break;
 			case 9: // logout

@@ -5,6 +5,7 @@ import hms.boundary.patient.record.MedicalRecordView;
 import hms.control.MenuController;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Patient;
+import hms.entity.user.User;
 
 public class PatientMenuController extends MenuController {
 	private final PatientMenuView patientMenuView;
@@ -17,7 +18,7 @@ public class PatientMenuController extends MenuController {
 
 	@Override
 	public void navigate() {
-		checkNewUser(patient);
+		checkNewUser((User)patient);
 		int choice = 0;
 		do {
 			this.patientMenuView.displayHeader();
@@ -60,7 +61,7 @@ public class PatientMenuController extends MenuController {
 				appointmentOutcomeRecordController.navigate();
 				break;
 			case 9:
-				ChangePasswordController changePasswordController = new ChangePasswordController(patient);
+				ChangePasswordController changePasswordController = new ChangePasswordController((User)patient);
 				changePasswordController.navigate();
 				break;
 			case 10:
