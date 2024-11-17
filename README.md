@@ -2,6 +2,15 @@
 
 **HMS** is an application aimed at automating the management of hospital operations, including patient management, appointment scheduling, staff management, and billing. The system is expected to facilitate efficient management of hospital resources, enhance patient care, and streamline administrative processes.
 
+## Contributors
+
+| Name                            | Email                |                                                                   GitHub Profile                                                                    |
+| ------------------------------- | -------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------: |
+| Lee Heng Sheng, Brandon         | BLEE075@e.ntu.edu.sg | [![GitHub](https://img.shields.io/badge/brandonleehs-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/brandonleehs) |
+| Heng Ziyang                     | @e.ntu.edu.sg        |    [![GitHub](https://img.shields.io/badge/Zycrannny-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/Zycrannny)    |
+| Keagan Kong Kai Yi (Kang Kaiyi) | @e.ntu.edu.sg        |       [![GitHub](https://img.shields.io/badge/kekgan-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/kekgan)       |
+| Lim Zhen Rong                   | @e.ntu.edu.sg        |   [![GitHub](https://img.shields.io/badge/alvinlimzr-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/alvinlimzr)   |
+
 ## Prerequisites
 
 Ensure you have the following installed on your system:
@@ -107,11 +116,14 @@ Other design patterns our project uses include the Repository pattern, which enf
 ## Features
 
 1. Data Persistence
-2. Input Validation
-3. Strong security
-4. Receptionist Class
-5.
+2. New Patient Registration
+3. Password Encryption
+4. Password Reset
+5. Input Validation
+6. Unit Testing
 
-Our passwords are salted with BCrypt. Even if attackers gained access to the .csv files, they would not be able to gain access to the accounts.
+## JavaDoc
+
+The JavaDoc is deployed on [github pages](https://brandonleehs.github.io/SC2002-HMS/).
 
 For any additional information or troubleshooting, please consult the project documentation or open an issue in the repository.
