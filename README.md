@@ -72,8 +72,17 @@ cd SC2002-HMS/
 
 **2. Create a list of all java files in the project, then run the application.**
 
+Windows:
+
 ```
 dir /s /B *.java > sources.txt
+java -cp "./lib/*" @sources.txt
+```
+
+Linux/MacOS:
+
+```
+find -name "*.java" > sources.txt
 java -cp "./lib/*" @sources.txt
 ```
 
