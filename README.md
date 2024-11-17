@@ -22,7 +22,7 @@ If both commands return version details, your setup is correct and you're ready 
 
 We provide multiple convenient ways to run this project:
 
-### 1. Pre-compiled JAR
+### Pre-compiled JAR
 
 Clone the repository and run the pre-compiled JAR file located in the `bin/` directory:
 
@@ -32,7 +32,7 @@ cd SC2002-HMS/
 java -jar ./bin/hms-1.0.jar
 ```
 
-### 2. Build with Maven
+### Build with Maven
 
 **1. Clone the Repository**
 
@@ -59,7 +59,7 @@ After successfully building the project, execute the JAR file to run the Hospita
 java -jar ./target/hms-1.0.jar
 ```
 
-### 3. Running from Source
+### Running from Source
 
 **1. Clone the Repository**
 
@@ -96,5 +96,13 @@ This separation allows us to achieve strong decoupling, which improves modularit
 Other design patterns our project uses include the Repository pattern, which enforces a clean, uniform interface for performing CRUD operations on stored objects. We also made heavy use of generics for better code reusability and type safety.
 
 ## Features
+
+1. Data Persistence
+2. Input Validation
+3. Strong security
+4. Receptionist Class
+5.
+
+Our passwords are salted with BCrypt. Even if attackers gained access to the .csv files, they would not be able to gain access to the accounts.
 
 For any additional information or troubleshooting, please consult the project documentation or open an issue in the repository.
