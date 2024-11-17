@@ -1,5 +1,5 @@
-Staff ID,Name,Role,Gender,Age,Password Hash
+Staff ID,Name,Role,Gender,Age,Password Hash,Availability
 D002,Emily Clarke,Doctor,Female,38,$2a$10$DT16AKv/8U/ropcZOKWPEOuwFBVYYGENKAX5gW0EEUEUK.EuM2YzC
-D001,John Smith,Doctor,Male,45,$2a$10$SbqzkRaEn65jQZcepT3gduWCO/FvpedU12DMkxIpNB9NnhPwQ1TDS
+D001,John Smith,Doctor,Male,45,$2a$10$SbqzkRaEn65jQZcepT3gduWCO/FvpedU12DMkxIpNB9NnhPwQ1TDS,2024-11-05,-268435456
 P001,Mark Lee,Pharmacist,Male,29,$2a$10$U2TmtFMyvla.N2lPggb7EOwyD9zk9oZriFYKSrtq7aoxely9P/Uaa
 A001,Sarah Lee,Administrator,Female,40,$2a$10$oaexp4oaL35HAJpKdcYZneCbbwqrDCLBtowzBAcH4FEXJ8i3Y9Apq

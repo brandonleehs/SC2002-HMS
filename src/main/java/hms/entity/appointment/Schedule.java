@@ -64,6 +64,9 @@ public class Schedule {
 
 	public void cancelAppointment(Appointment appointment) {
 		Appointment[] timeslots = this.scheduleMap.get(appointment.getDate());
+		if (timeslots == null) {
+			return;
+		}
 		timeslots[getTimeslot(appointment.getTime())] = null;
 	}
 

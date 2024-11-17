@@ -3,6 +3,7 @@ package hms.repository;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -47,11 +48,13 @@ public class DoctorRepository implements IUserRepository<Doctor> {
 		File file = new File(FILEPATH);
 		try {
 			PrintWriter printWriter = new PrintWriter(file);
-			String header = String.join(",", "Staff ID", "Name", "Role", "Gender", "Age", "Password Hash");
+			String header = String.join(",", "Staff ID", "Name", "Role", "Gender", "Age", "Password Hash",
+					"Availability");
 			printWriter.println(header);
 			for (Doctor doctor : getAll()) {
 				String data = String.join(",", doctor.getId(), doctor.getName(), "Doctor",
 						doctor.getGender().toString(), String.valueOf(doctor.getAge()), doctor.getPasswordHash());
+				data += encodeAvailableMap(doctor);
 				printWriter.println(data);
 			}
 			printWriter.close();
@@ -59,5 +62,22 @@ public class DoctorRepository implements IUserRepository<Doctor> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	// Encode boolean array into an integer
+	private String encodeAvailableMap(Doctor doctor) {
+		String data = "";
+		Map<LocalDate, boolean[]> availableMap = doctor.getSchedule().getAvailableMap();
+		for (Map.Entry<LocalDate, boolean[]> entry : availableMap.entrySet()) {
+			int n = 0;
+			LocalDate date = entry.getKey();
+			for (int i = 0; i < entry.getValue().length; i++) {
+				if (entry.getValue()[i]) {
+					n |= 1 << i;
+				}
+			}
+			data += "," + date.toString() + "," + String.valueOf(n);
+		}
+		return data;
 	}
 }

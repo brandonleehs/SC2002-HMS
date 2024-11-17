@@ -1,6 +1,8 @@
 package hms.serializer;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +48,24 @@ public class DoctorSerializer extends UserSerializer<Doctor> {
 		String passwordHash = row[5];
 		Doctor doctor = new Doctor(id, "password", name, gender, age);
 		doctor.setPasswordHash(passwordHash);
+		decodeAvailableMap(doctor, row);
+
 		return doctor;
+	}
+
+	// Decode integer into boolean array
+	private void decodeAvailableMap(Doctor doctor, String[] row) {
+		for (int i = 6; i < row.length; i += 2) {
+			LocalDate date = LocalDate.from(DateTimeFormatter.ISO_LOCAL_DATE.parse(row[i]));
+			int n = Integer.valueOf(row[i + 1]);
+			boolean[] availability = new boolean[48];
+			for (int j = 0; j < 48; j++) {
+				if ((n & 1 << j) != 0) {
+					availability[j] = true;
+				}
+			}
+			doctor.getSchedule().getAvailableMap().put(date, availability);
+		}
 	}
 
 //	private Doctor getDoctorFromRow() {

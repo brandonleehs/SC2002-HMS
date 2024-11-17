@@ -67,5 +67,6 @@ public class AppointmentOutcomeRecordSerializer extends Serializer {
 		Patient patient = patientRepository.getById(appointment.getPatientId());
 		Doctor doctor = doctorRepository.getById(appointment.getDoctorId());
 		doctor.completeAppointment(patient, appointment, serviceType, consultationNotes, prescribedMedicineMap);
+
 	}
 }
