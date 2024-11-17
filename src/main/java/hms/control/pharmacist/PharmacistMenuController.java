@@ -3,7 +3,6 @@ package hms.control.pharmacist;
 import hms.boundary.patient.record.AppointmentOutcomeRecordView;
 import hms.boundary.pharmacist.PharmacistMenuView;
 import hms.boundary.pharmacist.ViewReplenishmentRequestView;
-import hms.control.Controller;
 import hms.control.MenuController;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Patient;
