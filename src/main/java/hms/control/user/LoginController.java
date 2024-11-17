@@ -60,13 +60,6 @@ public class LoginController extends Controller {
 //		medicineMap.put(new Medicine("Ibuprofen"), 50);
 //
 //		doctor.completeAppointment(patient, appt1, "Consultation", "Fever. Rest recommended. ", medicineMap);
-//
-//		Appointment[] slot = doctor.getSchedule().getScheduleMap().get(LocalDate.of(2024, 11, 5));
-//		for (int i = 0; i < 48; i++) {
-//			if (slot[i] != null) {
-//				System.out.println(slot[i].getTime());
-//			}
-//		}
 
 		boolean login = false;
 		User user = null;

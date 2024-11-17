@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import hms.entity.appointment.Appointment;
 import hms.entity.medicine.Medicine;
+import hms.entity.medicine.MedicineStatus;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 import hms.repository.AppointmentRepository;
@@ -53,10 +54,12 @@ public class AppointmentOutcomeRecordSerializer extends Serializer {
 		String serviceType = row[2];
 		String consultationNotes = row[3];
 		Map<Medicine, Integer> prescribedMedicineMap = new HashMap<Medicine, Integer>();
-		for (int i = 4; i < row.length; i += 2) {
+		for (int i = 4; i < row.length; i += 3) {
 			String medicineName = row[i];
 			Integer amt = Integer.valueOf(row[i + 1]);
+			MedicineStatus medicineStatus = MedicineStatus.fromString(row[i + 2]);
 			Medicine medicine = new Medicine(medicineName);
+			medicine.setMedicineStatus(medicineStatus);
 			prescribedMedicineMap.put(medicine, amt);
 		}
 
@@ -64,6 +67,5 @@ public class AppointmentOutcomeRecordSerializer extends Serializer {
 		Patient patient = patientRepository.getById(appointment.getPatientId());
 		Doctor doctor = doctorRepository.getById(appointment.getDoctorId());
 		doctor.completeAppointment(patient, appointment, serviceType, consultationNotes, prescribedMedicineMap);
-
 	}
 }

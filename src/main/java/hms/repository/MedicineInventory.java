@@ -19,7 +19,9 @@ public class MedicineInventory {
 
 	public MedicineInventory() {
 		MedicineInventorySerializer medicineInventorySerializer = new MedicineInventorySerializer(FILEPATH);
-		medicineStock = medicineInventorySerializer.getMedicineInventory();
+		medicineInventorySerializer.serialize();
+		this.medicineStock = medicineInventorySerializer.getMedicineStock();
+		this.replenishmentRequestList.addAll(medicineInventorySerializer.getReplenishmentRequestList());
 	}
 
 	public Map<String, List<Integer>> getFullMedicine() {
@@ -108,11 +110,18 @@ public class MedicineInventory {
 		File file = new File(FILEPATH);
 		try {
 			PrintWriter printWriter = new PrintWriter(file);
-			String header = String.join(",", "Medicine Name", "Initial Stock", "Low Stock Level Alert");
+			String header = String.join(",", "Medicine Name", "Initial Stock", "Low Stock Level Alert",
+					"Replenish Request");
 			printWriter.println(header);
 			for (Map.Entry<String, List<Integer>> entry : medicineStock.entrySet()) {
 				String data = String.join(",", entry.getKey(), String.valueOf(entry.getValue().get(0)),
 						String.valueOf(entry.getValue().get(1)));
+				ReplenishRequest replenishRequest = null;
+				if (!this.replenishmentRequestList.isEmpty()
+						&& (replenishRequest = this.replenishmentRequestList.remove(0)) != null) {
+					data = data + "," + replenishRequest.getMedicineName() + ","
+							+ String.valueOf(replenishRequest.getStockToAdd());
+				}
 				printWriter.println(data);
 			}
 			printWriter.close();

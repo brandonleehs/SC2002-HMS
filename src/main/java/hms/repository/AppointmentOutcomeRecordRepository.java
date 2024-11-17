@@ -8,6 +8,7 @@ import java.util.Map;
 import hms.entity.appointment.Appointment;
 import hms.entity.appointment.AppointmentStatus;
 import hms.entity.medicine.Medicine;
+import hms.entity.medicine.MedicineStatus;
 import hms.entity.record.AppointmentOutcomeRecord;
 import hms.serializer.AppointmentOutcomeRecordSerializer;
 
@@ -39,7 +40,8 @@ public class AppointmentOutcomeRecordRepository {
 					for (Map.Entry<Medicine, Integer> entry : prescribedMedicineMap.entrySet()) {
 						String medName = entry.getKey().getName();
 						Integer amt = entry.getValue();
-						data = data + "," + medName + "," + String.valueOf(amt);
+						MedicineStatus medicineStatus = entry.getKey().getMedicineStatus();
+						data = data + "," + medName + "," + String.valueOf(amt) + "," + medicineStatus.toString2();
 					}
 					printWriter.println(data);
 				}

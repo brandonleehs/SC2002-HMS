@@ -1,0 +1,5 @@
+UUID,Patient ID,Doctor ID,Appointment Status,Date,Time
+1f274cc6-f3ee-4805-9006-60776dc55a8a,P1001,D001,Confirmed,2024-11-05,09:30
+e3c5012f-52fc-421e-a667-b10dcef8beb7,P1001,D001,Completed,2024-11-05,10:30
+16466dac-2bbf-4a3a-8c8d-41c9393df16d,P1001,D001,Pending,2024-11-05,11:30
+032a2237-4a5b-496d-a5e5-6c8c2a5e7b73,P1001,D001,Pending,2024-11-06,11:30
