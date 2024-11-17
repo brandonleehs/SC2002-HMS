@@ -41,7 +41,6 @@ public class AdministratorRepository implements IUserRepository<Administrator> {
 
 	@Override
 	public void deserialize() {
-//		File file = new File(FILEPATH);
 		try {
 			FileWriter fw = new FileWriter(FILEPATH, true);
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -54,7 +53,6 @@ public class AdministratorRepository implements IUserRepository<Administrator> {
 			}
 			printWriter.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
