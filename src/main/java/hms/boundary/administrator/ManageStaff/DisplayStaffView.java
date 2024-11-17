@@ -50,7 +50,7 @@ public class DisplayStaffView extends View {
 		if (receptionists.isEmpty()) {
 			System.out.println("No receptionist in records.");
 		} else {
-			System.out.printf(format, "Index", "ID", "Recptionist Name");
+			System.out.printf(format, "Index", "ID", "Receptionist Name");
 			System.out.printf(format, "-".repeat(5), "-".repeat(5), "-".repeat(WIDTH - 20));
 			int u = 0;
 			for (Map.Entry<String, Receptionist> entry : receptionists.entrySet()) {

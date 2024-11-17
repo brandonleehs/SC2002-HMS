@@ -16,6 +16,6 @@ public class ResetPasswordView extends View {
     }
     
     public void successMessage(User user) {
-        System.out.println("Password for user " + user.getId() + user.getName() + " successfully reset.");
+        System.out.println("Password for user " + user.getId() + " " + user.getName() + " successfully reset.");
     }
 }
