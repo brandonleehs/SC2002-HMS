@@ -9,19 +9,19 @@ import org.junit.jupiter.api.Test;
 import hms.entity.user.Patient;
 import hms.entity.user.attributes.BloodType;
 import hms.entity.user.attributes.Gender;
-import hms.repository.PatientRepository;
+import hms.serializer.PatientSerializer;
 
 class PatientControllerTest {
-	private static final PatientRepository patientRepository = new PatientRepository();
+	private final PatientSerializer patientSerializer = new PatientSerializer("./src/test/resources/Patient_List.csv");
 
 	@Test
 	void testGetPatientTableIfNull() {
-		assertTrue(patientRepository.getMap() != null);
+		assertTrue(patientSerializer.getMap() != null);
 	}
 
 	@Test
 	void testGetPatientTableIfAttributesAreSame() {
-		Patient alice = patientRepository.getMap().get("P1001");
+		Patient alice = patientSerializer.getMap().get("P1001");
 		assertTrue(alice.getName().equals("Alice Brown"));
 		assertTrue(alice.getDateOfBirth().isEqual(LocalDate.of(1980, 5, 14)));
 		assertTrue(alice.getGender() == Gender.FEMALE);

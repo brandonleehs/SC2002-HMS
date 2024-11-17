@@ -15,14 +15,14 @@ class PatientSerializerTest {
 
 	@Test
 	void testGetPatientMapIfNull() {
-		PatientSerializer patientSerializer = new PatientSerializer("Patient_List.csv");
+		PatientSerializer patientSerializer = new PatientSerializer("./src/test/resources/Patient_List.csv");
 		assertTrue(patientSerializer.getMap() != null);
 
 	}
 
 	@Test
 	void testGetPatientMapIfAttributesAreSame() {
-		PatientSerializer patientSerializer = new PatientSerializer("Patient_List.csv");
+		PatientSerializer patientSerializer = new PatientSerializer("./src/test/resources/Patient_List.csv");
 		Map<String, Patient> patientMap;
 
 		patientMap = patientSerializer.getMap();

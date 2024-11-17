@@ -13,13 +13,13 @@ class DoctorSerializerTest {
 
 	@Test
 	void testGetDoctorMapIfNull() {
-		DoctorSerializer doctorSerializer = new DoctorSerializer("Staff_List.csv");
+		DoctorSerializer doctorSerializer = new DoctorSerializer("./src/test/resources/Staff_List.csv");
 		assertTrue(doctorSerializer.getMap() != null);
 	}
 
 	@Test
 	void testGetDoctorMapIfAttributesAreSame() {
-		DoctorSerializer doctorSerializer = new DoctorSerializer("Staff_List.csv");
+		DoctorSerializer doctorSerializer = new DoctorSerializer("./src/test/resources/Staff_List.csv");
 		Map<String, Doctor> doctorMap;
 
 		doctorMap = doctorSerializer.getMap();

@@ -13,13 +13,15 @@ class AdministratorSerializerTest {
 
 	@Test
 	void testGetAdministratorMapIfNull() {
-		AdministratorSerializer administratorSerializer = new AdministratorSerializer("Staff_List.csv");
+		AdministratorSerializer administratorSerializer = new AdministratorSerializer(
+				"./src/test/resources/Staff_List.csv");
 		assertTrue(administratorSerializer.getMap() != null);
 	}
 
 	@Test
 	void testGetAdministratorMapIfAttributesAreSame() {
-		AdministratorSerializer administratorSerializer = new AdministratorSerializer("Staff_List.csv");
+		AdministratorSerializer administratorSerializer = new AdministratorSerializer(
+				"./src/test/resources/Staff_List.csv");
 		Map<String, Administrator> administratorMap;
 
 		administratorMap = administratorSerializer.getMap();
