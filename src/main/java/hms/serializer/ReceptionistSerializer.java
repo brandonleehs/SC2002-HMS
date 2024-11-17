@@ -40,6 +40,12 @@ public class ReceptionistSerializer extends UserSerializer<Receptionist> {
 		String name = row[1];
 		Gender gender = row[3].equals("Male") ? Gender.MALE : Gender.FEMALE;
 		int age = Integer.parseInt(row[4]);
-		return new Receptionist(id, "password", name, gender, age);
+		if (row.length < 6) {
+			return new Receptionist(id, "password", name, gender, age);
+		}
+		String passwordHash = row[5];
+		Receptionist receptionist = new Receptionist(id, "password", name, gender, age);
+		receptionist.setPasswordHash(passwordHash);
+		return receptionist;
 	}
 }

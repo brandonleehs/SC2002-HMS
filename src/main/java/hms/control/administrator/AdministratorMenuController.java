@@ -8,6 +8,7 @@ import hms.control.administrator.ManageStaff.ManageStaffController;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Administrator;
 import hms.entity.user.Patient;
+import hms.entity.user.User;
 
 public class AdministratorMenuController extends MenuController {
 	private final Administrator administrator;
@@ -20,7 +21,7 @@ public class AdministratorMenuController extends MenuController {
 
 	@Override
 	public void navigate() {
-		checkNewUser(administrator);
+		checkNewUser((User)administrator);
 		int choice;
 		do {
 			adminMenuView.displayHeader();
@@ -51,7 +52,7 @@ public class AdministratorMenuController extends MenuController {
 				resetPasswordController.navigate();
 				break;
 			case 6:
-				ChangePasswordController changePasswordController = new ChangePasswordController(administrator);
+				ChangePasswordController changePasswordController = new ChangePasswordController((User)administrator);
 				changePasswordController.navigate();
 				break;
 			case 7:

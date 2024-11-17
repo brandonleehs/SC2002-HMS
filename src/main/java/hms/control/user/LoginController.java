@@ -101,7 +101,6 @@ public class LoginController extends Controller {
 					administratorMenuController.navigate();
 
 				} else if (user instanceof Receptionist) {
-					System.out.println(1);
 					ReceptionistMenuController receptionistMenuController = new ReceptionistMenuController(
 							(Receptionist) user);
 					receptionistMenuController.navigate();
@@ -113,6 +112,7 @@ public class LoginController extends Controller {
 				doctorRepository.deserialize(); // must deserialize doctor first since it writes header!
 				pharmacistRepository.deserialize();
 				administratorRepository.deserialize();
+				receptionistRepository.deserialize();
 				medicineInventory.deserialize();
 				appointmentRepository.deserialize();
 				appointmentOutcomeRecordRepository.deserialize();

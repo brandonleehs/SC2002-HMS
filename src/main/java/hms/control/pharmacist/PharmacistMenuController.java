@@ -3,11 +3,11 @@ package hms.control.pharmacist;
 import hms.boundary.patient.record.AppointmentOutcomeRecordView;
 import hms.boundary.pharmacist.PharmacistMenuView;
 import hms.boundary.pharmacist.ViewReplenishmentRequestView;
-import hms.control.Controller;
 import hms.control.MenuController;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;
+import hms.entity.user.User;
 
 public class PharmacistMenuController extends MenuController {
 	private final PharmacistMenuView pharmacistMenuView;
@@ -20,7 +20,7 @@ public class PharmacistMenuController extends MenuController {
 
 	@Override
 	public void navigate() {
-		checkNewUser(pharmacist);
+		checkNewUser((User)pharmacist);
 		int choice = 0;
 		do {
 			this.pharmacistMenuView.displayHeader();
@@ -57,7 +57,7 @@ public class PharmacistMenuController extends MenuController {
 				viewReplenishmentRequestView.displayRequests(medicineInventory.getReplenishmentRequestList());
 				break;
 			case 6: // change password
-				ChangePasswordController changePasswordController = new ChangePasswordController(pharmacist);
+				ChangePasswordController changePasswordController = new ChangePasswordController((User)pharmacist);
 				changePasswordController.navigate();
 				break;
 			case 7: // logout

@@ -24,7 +24,7 @@ public class ResetPasswordController extends Controller {
         userMap.putAll(pharmacistRepository.getMap());
         userMap.putAll(receptionistRepository.getMap());
 
-        String id = resetPasswordView.chooseUser();
+        String id;
         User user = null;
         do {
             id = resetPasswordView.chooseUser();
