@@ -21,7 +21,6 @@ public class Doctor extends User {
 	private final List<Appointment> pendingAppointmentList;
 	private final List<Appointment> confirmedAppointmentList;
 
-	// TODO: add custom working hours after testing
 	public Doctor(String id, String password, String name, Gender gender, int age) {
 		super(id, password, name, gender);
 		this.age = age;

@@ -11,7 +11,6 @@ import java.util.Map;
 import hms.entity.medicine.ReplenishRequest;
 import hms.serializer.MedicineInventorySerializer;
 
-// Define a singleton class with early instantiation
 public class MedicineInventory {
 	private Map<String, List<Integer>> medicineStock = new HashMap<>();
 	private final List<ReplenishRequest> replenishmentRequestList = new ArrayList<ReplenishRequest>();
@@ -126,7 +125,6 @@ public class MedicineInventory {
 			}
 			printWriter.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

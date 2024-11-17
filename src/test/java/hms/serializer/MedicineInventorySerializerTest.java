@@ -1,33 +1,32 @@
-// package hms.serializer;
+package hms.serializer;
 
-// import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-// import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-// import hms.entity.medicine.MedicineInventory;
+class MedicineInventorySerializerTest {
+	private static final MedicineInventorySerializer medicineInventorySerializer = new MedicineInventorySerializer(
+			"./src/test/resources/Medicine_List.csv");
 
-// class MedicineInventorySerializerTest {
+	@BeforeAll
+	static void setUp() {
+		medicineInventorySerializer.serialize();
+	}
 
-// 	@Test
-// 	void testMedicineInventoryIfNull() {
-// 		MedicineInventorySerializer medicineInventorySerializer = new MedicineInventorySerializer();
-// 		medicineInventorySerializer.getMedicineInventory("Medicine_List.xlsx");
-// 		MedicineInventory medicineInventory = MedicineInventory.getInstance();
-// 		assertTrue(medicineInventory.getMedicineStock() != null);
-// 		assertTrue(medicineInventory.getMedicineLowStockLevelAlertValue() != null);
-// 	}
+	@Test
+	void testMedicineInventoryIfNull() {
+		assertTrue(medicineInventorySerializer.getMedicineStock() != null);
+	}
 
-// 	@Test
-// 	void testMedicineInventoryAttributesIfSame() {
-// 		MedicineInventorySerializer medicineInventorySerializer = new MedicineInventorySerializer();
-// 		medicineInventorySerializer.getMedicineInventory("Medicine_List.xlsx");
-// 		MedicineInventory medicineInventory = MedicineInventory.getInstance();
-// 		assertTrue(medicineInventory.getMedicineStock().get("Paracetamol") == 100);
-// 		assertTrue(medicineInventory.getMedicineLowStockLevelAlertValue().get("Paracetamol") == 20);
-// 		assertTrue(medicineInventory.getMedicineStock().get("Ibuprofen") == 50);
-// 		assertTrue(medicineInventory.getMedicineLowStockLevelAlertValue().get("Ibuprofen") == 10);
-// 		assertTrue(medicineInventory.getMedicineStock().get("Amoxicillin") == 75);
-// 		assertTrue(medicineInventory.getMedicineLowStockLevelAlertValue().get("Amoxicillin") == 15);
-// 	}
+	@Test
+	void testMedicineInventoryAttributesIfSame() {
+		assertTrue(medicineInventorySerializer.getMedicineStock().get("Paracetamol").get(0) == 100);
+		assertTrue(medicineInventorySerializer.getMedicineStock().get("Paracetamol").get(1) == 20);
+		assertTrue(medicineInventorySerializer.getMedicineStock().get("Ibuprofen").get(0) == 50);
+		assertTrue(medicineInventorySerializer.getMedicineStock().get("Ibuprofen").get(1) == 10);
+		assertTrue(medicineInventorySerializer.getMedicineStock().get("Amoxicillin").get(0) == 75);
+		assertTrue(medicineInventorySerializer.getMedicineStock().get("Amoxicillin").get(1) == 15);
+	}
 
-// }
+}
