@@ -29,7 +29,7 @@ If both commands return version details, your setup is correct and you're ready 
 
 ## Usage Options:
 
-We provide multiple convenient ways to run this project:
+We provide multiple convenient ways to run this project, depending on whether you use Maven or not:
 
 ### Pre-compiled JAR
 
