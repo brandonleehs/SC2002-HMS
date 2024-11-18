@@ -3,6 +3,7 @@ package hms.repository;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Base64;
 import java.util.Map;
 
 import hms.entity.appointment.Appointment;
@@ -34,8 +35,15 @@ public class AppointmentOutcomeRecordRepository {
 			for (Appointment appointment : appointmentRepository.getAll()) {
 				if (appointment.getAppointmentStatus() == AppointmentStatus.COMPLETED) {
 					AppointmentOutcomeRecord aor = appointment.getAppointmentOutcomeRecord();
+					String serviceType = aor.getServiceType();
+					String consultationNotes = aor.getConsultationNotes();
+
+					// Use base64 encoding to prevent commas in string
+					String encodedServiceType = Base64.getEncoder().encodeToString(serviceType.getBytes());
+					String encodedConsultationNotes = Base64.getEncoder().encodeToString(consultationNotes.getBytes());
+
 					String data = String.join(",", aor.getUUID().toString(), aor.getDate().toString(),
-							aor.getServiceType(), aor.getConsultationNotes());
+							encodedServiceType, encodedConsultationNotes);
 					Map<Medicine, Integer> prescribedMedicineMap = aor.getPrescribedMedicineMap();
 					for (Map.Entry<Medicine, Integer> entry : prescribedMedicineMap.entrySet()) {
 						String medName = entry.getKey().getName();

@@ -1,6 +1,7 @@
 package hms.serializer;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -46,8 +47,11 @@ public class AppointmentOutcomeRecordSerializer extends Serializer {
 
 	private void initAppointmentOutcomeRecordFromRow(String[] row) {
 		UUID uuid = UUID.fromString(row[0]);
-		String serviceType = row[2];
-		String consultationNotes = row[3];
+		String encodedServiceType = row[2];
+		String encodedConsultationNotes = row[3];
+		String serviceType = new String(Base64.getDecoder().decode(encodedServiceType));
+		String consultationNotes = new String(Base64.getDecoder().decode(encodedConsultationNotes));
+
 		Map<Medicine, Integer> prescribedMedicineMap = new HashMap<Medicine, Integer>();
 		for (int i = 4; i < row.length; i += 3) {
 			String medicineName = row[i];
