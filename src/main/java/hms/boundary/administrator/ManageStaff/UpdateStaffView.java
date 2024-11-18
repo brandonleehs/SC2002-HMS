@@ -81,7 +81,6 @@ public class UpdateStaffView extends View {
 
 	public int printDetails(List<String> details, int age) {
 		try {
-			System.out.println("|" + "-".repeat(WIDTH - 29) + "|" + "-".repeat(12) + "|" + "-".repeat(13) + "|");
 			System.out.println("Check that entered details are correct:");
 			System.out.println("ID: " + details.get(0));
 			System.out.println("Name: " + details.get(1));

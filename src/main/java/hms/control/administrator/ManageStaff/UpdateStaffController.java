@@ -76,6 +76,7 @@ public class UpdateStaffController extends Controller {
 		if (choice == 2) {
 			return;
 		}
+		String oldId = editingDoctor.getId();
 		editingDoctor.setId(details.get(0));
 		editingDoctor.setName(details.get(1));
 		if (details.get(2).equals("M")) {
@@ -83,6 +84,8 @@ public class UpdateStaffController extends Controller {
 		} else {
 			editingDoctor.setGender(Gender.FEMALE);
 		}
+		doctorRepository.getMap().remove(oldId);
+		doctorRepository.addDoctor(editingDoctor.getId(), editingDoctor);
 		updateStaffView.updateDoctorSuccessful();
 	}
 
@@ -91,6 +94,7 @@ public class UpdateStaffController extends Controller {
 		if (choice == 2) {
 			return;
 		}
+		String oldId = editingPharmacist.getId();
 		editingPharmacist.setId(details.get(0));
 		editingPharmacist.setName(details.get(1));
 		if (details.get(2).equals("M")) {
@@ -98,6 +102,8 @@ public class UpdateStaffController extends Controller {
 		} else {
 			editingPharmacist.setGender(Gender.FEMALE);
 		}
+		pharmacistRepository.getMap().remove(oldId);
+		pharmacistRepository.addPharmacist(editingPharmacist.getId(), editingPharmacist);
 		updateStaffView.updatePharmacistSuccessful();
 	}
 
@@ -106,6 +112,7 @@ public class UpdateStaffController extends Controller {
 		if (choice == 2) {
 			return;
 		}
+		String oldId = editingReceptionist.getId();
 		editingReceptionist.setId(details.get(0));
 		editingReceptionist.setName(details.get(1));
 		if (details.get(2).equals("M")) {
@@ -113,6 +120,8 @@ public class UpdateStaffController extends Controller {
 		} else {
 			editingReceptionist.setGender(Gender.FEMALE);
 		}
+		receptionistRepository.getMap().remove(oldId);
+		receptionistRepository.addReceptionist(editingReceptionist.getId(), editingReceptionist);
 		updateStaffView.updateReceptionistSuccessful();
 	}
 }
