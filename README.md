@@ -81,10 +81,17 @@ cd SC2002-HMS/
 
 **2. Create a list of all java files in the project, then run the application.**
 
-Windows:
+Windows Command Prompt:
 
 ```
 dir /s /B *.java > sources.txt
+java -cp "./lib/*" @sources.txt
+```
+
+Windows Powershell:
+
+```
+Get-ChildItem -Recurse -Filter *.java | ForEach-Object { $_.FullName } | Out-File -FilePath sources.txt -Encoding ASCII
 java -cp "./lib/*" "@sources.txt"
 ```
 
