@@ -43,7 +43,7 @@ public class AppointmentOutcomeRecord {
 		StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append(this.consultationNotes);
-		stringBuilder.append(consultationNotes);
+		stringBuilder.append(" " + consultationNotes);
 		this.consultationNotes = stringBuilder.toString();
 	}
 
