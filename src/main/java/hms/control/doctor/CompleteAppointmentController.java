@@ -66,10 +66,12 @@ public class CompleteAppointmentController extends Controller {
 			Medicine prescribed_medicine = new Medicine(medicineNames.get(medicineChoice));
 			prescribed_medicine.setMedicineStatus(MedicineStatus.PENDING);
 			prescribed_medicines.put(prescribed_medicine, medicineAmount);
+
+			
+		completeAppointmentView.SuccessfulPrescription();
 		}
 
 		doctor.completeAppointment(patientRepository.getById(appointment.getPatientId()), appointment, serviceType,
 				consultationNotes, prescribed_medicines);
-		completeAppointmentView.SuccessfulPrescription();
 	}
 }
