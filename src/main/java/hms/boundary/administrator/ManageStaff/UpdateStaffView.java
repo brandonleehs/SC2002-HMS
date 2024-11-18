@@ -48,8 +48,6 @@ public class UpdateStaffView extends View {
 		do {
 			try {
 				choice = -1;
-//				System.out.println("Enter ID: ");
-//				returnDetails.add(InputHandler.getString());
 				System.out.println("Enter Name: ");
 				returnDetails.add(InputHandler.getString());
 				System.out.println("Enter Gender: ");
