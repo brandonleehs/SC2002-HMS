@@ -48,8 +48,8 @@ public class UpdateStaffView extends View {
 		do {
 			try {
 				choice = -1;
-				System.out.println("Enter ID: ");
-				returnDetails.add(InputHandler.getString());
+//				System.out.println("Enter ID: ");
+//				returnDetails.add(InputHandler.getString());
 				System.out.println("Enter Name: ");
 				returnDetails.add(InputHandler.getString());
 				System.out.println("Enter Gender: ");
@@ -82,9 +82,8 @@ public class UpdateStaffView extends View {
 	public int printDetails(List<String> details, int age) {
 		try {
 			System.out.println("Check that entered details are correct:");
-			System.out.println("ID: " + details.get(0));
-			System.out.println("Name: " + details.get(1));
-			System.out.println("Gender: " + details.get(2));
+			System.out.println("Name: " + details.get(0));
+			System.out.println("Gender: " + details.get(1));
 			System.out.println("Age: " + age);
 			System.out.println("Enter 1 to confirm, 2 to cancel");
 			choice = InputHandler.getChoice(1, 2);

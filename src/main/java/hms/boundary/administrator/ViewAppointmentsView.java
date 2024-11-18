@@ -60,7 +60,8 @@ public class ViewAppointmentsView extends AppointmentView {
 				System.out.printf(format, i + 1, appointment.getDate(), appointment.getTime(),
 						appointment.getDoctorId(), "[FIRED DOCTOR]");
 			} else {
-				System.out.printf(format, i + 1, appointment.getDate(), appointment.getTime(), doctor.getName());
+				System.out.printf(format, i + 1, appointment.getDate(), appointment.getTime(), doctor.getId(),
+						doctor.getName());
 			}
 		}
 		System.out.println();

@@ -76,16 +76,16 @@ public class UpdateStaffController extends Controller {
 		if (choice == 2) {
 			return;
 		}
-		String oldId = editingDoctor.getId();
-		editingDoctor.setId(details.get(0));
-		editingDoctor.setName(details.get(1));
-		if (details.get(2).equals("M")) {
+//		String oldId = editingDoctor.getId();
+//		editingDoctor.setId(details.get(0));
+		editingDoctor.setName(details.get(0));
+		if (details.get(1).equals("M")) {
 			editingDoctor.setGender(Gender.MALE);
 		} else {
 			editingDoctor.setGender(Gender.FEMALE);
 		}
-		doctorRepository.getMap().remove(oldId);
-		doctorRepository.addDoctor(editingDoctor.getId(), editingDoctor);
+//		doctorRepository.getMap().remove(oldId);
+//		doctorRepository.addDoctor(editingDoctor.getId(), editingDoctor);
 		updateStaffView.updateDoctorSuccessful();
 	}
 
@@ -94,16 +94,16 @@ public class UpdateStaffController extends Controller {
 		if (choice == 2) {
 			return;
 		}
-		String oldId = editingPharmacist.getId();
-		editingPharmacist.setId(details.get(0));
-		editingPharmacist.setName(details.get(1));
-		if (details.get(2).equals("M")) {
+//		String oldId = editingPharmacist.getId();
+//		editingPharmacist.setId(details.get(0));
+		editingPharmacist.setName(details.get(0));
+		if (details.get(1).equals("M")) {
 			editingPharmacist.setGender(Gender.MALE);
 		} else {
 			editingPharmacist.setGender(Gender.FEMALE);
 		}
-		pharmacistRepository.getMap().remove(oldId);
-		pharmacistRepository.addPharmacist(editingPharmacist.getId(), editingPharmacist);
+//		pharmacistRepository.getMap().remove(oldId);
+//		pharmacistRepository.addPharmacist(editingPharmacist.getId(), editingPharmacist);
 		updateStaffView.updatePharmacistSuccessful();
 	}
 
@@ -112,16 +112,16 @@ public class UpdateStaffController extends Controller {
 		if (choice == 2) {
 			return;
 		}
-		String oldId = editingReceptionist.getId();
-		editingReceptionist.setId(details.get(0));
-		editingReceptionist.setName(details.get(1));
-		if (details.get(2).equals("M")) {
+//		String oldId = editingReceptionist.getId();
+//		editingReceptionist.setId(details.get(0));
+		editingReceptionist.setName(details.get(0));
+		if (details.get(1).equals("M")) {
 			editingReceptionist.setGender(Gender.MALE);
 		} else {
 			editingReceptionist.setGender(Gender.FEMALE);
 		}
-		receptionistRepository.getMap().remove(oldId);
-		receptionistRepository.addReceptionist(editingReceptionist.getId(), editingReceptionist);
+//		receptionistRepository.getMap().remove(oldId);
+//		receptionistRepository.addReceptionist(editingReceptionist.getId(), editingReceptionist);
 		updateStaffView.updateReceptionistSuccessful();
 	}
 }
