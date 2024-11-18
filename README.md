@@ -4,12 +4,12 @@
 
 ## Contributors
 
-| Name                            | Email                |                                                                   GitHub Profile                                                                    |
-| ------------------------------- | -------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------: |
-| Lee Heng Sheng, Brandon         | BLEE075@e.ntu.edu.sg | [![GitHub](https://img.shields.io/badge/brandonleehs-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/brandonleehs) |
-| Heng Ziyang                     | @e.ntu.edu.sg        |    [![GitHub](https://img.shields.io/badge/Zycrannny-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/Zycrannny)    |
-| Keagan Kong Kai Yi (Kang Kaiyi) | @e.ntu.edu.sg        |       [![GitHub](https://img.shields.io/badge/kekgan-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/kekgan)       |
-| Lim Zhen Rong                   | @e.ntu.edu.sg        |   [![GitHub](https://img.shields.io/badge/alvinlimzr-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/alvinlimzr)   |
+| Name                            | Email                 |                                                                   GitHub Profile                                                                    |
+| ------------------------------- | --------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------: |
+| Lee Heng Sheng, Brandon         | BLEE075@e.ntu.edu.sg  | [![GitHub](https://img.shields.io/badge/brandonleehs-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/brandonleehs) |
+| Heng Ziyang                     | HENG0274@e.ntu.edu.sg |    [![GitHub](https://img.shields.io/badge/Zycrannny-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/Zycrannny)    |
+| Keagan Kong Kai Yi (Kang Kaiyi) | KEAG0002@e.ntu.edu.sg |       [![GitHub](https://img.shields.io/badge/kekgan-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/kekgan)       |
+| Lim Zhen Rong                   | ZLIM139@e.ntu.edu.sg  |   [![GitHub](https://img.shields.io/badge/alvinlimzr-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/alvinlimzr)   |
 
 ## Prerequisites
 
@@ -85,7 +85,7 @@ Windows:
 
 ```
 dir /s /B *.java > sources.txt
-java -cp "./lib/*" @sources.txt
+java -cp "./lib/*" "@sources.txt"
 ```
 
 Linux/MacOS:
@@ -111,7 +111,7 @@ Our project uses the Entity-Control-Boundary (ECB) design pattern for maintainab
 
 This separation allows us to achieve strong decoupling, which improves modularity, testability and scalability of the application.
 
-Other design patterns our project uses include the Repository pattern, which enforces a clean, uniform interface for performing CRUD operations on stored objects. We also made heavy use of generics for better code reusability and type safety.
+Other design patterns our project uses include the Repository pattern, which enforces a clean, uniform interface for performing CRUD operations on stored objects. We also made use of generics for better code reusability and type safety.
 
 ## Features
 
@@ -125,5 +125,9 @@ Other design patterns our project uses include the Repository pattern, which enf
 ## JavaDoc
 
 The JavaDoc is deployed on [github pages](https://brandonleehs.github.io/SC2002-HMS/).
+
+## TroubleShooting
+
+The application's state is persisted in CSV files located in src/main/resources. If you encounter serialization issues or have modified the CSV files, resulting in errors, you can reset the application's state to its initial configuration. To do so, copy the content from the corresponding `[Patient/Medicine/Staff]_List-initial.csv` file and replace the current `[Patient/Medicine/Staff]_List.csv` file with it. If you have any other CSV files, such as `[Appointment/AppointmentOutcomeRecord]_List.csv`, ensure you delete them as well. This will restore the application to its default state.
 
 For any additional information or troubleshooting, please consult the project documentation or open an issue in the repository.
