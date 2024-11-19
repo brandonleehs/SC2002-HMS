@@ -33,7 +33,7 @@ public class UpdatePrescriptionStatusView extends View {
 	}
 
 	public void UnsuccessfulDispense() {
-		System.out.println("Dispense unsuccessful, insufficient medicine.");
+		System.out.println("Dispense unsuccessful.");
 	}
 
 	public void emptyRecords() {
