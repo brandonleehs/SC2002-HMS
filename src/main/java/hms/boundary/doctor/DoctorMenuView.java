@@ -6,6 +6,12 @@ import hms.entity.user.Doctor;
 import hms.exceptions.InvalidChoiceFormatException;
 import hms.exceptions.InvalidChoiceValueException;
 
+/**
+ * The DoctorMenuView class provides the user interface for the doctor to
+ * interact with the system. It allows the doctor to view patient records,
+ * update medical information, manage appointments, and other personal
+ * functionalities.
+ */
 public class DoctorMenuView extends StaffView {
 	private final Doctor doctor;
 
@@ -13,6 +19,14 @@ public class DoctorMenuView extends StaffView {
 		this.doctor = doctor;
 	}
 
+	/**
+	 * Displays the options menu for the doctor, allowing them to choose from
+	 * various functionalities such as viewing records, managing appointments, and
+	 * updating personal settings.
+	 * 
+	 * @return the choice selected by the doctor, or -1 if invalid input is
+	 *         provided.
+	 */
 	public int displayOptions() {
 		String options = "Please select an option:\r\n" + "1. View Patient Medical Records\r\n"
 				+ "2. Update Patient Medical Records\r\n" + "3. View Personal Schedule\r\n"
@@ -27,14 +41,18 @@ public class DoctorMenuView extends StaffView {
 		System.out.println(prompt);
 
 		int choice;
-        try{
-            choice = InputHandler.getChoice(1, 9);
-        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				return -1;
+		try {
+			choice = InputHandler.getChoice(1, 9);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+			return -1;
 		}
-        return choice;
+		return choice;
 	}
 
+	/**
+	 * Displays the header for the doctor's menu, which includes a welcome message
+	 * with the doctor's name.
+	 */
 	@Override
 	public void displayHeader() {
 		displayBorderedText(WIDTH, String.format("Welcome, Dr. %s.", doctor.getName()));

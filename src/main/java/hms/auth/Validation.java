@@ -3,13 +3,30 @@ package hms.auth;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * A utility class for validating email addresses and passwords based on
+ * specific criteria. This class cannot be instantiated.
+ */
 public final class Validation {
 	private Validation() {
 	}
 
+	/**
+	 * Validates an email address based on a specified pattern.
+	 * 
+	 * <p>
+	 * The pattern checks for a traditional email format with a local part followed
+	 * by the "@" symbol and a domain part: {@code {local}@{domain}}. The local part
+	 * of the email address only allows alphanumeric characters, underscores
+	 * ({@code _}), and dots ({@code .}) as special characters. The domain part must
+	 * follow a valid structure with alphanumeric characters and optional hyphens
+	 * ({@code -}) or dots ({@code .}).
+	 * </p>
+	 * 
+	 * @param emailAddress the email address to validate
+	 * @return {@code true} if the email address is valid; {@code false} otherwise
+	 */
 	public static boolean validateEmailAddress(String emailAddress) {
-		// A lenient regex pattern for a traditional email address {local}@{domain}
-		// Local part allows only {_, .} special characters.
 		String emailAddressPattern = "^[a-zA-Z0-9_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$";
 		Pattern pattern = Pattern.compile(emailAddressPattern);
 		Matcher matcher = pattern.matcher(emailAddress);
@@ -22,6 +39,22 @@ public final class Validation {
 
 	}
 
+	/**
+	 * Validates a password against specific criteria:
+	 * <ul>
+	 * <li>Must be at least 8 characters long</li>
+	 * <li>Must contain at least one uppercase letter</li>
+	 * <li>Must contain at least one lowercase letter</li>
+	 * <li>Must contain at least one digit</li>
+	 * <li>Must contain at least one special character (!, @, #, $, %, ^, &, *)</li>
+	 * <li>Must not contain any spaces or tabs</li>
+	 * </ul>
+	 * Prints detailed validation results to the console.
+	 *
+	 * @param password the password to validate
+	 * @return {@code true} if the password meets all criteria; {@code false}
+	 *         otherwise
+	 */
 	public static boolean validatePassword(String password) {
 		boolean valid = true;
 

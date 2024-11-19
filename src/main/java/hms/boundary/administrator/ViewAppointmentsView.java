@@ -10,17 +10,44 @@ import hms.entity.record.AppointmentOutcomeRecord;
 import hms.entity.user.Doctor;
 import hms.repository.DoctorRepository;
 
+/**
+ * The view class for displaying appointments. It handles the display of
+ * appointment details for all types of appointments and handles both the
+ * completed and non-completed appointments.
+ */
 public class ViewAppointmentsView extends AppointmentView {
 
+	/**
+	 * Displays the header for the "All Appointments" section.
+	 */
 	@Override
 	public void displayHeader() {
 		displayBorderedText(WIDTH, "All Appointments");
 	}
 
+	/**
+	 * Displays a message indicating that there are no appointments for the
+	 * specified status.
+	 * 
+	 * @param status The specified appointment status (e.g., Pending, Confirmed,
+	 *               Cancelled, Completed).
+	 */
 	public void displayNoAppointmentsType(AppointmentStatus status) {
 		System.out.println("No " + status + " appointments scheduled.");
 	}
 
+	/**
+	 * Displays a list of appointments of a specific type (e.g., completed or
+	 * scheduled). It shows appointment details such as the date, time, doctor, and
+	 * any associated outcome record for completed appointments. If there are no
+	 * appointments, it displays a relevant message.
+	 * 
+	 * @param appointments     The list of appointments to display.
+	 * @param doctorRepository The repository containing doctor data for retrieving
+	 *                         doctor information.
+	 * @param status           The status of the appointments to display (e.g.,
+	 *                         completed, scheduled).
+	 */
 	public void displayAppointmentsType(List<Appointment> appointments, DoctorRepository doctorRepository,
 			AppointmentStatus status) {
 		System.out.println(status + " appointments:");
