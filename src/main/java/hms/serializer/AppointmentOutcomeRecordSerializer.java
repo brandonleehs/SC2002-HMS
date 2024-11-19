@@ -15,11 +15,27 @@ import hms.repository.AppointmentRepository;
 import hms.repository.DoctorRepository;
 import hms.repository.PatientRepository;
 
+
+/**
+ * The AppointmentOutcomeRecordSerializer class is responsible for deserializing and processing
+ * appointment outcome records from a CSV file. It converts each record into an {@link Appointment}
+ * outcome, updating associated {@link Doctor}, {@link Patient}, and {@link Medicine} data.
+ */
 public class AppointmentOutcomeRecordSerializer extends Serializer {
 	private final AppointmentRepository appointmentRepository;
 	private final DoctorRepository doctorRepository;
 	private final PatientRepository patientRepository;
 
+	/**
+     * Constructs an AppointmentOutcomeRecordSerializer with the specified file path and repositories.
+     * This constructor initializes the serializer to read from the given file and use the provided
+     * repositories for appointment, patient, and doctor data.
+     * 
+     * @param filepath the path to the CSV file containing appointment outcome records
+     * @param appointmentRepository the repository for retrieving appointment data
+     * @param patientRepository the repository for retrieving patient data
+     * @param doctorRepository the repository for retrieving doctor data
+     */
 	public AppointmentOutcomeRecordSerializer(String filepath, AppointmentRepository appointmentRepository,
 			PatientRepository patientRepository, DoctorRepository doctorRepository) {
 		super(filepath);
@@ -28,6 +44,11 @@ public class AppointmentOutcomeRecordSerializer extends Serializer {
 		this.doctorRepository = doctorRepository;
 	}
 
+	/**
+     * Deserializes the appointment outcome records from the CSV file and processes each record.
+     * Each record is read, decoded, and used to update the relevant {@link Appointment}, {@link Patient},
+     * {@link Doctor}, and {@link Medicine} data.
+     */
 	public void serialize() {
 		if (this.br == null) {
 			return;
@@ -45,6 +66,13 @@ public class AppointmentOutcomeRecordSerializer extends Serializer {
 		}
 	}
 
+	/**
+     * Initializes an Appointment Outcome record from a given CSV row.
+     * This method decodes the service type and consultation notes, creates a map of prescribed medicines,
+     * and updates the associated {@link Doctor} and {@link Patient} data for the relevant appointment.
+     * 
+     * @param row the CSV row containing the appointment outcome record
+     */
 	private void initAppointmentOutcomeRecordFromRow(String[] row) {
 		UUID uuid = UUID.fromString(row[0]);
 		String encodedServiceType = row[2];
