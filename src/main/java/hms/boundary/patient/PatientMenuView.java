@@ -6,6 +6,11 @@ import hms.entity.user.Patient;
 import hms.exceptions.InvalidChoiceFormatException;
 import hms.exceptions.InvalidChoiceValueException;
 
+/**
+ * The PatientMenuView class represents the interface for a patient's menu,
+ * allowing them to navigate through various options such as viewing medical
+ * records, updating information, scheduling appointments, and logging out.
+ */
 public class PatientMenuView extends View {
 	private Patient patient;
 
@@ -13,6 +18,13 @@ public class PatientMenuView extends View {
 		this.patient = patient;
 	}
 
+	/**
+	 * Displays the menu options available to the patient and prompts them to make a
+	 * choice.
+	 *
+	 * @return the patient's choice as an integer, or -1 if an invalid choice is
+	 *         entered.
+	 */
 	public int displayOptions() {
 		String options = "Please select an option:\r\n" + "1. View Medical Record\r\n"
 				+ "2. Update Personal Information\r\n" + "3. View Available Appointment Slots\r\n"
@@ -27,14 +39,18 @@ public class PatientMenuView extends View {
 		System.out.println(prompt);
 
 		int choice;
-        try{
-            choice = InputHandler.getChoice(1, 10);
-        } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				return -1;
+		try {
+			choice = InputHandler.getChoice(1, 10);
+		} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+			return -1;
 		}
-        return choice;
+		return choice;
 	}
 
+	/**
+	 * Displays a personalized header for the patient menu, including the patient's
+	 * name.
+	 */
 	@Override
 	public void displayHeader() {
 		displayBorderedText(WIDTH, String.format("Welcome, %s.", patient.getName()));

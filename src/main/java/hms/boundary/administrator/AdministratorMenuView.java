@@ -14,6 +14,11 @@ import hms.exceptions.InvalidChoiceValueException;
 public class AdministratorMenuView extends StaffView {
 	private final Administrator administrator;
 
+	/**
+	 * Constructs a AdministratorMenuView instance for the specified administrator.
+	 *
+	 * @param administrator the administrator to display the menu for.
+	 */
 	public AdministratorMenuView(Administrator administrator) {
 		this.administrator = administrator;
 	}
