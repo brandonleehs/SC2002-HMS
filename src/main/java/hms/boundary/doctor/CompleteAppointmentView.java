@@ -36,7 +36,7 @@ public class CompleteAppointmentView extends UpdatePatientMedicalRecordView {
 	}
 
 	public int displayPrescriptionChoicePrompt() {
-		System.out.print("Enter numer of prescriptions to give (0-999): ");
+		System.out.print("Enter number of prescriptions to give (0-999): ");
 		int amt;
 		try {
 			amt = InputHandler.getChoice(0, 999);
