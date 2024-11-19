@@ -6,16 +6,29 @@ import hms.boundary.administrator.InventoryManagement.RemoveMedicineView;
 import hms.control.Controller;
 import hms.control.pharmacist.ShowMedicationInventoryController;
 
+
+/**
+ * The RemoveMedicineController class handles the process of removing medicine
+ * stock from the inventory. It interacts with the RemoveMedicineView to display
+ * prompts and gather user input for reducing medicine stock.
+ */
 public class RemoveMedicineController extends Controller {
 	private final RemoveMedicineView removeMedicineView;
 	private final ShowMedicationInventoryController showMedicationInventoryController;
 	private int choice, amount;
 
+	/**
+	 * Constructs a RemoveMedicineController, initializing the RemoveMedicineView
+	 * and the ShowMedicationInventoryController.
+	 */
 	public RemoveMedicineController() {
 		removeMedicineView = new RemoveMedicineView();
 		showMedicationInventoryController = new ShowMedicationInventoryController();
 	}
 
+	/**
+	 * Executes the navigation logic for removing medicine from the inventory.
+	 */
 	@Override
 	public void navigate() {
 		choice = 0;

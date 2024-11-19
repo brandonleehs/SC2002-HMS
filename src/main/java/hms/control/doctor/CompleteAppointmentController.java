@@ -13,6 +13,11 @@ import hms.entity.medicine.Medicine;
 import hms.entity.medicine.MedicineStatus;
 import hms.entity.user.Doctor;
 
+/**
+ * Controller class for managing the completion of patient appointments.
+ * Handles the process of completing an appointment, including adding consultation notes,
+ * prescribing medicines, and updating appointment statuses.
+ */
 public class CompleteAppointmentController extends Controller {
 	private ScheduleView scheduleView;
 	private CompleteAppointmentView completeAppointmentView;
@@ -20,12 +25,20 @@ public class CompleteAppointmentController extends Controller {
 	private Doctor doctor;
 	private Map<String, List<Integer>> medicines = new HashMap<>();
 
+	/**
+	 * Constructs a new CompleteAppointmentController with the specified doctor.
+	 *
+	 * @param doctor the doctor handling the appointment
+	 */
 	public CompleteAppointmentController(Doctor doctor) {
 		this.scheduleView = new ScheduleView();
 		this.completeAppointmentView = new CompleteAppointmentView();
 		this.doctor = doctor;
 	}
 
+	/**
+	 * Facilitates the workflow for completing an appointment.
+	 */
 	public void navigate() {
 		completeAppointmentView.displayHeader();
 

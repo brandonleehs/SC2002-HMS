@@ -11,13 +11,24 @@ import hms.entity.user.attributes.Gender;
 import hms.exceptions.InvalidChoiceFormatException;
 import hms.exceptions.InvalidChoiceValueException;
 
+/**
+ * The AddStaffController class handles the process of adding new staff members to the system.
+ * It interacts with the AddStaffView to gather user input and creates new staff objects
+ * such as doctors, pharmacists, or receptionists.
+ */
 public class AddStaffController extends Controller {
 	private final AddStaffView addStaffView;
 
+	/**
+	 * Constructs an AddStaffController, initializing the AddStaffView.
+	 */
 	public AddStaffController() {
 		this.addStaffView = new AddStaffView();
 	}
 
+	/**
+	 * Executes the navigation logic for adding staff members.
+	 */
 	@Override
 	public void navigate() {
 		addStaffView.displayHeader();
@@ -33,6 +44,11 @@ public class AddStaffController extends Controller {
 		DoctorPharmacistBuilder(details, choice);
 	}
 
+	/**
+	 * Creates a new staff member (Doctor, Pharmacist, or Receptionist) based on the provided details.
+	 * @param details
+	 * @param choice
+	 */
 	private void DoctorPharmacistBuilder(List<String> details, int choice) {
 		// TODO: Verify that id is valid format (D001/P001 for example)
 		String password, name, id;

@@ -9,15 +9,28 @@ import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;
 import hms.entity.user.User;
 
+/**
+ * Controller for the pharmacist's menu and actions within the system.
+ * This class handles the pharmacist's available operations such as viewing appointment records,
+ * updating prescription statuses, managing medication inventory, and submitting replenishment requests.
+ */
 public class PharmacistMenuController extends MenuController {
 	private final PharmacistMenuView pharmacistMenuView;
 	private final Pharmacist pharmacist;
 
+	/**
+	 * Constructs an instance of PharmacistMenuController.
+	 *
+	 * @param pharmacist The pharmacist whose menu actions will be controlled.
+	 */
 	public PharmacistMenuController(Pharmacist pharmacist) {
 		this.pharmacist = pharmacist;
 		this.pharmacistMenuView = new PharmacistMenuView(pharmacist);
 	}
 
+	/**
+	 * Navigates the pharmacist through the available menu options and executes the corresponding action.
+	 */
 	@Override
 	public void navigate() {
 		checkNewUser((User)pharmacist);

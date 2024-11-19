@@ -12,15 +12,30 @@ import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 import hms.entity.user.User;
 
+/**
+ * Controller for managing the menu options for a doctor in the hospital management system.
+ * This class provides various functionalities that a doctor can perform, such as viewing and updating patient medical records, managing appointments,
+ * setting availability, and changing the password.
+ */
 public class DoctorMenuController extends MenuController {
 	private final DoctorMenuView doctorMenuView;
 	private Doctor doctor;
 
+	/**
+	 * Constructs a new instance of DoctorMenuController for the specified doctor.
+	 * Initializes the doctorMenuView with the given doctor.
+	 *
+	 * @param doctor The doctor for whom the menu is being created.
+	 */
 	public DoctorMenuController(Doctor doctor) {
 		this.doctor = doctor;
 		this.doctorMenuView = new DoctorMenuView(doctor);
 	}
 
+	/**
+	 * Navigates through the available menu options for a doctor.
+	 * The loop continues until the doctor selects the option to log out (option 9).
+	 */
 	@Override
 	public void navigate() {
 		checkNewUser((User)doctor);

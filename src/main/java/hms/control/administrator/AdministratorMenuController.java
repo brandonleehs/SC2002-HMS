@@ -10,15 +10,28 @@ import hms.entity.user.Administrator;
 import hms.entity.user.Patient;
 import hms.entity.user.User;
 
+/**
+ * Controller class for managing the menu options available to an administrator.
+ * Facilitates navigation between different administrative functions such as managing staff,
+ * patient appointments, inventory management, and password management.
+ */
 public class AdministratorMenuController extends MenuController {
 	private final Administrator administrator;
 	private final AdministratorMenuView adminMenuView;
 
+	/**
+	 * Constructs a new AdministratorMenuController with the specified administrator.
+	 *
+	 * @param administrator the administrator for whom the menu is being displayed
+	 */
 	public AdministratorMenuController(Administrator administrator) {
 		this.administrator = administrator;
 		this.adminMenuView = new AdministratorMenuView(administrator);
 	}
 
+	/**
+	 * Facilitates the navigation of the administrator menu.
+	 */
 	@Override
 	public void navigate() {
 		checkNewUser((User)administrator);

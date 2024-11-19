@@ -14,6 +14,10 @@ import hms.entity.record.AppointmentOutcomeRecord;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 
+/**
+ * Controller for updating the medical records of a patient during a doctor's consultation.
+ * This class allows the doctor to add prescriptions, set consultation notes, or modify existing records.
+ */
 public class UpdatePatientMedicalRecordController extends Controller {
 	private Patient patient;
 	private Doctor doctor;
@@ -21,6 +25,13 @@ public class UpdatePatientMedicalRecordController extends Controller {
 	private ShowMedicationInventoryController showMedicationInventoryController;
 	private Map<String, List<Integer>> medicines = new HashMap<String, List<Integer>>();
 
+	/**
+	 * Constructs a new instance of UpdatePatientMedicalRecordController with the given doctor and patient.
+	 * Initializes the view and other necessary components for updating medical records.
+	 *
+	 * @param doctor The doctor who will be updating the patient's medical record.
+	 * @param patient The patient whose medical record is being updated.
+	 */
 	public UpdatePatientMedicalRecordController(Doctor doctor, Patient patient) {
 		this.patient = patient;
 		this.doctor = doctor;
@@ -28,6 +39,9 @@ public class UpdatePatientMedicalRecordController extends Controller {
 		this.showMedicationInventoryController = new ShowMedicationInventoryController();
 	}
 
+	/**
+	 * Navigates through the process of updating the patient's medical record.
+	 */
 	@Override
 	public void navigate() {
 		if (patient.getAppointmentOutcomeRecordList().isEmpty()) {

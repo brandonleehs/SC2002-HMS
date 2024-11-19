@@ -11,16 +11,26 @@ import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;
 import hms.entity.user.Receptionist;
 
+/**
+ * Controller class for removing staff members from the hospital management system.
+ * Handles the process of removing doctors, pharmacists, and receptionists from the system.
+ */
 public class RemoveStaffController extends Controller {
 	private final RemoveStaffView removeStaffView;
 	private Doctor removingDoctor;
 	private Pharmacist removingPharmacist;
 	private Receptionist removingReceptionist;
 
+	/**
+	 * Constructs a new RemoveStaffController and initializes the associated view.
+	 */
 	public RemoveStaffController() {
 		removeStaffView = new RemoveStaffView();
 	}
 
+	/**
+	 * Facilitates the workflow for removing staff members from the system.
+	 */
 	@Override
 	public void navigate() {
 		removeStaffView.displayHeader();

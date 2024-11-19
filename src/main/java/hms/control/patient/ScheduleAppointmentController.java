@@ -10,15 +10,29 @@ import hms.entity.appointment.Appointment;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 
+/**
+ * Controller class for scheduling an appointment for a patient.
+ * Handles the user input for selecting a date, time, and doctor, and then attempts to schedule the appointment.
+ */
 public class ScheduleAppointmentController extends Controller {
 	private ScheduleAppointmentView scheduleAppointmentView;
 	private Patient patient;
 
+	/**
+	 * Constructs a new ScheduleAppointmentController with the specified patient.
+	 *
+	 * @param patient the patient for whom the appointment is being scheduled
+	 */
 	public ScheduleAppointmentController(Patient patient) {
 		this.scheduleAppointmentView = new ScheduleAppointmentView();
 		this.patient = patient;
 	}
 
+	/**
+	 * Displays the prompts for the patient to schedule an appointment.
+	 * This includes selecting a date, time, and doctor, then attempts to create and schedule the appointment.
+	 * If the scheduling is successful, a success message is displayed; otherwise, a failure message is shown.
+	 */
 	@Override
 	public void navigate() {
 		this.scheduleAppointmentView.displayHeader();

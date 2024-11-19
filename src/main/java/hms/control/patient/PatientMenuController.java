@@ -7,15 +7,27 @@ import hms.control.user.ChangePasswordController;
 import hms.entity.user.Patient;
 import hms.entity.user.User;
 
+/**
+ * Controller class for managing the patient's menu and interactions with the system.
+ * Facilitates navigation between different options available to a patient, such as viewing medical records, scheduling appointments, and changing personal information.
+ */
 public class PatientMenuController extends MenuController {
 	private final PatientMenuView patientMenuView;
 	private Patient patient;
 
+	/**
+	 * Constructs a new PatientMenuController with the specified patient.
+	 *
+	 * @param patient the patient for whom the menu options are being displayed
+	 */
 	public PatientMenuController(Patient patient) {
 		this.patient = patient;
 		this.patientMenuView = new PatientMenuView(patient);
 	}
 
+	/**
+	 * Displays the menu options for the patient and handles the navigation between different functionalities.
+	 */
 	@Override
 	public void navigate() {
 		checkNewUser((User)patient);

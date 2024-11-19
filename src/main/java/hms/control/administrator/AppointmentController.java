@@ -9,15 +9,29 @@ import hms.entity.appointment.Appointment;
 import hms.entity.appointment.AppointmentStatus;
 import hms.entity.user.Patient;
 
+/**
+ * Controller class for managing and displaying a patient's appointments.
+ * This class handles the logic of categorizing appointments by status and displaying them through the associated view.
+ */
 public class AppointmentController extends Controller {
     private final ViewAppointmentsView appointmentsView;
     private Patient patient;
 
+    /**
+     * Constructs a new instance of AppointmentController for the given patient.
+     *
+     * @param patient The patient whose appointments are to be managed and displayed.
+     */
     public AppointmentController(Patient patient) {
         this.appointmentsView = new ViewAppointmentsView();
         this.patient = patient;
     }
 
+    /**
+     * Navigates through the process of displaying a patient's appointments.
+     * It retrieves all appointments for the patient, categorizes them by status, and displays them using the view.
+     * If no appointments are found, a message is displayed.
+     */
     public void navigate() {
         appointmentsView.displayHeader();
         List<Appointment> allAppointments = patient.getAllAppointmentList();

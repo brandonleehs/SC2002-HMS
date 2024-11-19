@@ -6,17 +6,28 @@ import hms.boundary.administrator.InventoryManagement.UpdateMedicineView;
 import hms.control.Controller;
 import hms.control.pharmacist.ShowMedicationInventoryController;
 
+/**
+ * Controller class for updating medicine inventory.
+ * Handles the process of displaying current inventory, prompting the user to select a medicine,
+ * and updating the stock quantity.
+ */
 public class UpdateMedicineController extends Controller {
     private final UpdateMedicineView updateMedicineView;
     private final ShowMedicationInventoryController showMedicationInventoryController;
     private int choice, amount;
 
+    /**
+     * Constructs a new UpdateMedicineController and initializes the associated view
+     * and dependent controller.
+     */
     public UpdateMedicineController(){
         updateMedicineView = new UpdateMedicineView();
         showMedicationInventoryController = new ShowMedicationInventoryController();
     }
-    
 
+    /**
+     * Facilitates the workflow for updating the stock of a specific medicine.
+     */
     @Override
     public void navigate(){
         choice=0;

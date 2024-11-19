@@ -24,15 +24,31 @@ import hms.entity.user.User;
 import hms.exceptions.InvalidChoiceFormatException;
 import hms.exceptions.InvalidChoiceValueException;
 
+/**
+ * Controller class responsible for handling the user login process in the hospital management system.
+ * This controller displays the login screen, authenticates the user, and navigates to the appropriate
+ * menu based on the user's role (Patient, Doctor, Pharmacist, Administrator, Receptionist).
+ */
 public class LoginController extends Controller {
 	private final LoginView loginView;
 	private final StartView startView;
 
+	/**
+	 * Constructs a LoginController to manage the login process.
+	 */
 	public LoginController() {
 		this.loginView = new LoginView();
 		this.startView = new StartView();
 	}
 
+	/**
+	 * Navigates the user through the login process. Displays the login screen, authenticates the user,
+	 * and redirects them to the appropriate menu based on their role (Patient, Doctor, Pharmacist,
+	 * Administrator, Receptionist).
+	 * <p>
+	 * If authentication fails, the user is prompted to try again.
+	 * If the user chooses to exit, the system data is saved and the application closes.
+	 */
 	@Override
 	public void navigate() {
 		boolean login = false;
@@ -95,6 +111,14 @@ public class LoginController extends Controller {
 		}
 	}
 
+	/**
+	 * Retrieves the user with the given ID from the repositories of all user types (Administrator, Doctor, Patient,
+	 * Pharmacist, Receptionist).
+	 *
+	 * @param id the user ID to search for.
+	 * @param password the password for authentication.
+	 * @return the user corresponding to the given ID, or null if not found.
+	 */
 	private User getUser(String id, String password) {
 		Map<String, User> userMap = new HashMap<String, User>();
 		userMap.putAll(administratorRepository.getMap());
@@ -106,6 +130,14 @@ public class LoginController extends Controller {
 		return user;
 	}
 
+	/**
+	 * Authenticates the user by checking if the provided password matches the stored hashed password.
+	 *
+	 * @param user the user to authenticate.
+	 * @param id the user ID.
+	 * @param password the password provided by the user.
+	 * @return true if authentication is successful, false otherwise.
+	 */
 	private boolean authenticate(User user, String id, String password) {
 		if (user == null || !(id.equals(user.getId()) && BCrypt.checkpw(password, user.getPasswordHash()))) {
 			System.out.println("Authentication failed. Please try again.");

@@ -10,13 +10,25 @@ import hms.entity.user.Patient;
 import hms.entity.user.attributes.BloodType;
 import hms.entity.user.attributes.Gender;
 
+/**
+ * Controller for adding a new patient to the system.
+ * This class manages the process of gathering patient details from the receptionist,
+ * creating a new patient record, and saving it to the patient repository.
+ */
 public class AddPatientController extends Controller {
     private final AddPatientView addPatientView;
-    
+
+    /**
+     * Constructs an instance of AddPatientController.
+     * Initializes the view for adding patient details.
+     */
     public AddPatientController(){
         this.addPatientView = new AddPatientView();
     }
 
+    /**
+     * Navigates the receptionist through the process of adding a new patient.
+     */
     @Override
     public void navigate(){
         addPatientView.displayHeader();

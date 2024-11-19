@@ -4,6 +4,13 @@ import hms.boundary.administrator.InventoryManagement.InventoryManagementView;
 import hms.control.Controller;
 import hms.control.pharmacist.ShowMedicationInventoryController;
 
+
+/**
+ * The InventoryManagementController class manages the navigation and control flow
+ * for inventory management functionalities in the HMS system.
+ * It connects various controllers responsible for specific inventory tasks
+ * and delegates the operations based on user input.
+ */
 public class InventoryManagementController extends Controller {
 	private final InventoryManagementView inventoryManagementView;
 	private final AddMedicineController addMedicineController;
@@ -12,6 +19,11 @@ public class InventoryManagementController extends Controller {
 	private final RemoveMedicineController removeMedicineController;
 	private final SetStockWarningController setStockWarningController;
 
+
+	/**
+	 * Constructs a new InventoryManagementController and initializes the
+	 * associated view and all sub-controllers for inventory management functionalities.
+	 */
 	public InventoryManagementController() {
 		this.inventoryManagementView = new InventoryManagementView();
 		this.addMedicineController = new AddMedicineController();
@@ -21,7 +33,11 @@ public class InventoryManagementController extends Controller {
 		this.setStockWarningController = new SetStockWarningController();
 	}
 
-	@Override
+	/**
+ 	* Navigates through the inventory management options based on the user's choice.
+ 	* Continuously prompts the user until they choose to exit.
+ 	*/
+ 	@Override
 	public void navigate() {
 		int choice;
 		do {

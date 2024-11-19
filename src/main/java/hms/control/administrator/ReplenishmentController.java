@@ -6,11 +6,20 @@ import hms.boundary.administrator.ReplenishRequest.ReplenishRequestView;
 import hms.control.Controller;
 import hms.entity.medicine.ReplenishRequest;
 
+/**
+ * Controller class for managing and processing replenishment requests in the hospital management system.
+ * Handles the approval or removal of replenishment requests for medicines in the inventory.
+ */
 public class ReplenishmentController extends Controller {
     private final ReplenishRequestView replenishRequestView = new ReplenishRequestView();
 
+    /**
+     * Constructs a new ReplenishmentController and initializes the replenishment request view.
+     */
     public ReplenishmentController() {}
-
+    /**
+     * Facilitates the process of managing replenishment requests.
+     */
     @Override
     public void navigate() {
         List<ReplenishRequest> pendingRequests = medicineInventory.getReplenishmentRequestList();

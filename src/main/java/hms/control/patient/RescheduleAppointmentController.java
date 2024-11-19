@@ -10,15 +10,28 @@ import hms.entity.appointment.Appointment;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 
+/**
+ * Controller for managing the rescheduling of a patient's appointments.
+ * This class allows a patient to reschedule an existing appointment by selecting a new date, time, and doctor.
+ */
 public class RescheduleAppointmentController extends Controller {
 	private RescheduleAppointmentView rescheduleAppointmentView;
 	private Patient patient;
 
+	/**
+	 * Constructs an instance of RescheduleAppointmentController with the given patient.
+	 * Initializes the view for rescheduling appointments.
+	 *
+	 * @param patient The patient whose appointment is to be rescheduled.
+	 */
 	public RescheduleAppointmentController(Patient patient) {
 		this.patient = patient;
 		this.rescheduleAppointmentView = new RescheduleAppointmentView();
 	}
 
+	/**
+	 * Navigates through the process of rescheduling a patient's appointment.
+	 */
 	@Override
 	public void navigate() {
 		this.rescheduleAppointmentView.displayHeader();
@@ -29,6 +42,9 @@ public class RescheduleAppointmentController extends Controller {
 		}
 	}
 
+	/**
+	 * Handles the process of rescheduling an existing appointment.
+	 */
 	private void rescheduleAppointment() {
 		this.rescheduleAppointmentView.displayAppointments(this.patient, doctorRepository);
 		int choice = this.rescheduleAppointmentView

@@ -11,15 +11,29 @@ import hms.entity.medicine.MedicineStatus;
 import hms.entity.record.AppointmentOutcomeRecord;
 import hms.entity.user.Patient;
 
+/**
+ * Controller class for updating the prescription status in the pharmacy system.
+ * Allows the pharmacist to update the status of prescribed medicines and dispense them.
+ */
 public class UpdatePrescriptionStatusController extends Controller {
 	private UpdatePrescriptionStatusView updatePrescriptionStatusView = new UpdatePrescriptionStatusView();
 	private Patient patient;
 	private AppointmentOutcomeRecordView appointmentOutcomeRecordView = new AppointmentOutcomeRecordView();
 
+	/**
+	 * Constructs an UpdatePrescriptionStatusController for a given patient.
+	 *
+	 * @param patient the patient whose prescription status needs to be updated.
+	 */
 	public UpdatePrescriptionStatusController(Patient patient) {
 		this.patient = patient;
 	}
 
+	/**
+	 * Navigates through the process of updating the prescription status.
+	 * Displays the unprescribed appointment records, allows the pharmacist to select an appointment,
+	 * then select the medicine to dispense and update its status.
+	 */
 	@Override
 	public void navigate() {
 		// Display index table for user to see which appointment
