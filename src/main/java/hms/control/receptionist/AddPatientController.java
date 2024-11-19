@@ -23,7 +23,7 @@ public class AddPatientController extends Controller {
         List<Object> patientDetails = addPatientView.getDetails();
         if (patientDetails == null) return;
 
-        String id = String.format("P1%03d", patientRepository.getAll().size());
+        String id = String.format("P1%03d", (patientRepository.getAll().size() + 1));
 
         MedicalRecord medicalRecord = new MedicalRecord(id, (String)patientDetails.get(0), 
             (LocalDate)patientDetails.get(1), (Gender)patientDetails.get(2), 
