@@ -31,6 +31,40 @@ If both commands return version details, your setup is correct and you're ready 
 
 We provide multiple convenient ways to run this project, depending on whether you use Maven or not:
 
+### Running from Source
+
+**1. Clone the Repository**
+
+If you prefer to compile and run the application directly from the source code, clone the repository and navigate to the project directory.
+
+```
+git clone https://github.com/brandonleehs/SC2002-HMS.git
+cd SC2002-HMS/
+```
+
+**2. Create a list of all java files in the project, then run the application.**
+
+Windows Command Prompt:
+
+```
+dir /s /B *.java > sources.txt
+java -cp "./lib/*" @sources.txt
+```
+
+Windows Powershell:
+
+```
+Get-ChildItem -Recurse -Filter *.java | ForEach-Object { $_.FullName } | Out-File -FilePath sources.txt -Encoding ASCII
+java -cp "./lib/*" "@sources.txt"
+```
+
+Linux/MacOS:
+
+```
+find -name "*.java" > sources.txt
+java -cp "./lib/*" @sources.txt
+```
+
 ### Pre-compiled JAR
 
 Clone the repository and run the pre-compiled JAR file located in the `bin/` directory:
@@ -66,40 +100,6 @@ After successfully building the project, execute the JAR file to run the Hospita
 
 ```
 java -jar ./target/hms-1.0.jar
-```
-
-### Running from Source
-
-**1. Clone the Repository**
-
-If you prefer to compile and run the application directly from the source code, clone the repository and navigate to the project directory.
-
-```
-git clone https://github.com/brandonleehs/SC2002-HMS.git
-cd SC2002-HMS/
-```
-
-**2. Create a list of all java files in the project, then run the application.**
-
-Windows Command Prompt:
-
-```
-dir /s /B *.java > sources.txt
-java -cp "./lib/*" @sources.txt
-```
-
-Windows Powershell:
-
-```
-Get-ChildItem -Recurse -Filter *.java | ForEach-Object { $_.FullName } | Out-File -FilePath sources.txt -Encoding ASCII
-java -cp "./lib/*" "@sources.txt"
-```
-
-Linux/MacOS:
-
-```
-find -name "*.java" > sources.txt
-java -cp "./lib/*" @sources.txt
 ```
 
 ## Project Structure
