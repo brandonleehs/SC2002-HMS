@@ -16,7 +16,7 @@
 Ensure you have the following installed on your system:
 
 - **JDK 22** or higher: [Download here](https://www.oracle.com/sg/java/technologies/downloads/)
-- **Apache Maven (Optional, but recommended)**: [Download here](https://maven.apache.org/download.cgi)
+- **Apache Maven (Optional)**: [Download here](https://maven.apache.org/download.cgi)
 
 Make sure your environment is set up correctly by verifying the installation of Java and Maven. You can check this by running the following commands:
 
