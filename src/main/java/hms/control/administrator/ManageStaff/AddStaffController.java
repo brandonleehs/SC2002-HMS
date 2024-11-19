@@ -54,35 +54,45 @@ public class AddStaffController extends Controller {
 		Gender gender;
 		id = details.get(0);
 		name = details.get(1);
-		if (doctorRepository.getById(id) == null) {
-			if (details.get(2).equals("M")) {
-				gender = Gender.MALE;
-			} else {
-				gender = Gender.FEMALE;
-			}
-			password = "password";
-			int age = this.addStaffView.getAge();
-			switch (choice) {
-				case 1:
-					Doctor newDoctor = new Doctor(id, password, name, gender, age);
-					doctorRepository.addDoctor(id, newDoctor);
-					addStaffView.addDoctorSuccessful();
-					break;
-				
-				case 2:
-					Pharmacist newPharmacist = new Pharmacist(id, password, name, gender, age);
-					pharmacistRepository.addPharmacist(id, newPharmacist);
-					addStaffView.addPharmacistSuccessful();
-					break;
-			
-				case 3:
-					Receptionist newReceptionist = new Receptionist(id, password, name, gender, age);
-					receptionistRepository.addReceptionist(id, newReceptionist);
-					addStaffView.addReceptionistSuccessful();
-					break;
-			}
+		
+		if (details.get(2).equals("M")) {
+			gender = Gender.MALE;
 		} else {
-			addStaffView.userExists();
+			gender = Gender.FEMALE;
+		}
+		password = "password";
+		int age = this.addStaffView.getAge();
+		switch (choice) {
+			case 1:
+				if(doctorRepository.getById(id) != null){
+					addStaffView.userExists();
+					return;
+				}
+				Doctor newDoctor = new Doctor(id, password, name, gender, age);
+				doctorRepository.addDoctor(id, newDoctor);
+				addStaffView.addDoctorSuccessful();
+				break;
+			
+			case 2:
+				if(pharmacistRepository.getById(id) != null){
+					addStaffView.userExists();
+					return;
+				}
+				Pharmacist newPharmacist = new Pharmacist(id, password, name, gender, age);
+				pharmacistRepository.addPharmacist(id, newPharmacist);
+				addStaffView.addPharmacistSuccessful();
+				break;
+		
+			case 3:
+				if(receptionistRepository.getById(id) != null){
+					addStaffView.userExists();
+					return;
+				}
+				Receptionist newReceptionist = new Receptionist(id, password, name, gender, age);
+				receptionistRepository.addReceptionist(id, newReceptionist);
+				addStaffView.addReceptionistSuccessful();
+				break;
+			
 		}
 	}
 }
