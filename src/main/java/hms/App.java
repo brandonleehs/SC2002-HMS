@@ -2,44 +2,23 @@ package hms;
 
 import hms.control.user.LoginController;
 
+/**
+ * The main entry point of the Hospital Management System (HMS) application.
+ * <p>
+ * This class initializes the application by creating an instance of the
+ * {@code LoginController} and invoking its {@code navigate()} method to manage
+ * the login flow.
+ * </p>
+ */
 public class App {
 
+	/**
+	 * The main method to launch the HMS application.
+	 * 
+	 * @param args command-line arguments
+	 */
 	public static void main(String[] args) {
 		LoginController loginController = new LoginController();
 		loginController.navigate();
-//		LoginView loginView = new LoginView();
-//		loginView.show();
-//		View.close();
-//
-//		PatientRepository patientRepository = new PatientRepository();
-//		DoctorRepository doctorRepository = new DoctorRepository();
-//		PharmacistRepository pharmacistRepository = new PharmacistRepository();
-//		AdministratorRepository administratorRepository = new AdministratorRepository();
-//
-//		Patient user = patientRepository.getById("P1001");
-//		Doctor doctor = doctorRepository.getById("D001");
-//		Appointment appt = new Appointment(user.getId(), doctor.getId(), LocalDate.of(2024, 11, 5),
-//				LocalTime.of(9, 30));
-//		user.scheduleAppointment(doctor, appt);
-//		doctor.acceptAppointment(appt);
-
-//		doctor.completeAppointment(user, appt, "Consultation", "Hypertension. Lifestyle change recommended.");
-//		doctor.prescribeMedicine(new Medicine("Paracetamol"), appt.getAppointmentOutcomeRecord());
-//		Medicine medicine = new Medicine("Ibuprofen");
-//		doctor.prescribeMedicine(medicine, appt.getAppointmentOutcomeRecord());
-//		MedicalRecordView medicalRecordView = new MedicalRecordView(user);
-//		medicalRecordView.show();
-//		ScheduleView scheduleView = new ScheduleView();
-//		scheduleView.show();
-//		Patient patient = patientRepository.getById("P1001");
-//		Doctor doctor = doctorRepository.getById("D001");
-//
-//		Appointment appt = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 5),
-//				LocalTime.of(9, 30));
-//
-//		patient.scheduleAppointment(doctor, appt);
-//		RescheduleAppointmentView rescheduleAppointmentView = new RescheduleAppointmentView(
-//				patientRepository.getById("P1001"));
-//		rescheduleAppointmentView.show();
 	}
 }

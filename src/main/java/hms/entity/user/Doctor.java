@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import hms.entity.appointment.Appointment;
 import hms.entity.appointment.AppointmentStatus;
@@ -19,7 +21,6 @@ public class Doctor extends User {
 	private final List<Appointment> pendingAppointmentList;
 	private final List<Appointment> confirmedAppointmentList;
 
-	// TODO: add custom working hours after testing
 	public Doctor(String id, String password, String name, Gender gender, int age) {
 		super(id, password, name, gender);
 		this.age = age;
@@ -46,7 +47,6 @@ public class Doctor extends User {
 		return availability;
 	}
 
-	// TODO: input validation for date/timings
 	public void setAvailability(LocalDate date, LocalTime startTime, LocalTime endTime) {
 		this.schedule.setAvailability(date, startTime, endTime);
 	}
@@ -67,14 +67,12 @@ public class Doctor extends User {
 	}
 
 	public void completeAppointment(Patient patient, Appointment appointment, String serviceType,
-			String consultationNotes, Medicine[] medicines) {
+			String consultationNotes, Map<Medicine, Integer> medicineList) {
 
 		AppointmentOutcomeRecord appointmentOutcomeRecord = new AppointmentOutcomeRecord(appointment.getDate(),
 				serviceType, consultationNotes, appointment.getUUID());
-		
-		for (Medicine medicine : medicines) {
-			appointmentOutcomeRecord.addPrescribedMedicine(medicine);
-		}
+
+		appointmentOutcomeRecord.addPrescribedMedicine(medicineList);
 
 		appointment.setAppointmentOutcomeRecord(appointmentOutcomeRecord);
 		// Remove appointment from schedule
@@ -95,20 +93,16 @@ public class Doctor extends User {
 			return true;
 		}
 		return false;
-//		return this.schedule.addAppointment(appointment);
 	}
 
-//	public boolean changeAppointment(Appointment appointment, LocalDateTime datetime) {
-//		return this.schedule.changeAppointment(appointment, datetime);
-//	}
-
-	public void prescribeMedicine(Medicine medicine, AppointmentOutcomeRecord appointmentOutcomeRecord) {
-		appointmentOutcomeRecord.addPrescribedMedicine(medicine);
+	public void prescribeMedicine(HashMap<Medicine, Integer> medicineList,
+			AppointmentOutcomeRecord appointmentOutcomeRecord) {
+		appointmentOutcomeRecord.addPrescribedMedicine(medicineList);
 	}
 
-//	public void removeMedicine(Medicine medicine, AppointmentOutcomeRecord appointmentOutcomeRecord) {
-//		appointmentOutcomeRecord.removePrescribedMedicine(medicine);
-//	}
+	public void removeMedicine(Medicine medicine, AppointmentOutcomeRecord appointmentOutcomeRecord) {
+		appointmentOutcomeRecord.removePrescribedMedicine(medicine);
+	}
 
 	public int getAge() {
 		return this.age;

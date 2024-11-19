@@ -2,15 +2,15 @@ package hms.entity.user;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import hms.Validation;
+import hms.auth.Validation;
 import hms.entity.user.attributes.Gender;
 
 public abstract class User {
 
-	private final String id;
-	private final String name;
+	private String id;
+	private String name;
 	private String passwordHash;
-	private final Gender gender;
+	private Gender gender;
 
 	protected User(String id, String password, String name, Gender gender) {
 		this.id = id;
@@ -23,6 +23,10 @@ public abstract class User {
 		return this.id;
 	}
 
+	public void setId(String newID) {
+		this.id = newID;
+	}
+
 	public String getPasswordHash() {
 		return this.passwordHash;
 	}
@@ -31,8 +35,16 @@ public abstract class User {
 		return this.name;
 	}
 
+	public void setName(String newName) {
+		this.name = newName;
+	}
+
 	public Gender getGender() {
 		return this.gender;
+	}
+
+	public void setGender(Gender newGender) {
+		this.gender = newGender;
 	}
 
 	public boolean setPassword(String password) {
@@ -41,5 +53,13 @@ public abstract class User {
 			return true;
 		}
 		return false;
+	}
+
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
+	}
+
+	public void resetPassword() {
+		this.passwordHash = BCrypt.hashpw("password", BCrypt.gensalt());
 	}
 }

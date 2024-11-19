@@ -2,15 +2,13 @@ package hms.serializer;
 
 import java.util.Map;
 
-import org.apache.poi.ss.usermodel.Workbook;
-
 import hms.entity.user.User;
 
 public abstract class UserSerializer<E extends User> extends Serializer {
 
-	public Map<String, E> getMap(String filepath) {
-		return readWorkbook(getWorkbook(filepath));
+	protected UserSerializer(String filepath) {
+		super(filepath);
 	}
 
-	protected abstract Map<String, E> readWorkbook(Workbook wb);
+	public abstract Map<String, E> getMap();
 }

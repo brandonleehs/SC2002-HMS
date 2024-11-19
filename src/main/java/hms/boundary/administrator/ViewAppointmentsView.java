@@ -1,64 +1,97 @@
 package hms.boundary.administrator;
 
-import hms.boundary.View;
+import java.util.List;
+
+import hms.boundary.patient.appointment.AppointmentView;
+import hms.boundary.patient.record.AppointmentOutcomeRecordView;
 import hms.entity.appointment.Appointment;
 import hms.entity.appointment.AppointmentStatus;
+import hms.entity.record.AppointmentOutcomeRecord;
+import hms.entity.user.Doctor;
+import hms.repository.DoctorRepository;
 
-import java.util.List;
-import java.util.Scanner;
+/**
+ * The view class for displaying appointments. It handles the display of
+ * appointment details for all types of appointments and handles both the
+ * completed and non-completed appointments.
+ */
+public class ViewAppointmentsView extends AppointmentView {
 
-public class ViewAppointmentsView extends View {
-    public void displayOptions() {
-        System.out.println("Please select an option:");
-        System.out.println("1. View All Appointments");
-        System.out.println("2. Filter by Status");
-        System.out.println("3. Search by Patient ID");
-    }
+	/**
+	 * Displays the header for the "All Appointments" section.
+	 */
+	@Override
+	public void displayHeader() {
+		displayBorderedText(WIDTH, "All Appointments");
+	}
 
-    @Override
-    public void displayHeader() {
-        displayBorderedText(WIDTH, "Appointment Management");
-    }
+	/**
+	 * Displays a message indicating that there are no appointments for the
+	 * specified status.
+	 * 
+	 * @param status The specified appointment status (e.g., Pending, Confirmed,
+	 *               Cancelled, Completed).
+	 */
+	public void displayNoAppointmentsType(AppointmentStatus status) {
+		System.out.println("No " + status + " appointments scheduled.");
+	}
 
-    public AppointmentStatus getStatusChoice() {
-        System.out.println("Enter status to filter (1. Pending, 2. Confirmed, 3. Cancelled, 4. Completed): ");
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        switch (choice) {
-            case 1: return AppointmentStatus.PENDING;
-            case 2: return AppointmentStatus.CONFIRMED;
-            case 3: return AppointmentStatus.CANCELLED;
-            case 4: return AppointmentStatus.COMPLETED;
-            default: return null;
-        }
-    }
+	/**
+	 * Displays a list of appointments of a specific type (e.g., completed or
+	 * scheduled). It shows appointment details such as the date, time, doctor, and
+	 * any associated outcome record for completed appointments. If there are no
+	 * appointments, it displays a relevant message.
+	 * 
+	 * @param appointments     The list of appointments to display.
+	 * @param doctorRepository The repository containing doctor data for retrieving
+	 *                         doctor information.
+	 * @param status           The status of the appointments to display (e.g.,
+	 *                         completed, scheduled).
+	 */
+	public void displayAppointmentsType(List<Appointment> appointments, DoctorRepository doctorRepository,
+			AppointmentStatus status) {
+		System.out.println(status + " appointments:");
+		if (appointments == null) {
+			displayNoAppointmentsType(status);
+			return;
+		}
 
-    public String getPatientId() {
-        System.out.print("Enter Patient ID: ");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
+		String format = "| %-" + 5 + "s | %-" + 10 + "s | %-" + 5 + "s | %-" + 13 + "s | %-" + (WIDTH - 49) + "s |\n";
 
-    public int getUserInput() {
-        System.out.print("Enter choice: ");
-        Scanner scanner = new Scanner(System.in);
-        try {
-            return Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a number.");
-            return -1; // Return an invalid option to handle gracefully
-        }
-    }
+		if (status == AppointmentStatus.COMPLETED) {
+			AppointmentOutcomeRecordView appointmentOutcomeRecordView = new AppointmentOutcomeRecordView();
+			System.out.printf(format, "Index", "Date", "Time", "Doctor ID", "Doctor Name");
+			for (int i = 0; i < appointments.size(); i++) {
+				Appointment appointment = appointments.get(i);
+				Doctor doctor = doctorRepository.getById(appointment.getDoctorId());
+				if (doctor == null) {
+					System.out.printf(format, i + 1, appointment.getDate(), appointment.getTime(),
+							appointment.getDoctorId(), "[FIRED DOCTOR]");
+				} else {
+					System.out.printf(format, i + 1, appointment.getDate(), appointment.getTime(),
+							appointment.getDoctorId(), doctorRepository.getById(appointment.getDoctorId()).getName());
+				}
+				AppointmentOutcomeRecord appointmentOutcomeRecord = appointment.getAppointmentOutcomeRecord();
+				System.out.println(String.format("Service Type: %s", appointmentOutcomeRecord.getServiceType()));
+				System.out.println(String.format("Diagnosis: %s", appointmentOutcomeRecord.getConsultationNotes()));
+				appointmentOutcomeRecordView.displayPrescriptionTable(appointmentOutcomeRecord);
+			}
+			return;
+		}
 
-    public void displayAppointments(List<Appointment> appointments) {
-        for (Appointment appointment : appointments) {
-            System.out.println("ID: " + appointment.getUUID());
-            System.out.println("Patient ID: " + appointment.getPatientId());
-            System.out.println("Doctor ID: " + appointment.getDoctorId());
-            System.out.println("Date: " + appointment.getDate());
-            System.out.println("Time: " + appointment.getTime());
-            System.out.println("Status: " + appointment.getAppointmentStatus());
-            System.out.println("-----");
-        }
-    }
+		System.out.printf(format, "Index", "Date", "Time", "Doctor ID", "Doctor Name");
+		for (int i = 0; i < appointments.size(); i++) {
+			Appointment appointment = appointments.get(i);
+			Doctor doctor = doctorRepository.getById(appointment.getDoctorId());
+			if (doctor == null) {
+				System.out.printf(format, i + 1, appointment.getDate(), appointment.getTime(),
+						appointment.getDoctorId(), "[FIRED DOCTOR]");
+			} else {
+				System.out.printf(format, i + 1, appointment.getDate(), appointment.getTime(), doctor.getId(),
+						doctor.getName());
+			}
+		}
+		System.out.println();
+	}
+
 }

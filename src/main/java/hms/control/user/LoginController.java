@@ -1,7 +1,5 @@
 package hms.control.user;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,88 +8,89 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import hms.boundary.InputHandler;
 import hms.boundary.View;
 import hms.boundary.user.LoginView;
+import hms.boundary.user.StartView;
 import hms.control.Controller;
+import hms.control.administrator.AdministratorMenuController;
 import hms.control.doctor.DoctorMenuController;
 import hms.control.patient.PatientMenuController;
 import hms.control.pharmacist.PharmacistMenuController;
-import hms.entity.appointment.Appointment;
+import hms.control.receptionist.ReceptionistMenuController;
 import hms.entity.user.Administrator;
 import hms.entity.user.Doctor;
 import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;
+import hms.entity.user.Receptionist;
 import hms.entity.user.User;
+import hms.exceptions.InvalidChoiceFormatException;
+import hms.exceptions.InvalidChoiceValueException;
 
 public class LoginController extends Controller {
 	private final LoginView loginView;
+	private final StartView startView;
 
 	public LoginController() {
 		this.loginView = new LoginView();
+		this.startView = new StartView();
 	}
 
 	@Override
 	public void navigate() {
-		Patient patient = patientRepository.getById("P1001");
-		Doctor doctor = doctorRepository.getById("D001");
-		Appointment appt = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 5),
-				LocalTime.of(9, 30));
-		patient.scheduleAppointment(doctor, appt);
-//		doctor.acceptAppointment(appt);
-//
-////		doctor.completeAppointment(patient, appt, "Consultation", "Hypertension. Lifestyle change recommended.");
-////		doctor.prescribeMedicine(new Medicine("Paracetamol"), appt.getAppointmentOutcomeRecord());
-////		doctor.prescribeMedicine(new Medicine("Ibuprofen"), appt.getAppointmentOutcomeRecord());
-//
-		Appointment appt1 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 5),
-				LocalTime.of(10, 30));
-		patient.scheduleAppointment(doctor, appt1);
-
-		Appointment appt2 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 12, 5),
-				LocalTime.of(11, 30));
-		patient.scheduleAppointment(doctor, appt2);
-//		doctor.completeAppointment(patient, appt2, "Consultation", "Fever. Rest recommended. ");
-
-		Appointment appt3 = new Appointment(patient.getId(), doctor.getId(), LocalDate.of(2024, 11, 6),
-				LocalTime.of(11, 30));
-		patient.scheduleAppointment(doctor, appt3);
-
-//		doctor.acceptAppointment(appt1);
-
-//		doctor.completeAppointment(patient, appt1, "Consultation", "Fever. Rest recommended. ");
-//		doctor.prescribeMedicine(new Medicine("Paracetamol"), appt1.getAppointmentOutcomeRecord());
-//		doctor.prescribeMedicine(new Medicine("Ibuprofen"), appt1.getAppointmentOutcomeRecord());
-
 		boolean login = false;
 		User user = null;
 		while (true) {
-			do {
-				View.displayLogo();
-				this.loginView.displayHeader();
-				this.loginView.displayIdPrompt();
-				String id = InputHandler.getString();
-				this.loginView.displayPasswordPrompt();
-				String password = InputHandler.getString();
-				user = getUser(id, password);
-				login = authenticate(user, id, password);
-			} while (!login);
+			startView.displayHeader();
+			startView.displayOptions();
+			int choice = 0;
+			try {
+				choice = InputHandler.getChoice(1, 2);
+			} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
+				choice = 2;
+			}
 
-			if (user instanceof Patient) {
-				PatientMenuController patientMenuController = new PatientMenuController((Patient) user);
-				patientMenuController.navigate();
+			if (choice == 1) {
+				do {
+					View.displayLogo();
+					this.loginView.displayHeader();
+					String id = this.loginView.displayIdPrompt();
+					String password = this.loginView.displayPasswordPrompt();
+					user = getUser(id, password);
+					login = authenticate(user, id, password);
+				} while (!login);
 
-			} else if (user instanceof Doctor) {
-				DoctorMenuController doctorMenuController = new DoctorMenuController((Doctor) user);
-				doctorMenuController.navigate();
+				if (user instanceof Patient) {
+					PatientMenuController patientMenuController = new PatientMenuController((Patient) user);
+					patientMenuController.navigate();
 
-			} else if (user instanceof Pharmacist) {
-				PharmacistMenuController pharmacistMenuController = new PharmacistMenuController((Pharmacist) user);
-				pharmacistMenuController.navigate();
+				} else if (user instanceof Doctor) {
+					DoctorMenuController doctorMenuController = new DoctorMenuController((Doctor) user);
+					doctorMenuController.navigate();
 
-			} else if (user instanceof Administrator) {
-				// Not yet done
-				// PharmacistMenuController pharmacistMenuController = new PharmacistMenuController((Pharmacist) user);
-				// pharmacistMenuController.navigate();			
+				} else if (user instanceof Pharmacist) {
+					PharmacistMenuController pharmacistMenuController = new PharmacistMenuController((Pharmacist) user);
+					pharmacistMenuController.navigate();
+
+				} else if (user instanceof Administrator) {
+					AdministratorMenuController administratorMenuController = new AdministratorMenuController(
+							(Administrator) user);
+					administratorMenuController.navigate();
+
+				} else if (user instanceof Receptionist) {
+					ReceptionistMenuController receptionistMenuController = new ReceptionistMenuController(
+							(Receptionist) user);
+					receptionistMenuController.navigate();
+				}
+
 			} else {
-
+				// save and close
+				patientRepository.deserialize();
+				doctorRepository.deserialize(); // must deserialize doctor first since it writes header!
+				pharmacistRepository.deserialize();
+				administratorRepository.deserialize();
+				receptionistRepository.deserialize();
+				medicineInventory.deserialize();
+				appointmentRepository.deserialize();
+				appointmentOutcomeRecordRepository.deserialize();
+				break;
 			}
 		}
 	}
@@ -102,6 +101,7 @@ public class LoginController extends Controller {
 		userMap.putAll(doctorRepository.getMap());
 		userMap.putAll(patientRepository.getMap());
 		userMap.putAll(pharmacistRepository.getMap());
+		userMap.putAll(receptionistRepository.getMap());
 		User user = userMap.get(id);
 		return user;
 	}

@@ -1,15 +1,13 @@
 package hms.control.patient;
 
-import hms.boundary.InputHandler;
 import hms.boundary.patient.PatientMenuView;
 import hms.boundary.patient.record.MedicalRecordView;
-import hms.control.Controller;
+import hms.control.MenuController;
 import hms.control.user.ChangePasswordController;
 import hms.entity.user.Patient;
-import hms.exceptions.InvalidChoiceFormatException;
-import hms.exceptions.InvalidChoiceValueException;
+import hms.entity.user.User;
 
-public class PatientMenuController extends Controller {
+public class PatientMenuController extends MenuController {
 	private final PatientMenuView patientMenuView;
 	private Patient patient;
 
@@ -20,18 +18,11 @@ public class PatientMenuController extends Controller {
 
 	@Override
 	public void navigate() {
+		checkNewUser((User)patient);
 		int choice = 0;
 		do {
 			this.patientMenuView.displayHeader();
-			this.patientMenuView.displayOptions();
-
-			try {
-				choice = InputHandler.getChoice(1, 10);
-			} catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				// Continue loop if invalid choice
-				choice = -1;
-				continue;
-			}
+			choice = this.patientMenuView.displayOptions();
 
 			switch (choice) {
 			case 1:
@@ -70,7 +61,7 @@ public class PatientMenuController extends Controller {
 				appointmentOutcomeRecordController.navigate();
 				break;
 			case 9:
-				ChangePasswordController changePasswordController = new ChangePasswordController(patient);
+				ChangePasswordController changePasswordController = new ChangePasswordController((User)patient);
 				changePasswordController.navigate();
 				break;
 			case 10:

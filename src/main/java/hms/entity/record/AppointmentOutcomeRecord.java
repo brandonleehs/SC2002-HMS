@@ -1,25 +1,26 @@
 package hms.entity.record;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import hms.entity.medicine.Medicine;
+import hms.entity.medicine.MedicineStatus;
 
 public class AppointmentOutcomeRecord {
 	private final UUID uuid;
 	private final LocalDate date;
 	private String serviceType;
-	private final List<Medicine> prescribedMedicineList;
+	private Map<Medicine, Integer> prescribedMedicineMap;
 	private String consultationNotes;
 
 	public AppointmentOutcomeRecord(LocalDate date, String serviceType, String consultationNotes, UUID uuid) {
 		this.uuid = uuid;
 		this.date = date;
 		this.serviceType = serviceType;
-		this.prescribedMedicineList = new ArrayList<Medicine>();
 		this.consultationNotes = consultationNotes;
+		this.prescribedMedicineMap = new HashMap<>();
 	}
 
 	public LocalDate getDate() {
@@ -42,20 +43,20 @@ public class AppointmentOutcomeRecord {
 		StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append(this.consultationNotes);
-		stringBuilder.append(consultationNotes);
+		stringBuilder.append(" " + consultationNotes);
 		this.consultationNotes = stringBuilder.toString();
 	}
 
-	public List<Medicine> getPrescribedMedicineList() {
-		return this.prescribedMedicineList;
+	public Map<Medicine, Integer> getPrescribedMedicineMap() {
+		return this.prescribedMedicineMap;
 	}
 
-	public void addPrescribedMedicine(Medicine medicine) {
-		this.prescribedMedicineList.add(medicine);
+	public void addPrescribedMedicine(Map<Medicine, Integer> medicineMap) {
+		this.prescribedMedicineMap.putAll(medicineMap);
 	}
 
 	public void removePrescribedMedicine(Medicine medicine) {
-		this.prescribedMedicineList.remove(medicine);
+		this.prescribedMedicineMap.remove(medicine);
 	}
 
 	public String getConsultationNotes() {
@@ -64,5 +65,18 @@ public class AppointmentOutcomeRecord {
 
 	public UUID getUUID() {
 		return this.uuid;
+	}
+
+	public Boolean CheckIfUnprescribedMedicineExists() {
+		// Sees if all medicine in this record has been dispensed
+		if (prescribedMedicineMap.isEmpty()) {
+			return false;
+		} else {
+			for (Map.Entry<Medicine, Integer> entry : prescribedMedicineMap.entrySet()) {
+				if (entry.getKey().getMedicineStatus() == MedicineStatus.PENDING)
+					return true;
+			}
+			return false;
+		}
 	}
 }

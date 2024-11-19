@@ -1,0 +1,4 @@
+Patient ID,Name,Date of Birth,Gender,Blood Type,Contact Information,Phone Number,Password Hash
+P1003,Charlie White,1990-07-08,Male,O-,charlie.white@example.com,12345678,$2a$10$cBwRiitXfGNJBHanrf/mf.DVd.QsPEDOu7yTaTGQPMMWVSzWUWGV6
+P1001,Alice Brown,1980-05-14,Female,A+,alice.brown@example.com,12345678,$2a$10$g601iKOANygA3S5ErHfX7OhxOKAdODHH8QbqLqFiIG/6Y.Jgyekl6
+P1002,Bob Stone,1975-11-22,Male,B+,bob.stone@example.com,12345678,$2a$10$3VlAOSokanA5RpiwlxJGKOZFGodQ.9lzKj8nwVb7xWgo0fr1rvgRq

@@ -1,14 +1,10 @@
 package hms.serializer;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 
 import hms.entity.record.MedicalRecord;
 import hms.entity.user.Patient;
@@ -17,32 +13,47 @@ import hms.entity.user.attributes.Gender;
 
 public class PatientSerializer extends UserSerializer<Patient> {
 
+	public PatientSerializer(String filepath) {
+		super(filepath);
+	}
+
 	@Override
-	protected Map<String, Patient> readWorkbook(Workbook wb) {
+	public Map<String, Patient> getMap() {
 		Map<String, Patient> patientMap = new HashMap<String, Patient>();
-		for (Sheet sheet : wb) {
-			for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
-				Patient patient = getPatientFromRow(sheet.getRow(rowNum));
+
+		try {
+			this.br.readLine();
+			String line;
+			while ((line = br.readLine()) != null) {
+				String[] row = line.split(",");
+				Patient patient = getPatientFromRow(row);
 				patientMap.put(patient.getId(), patient);
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return patientMap;
 	}
 
-	private Patient getPatientFromRow(Row row) {
-		DataFormatter formatter = new DataFormatter();
-		String id = formatter.formatCellValue(row.getCell(0));
-		String name = formatter.formatCellValue(row.getCell(1));
+	private Patient getPatientFromRow(String[] row) {
+		String id = row[0];
+		String name = row[1];
 		// Get String representation
-		String dateOfBirthString = formatter.formatCellValue(row.getCell(2));
+		String dateOfBirthString = row[2];
 		// Parse as LocalDate
 		LocalDate dateOfBirth = LocalDate.from(DateTimeFormatter.ISO_LOCAL_DATE.parse(dateOfBirthString));
-		Gender gender = formatter.formatCellValue(row.getCell(3)).equals("Male") ? Gender.MALE : Gender.FEMALE;
-		BloodType bloodType = BloodType.getBloodType(formatter.formatCellValue(row.getCell(4)));
-		String emailAddress = formatter.formatCellValue(row.getCell(5));
+		Gender gender = row[3].equals("Male") ? Gender.MALE : Gender.FEMALE;
+		BloodType bloodType = BloodType.getBloodType(row[4]);
+		String emailAddress = row[5];
 		MedicalRecord medicalRecord = new MedicalRecord(id, name, dateOfBirth, gender, bloodType, "12345678",
 				emailAddress);
-		return new Patient(medicalRecord, "password");
+		if (row.length <= 6) {
+			return new Patient(medicalRecord, "password");
+		}
+		medicalRecord.setPhoneNumber(row[6]);
+		String passwordHash = row[7];
+		Patient patient = new Patient(medicalRecord, "password");
+		patient.setPasswordHash(passwordHash);
+		return patient;
 	}
-
 }

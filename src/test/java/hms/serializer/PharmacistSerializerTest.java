@@ -13,16 +13,16 @@ class PharmacistSerializerTest {
 
 	@Test
 	void testGetPharmacistMapIfNull() {
-		PharmacistSerializer pharmacistSerializer = new PharmacistSerializer();
-		assertTrue(pharmacistSerializer.getMap("Staff_List.xlsx") != null);
+		PharmacistSerializer pharmacistSerializer = new PharmacistSerializer("./src/test/resources/Staff_List.csv");
+		assertTrue(pharmacistSerializer.getMap() != null);
 	}
 
 	@Test
 	void testGetPharmacistMapIfAttributesAreSame() {
-		PharmacistSerializer pharmacistSerializer = new PharmacistSerializer();
+		PharmacistSerializer pharmacistSerializer = new PharmacistSerializer("./src/test/resources/Staff_List.csv");
 		Map<String, Pharmacist> pharmacistMap;
 
-		pharmacistMap = pharmacistSerializer.getMap("Staff_List.xlsx");
+		pharmacistMap = pharmacistSerializer.getMap();
 		Pharmacist mark = pharmacistMap.get("P001");
 		assertTrue(mark.getName().equals("Mark Lee"));
 		assertTrue(mark.getAge() == 29);

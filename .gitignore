@@ -34,7 +34,6 @@ buildNumber.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -60,3 +59,5 @@ replay_pid*
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+sources.txt

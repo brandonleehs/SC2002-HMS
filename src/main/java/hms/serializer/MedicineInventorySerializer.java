@@ -1,39 +1,53 @@
 package hms.serializer;
 
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-
-import hms.repository.MedicineInventory;
-
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import hms.entity.medicine.ReplenishRequest;
 
 public class MedicineInventorySerializer extends Serializer {
-	private Map<String, List<Integer>> medicineStock = new HashMap<String, List<Integer>>();
+	private final Map<String, List<Integer>> medicineStock = new HashMap<String, List<Integer>>();
+	private final List<ReplenishRequest> replenishmentRequestList = new ArrayList<ReplenishRequest>();
 
-	public Map<String, List<Integer>>getMedicineInventory(String filepath) {
-		Workbook wb = getWorkbook(filepath);
-		for (Sheet sheet : wb) {
-			for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
-				setMedicineStock(sheet.getRow(rowNum));
-			}
-		}
-		List<Map<String, Integer>> maps = new ArrayList<>();
-		return medicineStock;
+	public MedicineInventorySerializer(String filepath) {
+		super(filepath);
 	}
 
-	private void setMedicineStock(Row row) {
+	public void serialize() {
+		try {
+			this.br.readLine();
+			String line;
+			while ((line = br.readLine()) != null) {
+				String[] row = line.split(",");
+				setData(row);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void setData(String[] row) {
 		List<Integer> temp = new ArrayList<Integer>(2);
-		DataFormatter formatter = new DataFormatter();
-		String name = formatter.formatCellValue(row.getCell(0));
-		int stock = Integer.parseInt(formatter.formatCellValue(row.getCell(1)));
-		int lowStockLeveLAlertValue = Integer.parseInt(formatter.formatCellValue(row.getCell(2)));
+		String name = row[0];
+		int stock = Integer.parseInt(row[1]);
+		int lowStockLeveLAlertValue = Integer.parseInt(row[2]);
+		if (row.length > 3) {
+			ReplenishRequest replenishRequest = new ReplenishRequest(row[3], Integer.valueOf(row[4]));
+			this.replenishmentRequestList.add(replenishRequest);
+		}
 		temp.add(stock);
 		temp.add(lowStockLeveLAlertValue);
-		medicineStock.put(name, temp);
+		this.medicineStock.put(name, temp);
+	}
+
+	public Map<String, List<Integer>> getMedicineStock() {
+		return this.medicineStock;
+	}
+
+	public List<ReplenishRequest> getReplenishmentRequestList() {
+		return this.replenishmentRequestList;
 	}
 }

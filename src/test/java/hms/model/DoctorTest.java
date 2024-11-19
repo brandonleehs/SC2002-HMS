@@ -7,10 +7,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import hms.PatientController;
 import hms.entity.appointment.Appointment;
 import hms.entity.appointment.AppointmentStatus;
 import hms.entity.user.Doctor;
@@ -18,18 +16,14 @@ import hms.entity.user.Patient;
 import hms.entity.user.attributes.Gender;
 import hms.repository.DoctorRepository;
 import hms.repository.PatientRepository;
+import hms.serializer.PatientSerializer;
 
 class DoctorTest {
-	private static PatientController patientController = PatientController.getInstance();
-
-	@BeforeAll
-	static void setUp() {
-		patientController.loadPatientMap("Patient_List.xlsx");
-	}
+	private final PatientSerializer patientSerializer = new PatientSerializer("./src/test/resources/Patient_List.csv");
 
 	@Test
 	void testScheduleAppointmentIfRightTime() {
-		Patient alice = patientController.getPatientMap().get("P1001");
+		Patient alice = patientSerializer.getMap().get("P1001");
 		Doctor doctor = new Doctor("D001", "password", "John Smith", Gender.MALE, 45);
 		Appointment appointment = new Appointment(alice.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(13, 0));
@@ -40,7 +34,7 @@ class DoctorTest {
 
 	@Test
 	void testScheduleAppointmentIfWrongTime() {
-		Patient alice = patientController.getPatientMap().get("P1001");
+		Patient alice = patientSerializer.getMap().get("P1001");
 		Doctor doctor = new Doctor("D001", "password", "John Smith", Gender.MALE, 45);
 		Appointment appointment = new Appointment(alice.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(12, 0));
@@ -51,7 +45,7 @@ class DoctorTest {
 
 	@Test
 	void testRescheduleAppointmentIfRightTime() {
-		Patient bob = patientController.getPatientMap().get("P1002");
+		Patient bob = patientSerializer.getMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Appointment oldAppointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(13, 0));
@@ -66,7 +60,7 @@ class DoctorTest {
 
 	@Test
 	void testRescheduleAppointmentIfWrongTime() {
-		Patient bob = patientController.getPatientMap().get("P1002");
+		Patient bob = patientSerializer.getMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Appointment oldAppointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(13, 0));
@@ -81,7 +75,7 @@ class DoctorTest {
 
 	@Test
 	void testRescheduleAppointmentIfDifferentDoctorRightTime() {
-		Patient bob = patientController.getPatientMap().get("P1002");
+		Patient bob = patientSerializer.getMap().get("P1002");
 		Doctor oldDoctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Doctor newDoctor = new Doctor("D003", "password", "John Doe", Gender.MALE, 35);
 		Appointment oldAppointment = new Appointment(bob.getId(), oldDoctor.getId(), LocalDate.of(2024, 10, 29),
@@ -98,7 +92,7 @@ class DoctorTest {
 
 	@Test
 	void testRescheduleAppointmentIfDifferentDoctorWrongTime() {
-		Patient bob = patientController.getPatientMap().get("P1002");
+		Patient bob = patientSerializer.getMap().get("P1002");
 		Doctor oldDoctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Doctor newDoctor = new Doctor("D003", "password", "John Doe", Gender.MALE, 35);
 		Appointment oldAppointment = new Appointment(bob.getId(), oldDoctor.getId(), LocalDate.of(2024, 10, 29),
@@ -115,7 +109,7 @@ class DoctorTest {
 
 	@Test
 	void testCancelSchedule() {
-		Patient bob = patientController.getPatientMap().get("P1002");
+		Patient bob = patientSerializer.getMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Appointment appointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(13, 0));
@@ -127,7 +121,7 @@ class DoctorTest {
 
 	@Test
 	void testAcceptAppointment() {
-		Patient bob = patientController.getPatientMap().get("P1002");
+		Patient bob = patientSerializer.getMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Appointment appointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(13, 0));
@@ -139,7 +133,7 @@ class DoctorTest {
 
 	@Test
 	void testCancelAppointment() {
-		Patient bob = patientController.getPatientMap().get("P1002");
+		Patient bob = patientSerializer.getMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		Appointment appointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
 				LocalTime.of(13, 0));
@@ -152,7 +146,7 @@ class DoctorTest {
 
 	@Test
 	void testSetAvailabilityIfWrongTime() {
-		Patient bob = patientController.getPatientMap().get("P1002");
+		Patient bob = patientSerializer.getMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		doctor.setAvailability(LocalDate.of(2024, 10, 29), LocalTime.of(3, 0), LocalTime.of(8, 1, 23));
 		Appointment appointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
@@ -164,7 +158,7 @@ class DoctorTest {
 
 	@Test
 	void testSetAvailabilityIfRightTime() {
-		Patient bob = patientController.getPatientMap().get("P1002");
+		Patient bob = patientSerializer.getMap().get("P1002");
 		Doctor doctor = new Doctor("D002", "password", "Emily Clarke", Gender.FEMALE, 38);
 		doctor.setAvailability(LocalDate.of(2024, 10, 29), LocalTime.of(3, 0), LocalTime.of(8, 1, 23));
 		Appointment appointment = new Appointment(bob.getId(), doctor.getId(), LocalDate.of(2024, 10, 29),
@@ -177,8 +171,8 @@ class DoctorTest {
 	@Test
 	void testGetAvailability() {
 		DoctorRepository doctorRepository = new DoctorRepository();
-		PatientRepository patientRepository = new PatientRepository();
-		Patient patient = patientRepository.getById("P1001");
+		PatientRepository patientSerializer = new PatientRepository();
+		Patient patient = patientSerializer.getById("P1001");
 		Doctor doctor = doctorRepository.getById("D001");
 		LocalDate date = LocalDate.of(2024, 11, 5);
 		Appointment appt = new Appointment(patient.getId(), doctor.getId(), date, LocalTime.of(9, 30));

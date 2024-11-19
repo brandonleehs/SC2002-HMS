@@ -1,5 +1,8 @@
 package hms.repository;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -8,10 +11,11 @@ import hms.serializer.PatientSerializer;
 
 public class PatientRepository implements IUserRepository<Patient> {
 	private final Map<String, Patient> patientMap;
+	private final static String FILEPATH = "./src/main/resources/Patient_List.csv";
 
 	public PatientRepository() {
-		PatientSerializer patientSerializer = new PatientSerializer();
-		this.patientMap = patientSerializer.getMap("Patient_List.xlsx");
+		PatientSerializer patientSerializer = new PatientSerializer(FILEPATH);
+		this.patientMap = patientSerializer.getMap();
 	}
 
 	@Override
@@ -32,5 +36,30 @@ public class PatientRepository implements IUserRepository<Patient> {
 	@Override
 	public Map<String, Patient> getMap() {
 		return patientMap;
+	}
+
+	public void addPatient(String id, Patient patient) {
+		patientMap.put(id, patient);
+	}
+
+	@Override
+	public void deserialize() {
+		File file = new File(FILEPATH);
+		try {
+			PrintWriter printWriter = new PrintWriter(file);
+			String header = String.join(",", "Patient ID", "Name", "Date of Birth", "Gender", "Blood Type",
+					"Contact Information", "Phone Number", "Password Hash");
+			printWriter.println(header);
+			for (Patient patient : getAll()) {
+				String data = String.join(",", patient.getId(), patient.getName(), patient.getDateOfBirth().toString(),
+						patient.getGender().toString(), patient.getBloodType().toString(), patient.getEmailAddress(),
+						patient.getPhoneNumber(), patient.getPasswordHash());
+				printWriter.println(data);
+			}
+			printWriter.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

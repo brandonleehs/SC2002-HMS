@@ -1,5 +1,9 @@
 package hms.repository;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -8,10 +12,11 @@ import hms.serializer.AdministratorSerializer;
 
 public class AdministratorRepository implements IUserRepository<Administrator> {
 	private final Map<String, Administrator> administratorMap;
+	private static final String FILEPATH = "./src/main/resources/Staff_List.csv";
 
 	public AdministratorRepository() {
-		AdministratorSerializer administratorSerializer = new AdministratorSerializer();
-		this.administratorMap = administratorSerializer.getMap("Staff_List.xlsx");
+		AdministratorSerializer administratorSerializer = new AdministratorSerializer(FILEPATH);
+		this.administratorMap = administratorSerializer.getMap();
 	}
 
 	@Override
@@ -32,5 +37,23 @@ public class AdministratorRepository implements IUserRepository<Administrator> {
 	@Override
 	public Map<String, Administrator> getMap() {
 		return this.administratorMap;
+	}
+
+	@Override
+	public void deserialize() {
+		try {
+			FileWriter fw = new FileWriter(FILEPATH, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter printWriter = new PrintWriter(bw);
+			for (Administrator administrator : getAll()) {
+				String data = String.join(",", administrator.getId(), administrator.getName(), "Administrator",
+						administrator.getGender().toString(), String.valueOf(administrator.getAge()),
+						administrator.getPasswordHash());
+				printWriter.println(data);
+			}
+			printWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

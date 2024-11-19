@@ -1,83 +1,70 @@
 package hms.control.pharmacist;
 
-import hms.boundary.InputHandler;
+import hms.boundary.patient.record.AppointmentOutcomeRecordView;
 import hms.boundary.pharmacist.PharmacistMenuView;
-import hms.control.Controller;
+import hms.boundary.pharmacist.ViewReplenishmentRequestView;
+import hms.control.MenuController;
 import hms.control.user.ChangePasswordController;
-import hms.control.pharmacist.UpdatePrescriptionStatusController;
-import hms.boundary.patient.record.MedicalRecordView;
 import hms.entity.user.Patient;
 import hms.entity.user.Pharmacist;
-import hms.exceptions.InvalidChoiceFormatException;
-import hms.exceptions.InvalidChoiceValueException;
+import hms.entity.user.User;
 
-public class PharmacistMenuController extends Controller{
-    private final PharmacistMenuView pharmacistMenuView;
-    private Pharmacist pharmacist;
+public class PharmacistMenuController extends MenuController {
+	private final PharmacistMenuView pharmacistMenuView;
+	private final Pharmacist pharmacist;
 
-    public PharmacistMenuController(Pharmacist pharmacist){
-        this.pharmacist=pharmacist;
-        this.pharmacistMenuView=new PharmacistMenuView(pharmacist);
-    }
+	public PharmacistMenuController(Pharmacist pharmacist) {
+		this.pharmacist = pharmacist;
+		this.pharmacistMenuView = new PharmacistMenuView(pharmacist);
+	}
 
-    @Override
-    public void navigate() {
-        int choice = 0;
-        do{
-            this.pharmacistMenuView.displayHeader();
-            this.pharmacistMenuView.displayOptions();
+	@Override
+	public void navigate() {
+		checkNewUser((User)pharmacist);
+		int choice = 0;
+		do {
+			this.pharmacistMenuView.displayHeader();
+			choice = this.pharmacistMenuView.displayOptions();
 
-            try{
-                choice = InputHandler.getChoice(1, 9);
-            } catch (InvalidChoiceFormatException | InvalidChoiceValueException e) {
-				// Continue loop if invalid choice
-				choice = -1;
-				continue;
+			Patient patient;
+			switch (choice) {
+			case 1: // View Appointment Outcome Record
+				AppointmentOutcomeRecordView appointmentOutcomeRecordView = new AppointmentOutcomeRecordView();
+				patient = PharmacistMenuView.choosePatient(patientRepository);
+				if (patient == null)
+					continue;
+				appointmentOutcomeRecordView.displayRecords(patient);
+				break;
+			case 2: // Update Prescription Status
+				patient = PharmacistMenuView.choosePatient(patientRepository);
+				if (patient == null)
+					continue;
+				UpdatePrescriptionStatusController updatePatientMedicalRecordController = new UpdatePrescriptionStatusController(
+						patient);
+				updatePatientMedicalRecordController.navigate();
+				break;
+			case 3: // View Medication Inventory
+				ShowMedicationInventoryController showMedicationInventoryController = new ShowMedicationInventoryController();
+				showMedicationInventoryController.navigate();
+				break;
+			case 4: // Submit Replenishment Request
+				SubmitReplenishmentRequestController submitReplenishmentRequest = new SubmitReplenishmentRequestController();
+				submitReplenishmentRequest.navigate();
+				break;
+			case 5: // View active amounts of Replenishment Requests waiting for approval
+				ViewReplenishmentRequestView viewReplenishmentRequestView = new ViewReplenishmentRequestView();
+				viewReplenishmentRequestView.displayHeader();
+				viewReplenishmentRequestView.displayRequests(medicineInventory.getReplenishmentRequestList());
+				break;
+			case 6: // change password
+				ChangePasswordController changePasswordController = new ChangePasswordController((User)pharmacist);
+				changePasswordController.navigate();
+				break;
+			case 7: // logout
+				System.out.println("Logging out.");
+				break;
+			default:
 			}
-
-            switch (choice) {
-            case 1: //View Appointment Outcome Record
-                MedicalRecordView medicalRecordView = new MedicalRecordView(choosePatient());
-                medicalRecordView.displayAppointmentOutcomeRecord();
-                break;
-            case 2: //Update Prescription Status
-                UpdatePrescriptionStatusController updatePatientMedicalRecordController = new UpdatePrescriptionStatusController(choosePatient());
-                updatePatientMedicalRecordController.navigate();
-                break;
-            // case 3: //view personal schedule (all appointments in DB)
-            //     scheduleView.displayAllAppointments(doctor.getSchedule(), patientRepository);
-            //     break;
-            // case 4: //set availability for appointments
-            //     SetDoctorAvailabilityController setDoctorAvailabilityController = new SetDoctorAvailabilityController(doctor);
-            //     setDoctorAvailabilityController.navigate();
-            //     break;
-            // case 5: // accept or decline appt requests
-            //     PendingRequestController pendingRequestController = new PendingRequestController(doctor);
-            //     pendingRequestController.navigate();
-            //     break;
-            // case 6: //view all appts today & tmr
-            //     scheduleView.displayUpcomingAppointments(doctor.getSchedule(), patientRepository);
-            //     break;
-            // case 7: //record appt outcome
-            //     CompleteAppointmentController completeAppointmentController = new CompleteAppointmentController(doctor);
-            //     completeAppointmentController.navigate();
-            //     break;
-            case 8: //change password
-                ChangePasswordController changePasswordController = new ChangePasswordController(pharmacist);
-                changePasswordController.navigate();
-                break;
-            case 9: //logout
-                System.out.println("Logging out.");
-                break;
-            default:
-            }
-        } while (choice < 9);
-    }
-    
-    private Patient choosePatient() {
-        pharmacistMenuView.displayPatientIdPrompt();
-        String patientID = InputHandler.getString();
-        return patientRepository.getById(patientID);
-    }
-
+		} while (choice < 7);
+	}
 }
