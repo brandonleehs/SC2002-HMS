@@ -16,26 +16,20 @@
 Ensure you have the following installed on your system:
 
 - **JDK 22** or higher: [Download here](https://www.oracle.com/sg/java/technologies/downloads/)
-- **Apache Maven (Optional)**: [Download here](https://maven.apache.org/download.cgi)
 
 Make sure your environment is set up correctly by verifying the installation of Java and Maven. You can check this by running the following commands:
 
 ```
 java --version
-mvn --version
 ```
 
-If both commands return version details, your setup is correct and you're ready to proceed. Otherwise, you may need to configure your PATH environment variables to include the locations of your Java and Maven installations.
+If the command return version details, your setup is correct and you're ready to proceed. Otherwise, you may need to configure your PATH environment variables to include the locations of your Java installation.
 
-## Usage Options:
-
-We provide multiple convenient ways to run this project, depending on whether you use Maven or not:
-
-### Running from Source
+## Running from Source
 
 **1. Clone the Repository**
 
-If you prefer to compile and run the application directly from the source code, clone the repository and navigate to the project directory.
+Clone the repository and navigate to the project directory.
 
 ```
 git clone https://github.com/brandonleehs/SC2002-HMS.git
@@ -65,50 +59,12 @@ find -name "*.java" > sources.txt
 java -cp "./lib/*" @sources.txt
 ```
 
-### Pre-compiled JAR
-
-Clone the repository and run the pre-compiled JAR file located in the `bin/` directory:
-
-```
-git clone https://github.com/brandonleehs/SC2002-HMS.git
-cd SC2002-HMS/
-java -jar ./bin/hms-1.0.jar
-```
-
-### Build with Maven
-
-**1. Clone the Repository**
-
-Navigate to your desired directory and clone this repository with `git clone`. Then navigate into the project directory.
-
-```
-git clone https://github.com/brandonleehs/SC2002-HMS.git
-cd SC2002-HMS/
-```
-
-**2. Build the Project**
-
-Clean the previous build artifacts (if any) and package the project into a JAR file using Maven. The generated build files will be located in the `target/` directory.
-
-```
-mvn clean package
-```
-
-**3. Run the Application**
-
-After successfully building the project, execute the JAR file to run the Hospital Management System.
-
-```
-java -jar ./target/hms-1.0.jar
-```
-
 ## Project Structure
 
-The project follows a standard Maven structure:
+The project follows a standard structure:
 
 - `src/main/java/`: Contains the main source code for the application.
 - `src/test/java/`: Holds unit tests for the project.
-- `target/`: This directory is generated during the build process and houses all output of the build.
 
 Our project uses the Entity-Control-Boundary (ECB) design pattern for maintainability and extensibility.
 
@@ -135,6 +91,6 @@ The JavaDoc is deployed on [github pages](https://brandonleehs.github.io/SC2002-
 
 ## TroubleShooting
 
-The application's state is persisted in CSV files located in src/main/resources. If you encounter serialization issues or have modified the CSV files, resulting in errors, you can reset the application's state to its initial configuration. To do so, copy the content from the corresponding `[Patient/Medicine/Staff]_List-initial.csv` file and replace the current `[Patient/Medicine/Staff]_List.csv` file with it. If you have any other CSV files, such as `[Appointment/AppointmentOutcomeRecord]_List.csv`, ensure you delete them as well. This will restore the application to its default state.
+The application's state is persisted in CSV files located in `src/main/resources`. If you encounter serialization issues or have modified the CSV files, resulting in errors, you can reset the application's state to its initial configuration. To do so, copy the content from the corresponding `[Patient/Medicine/Staff]_List-initial.csv` file and replace the current `[Patient/Medicine/Staff]_List.csv` file with it. If you have any other CSV files, such as `[Appointment/AppointmentOutcomeRecord]_List.csv`, ensure you delete them as well. This will restore the application to its default state.
 
 For any additional information or troubleshooting, please consult the project documentation or open an issue in the repository.
