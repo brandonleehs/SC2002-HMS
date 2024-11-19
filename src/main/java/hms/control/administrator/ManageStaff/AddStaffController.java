@@ -50,7 +50,6 @@ public class AddStaffController extends Controller {
 	 * @param choice
 	 */
 	private void DoctorPharmacistBuilder(List<String> details, int choice) {
-		// TODO: Verify that id is valid format (D001/P001 for example)
 		String password, name, id;
 		Gender gender;
 		id = details.get(0);
