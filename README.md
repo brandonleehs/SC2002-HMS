@@ -11,6 +11,8 @@
 | Keagan Kong Kai Yi (Kang Kaiyi) | KEAG0002@e.ntu.edu.sg |       [![GitHub](https://img.shields.io/badge/kekgan-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/kekgan)       |
 | Lim Zhen Rong                   | ZLIM139@e.ntu.edu.sg  |   [![GitHub](https://img.shields.io/badge/alvinlimzr-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/alvinlimzr)   |
 
+The github repository may be found at https://github.com/brandonleehs/SC2002-HMS.
+
 ## Prerequisites
 
 Ensure you have the following installed on your system:
