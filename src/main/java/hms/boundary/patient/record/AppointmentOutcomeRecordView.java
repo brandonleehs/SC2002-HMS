@@ -9,13 +9,26 @@ import hms.entity.medicine.Medicine;
 import hms.entity.record.AppointmentOutcomeRecord;
 import hms.entity.user.Patient;
 
+/**
+ * The AppointmentOutcomeRecordView class provides functionalities to display
+ * details of appointment records for a patient, including appointment details,
+ * prescribed medicines, and unprescribed appointments.
+ */
 public class AppointmentOutcomeRecordView extends View {
-
+	/**
+	 * Displays the header for the "Appointment Records" view.
+	 */
 	@Override
 	public void displayHeader() {
 		displayBorderedText(WIDTH, "Appointment Records");
 	}
 
+	/**
+	 * Displays a list of all records for a given patient. If no records are found,
+	 * an appropriate message is displayed.
+	 *
+	 * @param patient the patient whose appointment records are to be displayed.
+	 */
 	public void displayRecords(Patient patient) {
 		displayHeader();
 		List<AppointmentOutcomeRecord> records = patient.getAppointmentOutcomeRecordList();
@@ -47,6 +60,13 @@ public class AppointmentOutcomeRecordView extends View {
 		System.out.println("-".repeat(WIDTH));
 	}
 
+	/**
+	 * Displays a table of prescribed medicines for a given appointment outcome
+	 * record. If no medicines are prescribed, an appropriate message is displayed.
+	 *
+	 * @param appointmentOutcomeRecord the appointment outcome record containing
+	 *                                 prescribed medicines.
+	 */
 	public void displayPrescriptionTable(AppointmentOutcomeRecord appointmentOutcomeRecord) {
 		String title = "Medicine Prescribed";
 		int leftPadding = (WIDTH - title.length()) / 2;
@@ -76,6 +96,14 @@ public class AppointmentOutcomeRecordView extends View {
 
 	}
 
+	/**
+	 * Displays a list of unprescribed appointment outcome records for a given
+	 * patient. Only appointments with undispensed medicines are shown.
+	 *
+	 * @param patient the patient whose unprescribed appointment records are to be
+	 *                displayed.
+	 * @return a list of unprescribed appointment outcome records.
+	 */
 	public List<AppointmentOutcomeRecord> displayUnprescribedAppointmentOutcomeRecord(Patient patient) {
 		List<AppointmentOutcomeRecord> records = patient.getAppointmentOutcomeRecordList();
 		List<AppointmentOutcomeRecord> return_records = new ArrayList<>();
